@@ -20,4 +20,9 @@ class Recursos extends Model
         return $this->belongsToMany(Recursos::class, 'incidencies_has_recursos',  'recursos_id', 'incidencies_id')->withPivot('id');
     }
 
+    public function usuaris()
+    {
+        return $this->hasMany(Usuaris::class, 'recursos_id');
+    }
+
 }

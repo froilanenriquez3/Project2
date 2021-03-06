@@ -25,5 +25,16 @@ class Incidencies extends Model
         return $this->belongsToMany(Recursos::class, 'incidencies_has_recursos', 'incidencies_id', 'recursos_id')->withPivot('id');
     }
 
+    public function usuaris()
+    {
+        return $this->belongsTo(Usuaris::class, 'usuaris_id');
+    }
+
+    public function alertants()
+    {
+        return $this->belongsTo(Alertants::class, 'alertants_id');
+    }
+
+
 
 }
