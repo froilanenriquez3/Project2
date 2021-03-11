@@ -35,6 +35,18 @@ class Incidencies extends Model
         return $this->belongsTo(Alertants::class, 'alertants_id');
     }
 
+    //Relación con la tabla afectats MN
+    public function incidencies_has_afectats()
+    {
+        return $this->belongsToMany(Afectats::class, 'incidencies_has_afectats', 'incidencies_id', 'afectats_id');
+    }
+    //Relación con la tabla municipis
+    public function municipis()
+    {
+        return $this->belongsTo(Municipis::class, 'municipis_id');
+    }
 
+
+  
 
 }
