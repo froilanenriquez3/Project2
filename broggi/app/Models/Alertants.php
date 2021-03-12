@@ -26,4 +26,5 @@ class Alertants extends Model
         return $this->belongsTo(Tipus_alertants::class, 'tipus_alertants_id');
     }
 
+    
 }
