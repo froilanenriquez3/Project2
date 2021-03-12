@@ -18,12 +18,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {return view('login');});
 
-Route::resource('/incidencies', [IncidenciesController::class]);
+Route::resource('/incidencies', IncidenciesController::class);
 
-Route::resource('/alertants', [AlertantsController::class]);
+Route::resource('/alertants', AlertantsController::class);
 
-Route::resource('/recursos', [RecursosController::class]);
+Route::resource('/recursos', RecursosController::class);
 
-Route::resource('/usuaris', [UsuarisController::class]);
+Route::resource('/usuaris', UsuarisController::class);
 
 //Possibly missing: route for Incidencies has recursos
