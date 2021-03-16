@@ -30,7 +30,7 @@
                 <input class="" name="contrasenya" id="contrasenya" type="password">
             </div>
 
-            <button class="btn btn-primary" type="submit">Entrar</button>
+            <button id="entrarBtn" class="btn btn-primary" type="submit">Entrar</button>
         </form>
     </section>
 
