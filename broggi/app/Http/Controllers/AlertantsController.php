@@ -14,7 +14,7 @@ class AlertantsController extends Controller
      */
     public function index()
     {
-        //
+        return view('alertantesHabituales.index');
     }
 
     /**
