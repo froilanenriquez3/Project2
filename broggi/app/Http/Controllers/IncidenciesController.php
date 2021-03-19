@@ -14,7 +14,7 @@ class IncidenciesController extends Controller
      */
     public function index()
     {
-        //
+        return view('incidencies/index');
     }
 
     /**
@@ -24,7 +24,7 @@ class IncidenciesController extends Controller
      */
     public function create()
     {
-        //
+        return view('incidencies/create');
     }
 
     /**
