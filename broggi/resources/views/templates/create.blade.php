@@ -7,7 +7,8 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    <p>I am create template</p>
+    {{-- import for navbar --}}
+    {{-- import for sidebar --}}
     @yield('content')
 </body>
 </html>
