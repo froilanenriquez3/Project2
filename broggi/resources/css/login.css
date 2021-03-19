@@ -1,0 +1,69 @@
+body{
+    display: flex;
+    flex-direction: row;
+}
+
+section{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#ambulanceHalf{
+    background-color: rgb(233, 59, 143);
+    width: 50%;
+}
+
+#ambulance{
+    position: relative;
+    height: 70vh;
+    object-fit: cover;
+    right: 30vh;
+}
+
+#logo{
+    height: 30vh;
+    position: relative;
+    right: 3vh;
+    bottom: 10vh;
+    /* border: solid black 1px; */
+}
+
+#loginBox{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+}
+
+#loginBox form{
+    position: relative;
+    right: 5vh;
+    bottom: 10vh;
+}
+
+.loginInputs {
+    width: 20vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 10%;
+
+}
+
+
+.loginInputs input{
+    width: 100%;
+}
+
+#loginBox > form > button {
+    float:right;
+}
+
+#entrarBtn {
+    position: relative;
+    left: 4vh;
+    background-color: rgb(0, 172, 194);
+}
