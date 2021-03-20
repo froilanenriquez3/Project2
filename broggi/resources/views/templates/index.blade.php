@@ -30,8 +30,13 @@
             </nav>
         </header>
 
-        <section id="formSection">
-            <div id="divForm">
+        <section id="tableSection">
+            <div id="filterSection">
+                <p>Filters</p>
+            </div>
+
+            <div id="divTable">
+                <p>Table</p>
                 @yield('form')
             </div>
 
