@@ -37,9 +37,14 @@
         </div>
 
 
-        <section>
-            @yield('form')
+        <section id="formSection">
+            <div id="divForm">
+                @yield('form')
+            </div>
+
         </section>
+
+
     </main>
 
     <script src="{{ url('https://code.jquery.com/jquery-3.5.1.slim.min.js') }}"
