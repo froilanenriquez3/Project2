@@ -16,12 +16,6 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            {{-- import for navbar --}}
-            <p>temporary</p>
-        </nav>
-    </header>
 
     <aside>
         {{-- import for sidebar --}}
@@ -29,6 +23,12 @@
     </aside>
 
     <main>
+        <header>
+            <nav>
+                {{-- import for navbar --}}
+                <p>temporary</p>
+            </nav>
+        </header>
 
         <section id="formSection">
             <div id="divForm">
