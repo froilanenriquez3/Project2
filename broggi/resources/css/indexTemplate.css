@@ -1,0 +1,46 @@
+body{
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+header {
+    width: 100%;
+}
+
+/* Placeholder for nav*/
+nav {
+    border: dashed black 1px;
+    height: 20vh;
+    width: 100%;
+}
+
+/* Placeholder for sidebar*/
+aside {
+    border: dashed black 1px;
+    height: 80vh;
+    width: 20%;
+
+}
+
+main {
+    width: 80%;
+    position: relative;
+
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+#divForm{
+    position: relative;
+    border: solid black 3px;
+    height: 90%;
+    width: 90%;
+    top: 5%;
+}

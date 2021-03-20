@@ -15,19 +15,23 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            {{-- import for navbar --}}
-            <p>temporary</p>
-        </nav>
-    </header>
 
     <aside>
         {{-- import for sidebar --}}
         <p>temporary</p>
     </aside>
 
+
+
     <main>
+        <header>
+            <nav>
+                {{-- import for navbar --}}
+                <p>temporary</p>
+            </nav>
+        </header>
+
+
         <div id="divModoFormacion">
             <p>Modo formacion</p>
             <label class="switch" id="btnModoFormacion">
