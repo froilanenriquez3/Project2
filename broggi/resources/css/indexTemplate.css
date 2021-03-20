@@ -26,19 +26,30 @@ main {
 
 }
 
-
-section {
+#tableSection {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     height: 85vh;
     width: 80vw;
 
 }
 
-#divForm{
+#filterSection{
+    border: solid black 3px;
+    height: 10%;
+    width: 90%;
+    margin-bottom: 3%;
+    padding: 5px;
+
+}
+
+#divTable{
     position: relative;
     border: solid black 3px;
-    height: 80%;
+    height: 75%;
     width: 90%;
-    top: 10%;
+    padding: 5px;
+
 }
