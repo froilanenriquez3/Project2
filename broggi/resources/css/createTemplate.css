@@ -11,14 +11,14 @@ header {
 
 /* Placeholder for nav*/
 nav {
-    border: solid black 1px;
+    border: dashed black 1px;
     height: 20vh;
     width: 100%;
 }
 
 /* Placeholder for sidebar*/
 aside {
-    border: solid black 1px;
+    border: dashed black 1px;
     height: 80vh;
     width: 20%;
 
