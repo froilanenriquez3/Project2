@@ -24,7 +24,7 @@ class AlertantsController extends Controller
      */
     public function create()
     {
-        //
+        return view('alertantesHabituales.create');
     }
 
     /**
