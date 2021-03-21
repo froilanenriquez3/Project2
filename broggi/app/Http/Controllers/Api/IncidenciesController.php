@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Clases\Utilitat;
 use App\Models\Incidencies;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Database\QueryException;
+use App\Http\Resources\IncidenciesResource;
 
 class IncidenciesController extends Controller
 {
@@ -15,7 +18,9 @@ class IncidenciesController extends Controller
      */
     public function index()
     {
-        //
+        $usuaris= Incidencies::all();
+
+        return IncidenciesResource::collection($usuaris);
     }
 
     /**
@@ -60,6 +65,17 @@ class IncidenciesController extends Controller
      */
     public function destroy(Incidencies $incidencies)
     {
-        //
-    }
+        try{
+            $incidencies->delete();
+            $response= \response()
+                        ->json(['message'=>'Registro borrado correctamente'], 200);
+        } catch (QueryException $ex){
+            $message = Utilitat::errorMessage($ex);
+            $response= \response()
+                        ->json(['error'=> $message], 400);
+        }
+
+            return $response;
+        }
+
 }
