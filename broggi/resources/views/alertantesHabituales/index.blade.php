@@ -5,6 +5,5 @@
 
 @section('content')
 
-<p>I am Alertantes</p>
 
 @endsection
