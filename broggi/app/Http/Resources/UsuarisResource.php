@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UsuarisResource extends JsonResource
@@ -15,5 +16,6 @@ class UsuarisResource extends JsonResource
     public function toArray($request)
     {
         return parent::toArray($request);
+
     }
 }
