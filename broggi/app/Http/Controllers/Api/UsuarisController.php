@@ -31,18 +31,19 @@ class UsuarisController extends Controller
      */
     public function store(Request $request)
     {
-        $usuari= new Usuaris();
+        $usuaris= new Usuaris();
 
-        $usuari->username= $request->input('username');
-        $usuari->contrasenya= $request->input('constrasenya');
-        $usuari->nom= $request->input('nom');
-        $usuari->cognom= $request->input('cognom');
-        $usuari->rols_id= $request->input('rols_id');
-        $usuari->recursos_id= $request->input('recursos_id');
+        $usuaris->username= $request->input('username');
+        $usuaris->contrasenya= $request->input('contrasenya');
+        $usuaris->nom= $request->input('nom');
+        $usuaris->cognoms= $request->input('cognoms');
+        $usuaris->email= $request->input('email');
+        $usuaris->rols_id= $request->input('rols_id');
+        $usuaris->recursos_id= $request->input('recursos_id');
 
         try{
-        $usuari->save();
-        $response= (new UsuarisResource($usuari))
+        $usuaris->save();
+        $response= (new UsuarisResource($usuaris))
                     ->response()
                     ->setStatusCode(201);
         } catch (QueryException $ex){
@@ -62,8 +63,8 @@ class UsuarisController extends Controller
      */
     public function show(Usuaris $usuaris)
     {
-        $usuaris = Usuaris::with('rols')->find($usuaris->rols_id)
-                        ->with('recurs')->find($usuaris->recursos_id);
+        // $usuaris = Usuaris::with('rols')->find($usuaris->rols_id)
+        //                 ->with('recursos')->find($usuaris->recursos_id);
         return new UsuarisResource($usuaris);
     }
 
@@ -76,11 +77,11 @@ class UsuarisController extends Controller
      */
     public function update(Request $request, Usuaris $usuaris)
     {
-
         $usuaris->username= $request->input('username');
-        $usuaris->contrasenya= $request->input('constrasenya');
+        $usuaris->contrasenya= $request->input('contrasenya');
         $usuaris->nom= $request->input('nom');
-        $usuaris->cognom= $request->input('cognom');
+        $usuaris->cognoms= $request->input('cognoms');
+        $usuaris->email= $request->input('email');
         $usuaris->rols_id= $request->input('rols_id');
         $usuaris->recursos_id= $request->input('recursos_id');
 
@@ -109,7 +110,7 @@ class UsuarisController extends Controller
         try{
             $usuaris->delete();
             $response= \response()
-                        ->json(['message'=>'registro borrado correcto'], 200);
+                        ->json(['message'=>'Registro borrado correctamente'], 200);
         } catch (QueryException $ex){
             $message = Utilitat::errorMessage($ex);
             $response= \response()
