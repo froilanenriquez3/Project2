@@ -36,6 +36,8 @@ class RecursosController extends Controller
         $recursos->codi= $request->input('codi');
         $recursos->actiu = ($request->input('actiu') == 1);
         $recursos->tipus_recursos_id= $request->input('tipus_recursos_id');
+        $recursos->lat= $request->input('lat');
+        $recursos->lon= $request->input('lon');
 
         try{
             $recursos->save();
@@ -76,6 +78,8 @@ class RecursosController extends Controller
         $recurso->codi= $request->input('codi');
         $recurso->actiu = ($request->input('actiu') == 1);
         $recurso->tipus_recursos_id= $request->input('tipus_recursos_id');
+        $recurso->lat= $request->input('lat');
+        $recurso->lon= $request->input('lon');
 
         try{
             $recurso->save();
