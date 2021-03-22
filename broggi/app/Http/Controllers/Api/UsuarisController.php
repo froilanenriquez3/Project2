@@ -63,8 +63,7 @@ class UsuarisController extends Controller
      */
     public function show(Usuaris $usuari)
     {
-         $usuari = Usuaris::with('rols')->find($usuari->rols_id)
-                       ->with('recursos')->find($usuari->recursos_id);
+         $usuari = Usuaris::with(['rols', 'recursos'])->find($usuari->id);
         return new UsuarisResource($usuari);
     }
 
