@@ -6,6 +6,8 @@ use App\Models\Usuaris;
 use App\Clases\Utilitat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UsuarisResource;
 use Illuminate\Database\QueryException;
 
@@ -34,7 +36,7 @@ class UsuarisController extends Controller
         $usuaris= new Usuaris();
 
         $usuaris->username= $request->input('username');
-        $usuaris->contrasenya= $request->input('contrasenya');
+        $usuaris->contrasenya= bcrypt($request->input('contrasenya'));
         $usuaris->nom= $request->input('nom');
         $usuaris->cognoms= $request->input('cognoms');
         $usuaris->email= $request->input('email');
@@ -63,7 +65,8 @@ class UsuarisController extends Controller
      */
     public function show(Usuaris $usuari)
     {
-         $usuari = Usuaris::with(['rols', 'recursos'])->find($usuari->id);
+        $usuari = Usuaris::with(['rols', 'recursos'])->find($usuari->id);
+
         return new UsuarisResource($usuari);
     }
 
@@ -118,4 +121,5 @@ class UsuarisController extends Controller
 
             return $response;
         }
+
 }
