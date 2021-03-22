@@ -2,8 +2,8 @@
 
 @section('title','Alertantes')
 
-
 @section('content')
+
 
 
 @endsection
