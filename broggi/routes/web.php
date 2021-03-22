@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsuarisController;
+use App\Http\Controllers\RecursosController;
 use App\Http\Controllers\AlertantsController;
 use App\Http\Controllers\IncidenciesController;
-use App\Http\Controllers\RecursosController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {return view('login');});
+Route::get('/', function () {return view('login');});
 
-//Route::resource('/incidencies', IncidenciesController::class);
+Route::resource('/incidencies', IncidenciesController::class);
 
-//Route::resource('/alertants', AlertantsController::class);
+Route::resource('/alertantsHabituales', AlertantsController::class);
 
-//Route::resource('/recursos', RecursosController::class);
+Route::resource('/recursos', RecursosController::class);
 
-//Route::resource('/usuaris', UsuarisController::class);
+Route::resource('/usuaris', UsuarisController::class);
 
 //Possibly missing: route for Incidencies has recursos

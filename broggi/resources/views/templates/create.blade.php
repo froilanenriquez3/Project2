@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="{{ asset('../resources/css/createTemplate.css?' . rand()) }}">
 
+    @yield('links')
     <title>@yield('title')</title>
 </head>
 
@@ -42,8 +43,12 @@
 
 
         <section id="formSection">
-            <div id="divForm">
+            <div id="divForm" class="container-fluid">
                 @yield('form')
+            </div>
+            <div id="formButtons">
+                <button class="btn ">Cancelar</button>
+                <button type="submit" id="formSubmit" class="btn btn-primary" form="form">Siguiente</button>
             </div>
 
         </section>
