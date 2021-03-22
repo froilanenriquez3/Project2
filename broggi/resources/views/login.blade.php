@@ -22,7 +22,8 @@
     <section class="container-fluid" id="loginBox">
         <img src=" {{ asset('img/logo1.svg') }}" alt="Logo" id="logo">
 
-        <form action="{{ action([App\Http\Controllers\Api\UsuarisController::class,'store']) }}" method="POST">
+        <form action="{{ action([App\Http\Controllers\UsuarisController::class,'store']) }}" method="POST">
+            @csrf
 
             <div class="loginInputs">
                 <label class="" for="username">Usuario</label>
