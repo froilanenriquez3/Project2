@@ -1,0 +1,13 @@
+#menuSection {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#menuSection > div{
+    width: 30vw;
+    height: 30vh;
+    border: solid black 3px;
+    margin: 3%;
+    border-radius: 5%;
+}
