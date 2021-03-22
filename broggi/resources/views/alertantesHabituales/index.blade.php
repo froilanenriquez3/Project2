@@ -19,18 +19,22 @@
       </tr>
     </thead>
     <tbody>
-
+        @foreach($alertants as $alertant)
       <tr>
-        <th scope="row">1</th>
-        <td>John</td>
-        <td>Doe</td>
-        <td>407-968-1977</td>
-        <td>3505 Peach Blossom</td>
-        <td>Habitual</td>
+        <th scope="row">{{ $alertant->id }}</th>
+        <td>{{ $alertant->nom }}</td>
+        <td>{{ $alertant->cognoms }}</td>
+        <td>{{ $alertant->telefon }}</td>
+        <td>{{ $alertant->adreca }}</td>
+        <td>{{ $alertant->tipus_alertants_id }}</td>
       </tr>
+      @endforeach
 
     </tbody>
   </table>
+  <div id="tableNav">
+    {{ $alertants->links() }}
+</div>
 
 
 @endsection
