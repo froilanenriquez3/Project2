@@ -5,9 +5,17 @@
 @section('title','Teleoperador')
 @section('content')
     <section id="menuSection">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        <div>
+            <p>Formulario, nueva indidencia</p>
+        </div>
+        <div>
+            <p>Gestionar alertantes habituales</p>
+        </div>
+        <div>
+            <p>Incidencias</p>
+        </div>
+        <div>
+            <p>Recursos Moviles</p>
+        </div>
     </section>
 @endsection
