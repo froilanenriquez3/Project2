@@ -8,7 +8,7 @@
 <h5 id="formTitle">Alertants</h5>
 
 
-<form action="{{ action([App\Http\Controllers\UsuarisController::class,'store']) }}" method="POST" id="form">
+<form action="{{ action([App\Http\Controllers\AlertantsController::class,'store']) }}" method="POST" id="form">
 
     <div class="form-group row">
         <label class="col-2" for="alertantTelefon">Telefon</label>
