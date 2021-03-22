@@ -17,14 +17,19 @@ use App\Http\Controllers\IncidenciesController;
 |
 */
 
-Route::get('/', function () {return view('login');});
+Route::get('/', function () {return view('login');})->name('login');
 
 Route::resource('/incidencies', IncidenciesController::class);
 
-Route::resource('/alertantsHabituales', AlertantsController::class);
+Route::resource('/alertants', AlertantsController::class);
 
 Route::resource('/recursos', RecursosController::class);
 
 Route::resource('/usuaris', UsuarisController::class);
 
-//Possibly missing: route for Incidencies has recursos
+
+//Routes for pages that need to be accessed by login(all of them)
+Route::middleware(['auth'])->group(function () {
+
+
+});
