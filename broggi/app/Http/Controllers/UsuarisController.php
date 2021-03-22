@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuaris;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarisController extends Controller
 {
@@ -35,7 +37,19 @@ class UsuarisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $route = view('login');
+        $username = $request->input('username');
+
+        $user = Usuaris::where('username', $username)->get()->first();
+        if(!empty($user)){
+            $password = $request->input('contrasenya');
+            if(Hash::check($password, $user->contrasenya)){
+                Auth::login($user);
+                $route = view('homePages.home');
+            }
+
+        }
+        return $route;
     }
 
     /**
@@ -44,9 +58,9 @@ class UsuarisController extends Controller
      * @param  \App\Models\Usuaris  $usuaris
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuaris $usuaris)
+    public function show(Usuaris  $usuaris)
     {
-        //
+
     }
 
     /**
@@ -82,4 +96,6 @@ class UsuarisController extends Controller
     {
         //
     }
+
+
 }
