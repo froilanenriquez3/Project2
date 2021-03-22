@@ -31,39 +31,39 @@ class AlertantsController extends Controller
      */
     public function store(Request $request)
     {
-        // $alertants= new alertants();
+        $alertants= new Alertants();
 
-        // $alertants->username= $request->input('username');
-        // $alertants->contrasenya= $request->input('contrasenya');
-        // $alertants->nom= $request->input('nom');
-        // $alertants->cognoms= $request->input('cognoms');
-        // $alertants->email= $request->input('email');
-        // $alertants->rols_id= $request->input('rols_id');
-        // $alertants->recursos_id= $request->input('recursos_id');
+        $alertants->telefon= $request->input('telefon');
+        $alertants->nom= $request->input('nom');
+        $alertants->cognoms= $request->input('cognoms');
+        $alertants->adreca= $request->input('adreca');
+        $alertants->municipis_id= $request->input('municipis_id');
+        $alertants->tipus_alertants_id= $request->input('tipus_alertants_id');
 
-        // try{
-        // $alertants->save();
-        // $response= (new alertantsResource($alertants))
-        //             ->response()
-        //             ->setStatusCode(201);
-        // } catch (QueryException $ex){
-        //     $message = Utilitat::errorMessage($ex);
-        //     $response = \response()
-        //                 ->json(['error'=> $message], 400);
-        // }
+        try{
+        $alertants->save();
+        $response= (new AlertantsResource($alertants))
+                    ->response()
+                    ->setStatusCode(201);
+        } catch (QueryException $ex){
+            $message = Utilitat::errorMessage($ex);
+            $response = \response()
+                        ->json(['error'=> $message], 400);
+        }
 
-        // return $response;
+        return $response;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Alertants  $alertants
+     * @param  \App\Models\Alertants  $alertant
      * @return \Illuminate\Http\Response
      */
-    public function show(Alertants $alertants)
+    public function show(Alertants $alertant)
     {
-        //
+        $alertant = Alertants::with(['municipis','tipus_alertants'])->find($alertant->id);
+        return new AlertantsResource($alertant);
     }
 
     /**
@@ -73,9 +73,28 @@ class AlertantsController extends Controller
      * @param  \App\Models\Alertants  $alertants
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Alertants $alertants)
+    public function update(Request $request, Alertants $alertant)
     {
-        //
+
+        $alertant->telefon= $request->input('telefon');
+        $alertant->nom= $request->input('nom');
+        $alertant->cognoms= $request->input('cognoms');
+        $alertant->adreca= $request->input('adreca');
+        $alertant->municipis_id= $request->input('municipis_id');
+        $alertant->tipus_alertants_id= $request->input('tipus_alertants_id');
+
+        try{
+        $alertant->save();
+        $response= (new alertantsResource($alertant))
+                    ->response()
+                    ->setStatusCode(201);
+        } catch (QueryException $ex){
+            $message = Utilitat::errorMessage($ex);
+            $response = \response()
+                        ->json(['error'=> $message], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -84,8 +103,18 @@ class AlertantsController extends Controller
      * @param  \App\Models\Alertants  $alertants
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Alertants $alertants)
+    public function destroy(Alertants $alertant)
     {
-        //
+        try{
+            $alertant->delete();
+            $response= \response()
+                        ->json(['message'=>'Registro borrado correctamente'], 200);
+        } catch (QueryException $ex){
+            $message = Utilitat::errorMessage($ex);
+            $response= \response()
+                        ->json(['error'=> $message], 400);
+        }
+
+            return $response;
     }
 }
