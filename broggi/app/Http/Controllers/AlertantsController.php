@@ -14,7 +14,9 @@ class AlertantsController extends Controller
      */
     public function index()
     {
-        return view('alertantesHabituales.index');
+        $alertants = Alertants::paginate(6);
+
+        return view('alertantesHabituales.index', compact('alertants'));
     }
 
     /**
