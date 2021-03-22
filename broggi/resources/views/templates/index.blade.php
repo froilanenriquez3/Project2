@@ -16,12 +16,6 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            {{-- import for navbar --}}
-            <p>temporary</p>
-        </nav>
-    </header>
 
     <aside>
         {{-- import for sidebar --}}
@@ -29,9 +23,20 @@
     </aside>
 
     <main>
+        <header>
+            <nav>
+                {{-- import for navbar --}}
+                <p>temporary</p>
+            </nav>
+        </header>
 
-        <section id="formSection">
-            <div id="divForm">
+        <section id="tableSection">
+            <div id="filterSection">
+                <p>Filters</p>
+            </div>
+
+            <div id="divTable">
+                <p>Table</p>
                 @yield('form')
             </div>
 
