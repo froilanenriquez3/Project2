@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsuarisController;
+use App\Http\Controllers\RecursosController;
 use App\Http\Controllers\AlertantsController;
 use App\Http\Controllers\IncidenciesController;
-use App\Http\Controllers\RecursosController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ Route::get('/', function () {return view('login');});
 
 Route::resource('/incidencies', IncidenciesController::class);
 
-Route::resource('/alertants', AlertantsController::class);
+Route::resource('/alertantsHabituales', AlertantsController::class);
 
 Route::resource('/recursos', RecursosController::class);
 
