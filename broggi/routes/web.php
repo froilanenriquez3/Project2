@@ -31,4 +31,6 @@ Route::get('/ahome', function (){ return view('homePages.admin');});
 Route::get('/rhome', function (){ return view('homePages.recurs');});
 
 //Routes for pages that need to be accessed by login(all of them)
-Route::middleware(['auth'])->group(function () {});
+Route::middleware(['auth'])->group(function () {
+
+});
