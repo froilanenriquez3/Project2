@@ -20,7 +20,23 @@ class Utilitat
                 $message = $exception->errorInfo[1] . '-' . $exception->errorInfo[2];
                 break;
         }
+    }else {
+        switch ($exception->getCode()) {
+            case 1044:
+                $message = "Incorrect information";
+                break;
+            case 1049:
+                $message = "Unknown database";
+                break;
+            case 2002:
+                $message = "Could not find the server";
+                break;
+            default:
+                $message = $exception->getCode() . '-' . $exception->getMessage();
+                break;
+        }
     }
+
     return $message;
 }
 

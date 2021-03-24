@@ -18,12 +18,13 @@ use App\Http\Controllers\IncidenciesController;
 */
 
 Route::get('/', function () {return view('login');})->name('login');
-
+Route::post('/', [UsuarisController::class, 'logIn']);
 
 Route::resource('/incidencies', IncidenciesController::class);
 Route::resource('/alertants', AlertantsController::class);
 Route::resource('/recursos', RecursosController::class);
 Route::resource('/usuaris', UsuarisController::class);
+
 
 Route::get('/thome', function (){ return view('homePages.teleoperador');});
 Route::get('/ahome', function (){ return view('homePages.admin');});
