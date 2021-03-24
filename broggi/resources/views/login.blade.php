@@ -7,8 +7,8 @@
 
     <link rel="stylesheet" href="{{ url('https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css') }}" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
-    <link rel="stylesheet" href=" {{ asset('css/app.css') }}">
-    <link rel="stylesheet" href=" {{ asset('css/all.css') }}">
+    @include('partials.headerLinks')
+
     <link rel="stylesheet" href=" {{ asset('../resources/css/login.css?'.rand()) }}">
 
     <title>Broggi</title>
@@ -42,6 +42,6 @@
     </section>
 
 
-    <script src="{{ asset('js/app.js') }}"></script>
+   @include('partials.scripts')
   </body>
 </html>

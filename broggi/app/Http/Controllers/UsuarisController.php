@@ -20,7 +20,7 @@ class UsuarisController extends Controller
             $password = $request->input('contrasenya');
             if(Hash::check($password, $user->contrasenya)){
                 Auth::login($user);
-                $route = view('homePages.home');
+                $route = view('templates.landingPage');
             }
 
         }
