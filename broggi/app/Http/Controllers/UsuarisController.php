@@ -11,12 +11,8 @@ use Illuminate\Database\QueryException;
 
 class UsuarisController extends Controller
 {
-    /**
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function logIn(Request $request){
-        // $route = view('login');
+    public function login(Request $request){
+        $route = view('login');
         $username = $request->input('username');
 
         $user = Usuaris::where('username', $username)->get()->first();
@@ -59,19 +55,7 @@ class UsuarisController extends Controller
      */
     public function store(Request $request)
     {
-        $route = view('login');
-        $username = $request->input('username');
 
-        $user = Usuaris::where('username', $username)->get()->first();
-        if(!empty($user)){
-            $password = $request->input('contrasenya');
-            if(Hash::check($password, $user->contrasenya)){
-                Auth::login($user);
-                $route = view('homePages.home');
-            }
-
-        }
-        return $route;
     }
 
     /**
