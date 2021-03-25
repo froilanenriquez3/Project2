@@ -1,3 +1,5 @@
 #tableNav{
-    position: relative;
+    position: absolute;
+    left: 1%;
+    bottom: 1%;
 }
