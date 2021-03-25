@@ -18,10 +18,14 @@
 
 <body>
 
+    <aside>
+        {{-- import for sidebar --}}
+        <p>temporary</p>
+    </aside>
 
     <main>
         <header>
-            <nav id="navbarHolder">
+            <nav>
                 {{-- import for navbar --}}
                 <p>temporary</p>
             </nav>

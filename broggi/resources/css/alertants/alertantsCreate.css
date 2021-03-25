@@ -1,9 +1,15 @@
 #form{
     padding: 2%;
+
 }
 
 #formTitle{
+    color: black;
     position: relative;
     left: 45%;
-    color: black;
+    width: fit-content;
+}
+
+#divModoFormacion {
+    display: none;
 }
