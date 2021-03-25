@@ -1,4 +1,4 @@
-@extends('homePages.home')
+@extends('templates.landingPage')
 @section('links')
     <link rel="stylesheet" href="{{ asset('../resources/css/homePages/teleoperador.css?' . rand()) }}">
 @endsection
