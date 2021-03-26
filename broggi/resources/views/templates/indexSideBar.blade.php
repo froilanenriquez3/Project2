@@ -25,7 +25,7 @@
 
     <main>
         <header>
-            <nav>
+            <nav id="navbarHolder">
                 {{-- import for navbar --}}
                 <p>temporary</p>
             </nav>
