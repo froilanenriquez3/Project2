@@ -17,4 +17,19 @@ main {
     position: relative;
 }
 
+#menuSection {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 
+#menuSection > div{
+    width: 30vw;
+    height: 30vh;
+    border: solid #2a9fd6 3px;
+    margin: 3%;
+    border-radius: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
