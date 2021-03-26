@@ -9,7 +9,7 @@
 
     @include('partials.headerLinks')
 
-    <link rel="stylesheet" href="{{ asset('../resources/css/indexTemplate.css?' . rand()) }}">
+    <link rel="stylesheet" href="{{ asset('../resources/css/indexTemplateSB.css?' . rand()) }}">
 
     @yield('links')
 
