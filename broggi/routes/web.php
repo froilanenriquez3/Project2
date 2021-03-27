@@ -18,7 +18,7 @@ use App\Http\Controllers\IncidenciesController;
 */
 
 Route::get('/', function () {return view('login');})->name('login');
-Route::post('/', [UsuarisController::class, 'logIn']);
+Route::post('/login', [UsuarisController::class, 'login']);
 
 Route::resource('/incidencies', IncidenciesController::class);
 Route::resource('/alertants', AlertantsController::class);
@@ -31,4 +31,6 @@ Route::get('/ahome', function (){ return view('homePages.admin');});
 Route::get('/rhome', function (){ return view('homePages.recurs');});
 
 //Routes for pages that need to be accessed by login(all of them)
-Route::middleware(['auth'])->group(function () {});
+Route::middleware(['auth'])->group(function () {
+
+});
