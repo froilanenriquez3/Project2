@@ -8,9 +8,11 @@
     <div>
         <p>Alertantes habituales</p>
     </div>
+    <a href="{{ asset('/recursos') }}">
     <div>
         <p>Recursos móviles</p>
     </div>
+    </a>
     <div>
         <p>Usuarios</p>
     </div>
