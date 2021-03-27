@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarisController;
 use App\Http\Controllers\RecursosController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\IncidenciesController;
 
 Route::get('/', function () {return view('login');})->name('login');
 Route::post('/login', [UsuarisController::class, 'login']);
+Route::get('/logout', [UsuarisController::class, 'logout']);
 
 Route::resource('/incidencies', IncidenciesController::class);
 Route::resource('/alertants', AlertantsController::class);
