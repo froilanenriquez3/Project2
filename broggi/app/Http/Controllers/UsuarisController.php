@@ -11,6 +11,12 @@ use Illuminate\Database\QueryException;
 
 class UsuarisController extends Controller
 {
+
+    public function logout(){
+        Auth::logout();
+        return view('login');
+    }
+
     public function login(Request $request)
     {
         $route = view('login');
