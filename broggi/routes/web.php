@@ -20,6 +20,7 @@ use App\Http\Controllers\IncidenciesController;
 
 Route::get('/', function () {return view('login');})->name('login');
 Route::post('/login', [UsuarisController::class, 'login']);
+Route::get('/logout', [UsuarisController::class, 'logout']);
 
 Route::resource('/incidencies', IncidenciesController::class);
 Route::resource('/alertants', AlertantsController::class);
