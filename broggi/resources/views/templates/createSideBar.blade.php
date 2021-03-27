@@ -8,7 +8,7 @@
 
     @include('partials.headerLinks')
 
-    <link rel="stylesheet" href="{{ asset('../resources/css/createTemplate.css?' . rand()) }}">
+    <link rel="stylesheet" href="{{ asset('../resources/css/createTemplateSB.css?' . rand()) }}">
 
     @yield('links')
 
@@ -16,6 +16,13 @@
 </head>
 
 <body>
+
+    <aside>
+        {{-- import for sidebar --}}
+        <p>temporary</p>
+    </aside>
+
+
 
     <main>
         <header>
