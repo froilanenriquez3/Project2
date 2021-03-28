@@ -2379,11 +2379,23 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       axios.post("/alertants", me.alertant).then(function (response) {
         console.log(response);
-        me.action = "";
+        window.location.href = '/Project2/broggi/public/alertants';
       })["catch"](function (error) {
         console.log(error.response.status);
         console.log(error.response.data);
         me.action = ""; // me.errorMessage= error.response.data.error;
+      });
+    },
+    editAlertant: function editAlertant() {
+      var me = this;
+      axios.put('/alertants/' + me.alertatnt.id, me.alertant).then(function (response) {
+        console.log(response);
+        me.selectRecursos();
+        me.action = '';
+      })["catch"](function (error) {
+        console.log(error.response.status);
+        console.log(error.response.data);
+        me.action = ''; // me.errorMessage= error.response.data.error;
       });
     }
   },

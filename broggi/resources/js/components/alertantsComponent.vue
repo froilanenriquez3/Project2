@@ -60,7 +60,7 @@ export default {
         .post("/alertants", me.alertant)
         .then(function (response) {
           console.log(response);
-          me.action = "";
+          window.location.href = '/Project2/broggi/public/alertants';
         })
         .catch((error) => {
           console.log(error.response.status);
@@ -69,6 +69,22 @@ export default {
           // me.errorMessage= error.response.data.error;
         });
     },
+    editAlertant(){
+        let me= this;
+        axios
+        .put('/alertants/' + me.alertatnt.id , me.alertant)
+        .then(function (response) {
+            console.log(response);
+            me.selectRecursos();
+            me.action=''
+        })
+        .catch(error => {
+            console.log(error.response.status);
+            console.log(error.response.data);
+            me.action=''
+            // me.errorMessage= error.response.data.error;
+        })
+    }
   },
   created() {
     //this.selectalertants();
@@ -76,7 +92,7 @@ export default {
   },
   mounted() {
       let me = this;
-    document.getElementById("formSubmit").onclick = function() {
+        document.getElementById("formSubmit").onclick = function() {
         me.createAlertant();
     }
     console.log("Component mounted.");
