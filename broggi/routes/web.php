@@ -6,6 +6,7 @@ use App\Http\Controllers\UsuarisController;
 use App\Http\Controllers\RecursosController;
 use App\Http\Controllers\AlertantsController;
 use App\Http\Controllers\IncidenciesController;
+use App\Http\Resources\TipusAlertants;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,6 @@ Route::resource('/incidencies', IncidenciesController::class);
 Route::resource('/alertants', AlertantsController::class);
 Route::resource('/recursos', RecursosController::class);
 Route::resource('/usuaris', UsuarisController::class);
-
 
 Route::get('/thome', function (){ return view('homePages.teleoperador');});
 Route::get('/ahome', function (){ return view('homePages.admin');});

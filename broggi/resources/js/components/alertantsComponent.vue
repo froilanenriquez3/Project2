@@ -50,8 +50,8 @@
         <option
           v-for="alertant in tipus_alertants"
           :key="alertant.id"
-          :selected="alertant.id == recurs.tipus_alertants_id"
-          v-bind:value="recurso.id"
+          :selected="alertant.id == alertants.tipus_alertants_id"
+          v-bind:value="alertant.id"
         >
           {{ alertant.tipus }}
         </option>
@@ -101,7 +101,7 @@ export default {
         .put("/alertants/" + me.alertant.id, me.alertant)
         .then(function (response) {
           console.log(response);
-          me.selectRecursos();
+
           me.action = "";
         })
         .catch((error) => {
