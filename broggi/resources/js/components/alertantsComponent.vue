@@ -30,7 +30,6 @@
          <select class="col-10" name="tipus_alertants_id" id="tipus_alertants_id"></select>
     </div>
 
-    <!-- </form> -->
   </div>
 </template>
 
