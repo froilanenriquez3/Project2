@@ -17,7 +17,7 @@
 
 <body>
 
-    <main id="app">
+    <main >
         <header>
             <nav id="navbarHolder">
                 {{-- import for navbar --}}
@@ -37,7 +37,10 @@
 
         <section id="formSection">
             <div id="divForm" class="container-fluid">
-                @yield('form')
+                <div id="app">
+                    @yield('form')
+                </div>
+
             </div>
             <div id="formButtons">
                 <button class="btn ">Cancelar</button>

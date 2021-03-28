@@ -156,8 +156,8 @@ CREATE TABLE IF NOT EXISTS `broggi`.`recursos` (
   `codi` VARCHAR(45) NOT NULL,
   `actiu` TINYINT NOT NULL,
   `tipus_recursos_id` INT NOT NULL,
-  `lat` DOUBLE NOT NULL,
-  `lon` DOUBLE NOT NULL,
+  `lat` DOUBLE ,
+  `lon` DOUBLE ,
   PRIMARY KEY (`id`),
   INDEX `fk_recursos_tipus_recursos1_idx` (`tipus_recursos_id` ASC) ,
   CONSTRAINT `fk_recursos_tipus_recursos1`
@@ -1551,9 +1551,9 @@ COMMIT;
 START TRANSACTION;
 
 USE `broggi`;
-INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id) 
+INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id)
 VALUES("Admin", "$2y$12$H1mP/taqaFI7rFpYWtrRNe3rofNVNz2v47cmxKSedKH28i7BpFbJS", "admin@mail.com", "Admin", "istrator", 1);
-INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id) 
+INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id)
 VALUES("Cecos", "$2y$12$hrnHGBQFTxofRxmtPOPlAu72hmhqaEdJWT97OdnJ4C4IEaYMmacse", "admin@mail.com", "Tele", "operador", 2);
 INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id)
 VALUES("Recurs", "$2y$12$H1E5Jy3gzLqe9DaG9k7jHeAhMMUbeBgNXLGRAzJWPnkDmPz5Go0iG", "admin@mail.com", "Recurs", "mobil", 3);
