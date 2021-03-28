@@ -41,7 +41,8 @@
             </div>
             <div id="formButtons">
                 <button class="btn ">Cancelar</button>
-                <button type="submit" id="formSubmit" class="btn btn-primary" form="form">Siguiente</button>
+                {{-- <button type="submit" id="formSubmit" class="btn btn-primary" form="form">Siguiente</button> --}}
+                <button class="btn btn-primary" id="formSubmit" >Siguiente</button>
             </div>
 
         </section>
