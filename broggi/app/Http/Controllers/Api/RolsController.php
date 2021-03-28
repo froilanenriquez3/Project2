@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Rols;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\RolsResource;
 
 class RolsController extends Controller
 {
@@ -14,17 +16,9 @@ class RolsController extends Controller
      */
     public function index()
     {
-        $rols = Rols::all();
-    }
+        $rols= Rols::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return RolsResource::collection($rols);
     }
 
     /**
@@ -45,17 +39,6 @@ class RolsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Rols $rols)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Rols  $rols
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Rols $rols)
     {
         //
     }
