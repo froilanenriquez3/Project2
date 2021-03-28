@@ -42,7 +42,11 @@
     </div>
     <div class="form-group row">
       <label class="col-2" for="municipis_id">Municipi</label>
-      <select class="col-10" name="municipis_id" id="municipis_id"></select>
+      <select class="col-10" name="municipis_id" id="municipis_id">
+          <option  v-for="municipi in municipis"
+          :key="municipi.id"
+          v-bind:value="municipi.id">{{municipi.nom}}</option>
+      </select>
     </div>
     <div class="form-group row">
       <label class="col-2" for="tipus_alertants_id">Tipus d'Alertant</label>
@@ -67,6 +71,7 @@ export default {
       action: "",
       alertants: [],
       tipus_alertants: [],
+      municipis: [],
       insert: false,
       alertant: {
         id: "",
@@ -74,8 +79,8 @@ export default {
         nom: "",
         cognoms: "",
         adreca: "",
-        municipis_id: "1",
-        tipus_alertants_id: "1",
+        municipis_id: "",
+        tipus_alertants_id: "",
       },
     };
   },
@@ -124,11 +129,23 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
+    selectMunicipis(){
+         let me = this;
+      axios
+        .get("/municipis")
+        .then((response) => {
+          me.municipis = response.data;
+          console.log(me.municipis);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => (this.loading = false));
+    }
   },
 
   created() {
-    //this.selectalertants();
-    debugger;
+    this.selectMunicipis();
     this.selectTipus();
   },
   mounted() {

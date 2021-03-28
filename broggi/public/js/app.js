@@ -2383,12 +2383,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       action: "",
       alertants: [],
       tipus_alertants: [],
+      municipis: [],
       insert: false,
       alertant: {
         id: "",
@@ -2396,8 +2401,8 @@ __webpack_require__.r(__webpack_exports__);
         nom: "",
         cognoms: "",
         adreca: "",
-        municipis_id: "1",
-        tipus_alertants_id: "1"
+        municipis_id: "",
+        tipus_alertants_id: ""
       }
     };
   },
@@ -2436,10 +2441,23 @@ __webpack_require__.r(__webpack_exports__);
       })["finally"](function () {
         return _this.loading = false;
       });
+    },
+    selectMunicipis: function selectMunicipis() {
+      var _this2 = this;
+
+      var me = this;
+      axios.get("/municipis").then(function (response) {
+        me.municipis = response.data;
+        console.log(me.municipis);
+      })["catch"](function (error) {
+        console.log(error);
+      })["finally"](function () {
+        return _this2.loading = false;
+      });
     }
   },
   created: function created() {
-    //this.selectalertants();
+    this.selectMunicipis();
     this.selectTipus();
   },
   mounted: function mounted() {
@@ -38943,7 +38961,27 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
-    _vm._m(0),
+    _c("div", { staticClass: "form-group row" }, [
+      _c("label", { staticClass: "col-2", attrs: { for: "municipis_id" } }, [
+        _vm._v("Municipi")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass: "col-10",
+          attrs: { name: "municipis_id", id: "municipis_id" }
+        },
+        _vm._l(_vm.municipis, function(municipi) {
+          return _c(
+            "option",
+            { key: municipi.id, domProps: { value: municipi.id } },
+            [_vm._v(_vm._s(municipi.nom))]
+          )
+        }),
+        0
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group row" }, [
       _c(
@@ -38976,23 +39014,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c("label", { staticClass: "col-2", attrs: { for: "municipis_id" } }, [
-        _vm._v("Municipi")
-      ]),
-      _vm._v(" "),
-      _c("select", {
-        staticClass: "col-10",
-        attrs: { name: "municipis_id", id: "municipis_id" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
