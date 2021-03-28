@@ -17,7 +17,7 @@
 
 <body>
 
-    <main>
+    <main id="app">
         <header>
             <nav id="navbarHolder">
                 {{-- import for navbar --}}
