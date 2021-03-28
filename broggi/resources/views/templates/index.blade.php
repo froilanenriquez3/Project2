@@ -33,8 +33,9 @@
             </div>
 
             <div id="divTable">
-                <p>Table</p>
+                <div id="app">
                 @yield('table')
+            </div>
             </div>
 
         </section>
