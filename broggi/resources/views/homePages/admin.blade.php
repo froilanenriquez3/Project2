@@ -13,9 +13,11 @@
         <p>Recursos móviles</p>
     </div>
     </a>
+    <a href="{{ asset('/usuaris') }}">
     <div>
         <p>Usuarios</p>
     </div>
+    </a>
     <div>
         <p>Incidencias</p>
     </div>

@@ -23,7 +23,7 @@ main {
     flex-wrap: wrap;
 }
 
-#menuSection > div{
+#menuSection > div, a{
     width: 30vw;
     height: 30vh;
     border: solid #2a9fd6 3px;
@@ -32,4 +32,14 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration-style: none;
 }
