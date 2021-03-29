@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="{{ asset('../resources/css/homePages/recurs.css?' . rand()) }}">
 @endsection
 @section('title','Recursos móviles')
-{{-- Navbar teleoperador --}}
+{{-- Navbar recursos --}}
 @section('navbar')
 @include('partials.navbarRecursos')
 @endsection

@@ -1,6 +1,9 @@
 @extends('templates.index')
 @section('title','Incidencies')
-
+{{-- Navbar teleoperador --}}
+@section('navbar')
+@include('partials.navbarTeleoperador')
+@endsection
 @section('content')
 <p>I am incidencies index</p>
 {{-- Filters (changing depending on type of user) --}}
