@@ -38969,8 +38969,33 @@ var render = function() {
       _c(
         "select",
         {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.alertant.municipis_id,
+              expression: "alertant.municipis_id"
+            }
+          ],
           staticClass: "col-10",
-          attrs: { name: "municipis_id", id: "municipis_id" }
+          attrs: { name: "municipis_id", id: "municipis_id" },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.alertant,
+                "municipis_id",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
+          }
         },
         _vm._l(_vm.municipis, function(municipi) {
           return _c(
@@ -38993,8 +39018,33 @@ var render = function() {
       _c(
         "select",
         {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.alertant.tipus_alertants_id,
+              expression: "alertant.tipus_alertants_id"
+            }
+          ],
           staticClass: "col-10",
-          attrs: { name: "tipus_alertants_id", id: "tipus_alertants_id" }
+          attrs: { name: "tipus_alertants_id", id: "tipus_alertants_id" },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.alertant,
+                "tipus_alertants_id",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
+          }
         },
         _vm._l(_vm.tipus_alertants, function(alertant) {
           return _c(
