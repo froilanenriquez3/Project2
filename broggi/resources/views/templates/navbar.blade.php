@@ -13,10 +13,7 @@
 
         <!--Inicio derecho my-2 my-lg-0-->
         <ul class="navbar-nav ml-auto mr-3">
-            <!--Inicio-->
-            <li class="nav-inicio  mr-2 ">
-                <a class="nav-link navbarLinks" href="#"><i class="fas fa-home"></i> Inicio </a>
-            </li>
+
 
             @yield('navbarLinks')
 
