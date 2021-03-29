@@ -42,7 +42,7 @@
     </div>
     <div class="form-group row">
       <label class="col-2" for="municipis_id">Municipi</label>
-      <select class="col-10" name="municipis_id" id="municipis_id">
+      <select class="col-10" name="municipis_id" id="municipis_id" v-model="alertant.municipis_id">
           <option  v-for="municipi in municipis"
           :key="municipi.id"
           v-bind:value="municipi.id">{{municipi.nom}}</option>
@@ -50,7 +50,7 @@
     </div>
     <div class="form-group row">
       <label class="col-2" for="tipus_alertants_id">Tipus d'Alertant</label>
-      <select class="col-10" name="tipus_alertants_id" id="tipus_alertants_id">
+      <select class="col-10" name="tipus_alertants_id" id="tipus_alertants_id" v-model="alertant.tipus_alertants_id">
         <option
           v-for="alertant in tipus_alertants"
           :key="alertant.id"
