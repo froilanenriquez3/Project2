@@ -27,7 +27,7 @@
                 <a id="id-cuenta" class="nav-link dropdown-toggle navbarLinks"  data-toggle="dropdown"  href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-alt"></i> Perfil </a>
                 <div class="dropdown-menu bg-primary">
                   <!--<a class="dropdown-item" href="#" style="color: white;"> Editar perfil</a>-->
-                  <a class="dropdown-item" href="{{ url('/logout')}}" style="color: white;"><i class="fas fa-sign-out-alt"></i> Salir </a>
+                  <a class="dropdown-item logout" href="{{ url('/logout')}}" style="color: white;"><i class="fas fa-sign-out-alt"></i> Salir </a>
                 </div>
             </li>
 
