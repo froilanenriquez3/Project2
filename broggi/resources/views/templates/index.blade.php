@@ -17,8 +17,6 @@
 </head>
 
 <body>
-
-
     <main id="app">
         <header>
             <nav id="navbarHolder">
@@ -27,19 +25,20 @@
         </header>
 
         <section id="tableSection">
+
             <div id="filterSection">
                 <p>Filters</p>
             </div>
 
             <div id="divTable">
                 <div id="app">
-                @yield('table')
+                    @yield('table')
+                </div>
             </div>
-            </div>
+
+            <a href="{{ url('/alertants/create') }}"> <button class="btn btn-primary" id="addButton">Afegir</button></a>
 
         </section>
-
-
     </main>
 
     @include('partials.scripts')
