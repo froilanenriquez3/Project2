@@ -1,12 +1,12 @@
 
-a{
+a.navbarLinks{
 
     text-decoration: none;
 }
-a:hover,
-a:active,
-a:visited,
-a:focus{
+a.navbarLinks:hover,
+a.navbarLinks:active,
+a.navbarLinks:visited,
+a.navbarLinks:focus{
     font-style: bold;
     background-color: #11ADC4;
     border-radius: 50px;

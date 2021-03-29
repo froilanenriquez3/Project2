@@ -6,8 +6,7 @@ body{
 }
 
 /* Placeholder for nav*/
-nav {
-    border: dashed black 1px;
+#navHolder {
     width: 100%;
     height: 15vh;
 }
@@ -23,7 +22,7 @@ main {
     flex-wrap: wrap;
 }
 
-#menuSection > div, a{
+#menuSection > div, #menuSection > a{
     width: 30vw;
     height: 30vh;
     border: solid #2a9fd6 3px;

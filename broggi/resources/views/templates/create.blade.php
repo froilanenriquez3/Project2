@@ -17,7 +17,7 @@
 
 <body>
 
-    <main>
+    <main >
         <header>
             <nav id="navbarHolder">
                 {{-- import for navbar --}}
@@ -37,11 +37,15 @@
 
         <section id="formSection">
             <div id="divForm" class="container-fluid">
-                @yield('form')
+                <div id="app">
+                    @yield('form')
+                </div>
+
             </div>
             <div id="formButtons">
                 <button class="btn ">Cancelar</button>
-                <button type="submit" id="formSubmit" class="btn btn-primary" form="form">Siguiente</button>
+                {{-- <button type="submit" id="formSubmit" class="btn btn-primary" form="form">Siguiente</button> --}}
+                <button class="btn btn-primary" id="formSubmit" >Siguiente</button>
             </div>
 
         </section>
