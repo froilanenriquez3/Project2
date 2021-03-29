@@ -2421,17 +2421,15 @@ __webpack_require__.r(__webpack_exports__);
           window.location.href = "/Project2/broggi/public/alertants";
         })["catch"](function (error) {
           console.log(error.response.status);
-          console.log(error.response.data);
-          me.action = ""; // me.errorMessage= error.response.data.error;
+          console.log(error.response.data); // me.errorMessage= error.response.data.error;
         });
       } else {
         axios.put("/alertants/" + me.alertant.id, me.alertant).then(function (response) {
           console.log(response);
-          me.action = "";
+          window.location.href = "/Project2/broggi/public/alertants";
         })["catch"](function (error) {
           console.log(error.response.status);
-          console.log(error.response.data);
-          me.action = ""; // me.errorMessage= error.response.data.error;
+          console.log(error.response.data); // me.errorMessage= error.response.data.error;
         });
       }
     },
