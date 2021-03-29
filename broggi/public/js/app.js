@@ -2310,6 +2310,169 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/alertantsComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/alertantsComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      action: "",
+      alertants: [],
+      tipus_alertants: [],
+      municipis: [],
+      insert: false,
+      alertant: {
+        id: "",
+        telefon: "",
+        nom: "",
+        cognoms: "",
+        adreca: "",
+        municipis_id: "",
+        tipus_alertants_id: ""
+      }
+    };
+  },
+  methods: {
+    createAlertant: function createAlertant() {
+      var me = this;
+      axios.post("/alertants", me.alertant).then(function (response) {
+        console.log(response);
+        window.location.href = "/Project2/broggi/public/alertants";
+      })["catch"](function (error) {
+        console.log(error.response.status);
+        console.log(error.response.data);
+        me.action = ""; // me.errorMessage= error.response.data.error;
+      });
+    },
+    editAlertant: function editAlertant() {
+      var me = this;
+      axios.put("/alertants/" + me.alertant.id, me.alertant).then(function (response) {
+        console.log(response);
+        me.action = "";
+      })["catch"](function (error) {
+        console.log(error.response.status);
+        console.log(error.response.data);
+        me.action = ""; // me.errorMessage= error.response.data.error;
+      });
+    },
+    selectTipus: function selectTipus() {
+      var _this = this;
+
+      var me = this;
+      axios.get("/tipusalertants").then(function (response) {
+        me.tipus_alertants = response.data;
+        console.log(me.tipus_alertants);
+      })["catch"](function (error) {
+        console.log(error);
+      })["finally"](function () {
+        return _this.loading = false;
+      });
+    },
+    selectMunicipis: function selectMunicipis() {
+      var _this2 = this;
+
+      var me = this;
+      axios.get("/municipis").then(function (response) {
+        me.municipis = response.data;
+        console.log(me.municipis);
+      })["catch"](function (error) {
+        console.log(error);
+      })["finally"](function () {
+        return _this2.loading = false;
+      });
+    }
+  },
+  created: function created() {
+    this.selectMunicipis();
+    this.selectTipus();
+  },
+  mounted: function mounted() {
+    var me = this;
+
+    document.getElementById("formSubmit").onclick = function () {
+      me.createAlertant();
+    };
+
+    console.log("Component mounted.");
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -2337,6 +2500,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue").default);
 Vue.component('main-recursos-moviles', __webpack_require__(/*! ./components/MainRecursosMovilesComponent.vue */ "./resources/js/components/MainRecursosMovilesComponent.vue").default);
 Vue.component('main-usuarios', __webpack_require__(/*! ./components/MainUsuariosComponent.vue */ "./resources/js/components/MainUsuariosComponent.vue").default);
+Vue.component('alertants', __webpack_require__(/*! ./components/alertantsComponent.vue */ "./resources/js/components/alertantsComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -2377,7 +2541,7 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.baseURL = '/Project2/Project2/broggi/public/api/';
+window.axios.defaults.baseURL = '/Project2/broggi/public/api';
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -37907,6 +38071,45 @@ component.options.__file = "resources/js/components/MainUsuariosComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/alertantsComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/alertantsComponent.vue ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _alertantsComponent_vue_vue_type_template_id_17706bc0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./alertantsComponent.vue?vue&type=template&id=17706bc0& */ "./resources/js/components/alertantsComponent.vue?vue&type=template&id=17706bc0&");
+/* harmony import */ var _alertantsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./alertantsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/alertantsComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _alertantsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _alertantsComponent_vue_vue_type_template_id_17706bc0___WEBPACK_IMPORTED_MODULE_0__.render,
+  _alertantsComponent_vue_vue_type_template_id_17706bc0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/alertantsComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -37952,6 +38155,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainUsuariosComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MainUsuariosComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MainUsuariosComponent.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainUsuariosComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/alertantsComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/alertantsComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_alertantsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./alertantsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/alertantsComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_alertantsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -38002,6 +38221,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainUsuariosComponent_vue_vue_type_template_id_6e542c38___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainUsuariosComponent_vue_vue_type_template_id_6e542c38___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MainUsuariosComponent.vue?vue&type=template&id=6e542c38& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MainUsuariosComponent.vue?vue&type=template&id=6e542c38&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/alertantsComponent.vue?vue&type=template&id=17706bc0&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/alertantsComponent.vue?vue&type=template&id=17706bc0& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_alertantsComponent_vue_vue_type_template_id_17706bc0___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_alertantsComponent_vue_vue_type_template_id_17706bc0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_alertantsComponent_vue_vue_type_template_id_17706bc0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./alertantsComponent.vue?vue&type=template&id=17706bc0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/alertantsComponent.vue?vue&type=template&id=17706bc0&");
 
 
 /***/ }),
@@ -38590,6 +38826,245 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/alertantsComponent.vue?vue&type=template&id=17706bc0&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/alertantsComponent.vue?vue&type=template&id=17706bc0& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "form-group row" }, [
+      _c("label", { staticClass: "col-2", attrs: { for: "nom" } }, [
+        _vm._v("Nom")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.alertant.nom,
+            expression: "alertant.nom"
+          }
+        ],
+        staticClass: "col-10",
+        attrs: { type: "text", id: "nom", name: "nom" },
+        domProps: { value: _vm.alertant.nom },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.alertant, "nom", $event.target.value)
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group row" }, [
+      _c("label", { staticClass: "col-2", attrs: { for: "cognoms" } }, [
+        _vm._v("Cognoms")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.alertant.cognoms,
+            expression: "alertant.cognoms"
+          }
+        ],
+        staticClass: "col-10",
+        attrs: { type: "text", id: "cognoms", name: "cognoms" },
+        domProps: { value: _vm.alertant.cognoms },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.alertant, "cognoms", $event.target.value)
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group row" }, [
+      _c("label", { staticClass: "col-2", attrs: { for: "telefon" } }, [
+        _vm._v("Telefon")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.alertant.telefon,
+            expression: "alertant.telefon"
+          }
+        ],
+        staticClass: "col-10",
+        attrs: { type: "tel", id: "telefon", name: "telefon" },
+        domProps: { value: _vm.alertant.telefon },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.alertant, "telefon", $event.target.value)
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group row" }, [
+      _c("label", { staticClass: "col-2", attrs: { for: "adreca" } }, [
+        _vm._v("Adreca")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.alertant.adreca,
+            expression: "alertant.adreca"
+          }
+        ],
+        staticClass: "col-10",
+        attrs: { type: "text", id: "adreca", name: "adreca" },
+        domProps: { value: _vm.alertant.adreca },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.alertant, "adreca", $event.target.value)
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group row" }, [
+      _c("label", { staticClass: "col-2", attrs: { for: "municipis_id" } }, [
+        _vm._v("Municipi")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.alertant.municipis_id,
+              expression: "alertant.municipis_id"
+            }
+          ],
+          staticClass: "col-10",
+          attrs: { name: "municipis_id", id: "municipis_id" },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.alertant,
+                "municipis_id",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
+          }
+        },
+        _vm._l(_vm.municipis, function(municipi) {
+          return _c(
+            "option",
+            { key: municipi.id, domProps: { value: municipi.id } },
+            [_vm._v(_vm._s(municipi.nom))]
+          )
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        { staticClass: "col-2", attrs: { for: "tipus_alertants_id" } },
+        [_vm._v("Tipus d'Alertant")]
+      ),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.alertant.tipus_alertants_id,
+              expression: "alertant.tipus_alertants_id"
+            }
+          ],
+          staticClass: "col-10",
+          attrs: { name: "tipus_alertants_id", id: "tipus_alertants_id" },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.alertant,
+                "tipus_alertants_id",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
+          }
+        },
+        _vm._l(_vm.tipus_alertants, function(alertant) {
+          return _c(
+            "option",
+            {
+              key: alertant.id,
+              domProps: {
+                selected: alertant.id == _vm.alertants.tipus_alertants_id,
+                value: alertant.id
+              }
+            },
+            [_vm._v("\n        " + _vm._s(alertant.tipus) + "\n      ")]
+          )
+        }),
+        0
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
