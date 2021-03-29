@@ -16,3 +16,7 @@ a.navbarLinks:focus{
     background-color: white;
 }
 
+.logout:hover{
+    background-color: grey;
+
+}

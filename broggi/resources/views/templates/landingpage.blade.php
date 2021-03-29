@@ -9,7 +9,7 @@
     @include('partials.headerLinks')
 
     <link rel="stylesheet" href="{{ asset('../resources/css/homePages/home.css?' . rand()) }}">
-    <link rel="stylesheet" href="{{ asset('../resources/css/navbar.css?'. rand()) }}">
+
 
     @yield('links')
 
@@ -28,7 +28,6 @@
         @yield('content')
     </main>
     @include('partials.scripts')
-    <script src="https://kit.fontawesome.com/b87b71c2a9.js" crossorigin="anonymous"></script>
 
 </body>
 </html>

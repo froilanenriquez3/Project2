@@ -26,8 +26,7 @@
     <main>
         <header>
             <nav id="navbarHolder">
-                {{-- import for navbar --}}
-                <p>temporary</p>
+                @yield('navbar')
             </nav>
         </header>
 
