@@ -2546,7 +2546,8 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       axios["delete"]('alertants/' + me.alertant.id).then(function (response) {
         console.log('Succesfully deleted');
-        console.log(me.id);
+        window.location.reload(); // window.location.href = "/Project2/broggi/public/alertants";
+
         $(me.id).modal('hide'); //me.infoMessage= response.data.missatge;
       })["catch"](function (error) {
         //me.errorMessage = error.response.data.error;
