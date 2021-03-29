@@ -3,10 +3,12 @@
     <link rel="stylesheet" href="{{ asset('../resources/css/homePages/admin.css?' . rand()) }}">
 @endsection
 @section('title', 'Administrador')
+
 {{-- Navbar admin --}}
 @section('navbar')
 @include('partials.navbarAdmin')
 @endsection
+
 @section('content')
     <section id="menuSection">
         <a href="{{ asset('/alertants') }}">

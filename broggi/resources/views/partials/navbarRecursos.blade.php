@@ -3,7 +3,7 @@
 @section('navbarLinks')
 <!--Inicio-->
 <li class="nav-inicio  mr-2 ">
-    <a class="nav-link navbarLinks" href=" {{ url('/rhome')}}"><i class="fas fa-home"></i> Inicio </a>
+    <a class="nav-link navbarLinks" href=" {{ url('/rhome')}}"><i class="fas fa-home"></i> Recursos Inicio </a>
 </li>
 
 <!--Incidencia actual-->
