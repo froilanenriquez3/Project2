@@ -4,6 +4,11 @@
 <link rel="stylesheet" href="{{ asset('../resources/css/alertants/alertantsIndex.css?' . rand()) }}">
 @endsection
 
+{{-- Navbar teleoperador --}}
+@section('navbar')
+@include('partials.navbarTeleoperador')
+@endsection
+
 @section('title','Alertantes')
 
 @section('table')
