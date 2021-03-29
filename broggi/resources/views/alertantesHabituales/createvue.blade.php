@@ -21,11 +21,12 @@
 <h5 id="formTitle">Alertants</h5>
 
 @if(isset($alertant))
-<alertants :insert='{{ $insert }}' :editedalertant='{{ $alertant }}'></alertants>
+<alertants-form :insert='{{ $insert }}' :editedalertant='{{ $alertant }}'></alertants-form>
 {{-- {{ $alertant }} --}}
 @else
-<alertants :insert='{{ $insert }}'></alertants>
+<alertants-form :insert='{{ $insert }}'></alertants-form>
 @endif
+
 
 
 

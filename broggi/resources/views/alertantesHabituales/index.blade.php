@@ -41,10 +41,13 @@
             <form
             action="{{ action([App\Http\Controllers\AlertantsController::class, 'edit'], ['alertant' => $alertant->id]) }}"
             method="GET">
-            @csrf
             <button class="btn btn-primary" id="editAlertant" type="submit">Editar</button>
             </form>
         </td>
+        <td>
+            <button class="btn btn-danger" id="editAlertant" type="submit" onclick=" $('#deleteAlertantModal{{$alertant->id}}').modal('show');">Esborrar</button>
+        </td>
+        <alertants-delete :alertant='{{$alertant}}'></alertants-delete>
       </tr>
       @endforeach
 
@@ -53,6 +56,9 @@
   <div id="tableNav">
     {{ $alertants->links() }}
 </div>
+
+
+
 
 
 @endsection
