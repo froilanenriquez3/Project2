@@ -2388,13 +2388,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    insert: {
+      required: "yes"
+    },
+    editedalertant: {}
+  },
   data: function data() {
     return {
       action: "",
-      alertants: [],
+      //alertants: [],
       tipus_alertants: [],
       municipis: [],
-      insert: false,
       alertant: {
         id: "",
         telefon: "",
@@ -2409,25 +2414,26 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     createAlertant: function createAlertant() {
       var me = this;
-      axios.post("/alertants", me.alertant).then(function (response) {
-        console.log(response);
-        window.location.href = "/Project2/broggi/public/alertants";
-      })["catch"](function (error) {
-        console.log(error.response.status);
-        console.log(error.response.data);
-        me.action = ""; // me.errorMessage= error.response.data.error;
-      });
-    },
-    editAlertant: function editAlertant() {
-      var me = this;
-      axios.put("/alertants/" + me.alertant.id, me.alertant).then(function (response) {
-        console.log(response);
-        me.action = "";
-      })["catch"](function (error) {
-        console.log(error.response.status);
-        console.log(error.response.data);
-        me.action = ""; // me.errorMessage= error.response.data.error;
-      });
+
+      if (me.insert == true) {
+        axios.post("/alertants", me.alertant).then(function (response) {
+          console.log(response);
+          window.location.href = "/Project2/broggi/public/alertants";
+        })["catch"](function (error) {
+          console.log(error.response.status);
+          console.log(error.response.data);
+          me.action = ""; // me.errorMessage= error.response.data.error;
+        });
+      } else {
+        axios.put("/alertants/" + me.alertant.id, me.alertant).then(function (response) {
+          console.log(response);
+          me.action = "";
+        })["catch"](function (error) {
+          console.log(error.response.status);
+          console.log(error.response.data);
+          me.action = ""; // me.errorMessage= error.response.data.error;
+        });
+      }
     },
     selectTipus: function selectTipus() {
       var _this = this;
@@ -2454,11 +2460,19 @@ __webpack_require__.r(__webpack_exports__);
       })["finally"](function () {
         return _this2.loading = false;
       });
+    },
+    setInputs: function setInputs() {
+      var me = this;
+
+      if (me.editedalertant != null) {
+        me.alertant = me.editedalertant;
+      }
     }
   },
   created: function created() {
     this.selectMunicipis();
     this.selectTipus();
+    this.setInputs();
   },
   mounted: function mounted() {
     var me = this;
@@ -2467,6 +2481,8 @@ __webpack_require__.r(__webpack_exports__);
       me.createAlertant();
     };
 
+    console.log(this.insert);
+    console.log(this.editedalertant);
     console.log("Component mounted.");
   }
 });
@@ -39052,7 +39068,7 @@ var render = function() {
             {
               key: alertant.id,
               domProps: {
-                selected: alertant.id == _vm.alertants.tipus_alertants_id,
+                selected: alertant.id == alertant.tipus_alertants_id,
                 value: alertant.id
               }
             },
