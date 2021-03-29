@@ -48,7 +48,8 @@ export default {
                 .delete('alertants/' + me.alertant.id)
                 .then(response => {
                     console.log('Succesfully deleted');
-                    console.log(me.id);
+                    window.location.reload();
+                    // window.location.href = "/Project2/broggi/public/alertants";
                     $(me.id).modal('hide');
                     //me.infoMessage= response.data.missatge;
                 })
