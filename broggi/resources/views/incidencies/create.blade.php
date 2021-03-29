@@ -1,9 +1,5 @@
 @extends('templates.create')
 
-@section('links')
-    <link rel="stylesheet" href="{{ asset('../resources/css/homePages/teleoperador.css?' . rand()) }}">
-@endsection
-
 @section('title', 'Formulario de incidencias')
 
 {{-- Navbar teleoperador --}}
