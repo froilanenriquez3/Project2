@@ -6,57 +6,54 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
    <!-- BOOTSTRAP -->
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/navbar.css">
 </head>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
+<nav class="navbar navbar-expand-lg navbar-light bg-white container-fluid fixed-top m-2">
 
-    <a href="#"><img src="../../../public/broggiLogo.png" width="205" height="45"></a>
+    <a class="logo ml-3" href="#"><img src="../../../public/broggiLogo.png" width="205" height="45"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarColor02">
+    <div class="collapse navbar-collapse" id="navbarColor02 ">
         <!--inicio izquierdo-->
-        <ul class="navbar-nav mr-auto">
 
-        </ul>
         <!-- fin izquierdo-->
 
-        <!--Inicio derecho-->
-        <ul class="navbar-nav my-2 my-lg-0">
+        <!--Inicio derecho my-2 my-lg-0-->
+        <ul class="navbar-nav ml-auto mr-3">
             <!--Inicio-->
-            <li class="nav-inicio active">
-                <a class="nav-link" href="#"><i class="fas fa-home"></i> Inicio
-                    <span class="sr-only">(current)</span>
-                </a>
+            <li class="nav-inicio  mr-2 ">
+                <a class="nav-link" href="#"><i class="fas fa-home"></i> Inicio </a>
             </li>
             <!--Nueva incidencias-->
-            <li class="nav-incidencias">
-                <a class="nav-link" href="#"><i class="fas fa-plus-circle"></i> Nueva incidencia</a>
+            <li class="nav-incidencias mr-2">
+                <a class="nav-link" style=":hover {color: yellow}" href="#"><i class="fas fa-plus-circle"></i> Nueva incidencia </a>
             </li>
             <!--Incidencias-->
-            <li class="nav-usuaris">
-                <a class="nav-link" href="#"><i class="fas fa-exclamation-triangle"></i> Incidencias</a>
+            <li class="nav-usuaris mr-2">
+                <a class="nav-link" href="#"><i class="fas fa-exclamation-triangle"></i> Incidencias </a>
             </li>
             <!--Alertantes habituales-->
-            <li class="nav-habituales">
-                <a class="nav-link" href="#"><i class="fas fa-users"></i> Alertantes habituales</a>
+            <li class="nav-habituales mr-2">
+                <a class="nav-link" href="#"><i class="fas fa-users"></i> Alertantes habituales </a>
             </li>
             <!--Recursos móviles-->
-            <li class="nav-recursos">
-                <a class="nav-link" href="#"><i class="fas fa-ambulance"></i> Recursos móviles</a>
+            <li class="nav-recursos mr-2">
+                <a class="nav-link " href="#"><i class="fas fa-ambulance"></i> Recursos móviles </a>
             </li>
 
             <!--PERFIL-->
 
-            <li class="nav-cuenta dropdown">
-                <a id="id-cuenta" class="nav-link dropdown-toggle"  data-toggle="dropdown"  href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-alt"></i> Perfil</a>
+            <li class="nav-cuenta dropdown ml-auto">
+                <a id="id-cuenta" class="nav-link dropdown-toggle"  data-toggle="dropdown"  href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-alt"></i> Perfil </a>
                 <div class="dropdown-menu bg-primary">
                   <!--<a class="dropdown-item" href="#" style="color: white;"> Editar perfil</a>-->
-                  <a class="dropdown-item" href="#" style="color: white;"><i class="fas fa-sign-out-alt"></i> Salir</a>
+                  <a class="dropdown-item" href="#" style="color: white;"><i class="fas fa-sign-out-alt"></i> Salir </a>
                 </div>
             </li>
 
