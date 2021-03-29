@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="{{ asset('../resources/css/homePages/admin.css?' . rand()) }}">
 @endsection
 @section('title', 'Administrador')
-{{-- Navbar teleoperador --}}
+{{-- Navbar admin --}}
 @section('navbar')
 @include('partials.navbarAdmin')
 @endsection
