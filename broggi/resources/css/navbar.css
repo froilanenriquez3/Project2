@@ -1,0 +1,20 @@
+
+a{
+
+    text-decoration: none;
+}
+a:hover,
+a:active,
+a:visited,
+a:focus{
+    font-style: bold;
+    background-color: #11ADC4;
+    border-radius: 50px;
+    color:white;
+
+}
+
+.logo:hover{
+    background-color: white;
+}
+
