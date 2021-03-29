@@ -103,7 +103,6 @@ export default {
         .catch((error) => {
           console.log(error.response.status);
           console.log(error.response.data);
-          me.action = "";
           // me.errorMessage= error.response.data.error;
         });
       } else{
@@ -111,13 +110,11 @@ export default {
         .put("/alertants/" + me.alertant.id, me.alertant)
         .then(function (response) {
           console.log(response);
-
-          me.action = "";
+          window.location.href = "/Project2/broggi/public/alertants";
         })
         .catch((error) => {
           console.log(error.response.status);
           console.log(error.response.data);
-          me.action = "";
           // me.errorMessage= error.response.data.error;
         });
       }
