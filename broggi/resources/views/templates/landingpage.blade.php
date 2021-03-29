@@ -21,7 +21,7 @@
         <header>
             <div id="navHolder">
                 {{-- import for navbar --}}
-                @include('templates.navbar')
+                @yield('navbar')
             </div>
         </header>
 
