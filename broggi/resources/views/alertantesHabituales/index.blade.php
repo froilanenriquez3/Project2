@@ -37,6 +37,14 @@
         <td>{{ $alertant->telefon }}</td>
         <td>{{ $alertant->adreca }}</td>
         <td>{{ $alertant->tipus_alertants_id }}</td>
+        <td>
+            <form
+            action="{{ action([App\Http\Controllers\AlertantsController::class, 'edit'], ['alertant' => $alertant->id]) }}"
+            method="GET">
+            @csrf
+            <button class="btn btn-primary" id="editAlertant" type="submit">Editar</button>
+            </form>
+        </td>
       </tr>
       @endforeach
 

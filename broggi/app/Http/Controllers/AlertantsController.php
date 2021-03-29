@@ -14,7 +14,7 @@ class AlertantsController extends Controller
      */
     public function index()
     {
-        $alertants = Alertants::paginate(5);
+        $alertants = Alertants::paginate(4);
 
         return view('alertantesHabituales.index', compact('alertants'));
     }
@@ -26,7 +26,9 @@ class AlertantsController extends Controller
      */
     public function create()
     {
-        return view('alertantesHabituales.createvue');
+        $insert = 'true';
+
+        return view('alertantesHabituales.createvue', compact('insert'));
     }
 
     /**
@@ -48,18 +50,19 @@ class AlertantsController extends Controller
      */
     public function show(Alertants $alertants)
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Alertants  $alertants
+     * @param  \App\Models\Alertants  $alertant
      * @return \Illuminate\Http\Response
      */
-    public function edit(Alertants $alertants)
+    public function edit(Alertants $alertant)
     {
-        //
+        $insert = 'false';
+        return view('alertantesHabituales.createvue', compact('insert','alertant'));
     }
 
     /**
@@ -71,7 +74,7 @@ class AlertantsController extends Controller
      */
     public function update(Request $request, Alertants $alertants)
     {
-        //
+
     }
 
     /**
