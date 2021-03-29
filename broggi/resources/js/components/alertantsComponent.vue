@@ -54,7 +54,7 @@
         <option
           v-for="alertant in tipus_alertants"
           :key="alertant.id"
-          :selected="alertant.id == alertants.tipus_alertants_id"
+          :selected="alertant.id == alertant.tipus_alertants_id"
           v-bind:value="alertant.id"
         >
           {{ alertant.tipus }}
@@ -66,13 +66,19 @@
 
 <script>
 export default {
+    props: {
+        insert: {
+            required: "yes"
+        },
+        editedalertant: {
+        }
+    },
   data() {
     return {
       action: "",
-      alertants: [],
+      //alertants: [],
       tipus_alertants: [],
       municipis: [],
-      insert: false,
       alertant: {
         id: "",
         telefon: "",
@@ -87,7 +93,8 @@ export default {
   methods: {
     createAlertant() {
       let me = this;
-      axios
+      if (me.insert == true){
+           axios
         .post("/alertants", me.alertant)
         .then(function (response) {
           console.log(response);
@@ -96,25 +103,22 @@ export default {
         .catch((error) => {
           console.log(error.response.status);
           console.log(error.response.data);
-          me.action = "";
           // me.errorMessage= error.response.data.error;
         });
-    },
-    editAlertant() {
-      let me = this;
-      axios
+      } else{
+         axios
         .put("/alertants/" + me.alertant.id, me.alertant)
         .then(function (response) {
           console.log(response);
-
-          me.action = "";
+          window.location.href = "/Project2/broggi/public/alertants";
         })
         .catch((error) => {
           console.log(error.response.status);
           console.log(error.response.data);
-          me.action = "";
           // me.errorMessage= error.response.data.error;
         });
+      }
+
     },
     selectTipus() {
       let me = this;
@@ -141,18 +145,27 @@ export default {
           console.log(error);
         })
         .finally(() => (this.loading = false));
+    },
+    setInputs(){
+        let me = this;
+        if(me.editedalertant != null){
+            me.alertant = me.editedalertant;
+        }
     }
   },
-
   created() {
     this.selectMunicipis();
     this.selectTipus();
+    this.setInputs();
   },
   mounted() {
     let me = this;
-    document.getElementById("formSubmit").onclick = function () {
+     document.getElementById("formSubmit").onclick = function () {
       me.createAlertant();
     };
+    console.log(this.insert);
+    console.log(this.editedalertant);
+
     console.log("Component mounted.");
   },
 };
