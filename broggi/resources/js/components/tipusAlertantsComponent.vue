@@ -140,10 +140,8 @@ export default {
       axios
         .get("/tipusalertants")
         .then((response) => {
-
           me.tipus_alertants = response.data;
           console.log(me.tipus_alertants);
-
         })
         .catch((error) => {
           console.log(error);
@@ -152,33 +150,35 @@ export default {
     },
     afegirTipo() {
       let me = this;
+       console.log("adding");å
       axios
         .post("/tipusalertants", me.tipo)
         .then(function (response) {
           console.log(response);
           me.selectTipus();
-          me.action = "";
+           me.action='';
         })
         .catch((error) => {
           console.log(error.response.status);
           console.log(error.response.data);
-          me.action = "";
+            me.action='';
           // me.errorMessage= error.response.data.error;
         });
     },
     editarTipo() {
+         console.log("updating");
       let me = this;
       axios
         .put("/tipusalertants/" + me.tipo.id, me.tipo)
         .then(function (response) {
           console.log(response);
           me.selectTipus();
-          me.action = "";
+           me.action='';
         })
         .catch((error) => {
           console.log(error.response.status);
           console.log(error.response.data);
-          me.action = "";
+            me.action='';
           // me.errorMessage= error.response.data.error;
         });
     },
@@ -187,20 +187,20 @@ export default {
       $("#deleteModal").modal("show");
     },
     deleteTipo() {
+        console.log("deleting");
       let me = this;
       axios
-        .delete("tipusalertants/" + me.tipo.id)
+        .delete("/tipusalertants/" + me.tipo.id)
         .then((response) => {
           me.selectTipus();
           $("#deleteModal").modal("hide");
-          me.action = "";
-          window.location.reload();
+            me.action='';
           //me.infoMessage= response.data.missatge;
         })
         .catch((error) => {
           //me.errorMessage = error.response.data.error;
           $("#deleteModal").modal("hide");
-          me.action = "";
+            me.action='';
         });
     },
     selectAction(action, tipo) {
