@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Models\Tipus_alertants;
+use App\Clases\Utilitat;
 use Illuminate\Http\Request;
+use App\Models\Tipus_alertants;
+use App\Http\Controllers\Controller;
+use Illuminate\Database\QueryException;
 use App\Http\Resources\TipusAlertantsResource;
 
 class TipusAlertantsController extends Controller
@@ -39,7 +41,22 @@ class TipusAlertantsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tipo= new Tipus_alertants();
+
+        $tipo->tipus= $request->input('tipus');
+
+        try{
+            $tipo->save();
+            $response= (new TipusAlertantsResource($tipo))
+                        ->response()
+                        ->setStatusCode(201);
+            } catch (QueryException $ex){
+                $message = Utilitat::errorMessage($ex);
+                $response = \response()
+                            ->json(['error'=> $message], 400);
+            }
+
+            return $response;
     }
 
     /**
