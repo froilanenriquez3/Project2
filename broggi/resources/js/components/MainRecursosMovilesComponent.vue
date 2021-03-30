@@ -3,7 +3,8 @@
         <!-- Si no se selecciona una opción, se muestra la tabla -->
         <div v-show="action == ''">
         <button type="button" @click="selectAction('afegir')" class="btn btn-primary">Afegir</button>
-        <table class="table">
+        <table class="table" id="my-table" :per-page="perPage"
+      :current-page="currentPage">
             <thead>
                 <tr>
                     <th scope="col">Codi</th>
@@ -14,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="recurs in recursos" :key="recurs.id">
+                <tr v-for="recurs in paginator(recursos)" :key="recurs.id">
                     <td>{{ recurs.codi }}</td>
                     <td>
                         <div class="form-check">
@@ -52,6 +53,12 @@
                     </td>
                 </tr>
             </tbody>
+            <b-pagination
+                     v-model="currentPage"
+                    :total-rows="totalRows"
+                    :per-page="perPage"
+                    aria-controls="my-table"
+            ></b-pagination>
         </table>
         </div>
 
@@ -110,6 +117,9 @@ export default {
             recursos: [],
             tipus_recursos:[],
             insert: false,
+             perPage: 4,
+            currentPage: 1,
+            totalRows: '',
             recurs: {
                 id: '',
                 codi: '',
@@ -127,6 +137,7 @@ export default {
                 .get("/recursos")
                 .then(response => {
                     me.recursos = response.data;
+                    me.totalRows= me.recursos.length
                 })
                 .catch(error => {
                     console.log(error);
@@ -137,6 +148,8 @@ export default {
             this.action = action;
             if(action == 'editar' || action == 'borrar'){
                 this.recurs = recurs;
+            } else {
+                this.recurs= '';
             }
 
         },
@@ -205,7 +218,16 @@ export default {
                     me.action=''
                 })
 
-            }
+            },
+             paginator(recursos) {
+        //  Devuelve parte del array que va a usar esa página concreta.
+      const beginning = (this.currentPage - 1) * this.perPage;
+      const end =
+       beginning + this.perPage > recursos.length
+          ? recursos.length
+          : beginning  + this.perPage;
+      return recursos.slice(beginning , end );
+    }
     },
     created() {
         this.selectRecursos();

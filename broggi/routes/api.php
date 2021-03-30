@@ -2,13 +2,14 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\RolsController;
 use App\Http\Controllers\Api\UsuarisController;
 use App\Http\Controllers\Api\RecursosController;
 use App\Http\Controllers\Api\AlertantsController;
+use App\Http\Controllers\Api\MunicipisController;
+use App\Http\Controllers\Api\IncidenciesController;
 use App\Http\Controllers\Api\TipusRecursController;
 use App\Http\Controllers\Api\TipusAlertantsController;
-use App\Http\Controllers\Api\IncidenciesController;
-use App\Http\Controllers\Api\MunicipisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,4 @@ Route::apiResource('recursos', RecursosController::class);
 Route::apiResource('tipusrecursos', TipusRecursController::class);
 Route::apiResource('tipusalertants', TipusAlertantsController::class);
 Route::apiResource('municipis', MunicipisController::class);
+Route::apiResource('rols', RolsController::class);
