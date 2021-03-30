@@ -14,7 +14,7 @@ class TipusAlertantsController extends Controller
      */
     public function index()
     {
-        //
+        return view('tiposAlertantes.index');
     }
 
     /**

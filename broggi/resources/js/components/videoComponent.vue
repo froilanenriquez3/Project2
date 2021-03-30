@@ -28,6 +28,15 @@ export default {
       let videoElem = document.querySelector(videoId);
       videoElem.currentTime = timestamp;
     },
+    pauseAtTimestamp(videoId, timestamp){
+        let videoElem = document.querySelector(videoId);
+        videoElem.addEventListener("timeupdate",function(){
+            //If you dont want video to pause from fast fowarding, remove greater than
+            if(this.currentTime >= timestamp){
+                this.pause();
+            }
+        })
+    }
   },
   created() {},
   mounted() {
