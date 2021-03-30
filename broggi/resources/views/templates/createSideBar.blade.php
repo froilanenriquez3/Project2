@@ -47,9 +47,9 @@
                 @yield('form')
             </div>
             <div id="formButtons">
-                <button class="btn ">Cancelar</button>
-                <button type="submit" id="formSubmit" class="btn btn-primary" form="form">Siguiente</button>
-            </div>
+                <a href="{{ url('/alertants')}}"> <button class="btn ">Cancelar</button></a>
+                 <button class="btn btn-primary" id="formSubmit" >Siguiente</button>
+             </div>
 
         </section>
 
