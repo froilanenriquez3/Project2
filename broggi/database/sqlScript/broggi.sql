@@ -35,7 +35,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `broggi`.`tipus_alertants` ;
 
 CREATE TABLE IF NOT EXISTS `broggi`.`tipus_alertants` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL auto_increment,
   `tipus` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `tipus_UNIQUE` (`tipus` ASC) )
@@ -404,11 +404,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `broggi`;
-INSERT INTO `broggi`.`tipus_alertants` (`id`, `tipus`) VALUES (1, 'Centre sanitari');
-INSERT INTO `broggi`.`tipus_alertants` (`id`, `tipus`) VALUES (2, 'Afectat');
-INSERT INTO `broggi`.`tipus_alertants` (`id`, `tipus`) VALUES (3, 'Entorn afectat');
-INSERT INTO `broggi`.`tipus_alertants` (`id`, `tipus`) VALUES (4, 'VIP');
-INSERT INTO `broggi`.`tipus_alertants` (`id`, `tipus`) VALUES (5, 'Accidental');
+INSERT INTO `broggi`.`tipus_alertants` (`tipus`) VALUES ('Centre sanitari');
+INSERT INTO `broggi`.`tipus_alertants` (`tipus`) VALUES ('Afectat');
+INSERT INTO `broggi`.`tipus_alertants` (`tipus`) VALUES ('Entorn afectat');
+INSERT INTO `broggi`.`tipus_alertants` (`tipus`) VALUES ('VIP');
+INSERT INTO `broggi`.`tipus_alertants` (`tipus`) VALUES ('Accidental');
 
 COMMIT;
 
