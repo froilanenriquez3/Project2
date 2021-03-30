@@ -2564,6 +2564,212 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/tipusAlertantsComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/tipusAlertantsComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      action: "",
+      tipus_alertants: [],
+      insert: false,
+      tipo: {
+        id: "",
+        tipus: ""
+      }
+    };
+  },
+  methods: {
+    selectTipus: function selectTipus() {
+      var _this = this;
+
+      var me = this;
+      axios.get("/tipusalertants").then(function (response) {
+        me.tipus_alertants = response.data;
+        console.log(me.tipus_alertants);
+      })["catch"](function (error) {
+        console.log(error);
+      })["finally"](function () {
+        return _this.loading = false;
+      });
+    },
+    afegirTipo: function afegirTipo() {
+      var me = this;
+      axios.post("/tipusalertants", me.tipo).then(function (response) {
+        console.log(response);
+        me.selectTipus();
+        me.action = "";
+      })["catch"](function (error) {
+        console.log(error.response.status);
+        console.log(error.response.data);
+        me.action = ""; // me.errorMessage= error.response.data.error;
+      });
+    },
+    editarTipo: function editarTipo() {
+      var me = this;
+      axios.put("/tipusalertants/" + me.tipo.id, me.tipo).then(function (response) {
+        console.log(response);
+        me.selectTipus();
+        me.action = "";
+      })["catch"](function (error) {
+        console.log(error.response.status);
+        console.log(error.response.data);
+        me.action = ""; // me.errorMessage= error.response.data.error;
+      });
+    },
+    confirmDeleteTipo: function confirmDeleteTipo(tipo) {
+      this.tipo = tipo;
+      $("#deleteModal").modal("show");
+    },
+    deleteTipo: function deleteTipo() {
+      var me = this;
+      axios["delete"]("tipusalertants/" + me.tipo.id).then(function (response) {
+        me.selectTipus();
+        $("#deleteModal").modal("hide");
+        me.action = ""; //me.infoMessage= response.data.missatge;
+      })["catch"](function (error) {
+        //me.errorMessage = error.response.data.error;
+        $("#deleteModal").modal("hide");
+        me.action = "";
+      });
+    },
+    selectAction: function selectAction(action, tipo) {
+      this.action = action;
+
+      if (action == 'editar' || action == 'borrar') {
+        this.tipo = tipo;
+      }
+    }
+  },
+  created: function created() {
+    this.selectTipus();
+  },
+  mounted: function mounted() {
+    console.log("Component mounted.");
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -2593,6 +2799,7 @@ Vue.component('main-recursos-moviles', __webpack_require__(/*! ./components/Main
 Vue.component('main-usuarios', __webpack_require__(/*! ./components/MainUsuariosComponent.vue */ "./resources/js/components/MainUsuariosComponent.vue").default);
 Vue.component('alertants-form', __webpack_require__(/*! ./components/alertantsComponent.vue */ "./resources/js/components/alertantsComponent.vue").default);
 Vue.component('alertants-delete', __webpack_require__(/*! ./components/alertantsDeleteComponent.vue */ "./resources/js/components/alertantsDeleteComponent.vue").default);
+Vue.component('tipus-alertants', __webpack_require__(/*! ./components/tipusAlertantsComponent.vue */ "./resources/js/components/tipusAlertantsComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -38241,6 +38448,45 @@ component.options.__file = "resources/js/components/alertantsDeleteComponent.vue
 
 /***/ }),
 
+/***/ "./resources/js/components/tipusAlertantsComponent.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/tipusAlertantsComponent.vue ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _tipusAlertantsComponent_vue_vue_type_template_id_4294781a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tipusAlertantsComponent.vue?vue&type=template&id=4294781a& */ "./resources/js/components/tipusAlertantsComponent.vue?vue&type=template&id=4294781a&");
+/* harmony import */ var _tipusAlertantsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tipusAlertantsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/tipusAlertantsComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _tipusAlertantsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _tipusAlertantsComponent_vue_vue_type_template_id_4294781a___WEBPACK_IMPORTED_MODULE_0__.render,
+  _tipusAlertantsComponent_vue_vue_type_template_id_4294781a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/tipusAlertantsComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -38318,6 +38564,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_alertantsDeleteComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./alertantsDeleteComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/alertantsDeleteComponent.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_alertantsDeleteComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/tipusAlertantsComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/tipusAlertantsComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_tipusAlertantsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./tipusAlertantsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/tipusAlertantsComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_tipusAlertantsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -38402,6 +38664,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_alertantsDeleteComponent_vue_vue_type_template_id_8d93e416___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_alertantsDeleteComponent_vue_vue_type_template_id_8d93e416___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./alertantsDeleteComponent.vue?vue&type=template&id=8d93e416& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/alertantsDeleteComponent.vue?vue&type=template&id=8d93e416&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/tipusAlertantsComponent.vue?vue&type=template&id=4294781a&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/tipusAlertantsComponent.vue?vue&type=template&id=4294781a& ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_tipusAlertantsComponent_vue_vue_type_template_id_4294781a___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_tipusAlertantsComponent_vue_vue_type_template_id_4294781a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_tipusAlertantsComponent_vue_vue_type_template_id_4294781a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./tipusAlertantsComponent.vue?vue&type=template&id=4294781a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/tipusAlertantsComponent.vue?vue&type=template&id=4294781a&");
 
 
 /***/ }),
@@ -39306,6 +39585,276 @@ var staticRenderFns = [
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
         [_vm._v("Esborrar Alertant")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/tipusAlertantsComponent.vue?vue&type=template&id=4294781a&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/tipusAlertantsComponent.vue?vue&type=template&id=4294781a& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "tiposContainer" }, [
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.action == "",
+            expression: "action == ''"
+          }
+        ]
+      },
+      [
+        _c("table", { staticClass: "table" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.tipus_alertants, function(tipo) {
+              return _c("tr", { key: tipo.id }, [
+                _c("th", { attrs: { scope: "row" } }, [
+                  _vm._v(_vm._s(tipo.id))
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(tipo.tipus))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-warning btn-sm d-flex",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.selectAction("editar", tipo)
+                        }
+                      }
+                    },
+                    [_vm._v("\n              Editar\n            ")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary btn-sm d-flex",
+                      attrs: { id: "deleteB", type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.confirmDeleteTipo(tipo)
+                        }
+                      }
+                    },
+                    [_vm._v("\n              Esborrar\n            ")]
+                  )
+                ])
+              ])
+            }),
+            0
+          )
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.action == "afegir" || _vm.action == "editar",
+            expression: "action == 'afegir' || action == 'editar'"
+          }
+        ]
+      },
+      [
+        _c("div", { staticClass: "form-group row" }, [
+          _c("label", { staticClass: "col-2", attrs: { for: "tipus" } }, [
+            _vm._v("Tipus")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.tipo.tipus,
+                expression: "tipo.tipus"
+              }
+            ],
+            staticClass: "col-10",
+            attrs: { type: "text", id: "tipus", name: "tipus" },
+            domProps: { value: _vm.tipo.tipus },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.tipo, "tipus", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _vm.action == "afegir"
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.afegirTipo()
+                  }
+                }
+              },
+              [_vm._v("\n      Afegir\n    ")]
+            )
+          : _c(
+              "button",
+              {
+                staticClass: "btn btn-warning",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.editarTipo()
+                  }
+                }
+              },
+              [_vm._v("\n      Editar\n    ")]
+            )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "deleteModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "modal-body", attrs: { id: "modalText" } },
+                [
+                  _vm._v(
+                    "\n          Està segur d'esborrar el tipo amb id " +
+                      _vm._s(_vm.tipo.id) +
+                      " ?\n        "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { id: "buttonDeleteModal", type: "submit" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteTipo()
+                      }
+                    }
+                  },
+                  [_vm._v("\n            Esborrar\n          ")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary",
+        attrs: { id: "addButton" },
+        on: {
+          click: function($event) {
+            return _vm.selectAction("afegir")
+          }
+        }
+      },
+      [_vm._v("Afegir")]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipus")]),
+        _vm._v(" "),
+        _c("th"),
+        _vm._v(" "),
+        _c("th")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Esborrar tipo")]
       ),
       _vm._v(" "),
       _c(
