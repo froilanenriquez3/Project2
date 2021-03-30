@@ -18,36 +18,10 @@
 
 @section('table')
 
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Tipus</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row"></th>
-        <td></td>
-        <td>
-            <form
-            action=""
-            method="GET">
-            <button class="btn btn-primary" id="editAlertant" type="submit">Editar</button>
-            </form>
-        </td>
-        <td>
-            <button class="btn btn-danger" id="deleteAlertant" type="submit" onclick="">Esborrar</button>
-        </td>
-      </tr>
-
-    </tbody>
-  </table>
+<tipus-alertants></tipus-alertants>
 
 @endsection
 
 @section('addButton')
-    <a href=""> <button class="btn btn-primary" id="addButton">Afegir</button></a>
+    {{-- <a href=""> <button class="btn btn-primary" id="addButton" onclick="selectAction('afegir')">Afegir</button></a> --}}
 @endsection
