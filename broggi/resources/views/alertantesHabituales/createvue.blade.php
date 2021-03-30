@@ -31,3 +31,7 @@
 
 
 @endsection
+
+@section('cancelButton')
+<a href="{{ url('/alertants')}}"> <button class="btn ">Cancelar</button></a>
+@endsection

@@ -1,0 +1,27 @@
+#navbarHolder {
+    width: 100%;
+    height: 10vh;
+}
+
+#formSection{
+    padding-top: 1%;
+}
+
+#divForm {
+    position: relative;
+    border: solid rgb(0, 172, 194) 3px;
+    border-radius: 5%;
+    width: 90%;
+    padding: 20px;
+    height: fit-content;
+}
+
+#divForm > div {
+    padding: 10px;
+}
+
+#formButtons {
+    position: relative;
+    left: 30vw;
+    top: 10vh;
+}
