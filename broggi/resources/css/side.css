@@ -1,0 +1,24 @@
+.nav-side{
+    margin-top: 35rem;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 15px;
+
+}
+a{
+    color:black;
+    /* text-align:center; */
+}
+.sidebar a:hover,
+.sidebar:active,
+.sidebar:focus{
+    font-style: bold;
+    color:#11ADC4;
+    background-size:4,25rem;
+}
+.nav-pills .nav-link.active,
+.show>.nav-pills .nav-link{
+    background: #11ADC4 !important
+
+}
+
