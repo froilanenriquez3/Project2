@@ -18,19 +18,9 @@ class TipusAlertantsController extends Controller
      */
     public function index()
     {
-        $alertants= Tipus_alertants::all();
+        $alertants = Tipus_alertants::all();
 
         return TipusAlertantsResource::collection($alertants);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -62,39 +52,29 @@ class TipusAlertantsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+      * @param  \App\Models\Tipus_alertants  $tipusalertant
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Tipus_alertants $tipusalertant)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $recurso = Tipus_alertants::find($tipusalertant->id);
+        return new TipusAlertantsResource($tipusalertant);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tipus_alertants  $tipo
+     * @param  \App\Models\Tipus_alertants  $tipusalertant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Tipus_alertants $tipo)
+    public function update(Request $request, Tipus_alertants $tipusalertant)
     {
-        $tipo->tipus= $request->input('tipus');
+        $tipusalertant->tipus= $request->input('tipus');
 
         try{
-            $tipo->save();
-            $response= (new TipusAlertantsResource($tipo))
+            $tipusalertant->save();
+            $response= (new TipusAlertantsResource($tipusalertant))
                         ->response()
                         ->setStatusCode(201);
             } catch (QueryException $ex){
@@ -110,13 +90,13 @@ class TipusAlertantsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-    * @param  \App\Models\Tipus_alertants  $tipo
+    * @param  \App\Models\Tipus_alertants  $tipusalertant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tipus_alertants $tipo)
+    public function destroy(Tipus_alertants $tipusalertant)
     {
         try{
-            $tipo->delete();
+            $tipusalertant->delete();
             $response= \response()
                         ->json(['message'=>'Registro borrado correctamente'], 200);
         } catch (QueryException $ex){
