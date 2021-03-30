@@ -32,7 +32,13 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/usuaris', UsuarisController::class);
 
     Route::get('/thome', function (){ return view('homePages.teleoperador');});
-    Route::get('/ahome', function (){ return view('homePages.admin');});
     Route::get('/rhome', function (){ return view('homePages.recurs');});
+    Route::get('/ahome', function (){
+        $view = view('login');
+        if(Auth::user()->rols_id == 1){
+            $view = view('homePages.admin');
+        }
+        return $view;
+    });
 
 });
