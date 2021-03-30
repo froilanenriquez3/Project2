@@ -17,7 +17,7 @@
 @section('title','Alertantes')
 
 @section('table')
-<table class="table">
+<table class="table table-striped">
     <thead>
       <tr>
         <th scope="col">ID</th>
@@ -25,7 +25,9 @@
         <th scope="col">Cognom</th>
         <th scope="col">Telefon</th>
         <th scope="col">Adreca</th>
-        <th scopr="col">Tipus</th>
+        <th scope="col">Tipus</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -59,8 +61,8 @@
     {{ $alertants->links() }}
 </div>
 
+@endsection
 
-
-
-
+@section('addButton')
+    <a href="{{ url('/alertants/create') }}"> <button class="btn btn-primary" id="addButton">Afegir</button></a>
 @endsection
