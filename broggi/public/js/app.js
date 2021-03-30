@@ -2686,6 +2686,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2745,7 +2757,8 @@ __webpack_require__.r(__webpack_exports__);
       axios["delete"]("tipusalertants/" + me.tipo.id).then(function (response) {
         me.selectTipus();
         $("#deleteModal").modal("hide");
-        me.action = ""; //me.infoMessage= response.data.missatge;
+        me.action = "";
+        window.location.reload(); //me.infoMessage= response.data.missatge;
       })["catch"](function (error) {
         //me.errorMessage = error.response.data.error;
         $("#deleteModal").modal("hide");
@@ -2755,7 +2768,7 @@ __webpack_require__.r(__webpack_exports__);
     selectAction: function selectAction(action, tipo) {
       this.action = action;
 
-      if (action == 'editar' || action == 'borrar') {
+      if (action == "editar" || action == "borrar") {
         this.tipo = tipo;
       }
     }
@@ -39703,6 +39716,29 @@ var render = function() {
         ]
       },
       [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.tipo.id,
+              expression: "tipo.id"
+            }
+          ],
+          attrs: { type: "hidden" },
+          domProps: { value: _vm.tipo.id },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.tipo, "id", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("p", [_vm._v(_vm._s(_vm.tipo.id))]),
+        _vm._v(" "),
         _c("div", { staticClass: "form-group row" }, [
           _c("label", { staticClass: "col-2", attrs: { for: "tipus" } }, [
             _vm._v("Tipus")
@@ -39825,7 +39861,7 @@ var render = function() {
           }
         }
       },
-      [_vm._v("Afegir")]
+      [_vm._v("\n    Afegir\n  ")]
     )
   ])
 }

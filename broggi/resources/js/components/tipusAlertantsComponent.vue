@@ -2,7 +2,6 @@
   <div class="tiposContainer">
     <!-- Si no se selecciona una opción, se muestra la tabla -->
     <div v-show="action == ''">
-
       <table class="table">
         <thead>
           <tr>
@@ -14,8 +13,8 @@
         </thead>
         <tbody>
           <tr v-for="tipo in tipus_alertants" :key="tipo.id">
-            <th scope="row">{{tipo.id}}</th>
-            <td>{{tipo.tipus}}</td>
+            <th scope="row">{{ tipo.id }}</th>
+            <td>{{ tipo.tipus }}</td>
             <td>
               <button
                 type="submit"
@@ -42,10 +41,17 @@
 
     <!-- Si se selecciona la opción añadir, se muestra el formulario -->
     <div v-show="action == 'afegir' || action == 'editar'">
-
+    <input type="hidden" v-model="tipo.id">
+      <p>{{ tipo.id }}</p>
       <div class="form-group row">
         <label class="col-2" for="tipus">Tipus</label>
-        <input v-model="tipo.tipus" class="col-10" type="text" id="tipus" name="tipus" />
+        <input
+          v-model="tipo.tipus"
+          class="col-10"
+          type="text"
+          id="tipus"
+          name="tipus"
+        />
       </div>
 
       <button
@@ -105,7 +111,13 @@
       </div>
     </div>
 
-     <button class="btn btn-primary" id="addButton" @click="selectAction('afegir')">Afegir</button>
+    <button
+      class="btn btn-primary"
+      id="addButton"
+      @click="selectAction('afegir')"
+    >
+      Afegir
+    </button>
   </div>
 </template>
 
@@ -116,10 +128,10 @@ export default {
       action: "",
       tipus_alertants: [],
       insert: false,
-      tipo:{
-          id: "",
-          tipus: ""
-      }
+      tipo: {
+        id: "",
+        tipus: "",
+      },
     };
   },
   methods: {
@@ -128,8 +140,10 @@ export default {
       axios
         .get("/tipusalertants")
         .then((response) => {
+
           me.tipus_alertants = response.data;
           console.log(me.tipus_alertants);
+
         })
         .catch((error) => {
           console.log(error);
@@ -180,6 +194,7 @@ export default {
           me.selectTipus();
           $("#deleteModal").modal("hide");
           me.action = "";
+          window.location.reload();
           //me.infoMessage= response.data.missatge;
         })
         .catch((error) => {
@@ -189,12 +204,11 @@ export default {
         });
     },
     selectAction(action, tipo) {
-            this.action = action;
-            if(action == 'editar' || action == 'borrar'){
-                this.tipo = tipo;
-            }
-
-        }
+      this.action = action;
+      if (action == "editar" || action == "borrar") {
+        this.tipo = tipo;
+      }
+    },
   },
   created() {
     this.selectTipus();
