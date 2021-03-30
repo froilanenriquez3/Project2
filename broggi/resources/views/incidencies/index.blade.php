@@ -6,7 +6,7 @@
 @include('partials.navbarTeleoperador')
 @endsection
 
-@section('content')
+@section('table')
 <p>I am incidencies index</p>
 {{-- Filters (changing depending on type of user) --}}
 
