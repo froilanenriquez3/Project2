@@ -99,6 +99,7 @@ export default {
         .then(function (response) {
           console.log(response);
           window.location.href = "/Project2/broggi/public/alertants";
+
         })
         .catch((error) => {
           console.log(error.response.status);
