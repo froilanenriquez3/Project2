@@ -8,7 +8,7 @@
 
  <!--Nueva incidencias-->
  <li class="nav-incidencias mr-2">
-    <a class="nav-link navbarLinks" style=":hover {color: yellow}" href=" "><i class="fas fa-plus-circle"></i> Nueva incidencia </a>
+    <a class="nav-link navbarLinks" style=":hover {color: yellow}" href="#"><i class="fas fa-plus-circle"></i> Nueva incidencia </a>
 </li>
 <!--Incidencias-->
 <li class="nav-usuaris mr-2">
