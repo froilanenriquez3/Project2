@@ -20,14 +20,18 @@
             </div>
 
         </div>
-        <div>
-            <p>Gestionar alertantes habituales</p>
-        </div>
+        <a href="{{ asset('/alertants') }}">
+            <div>
+                <p>Alertantes habituales</p>
+            </div>
+        </a>
         <div>
             <p>Incidencias</p>
         </div>
-        <div>
-            <p>Recursos Moviles</p>
-        </div>
+        <a href="{{ asset('/recursos') }}">
+            <div>
+                <p>Recursos móviles</p>
+            </div>
+        </a>
     </section>
 @endsection

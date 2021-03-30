@@ -80,7 +80,7 @@ class UsuarisController extends Controller
     public function update(Request $request, Usuaris $usuari)
     {
         $usuari->username= $request->input('username');
-        $usuari->contrasenya= $request->input('contrasenya');
+        $usuari->contrasenya= bcrypt($request->input('contrasenya'));
         $usuari->nom= $request->input('nom');
         $usuari->cognoms= $request->input('cognoms');
         $usuari->email= $request->input('email');
