@@ -2726,26 +2726,29 @@ __webpack_require__.r(__webpack_exports__);
     },
     afegirTipo: function afegirTipo() {
       var me = this;
+      console.log("adding");
+      å;
       axios.post("/tipusalertants", me.tipo).then(function (response) {
         console.log(response);
         me.selectTipus();
-        me.action = "";
+        me.action = '';
       })["catch"](function (error) {
         console.log(error.response.status);
         console.log(error.response.data);
-        me.action = ""; // me.errorMessage= error.response.data.error;
+        me.action = ''; // me.errorMessage= error.response.data.error;
       });
     },
     editarTipo: function editarTipo() {
+      console.log("updating");
       var me = this;
       axios.put("/tipusalertants/" + me.tipo.id, me.tipo).then(function (response) {
         console.log(response);
         me.selectTipus();
-        me.action = "";
+        me.action = '';
       })["catch"](function (error) {
         console.log(error.response.status);
         console.log(error.response.data);
-        me.action = ""; // me.errorMessage= error.response.data.error;
+        me.action = ''; // me.errorMessage= error.response.data.error;
       });
     },
     confirmDeleteTipo: function confirmDeleteTipo(tipo) {
@@ -2753,16 +2756,16 @@ __webpack_require__.r(__webpack_exports__);
       $("#deleteModal").modal("show");
     },
     deleteTipo: function deleteTipo() {
+      console.log("deleting");
       var me = this;
-      axios["delete"]("tipusalertants/" + me.tipo.id).then(function (response) {
+      axios["delete"]("/tipusalertants/" + me.tipo.id).then(function (response) {
         me.selectTipus();
         $("#deleteModal").modal("hide");
-        me.action = "";
-        window.location.reload(); //me.infoMessage= response.data.missatge;
+        me.action = ''; //me.infoMessage= response.data.missatge;
       })["catch"](function (error) {
         //me.errorMessage = error.response.data.error;
         $("#deleteModal").modal("hide");
-        me.action = "";
+        me.action = '';
       });
     },
     selectAction: function selectAction(action, tipo) {
