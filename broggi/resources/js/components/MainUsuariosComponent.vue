@@ -39,7 +39,7 @@
                             id="deleteB"
                             type="submit"
                             class="btn btn-secondary btn-sm d-flex"
-                            
+                            @click="confirmDeleteUsuari(usuari)"   
                         >
                             Esborrar
                         </button>
@@ -104,24 +104,24 @@
         </div>
 
         <!-- Modal Delete -->
-        <!-- <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Esborrar Recurs</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Esborrar Usuari</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div id="modalText" class="modal-body">
-            Està segur d'esborrar el recurs amb codi {{ recurs.codi}} ?
+            Està segur d'esborrar l'usuari {{ usuari.nom}} {{ usuari.cognoms }} ?
         </div>
         <div class="modal-footer">
-            <button id="buttonDeleteModal" @click="deleteRecurs()" type="submit" class="btn btn-secondary">Esborrar</button>
+            <button id="buttonDeleteModal"  @click="deleteUsuari()" type="submit" class="btn btn-secondary">Esborrar</button>
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
     </div>
 </template>
 
@@ -173,12 +173,12 @@ export default {
                 // this.usuari= ''
                 this.usuari.id= '';
                 this.usuari.username= '';
-                this.usuari.contrasenya= '',
-                this.usuari.nom= '',
-                this.usuari.cognoms= '',
-                this.usuari.email= '',
-                this.usuari.rols_id= '',
-                this.usuari.recursos_id= ''
+                this.usuari.contrasenya= '';
+                this.usuari.nom= '';
+                this.usuari.cognoms= '';
+                this.usuari.email= '';
+                this.usuari.rols_id= '';
+                this.usuari.recursos_id= '';
             }
         },
         selectRols(){
@@ -248,27 +248,27 @@ export default {
                     // me.errorMessage= error.response.data.error;
                 })
             },
-        //     confirmDeleteRecurs(recurs){
-        //         this.recurs= recurs;
-        //         $('#deleteModal').modal('show');
-        //     },
-        //     deleteRecurs(){
-        //     let me= this;
-        //     axios
-        //         .delete('recursos/' + me.recurs.id)
-        //         .then(response => {
-        //             me.selectRecursos();
-        //             $('#deleteModal').modal('hide');
-        //             me.action=''
-        //             //me.infoMessage= response.data.missatge;
-        //         })
-        //         .catch(error => {
-        //             //me.errorMessage = error.response.data.error;
-        //             $('#deleteModal').modal('hide');
-        //             me.action=''
-        //         })
+            confirmDeleteUsuari(usuari){
+                this.usuari= usuari;
+                $('#deleteModal').modal('show');
+            },
+            deleteUsuari(){
+            let me= this;
+            axios
+                .delete('usuaris/' + me.usuari.id)
+                .then(response => {
+                    me.selectUsuaris();
+                    $('#deleteModal').modal('hide');
+                    me.action=''
+                    //me.infoMessage= response.data.missatge;
+                })
+                .catch(error => {
+                    //me.errorMessage = error.response.data.error;
+                    $('#deleteModal').modal('hide');
+                    me.action=''
+                })
 
-        //     }
+            }
     },
     created() {
         this.selectUsuaris();

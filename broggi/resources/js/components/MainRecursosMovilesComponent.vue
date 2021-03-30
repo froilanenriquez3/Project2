@@ -149,7 +149,11 @@ export default {
             if(action == 'editar' || action == 'borrar'){
                 this.recurs = recurs;
             } else {
-                this.recurs= '';
+                this.recurs.codi='';
+                this.recurs.actiu= false;
+                this.recurs.tipus_recursos_id='';
+                this.recurs.lat='';
+                this.recurs.lon='';
             }
 
         },
