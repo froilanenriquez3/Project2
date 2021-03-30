@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alertants;
+use App\Models\Tipus_alertants;
 use Illuminate\Http\Request;
 
 class AlertantsController extends Controller
