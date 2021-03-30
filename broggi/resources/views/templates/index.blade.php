@@ -36,7 +36,8 @@
                 </div>
             </div>
 
-            <a href="{{ url('/alertants/create') }}"> <button class="btn btn-primary" id="addButton">Afegir</button></a>
+            @yield('addButton')
+
 
         </section>
     </main>
