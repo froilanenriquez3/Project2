@@ -36,7 +36,9 @@
         <td>{{ $alertant->cognoms }}</td>
         <td>{{ $alertant->telefon }}</td>
         <td>{{ $alertant->adreca }}</td>
-        <td>{{ $alertant->tipus_alertants_id }}</td>
+        <td>
+            {{ $alertant->tipus_alertants->tipus }}
+        </td>
         <td>
             <form
             action="{{ action([App\Http\Controllers\AlertantsController::class, 'edit'], ['alertant' => $alertant->id]) }}"
@@ -45,7 +47,7 @@
             </form>
         </td>
         <td>
-            <button class="btn btn-danger" id="editAlertant" type="submit" onclick=" $('#deleteAlertantModal{{$alertant->id}}').modal('show');">Esborrar</button>
+            <button class="btn btn-danger" id="deleteAlertant" type="submit" onclick=" $('#deleteAlertantModal{{$alertant->id}}').modal('show');">Esborrar</button>
         </td>
         <alertants-delete :alertant='{{$alertant}}'></alertants-delete>
       </tr>
