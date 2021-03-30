@@ -3,6 +3,7 @@ body{
     display: flex;
     flex-direction: row;
 
+
 }
 
 /* Placeholder for nav*/
@@ -14,10 +15,8 @@ body{
 
 /* Placeholder for sidebar*/
 aside {
-    border: dashed black 1px;
-    height: 100vh;
-    width: 20%;
-
+    /* border: dashed black 1px; */
+    width: 20vw;
 }
 
 main {
