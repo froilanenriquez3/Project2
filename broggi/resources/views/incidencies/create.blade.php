@@ -56,3 +56,6 @@
 
 @endsection
 
+@section('cancelButton')
+<a href="{{ url('/incidencies')}}"> <button class="btn ">Cancelar</button></a>
+@endsection
