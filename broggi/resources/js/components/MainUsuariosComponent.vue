@@ -1,5 +1,7 @@
 <template>
     <div class="recursosMovilsContainer">
+
+        <filter-select :listToFilter="usuaris"></filter-select>
         <!-- Si no se selecciona una opción, se muestra la tabla -->
         <div v-show="action == ''">
         <button type="button" @click="selectAction('afegir')" class="btn btn-primary">Afegir</button>
@@ -12,7 +14,8 @@
                     <th scope="col">Cogmons</th>
                     <th scope="col">Email</th>
                     <th scope="col">Rol</th>
-                    <th scope="col">Recurs</th>
+                    <!-- TODO: Añadir recurso si el usuario és recurs. -->
+
                     <th></th>
                     <th></th>
                 </tr>
@@ -21,7 +24,7 @@
                 <tr id="my-table" v-for="usuari in paginator(usuaris)" :key="usuari.id">
                     <td>{{ usuari.username }}</td>
                     <td>{{usuari.nom}}</td>
-                    <td>{{usuari.cognom}}</td>
+                    <td>{{usuari.cognoms}}</td>
                     <td>{{usuari.email}}</td>
                     <td>{{usuari.rols_id}}</td>
 
@@ -126,9 +129,12 @@
 </template>
 
 <script>
+import FilterSelect from './filterSelect.vue';
 export default {
     data() {
         return {
+  
+            FilterSelect,
             action: "",
             usuaris: [],
             rols: [],
