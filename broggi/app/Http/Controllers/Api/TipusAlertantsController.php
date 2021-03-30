@@ -85,22 +85,46 @@ class TipusAlertantsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Tipus_alertants  $tipo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Tipus_alertants $tipo)
     {
-        //
+        $tipo->tipus= $request->input('tipus');
+
+        try{
+            $tipo->save();
+            $response= (new TipusAlertantsResource($tipo))
+                        ->response()
+                        ->setStatusCode(201);
+            } catch (QueryException $ex){
+                $message = Utilitat::errorMessage($ex);
+                $response = \response()
+                            ->json(['error'=> $message], 400);
+            }
+
+        return $response;
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+    * @param  \App\Models\Tipus_alertants  $tipo
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tipus_alertants $tipo)
     {
-        //
+        try{
+            $tipo->delete();
+            $response= \response()
+                        ->json(['message'=>'Registro borrado correctamente'], 200);
+        } catch (QueryException $ex){
+            $message = Utilitat::errorMessage($ex);
+            $response= \response()
+                        ->json(['error'=> $message], 400);
+        }
+
+            return $response;
     }
 }
