@@ -34,8 +34,10 @@ Vue.component('main-recursos-moviles', require('./components/MainRecursosMoviles
 Vue.component('main-usuarios', require('./components/MainUsuariosComponent.vue').default);
 Vue.component('alertants-form', require('./components/alertantsComponent.vue').default);
 Vue.component('alertants-delete', require('./components/alertantsDeleteComponent.vue').default);
-Vue.component('tipus-alertants', require('./components/tipusAlertantsComponent.vue').default)
-Vue.component('filter-select', require('./components/filterSelect.vue').default)
+Vue.component('tipus-alertants', require('./components/tipusAlertantsComponent.vue').default);
+Vue.component('filter-select', require('./components/filterSelect.vue').default);
+Vue.component('video-component', require('./components/videoComponent.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
