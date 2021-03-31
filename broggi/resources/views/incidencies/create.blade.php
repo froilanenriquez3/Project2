@@ -1,7 +1,8 @@
 @extends('templates.createSideBar')
 
 @section('links')
-    <link rel="stylesheet" href=" {{ url('../resources/css/incidencies/create.css?'.rand()) }}">
+    <link rel="stylesheet" href=" {{ asset('../resources/css/incidencies/create.css?'.rand()) }}">
+    <link rel="stylesheet" href="{{ asset('../resources/css/videoComponent.css?'.rand()) }}">
 @endsection
 
 @section('title', 'Formulario de incidencias')
@@ -11,7 +12,10 @@
 @section('navbar')
 @include('partials.navbarTeleoperador')
 @endsection
+
 @section('form')
+
+<video-component></video-component>
 
 <div class="form-group row">
     <label class="col-2" for="">Numero de incidente</label>
