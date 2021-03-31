@@ -20,7 +20,7 @@
 </li>
 <!--Usuarios-->
 <li class="nav-recursos mr-2">
-    <a class="nav-link navbarLinks" href="#"><i class="fas fa-users-cog"></i> Usuarios</a>
+    <a class="nav-link navbarLinks" href="{{ url('/usuaris') }}"><i class="fas fa-users-cog"></i> Usuarios</a>
 </li>
 
 
