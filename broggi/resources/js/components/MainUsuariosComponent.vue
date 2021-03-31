@@ -1,7 +1,7 @@
 <template>
     <div class="recursosMovilsContainer">
-
-        <filter-select :listToFilter="usuaris"></filter-select>
+    <!-- Filtro -->
+        <filter-select :listToFilter="usuaris" :filterBy="rols" :filterField="'nom'"></filter-select>
         <!-- Si no se selecciona una opción, se muestra la tabla -->
         <div v-show="action == ''">
         <button type="button" @click="selectAction('afegir')" class="btn btn-primary">Afegir</button>
@@ -135,6 +135,7 @@ export default {
         return {
   
             FilterSelect,
+            filterBy: 'rols_id',
             action: "",
             usuaris: [],
             rols: [],
