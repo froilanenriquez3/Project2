@@ -21,8 +21,6 @@
         @include('templates.sideBar')
     </aside>
 
-
-
     <main id="app">
         <header>
             <nav id="navbarHolder">
