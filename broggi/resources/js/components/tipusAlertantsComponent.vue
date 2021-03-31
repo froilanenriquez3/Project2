@@ -41,7 +41,7 @@
 
     <!-- Si se selecciona la opción añadir, se muestra el formulario -->
     <div v-show="action == 'afegir' || action == 'editar'">
-    <input type="hidden" v-model="tipo.id">
+      <input type="hidden" v-model="tipo.id" />
       <p>{{ tipo.id }}</p>
       <div class="form-group row">
         <label class="col-2" for="tipus">Tipus</label>
@@ -70,6 +70,9 @@
       >
         Editar
       </button>
+
+
+      <button  type="button" @click="cancel()" class="btn btn-primary" id="cancelButton">Cancelar</button>
     </div>
 
     <!-- Modal Delete -->
@@ -98,6 +101,13 @@
             Està segur d'esborrar el tipo amb id {{ tipo.id }} ?
           </div>
           <div class="modal-footer">
+               <button
+              type="button"
+              class="btn btn-primary"
+              data-dismiss="modal"
+            >
+              Tancar
+            </button>
             <button
               id="buttonDeleteModal"
               @click="deleteTipo()"
@@ -135,6 +145,14 @@ export default {
     };
   },
   methods: {
+      cancel(){
+          this.action = '';
+          document.getElementById("addButton").style.display = "block";
+          this.tipo =  {
+                id: "",
+                tipus: "",
+            };
+      },
     selectTipus() {
       let me = this;
       axios
@@ -150,13 +168,18 @@ export default {
     },
     afegirTipo() {
       let me = this;
-       console.log("adding");å
+       console.log("adding");
       axios
         .post("/tipusalertants", me.tipo)
         .then(function (response) {
           console.log(response);
           me.selectTipus();
+          me.tipo =  {
+                id: "",
+                tipus: "",
+            };
            me.action='';
+            document.getElementById("addButton").style.display = "block";
         })
         .catch((error) => {
           console.log(error.response.status);
@@ -174,6 +197,10 @@ export default {
           console.log(response);
           me.selectTipus();
            me.action='';
+            me.tipo =  {
+                id: "",
+                tipus: "",
+            };
         })
         .catch((error) => {
           console.log(error.response.status);
@@ -205,6 +232,10 @@ export default {
     },
     selectAction(action, tipo) {
       this.action = action;
+      if(action != "borrar"){
+         document.getElementById("addButton").style.display = "none";
+      }
+
       if (action == "editar" || action == "borrar") {
         this.tipo = tipo;
       }
