@@ -1,5 +1,10 @@
 <template>
-  <div class="container"></div>
+  <div class="container" id="videoDiv">
+      <video id="myVideo" width="320" height="240">
+        <source src="" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+  </div>
 </template>
 
 <script>

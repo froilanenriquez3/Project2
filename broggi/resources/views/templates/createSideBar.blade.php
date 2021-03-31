@@ -9,8 +9,8 @@
     @include('partials.headerLinks')
 
     <link rel="stylesheet" href="{{ asset('../resources/css/createTemplateSB.css?' . rand()) }}">
-
     @yield('links')
+    <link rel="stylesheet" href="{{ asset('../resources/css/side.css?'.rand())}}">
 
     <title>@yield('title')</title>
 </head>
@@ -18,13 +18,12 @@
 <body>
 
     <aside>
-        {{-- import for sidebar --}}
-        <p>temporary</p>
+        @include('templates.sideBar')
     </aside>
 
 
 
-    <main>
+    <main id="app">
         <header>
             <nav id="navbarHolder">
                 {{-- import for navbar --}}
@@ -58,6 +57,7 @@
     </main>
 
     @include('partials.scripts')
+
 </body>
 
 </html>

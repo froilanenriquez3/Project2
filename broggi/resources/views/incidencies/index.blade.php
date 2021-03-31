@@ -8,7 +8,6 @@
 
 @section('table')
 <p>I am incidencies index</p>
-{{-- Filters (changing depending on type of user) --}}
 
 {{-- Table
     Campos para mostrar (erase me):
