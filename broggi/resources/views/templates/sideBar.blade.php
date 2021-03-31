@@ -12,7 +12,7 @@
                 </li>
                 <!--Alertante  -->
                 <li class="sidebar mb-2">
-                    <a  class="nav-link "  data-toggle="pill" href="#" role="tab" aria-controls="v-pills-home" aria-selected="true"> Alertante </a>
+                    <a  class="nav-link"  data-toggle="pill" href="#" role="tab" aria-controls="v-pills-home" aria-selected="true"> Alertante </a>
                 </li>
                 <!--Incidente-->
                 <li class="sidebar mb-2">
