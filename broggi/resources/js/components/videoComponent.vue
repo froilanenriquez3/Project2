@@ -120,6 +120,7 @@ export default {
   mounted() {
     console.log("Component mounted.");
     //this.playVideo();
+
     document.querySelector("#myVideo").setAttribute("controls", "true");
 
     document
