@@ -20,7 +20,8 @@ class RecursosResource extends JsonResource
             'id' => $this->id,
             'codi' => $this->codi,
             'actiu' => $this->actiu,
-            'tipus_recursos_id'=> Recursos::with('tipus_recursos')->find($this->id)->tipus_recursos
+            'tipus_recursos_id'=> $this->tipus_recursos_id,
+            'recurs' => Recursos::with('tipus_recursos')->find($this->id)->tipus_recursos
         ];
     }
 }
