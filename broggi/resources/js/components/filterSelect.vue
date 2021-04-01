@@ -41,6 +41,7 @@
         }
         },
         methods: {
+            // Esta función aplica el filtro y transmite al padre.
             applyFilter(){
                 this.filteredItems= [];
                 if(this.filterSelection ==='all'){
