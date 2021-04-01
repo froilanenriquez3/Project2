@@ -60,7 +60,7 @@ main {
 
 
 #formButtons {
-    position: absolute;
+    position: relative;
     right: 5%;
     bottom: 5%;
 }
