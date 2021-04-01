@@ -5,8 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarisController;
 use App\Http\Controllers\RecursosController;
 use App\Http\Controllers\AlertantsController;
-use App\Http\Controllers\TipusAlertantsController;
 use App\Http\Controllers\IncidenciesController;
+use App\Http\Controllers\TipusRecursosController;
+use App\Http\Controllers\TipusAlertantsController;
 
 
 /*
@@ -33,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/usuaris', UsuarisController::class);
 
     Route::resource('/tipusalertants', TipusAlertantsController::class);
+    Route::resource('/tipusrecursos', TipusRecursosController::class);
 
     Route::get('/thome', function (){ return view('homePages.teleoperador');});
     Route::get('/rhome', function (){ return view('homePages.recurs');});

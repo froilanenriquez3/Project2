@@ -2,7 +2,7 @@
   <div class="container" id="videoDiv">
     <video muted id="myVideo" width="320" height="240">
       <source
-        src="http://localhost:8080/Project2/broggi/public/secretFolder/myvideo.mp4"
+        src="http://localhost:8080/Project2/broggi/public/video/videosBroggi.mp4"
         type="video/mp4"
       />
       Your browser does not support the video tag.
@@ -25,15 +25,15 @@ export default {
       videoId: "#myVideo",
       action: "play",
       timestamp: 0,
-      section1time: 10,
-      section2time: 20,
-      section3time: 30,
+      section1time: 0,
+      section2time: 233,
+      section3time: 311,
     };
   },
   methods: {
     playVideo() {
       let videoElem = document.querySelector(this.videoId);
-      videoElem.play();
+      if (videoElem.paused) videoElem.play();
 
       document.querySelector(
         "#playButton"
@@ -55,7 +55,9 @@ export default {
       document
         .querySelector("#playButton")
         .removeEventListener("click", this.pauseVideo);
-      document.querySelector("#playButton").addEventListener("click", this.playVideo);
+      document
+        .querySelector("#playButton")
+        .addEventListener("click", this.playVideo);
     },
     skipTen() {
       let videoElem = document.querySelector(this.videoId);
@@ -102,21 +104,23 @@ export default {
     playSection2() {
       let videoElem = document.querySelector(this.videoId);
       videoElem.currentTime = this.section2time;
-        this.playVideo();
+      this.playVideo();
       this.timestamp = this.section3time;
       videoElem.addEventListener("timeupdate", this.pauseAtTimestamp);
     },
     playSection3() {
       let videoElem = document.querySelector(this.videoId);
       videoElem.currentTime = this.section3time;
-       this.playVideo();
+      this.playVideo();
+      this.timestamp = videoElem.duration;
+      videoElem.addEventListener("timeupdate", this.pauseAtTimestamp);
     },
   },
   created() {},
   mounted() {
     console.log("Component mounted.");
     //this.playVideo();
-    //document.querySelector("#myVideo").setAttribute("controls", "true");
+    document.querySelector("#myVideo").setAttribute("controls", "true");
 
     document
       .querySelector("#playButton")
