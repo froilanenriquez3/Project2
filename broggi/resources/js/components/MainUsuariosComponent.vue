@@ -1,12 +1,20 @@
 <template>
     <div class="recursosMovilsContainer">
-    <!-- Filtro -->
-        <filter-select :listToFilter="usuaris" :filterBy="rols" :filterField="'nom'" :relatedId="'rols_id'"></filter-select>
+
         <!-- Si no se selecciona una opción, se muestra la tabla -->
         <div v-show="action == ''">
-        <button type="button" @click="selectAction('afegir')" class="btn btn-primary">Afegir</button>
+        <!-- Filtro -->
+        <filter-select :listToFilter="usuaris" :filterBy="rols" :filterField="'nom'" :relatedId="'rols_id'"
+        @applyFilterResults="filter($event)"></filter-select>
 
-        <table class="table">
+        <button type="button"
+        @click="selectAction('afegir')"
+        class="btn btn-primary">Afegir</button>
+
+        <!-- Si no hay nada que cumpla con lo buscado, no sale la tabla y solo mostramos mensaje -->
+        <div v-if="itemsToDisplay.length == 0"> No s'han trobat elements d'aquestes característiques</div>
+
+        <table v-else class="table">
             <thead>
                 <tr>
                     <th scope="col">UserName</th>
@@ -21,12 +29,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr id="my-table" v-for="usuari in paginator(usuaris)" :key="usuari.id">
+                <tr id="my-table" v-for="usuari in paginator(itemsToDisplay)" :key="usuari.id">
                     <td>{{ usuari.username }}</td>
                     <td>{{usuari.nom}}</td>
                     <td>{{usuari.cognoms}}</td>
                     <td>{{usuari.email}}</td>
-                    <td>{{usuari.rols_id}}</td>
+                    <td>{{usuari.rols}}</td>
 
                     <td>
                         <button
@@ -97,7 +105,7 @@
             <label class="col-2" for="rols_id">Recurso asignado</label>
             <select class="form-select col-10" v-model="usuari.recursos_id" aria-label="Default select example">
                 <option v-for="recurs in recursos" :key="recurs.id" :selected="recurs.id == usuari.recursos_id"
-                v-bind:value="recurs.id" >{{recurs.codi}} - {{recurs.tipus_recursos_id.tipus}}</option>
+                v-bind:value="recurs.id" >{{recurs.codi}} - {{recurs.recurs.tipus}}</option>
             </select>
             </div>
 
@@ -135,7 +143,6 @@ export default {
         return {
             itemsToDisplay: [],
             FilterSelect,
-            filterBy: 'rols_id',
             action: "",
             usuaris: [],
             rols: [],
@@ -163,17 +170,17 @@ export default {
                 .get("/usuaris")
                 .then(response => {
                     me.usuaris = response.data;
-                    me.totalRows= me.usuaris.length
                     me.itemsToDisplay= me.usuaris;
+                    me.totalRows= me.itemsToDisplay.length;
                 })
                 .catch(error => {
                     console.log(error);
                 })
                 .finally(() => (this.loading = false));
         },
-        applyFilterResults(event){
-            console.log('pasando por filtro!')
-            this.itemsToDisplay= event;
+        filter(itemsFiltered){
+            this.itemsToDisplay= itemsFiltered;
+            this.totalRows= this.itemsToDisplay.length;
         },
         selectAction(action, usuari) {
             this.action = action;

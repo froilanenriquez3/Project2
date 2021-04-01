@@ -2,8 +2,14 @@
     <div class="recursosMovilsContainer">
         <!-- Si no se selecciona una opción, se muestra la tabla -->
         <div v-show="action == ''">
+        <!-- Filtro -->
+        <filter-select :listToFilter="recursos" :filterBy="tipus_recursos" :filterField="'tipus'" :relatedId="'tipus_recursos_id'"
+        @applyFilterResults="filter($event)"></filter-select>
         <button type="button" @click="selectAction('afegir')" class="btn btn-primary">Afegir</button>
-        <table class="table" id="my-table" :per-page="perPage"
+        <!-- Si no hay nada que cumpla con lo buscado, no sale la tabla y solo mostramos mensaje -->
+        <div v-if="itemsToDisplay.length == 0"> No s'han trobat elements d'aquestes característiques</div>
+
+        <table v-else class="table" id="my-table" :per-page="perPage"
       :current-page="currentPage">
             <thead>
                 <tr>
@@ -15,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="recurs in paginator(recursos)" :key="recurs.id">
+                <tr v-for="recurs in paginator(itemsToDisplay)" :key="recurs.id">
                     <td>{{ recurs.codi }}</td>
                     <td>
                         <div class="form-check">
@@ -25,12 +31,13 @@
                                 value="actiu"
                                 id="actiu"
                                 :checked="recurs.actiu"
+                                disabled
                             />
                             <label class="form-check-label" for="actiu"></label>
                         </div>
                     </td>
 
-                    <td>{{ recurs.tipus_recursos_id.tipus }}</td>
+                    <td>{{ recurs.recurs.tipus }}</td>
 
                     <td>
                         <button
@@ -77,7 +84,7 @@
             <div class="form-group row">
             <label class="col-2" for="tipus_rescurs_id">Tipus</label>
             <select class="form-select" v-model="recurs.tipus_recursos_id" aria-label="Default select example">
-                <option v-for="recurso in tipus_recursos" :key="recurso.id" :selected="recurso.id == recurs.tipus_recursos_id"
+                <option v-for="recurso in tipus_recursos" :key="recurso.id"
                 v-bind:value="recurso.id" >{{recurso.tipus}}</option>
             </select>
             </div>
@@ -110,9 +117,12 @@
 </template>
 
 <script>
+import FilterSelect from './filterSelect.vue';
 export default {
     data() {
         return {
+            FilterSelect,
+            itemsToDisplay: [],
             action: "",
             recursos: [],
             tipus_recursos:[],
@@ -137,7 +147,8 @@ export default {
                 .get("/recursos")
                 .then(response => {
                     me.recursos = response.data;
-                    me.totalRows= me.recursos.length
+                    me.itemsToDisplay= me.recursos;
+                    me.totalRows= me.itemsToDisplay.length;
                 })
                 .catch(error => {
                     console.log(error);
@@ -156,6 +167,10 @@ export default {
                 this.recurs.lon='';
             }
 
+        },
+        filter(itemsFiltered){
+            this.itemsToDisplay= itemsFiltered;
+            this.totalRows= this.itemsToDisplay.length;
         },
         selectTipus(){
              let me = this;
