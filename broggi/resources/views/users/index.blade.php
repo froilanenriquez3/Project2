@@ -10,7 +10,7 @@
 
 @section('table')
 
-<main-usuarios></main-usuarios>
+<main-usuarios @applyFilterResults="applyFilterResults($event)"></main-usuarios>
 
 @endsection
 

@@ -1,11 +1,11 @@
 <template>
     <div class="recursosMovilsContainer">
     <!-- Filtro -->
-        <filter-select :listToFilter="usuaris" :filterBy="rols" :filterField="'nom'"></filter-select>
+        <filter-select :listToFilter="usuaris" :filterBy="rols" :filterField="'nom'" :relatedId="'rols_id'"></filter-select>
         <!-- Si no se selecciona una opción, se muestra la tabla -->
         <div v-show="action == ''">
         <button type="button" @click="selectAction('afegir')" class="btn btn-primary">Afegir</button>
-        
+
         <table class="table">
             <thead>
                 <tr>
@@ -42,7 +42,7 @@
                             id="deleteB"
                             type="submit"
                             class="btn btn-secondary btn-sm d-flex"
-                            @click="confirmDeleteUsuari(usuari)"   
+                            @click="confirmDeleteUsuari(usuari)"
                         >
                             Esborrar
                         </button>
@@ -133,7 +133,7 @@ import FilterSelect from './filterSelect.vue';
 export default {
     data() {
         return {
-  
+            itemsToDisplay: [],
             FilterSelect,
             filterBy: 'rols_id',
             action: "",
@@ -164,11 +164,16 @@ export default {
                 .then(response => {
                     me.usuaris = response.data;
                     me.totalRows= me.usuaris.length
+                    me.itemsToDisplay= me.usuaris;
                 })
                 .catch(error => {
                     console.log(error);
                 })
                 .finally(() => (this.loading = false));
+        },
+        applyFilterResults(event){
+            console.log('pasando por filtro!')
+            this.itemsToDisplay= event;
         },
         selectAction(action, usuari) {
             this.action = action;
