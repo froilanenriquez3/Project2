@@ -24,7 +24,8 @@ class UsuarisResource extends JsonResource
             'nom' => $this->nom,
             'cognoms' => $this->cognoms,
             'email' => $this->email,
-            'rols_id'=> Rols::with('usuaris')->find($this->rols_id)->nom,
+            'rols'=> Rols::with('usuaris')->find($this->rols_id)->nom,
+            'rols_id' => $this->rols_id,
             'recursos_id'=> $this->recursos_id
         ];
 

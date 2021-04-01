@@ -14,7 +14,7 @@ class TipusIncidenciasController extends Controller
      */
     public function index()
     {
-        //
+        return view('tiposRecursos.index');
     }
 
     /**
