@@ -17,8 +17,6 @@
 @section('title',"Tipus de recurs")
 
 @section('table')
+    <tipus-recursos></tipus-recursos>
+@endsection
 
-@endsection
-@section('addButton')
-    <a href=""> <button class="btn btn-primary" id="addButton">Afegir</button></a>
-@endsection
