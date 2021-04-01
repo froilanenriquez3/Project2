@@ -8,10 +8,10 @@
 
     @include('partials.headerLinks')
 
-    <link rel="stylesheet" href="{{ asset('../resources/css/createTemplateSB.css?' . rand()) }}">
+
     @yield('links')
     <link rel="stylesheet" href="{{ asset('../resources/css/side.css?'.rand())}}">
-
+    <link rel="stylesheet" href="{{ asset('../resources/css/createTemplateSB.css?' . rand()) }}">
     <title>@yield('title')</title>
 </head>
 

@@ -87,7 +87,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Esborrar tipo</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Esborrar tipus</h5>
             <button
               type="button"
               class="close"
@@ -98,7 +98,7 @@
             </button>
           </div>
           <div id="modalText" class="modal-body">
-            Està segur d'esborrar el tipo amb id {{ tipo.id }} ?
+            Està segur d'esborrar el tipus {{ tipo.tipus }} ?
           </div>
           <div class="modal-footer">
                <button
