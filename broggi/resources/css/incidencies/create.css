@@ -25,3 +25,8 @@
     left: 30vw;
     top: 10vh;
 }
+
+#mapa-mapbox{
+    width: 50%;
+    height: 50%;
+}
