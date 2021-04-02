@@ -38,7 +38,7 @@ main {
     position: relative;
     border: solid rgb(0, 172, 194) 3px;
     border-radius: 5%;
-    height: 75%;
+    /* height: 75%; */
     width: 90%;
     top: 10%;
     padding: 20px;
@@ -60,7 +60,7 @@ main {
 
 
 #formButtons {
-    position: absolute;
+    position: relative;
     right: 5%;
     bottom: 5%;
 }
