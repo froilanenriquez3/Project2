@@ -16,6 +16,7 @@
 @section('form')
 
 <video-component></video-component>
+<help-box></help-box>
 
 <div class="form-group row">
     <label class="col-2" for="">Numero de incidente</label>
