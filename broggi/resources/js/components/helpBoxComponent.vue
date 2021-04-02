@@ -8,16 +8,11 @@
           <div class="card-body">
             <div id="questionsDiv">
               <ul v-for="question in questions" :key="question.id">
+
                 <li>
                   <p>{{ question.text }}</p>
 
-                  <div id="answersDiv" v-show="question.showAnswers == 'true'">
-                    <ul v-for="answer in question.answers" :key="answer.id">
-                      <li>{{ answer }}</li>
-                    </ul>
-                  </div>
-
-                  <button v-if="question.showAnswers == 'false'"
+                   <button v-if="question.showAnswers == 'false'"
                     id="showButton"
                     @click="showQuestionAnswers(question.id)"
                   >
@@ -29,6 +24,14 @@
                   >
                     Hide answers
                   </button>
+
+                  <div id="answersDiv" v-show="question.showAnswers == 'true'">
+                    <ul v-for="answer in question.answers" :key="answer.id">
+                      <li>{{ answer }}</li>
+                    </ul>
+                  </div>
+
+
                 </li>
               </ul>
             </div>
