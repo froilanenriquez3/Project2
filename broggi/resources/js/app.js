@@ -38,6 +38,7 @@ Vue.component('tipus-alertants', require('./components/tipusAlertantsComponent.v
 Vue.component('filter-select', require('./components/filterSelect.vue').default);
 Vue.component('video-component', require('./components/videoComponent.vue').default);
 Vue.component('tipus-recursos', require('./components/tipusRecursosComponent.vue').default);
+Vue.component('mapa-incidencies', require('./components/mapComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
