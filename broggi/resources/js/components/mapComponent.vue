@@ -3,6 +3,10 @@
         <div id="mapa-mapbox" style="width: 400px; height: 300px;"></div>
         <div id="geocoder" class="geocoder"></div>
         <button @click="addRecursosToMap()">ver Recursos</button>
+        <div class="color-box bg-primary"></div>
+        <span> Recursos disponibles</span>
+        <div class="color-box bg-secondary"></div>
+        <span> Recursos no disponibles</span>
     </div>
 </template>
 
@@ -17,7 +21,11 @@ export default {
                 "pk.eyJ1IjoibWlzYWxhOTEiLCJhIjoiY2ttZ2d1MmF0MjdzajJucWxqMTN6ZHR4diJ9.LqNFC2cYXEPAzf8f7PLAVg",
             recursos: [],
             map: {},
-            color: ''
+            color: "",
+            recurs: {},
+            marker: {},
+            button: {},
+            recursActivat: {}
         };
     },
     methods: {
@@ -33,28 +41,111 @@ export default {
                 })
                 .finally(() => (this.loading = false));
         },
-        colorRecurs(recurs){
-            this.color= recurs.actiu ? '#11adc4' : '#e1157a';
+        colorRecurs(recurs) {
+            this.color = recurs.actiu ? "#e1157a" : "#11adc4";
         },
-        addRecursosToMap(){
+        // Para asignar un recurso a la incidencia
+        activarRecurs() {
+            this.recurs.actiu = true;
+            this.recursActivat= this.recurs;
+            console.log(this.marker)
+            let me = this;
+            axios
+                .put("/recursos/" + me.recurs.id, me.recurs)
+                .then(function(response) {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error.response.status);
+                    console.log(error.response.data);
+                    // me.errorMessage= error.response.data.error;
+                });
+
+            this.button.innerHTML = "Desactivar";
+            this.button.style.backgroundColor = "#fdc619";
+            this.marker.color = "#FDC619";
+            this.button.removeEventListener("click", this.activarRecurs);
+            this.button.addEventListener("click", this.desactivarRecurs);
+
+            // this.checkIfActive();
+        },
+        // Por si la persona se equivoca y quiere cambiar de recurso seleccionado
+        desactivarRecurs() {
+            this.recurs.actiu = false;
+            this.recursActivat= {};
+            console.log(this.marker)
+            let me = this;
+            axios
+                .put("/recursos/" + me.recurs.id, me.recurs)
+                .then(function(response) {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error.response.status);
+                    console.log(error.response.data);
+                    // me.errorMessage= error.response.data.error;
+                });
+
+            this.button.innerHTML = "Activar";
+            this.button.style.backgroundColor = "#11adc4";
+            this.marker._color = "#11adc4";
+            this.button.removeEventListener("click", this.desactivarRecurs);
+            this.button.addEventListener("click", this.activarRecurs);
+
+            // this.checkIfActive();
+        },
+        // checkIfActive(){
+        //     let buttons= document.querySelectorAll('.marker-button');
+        //     console.log(buttons)
+        //     if(this.recursActivat){
+        //         buttons.forEach(button => {
+        //         if( button.dataset['data-id'] != this.recursActivat.id ){
+        //             button.setAttribute('disabled', true);
+        //         }
+        //     });
+        //     } else {
+        //         buttons.forEach(button => {
+        //         if( button.dataset['data-id'] != this.recursActivat.id && button.style.backgroundColor != '#e1157a'){
+        //             button.setAttribute('disasbled', false);
+        //         }
+        //     });
+        //     }
+
+        // },
+        addRecursosToMap() {
             this.recursos.forEach(element => {
                 this.colorRecurs(element);
-                var marker = new mapboxgl.Marker({
-                color: this.color,
-                draggable: true
-                }).setLngLat([element.lon , element.lat])
-                .addTo(this.map);
+                // Botón dentro del popup de cada marcador
+                let button = document.createElement("button");
+                button.classList.add("btn", "btn-primary", "marker-button");
+                button.setAttribute('data-id', element.id);
+                button.style.backgroundColor = this.color;
+                button.innerHTML = "Activar";
+                if (element.actiu) {
+                    button.setAttribute("disabled", true);
+                }
+
+                button.addEventListener("click", this.activarRecurs);
+                // Popup
+                let popup = new mapboxgl.Popup({ offset: 25 }).setDOMContent(
+                    button
+                );
+
+                let marker = new mapboxgl.Marker({
+                    color: this.color,
+                    draggable: false
+                })
+                    .setLngLat([element.lon, element.lat])
+                    .setPopup(popup)
+                    .addTo(this.map);
+
+                // Marcador
+                marker.getElement().addEventListener("click", () => {
+                    this.recurs = element;
+                    this.marker = marker;
+                    this.button = button;
+                });
             });
-
-
-        //     this.recursos.forEach(recurs => {
-        //         console.log('recurs')
-        //    new mapboxgl.Marker({
-        //         color: "#FFFFFF",
-        //         draggable: true
-        //         }).setLngLat([recurs.lat, recurs.lon])
-        //         .addTo(this.map);
-        // });
         }
     },
     created() {
@@ -70,15 +161,19 @@ export default {
             zoom: 9 // starting zoom
         });
 
-        var geocoder = new MapboxGeocoder({
+        let imageAccident= document.createElement("img");
+        imageAccident.classList.add('accidentImage');
+        imageAccident.setAttribute('src', 'img/marcadorAccident.svg');
+        let geocoder = new MapboxGeocoder({
             accessToken: this.key,
             marker: {
-                color: "orange"
+                element: imageAccident,
             },
             mapboxgl: mapboxgl
         });
 
         this.map.addControl(geocoder);
+        this.map.addControl(new mapboxgl.NavigationControl());
 
     }
 };
