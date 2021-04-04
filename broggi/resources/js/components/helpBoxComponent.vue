@@ -8,20 +8,13 @@
           <div class="card-body">
             <div id="questionsDiv">
               <ul v-for="question in questions" :key="question.id">
-
                 <li>
-                  <p>{{ question.text }}</p>
+                  <p>{{ question.questionText }}</p>
 
-                   <button v-if="question.showAnswers == 'false'"
-                    id="showButton"
-                    @click="showQuestionAnswers(question.id)"
-                  >
+                  <button v-if='question.showAnswers == "false"' id="showButton" @click="showQuestionAnswers(question.id)">
                     See answers
                   </button>
-                  <button v-else
-                    id="hideButton"
-                    @click="hideQuestionAnswers(question.id)"
-                  >
+                  <button v-else id="hideButton" @click="hideQuestionAnswers(question.id)" >
                     Hide answers
                   </button>
 
@@ -30,8 +23,6 @@
                       <li>{{ answer }}</li>
                     </ul>
                   </div>
-
-
                 </li>
               </ul>
             </div>
@@ -46,26 +37,7 @@
 export default {
   data() {
     return {
-      questions: [
-        {
-          id: 1,
-          text: "What's the location of your emergency?",
-          answers: ["At my house", "At my place of work", "At my school"],
-          showAnswers: "false",
-        },
-        {
-          id: 2,
-          text: "When did this happen?",
-          answers: ["Five minutes ago", "One hour ago", "I don't know"],
-          showAnswers: "false",
-        },
-        {
-          id: 3,
-          text: "What is your name?",
-          answers: ["John", "Tom", "Henrietta"],
-          showAnswers: "false",
-        },
-      ],
+      questions: [],
       question: {
         text: "",
         answers: [],
@@ -74,18 +46,44 @@ export default {
   },
   methods: {
     showQuestionAnswers(id) {
+        console.log("Show answers");
       id -= 1;
-
+         console.log(this.questions[id].showAnswers);
       this.questions[id].showAnswers = "true";
+      console.log(this.questions[id].showAnswers);
     },
     hideQuestionAnswers(id) {
       id -= 1;
 
       this.questions[id].showAnswers = "false";
     },
+    getQuestions() {
+      let me = this;
+      axios
+        .get("/questions")
+        .then((response) => {
+          console.log(response.data);
+          me.questions = response.data;
+          me.setShowAnswers();
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => (this.loading = false));
+    },
+    setShowAnswers() {
+      let me = this;
+      for (let i in me.questions) {
+        me.questions[i].showAnswers = "false";
+      }
+    },
+
   },
+
   mounted() {
     console.log("Component mounted.");
+    this.getQuestions();
+
   },
 };
 </script>
