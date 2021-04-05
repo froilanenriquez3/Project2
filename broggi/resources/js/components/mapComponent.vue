@@ -2,7 +2,7 @@
     <div class="map-container">
         <div id="mapa-mapbox" style="width: 400px; height: 300px;"></div>
         <div id="geocoder" class="geocoder"></div>
-        <button @click="addRecursosToMap()">ver Recursos</button>
+        <button @click="addRecursosToMap()" class="btn btn-primary">ver Recursos</button>
         <div class="color-box bg-primary"></div>
         <span> Recursos disponibles</span>
         <div class="color-box bg-secondary"></div>
@@ -25,7 +25,7 @@ export default {
             recurs: {},
             marker: {},
             button: {},
-            recursActivat: {}
+            recursActivat: false
         };
     },
     methods: {
@@ -47,7 +47,7 @@ export default {
         // Para asignar un recurso a la incidencia
         activarRecurs() {
             this.recurs.actiu = true;
-            this.recursActivat= this.recurs;
+            this.recursActivat= true;
             console.log(this.marker)
             let me = this;
             axios
@@ -67,12 +67,13 @@ export default {
             this.button.removeEventListener("click", this.activarRecurs);
             this.button.addEventListener("click", this.desactivarRecurs);
 
+
             // this.checkIfActive();
         },
         // Por si la persona se equivoca y quiere cambiar de recurso seleccionado
         desactivarRecurs() {
             this.recurs.actiu = false;
-            this.recursActivat= {};
+            this.recursActivat= false;
             console.log(this.marker)
             let me = this;
             axios
@@ -115,6 +116,11 @@ export default {
         addRecursosToMap() {
             this.recursos.forEach(element => {
                 this.colorRecurs(element);
+                // Div donde irá todo el contenido del popup
+                let div= document.createElement('div');
+                //Texto dentro de popup
+                let p = document.createElement('p');
+                p.innerHTML= element.codi + ' - ' + element.recurs.tipus;
                 // Botón dentro del popup de cada marcador
                 let button = document.createElement("button");
                 button.classList.add("btn", "btn-primary", "marker-button");
@@ -126,10 +132,13 @@ export default {
                 }
 
                 button.addEventListener("click", this.activarRecurs);
+
+                div.appendChild(p)
+                div.appendChild(button)
                 // Popup
                 let popup = new mapboxgl.Popup({ offset: 25 }).setDOMContent(
-                    button
-                );
+                   div
+                )
 
                 let marker = new mapboxgl.Marker({
                     color: this.color,
