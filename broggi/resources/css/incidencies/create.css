@@ -26,9 +26,14 @@
     top: 10vh;
 }
 
+.map-container{
+    width: 70%;
+    height: 60%;
+}
+
 #mapa-mapbox{
-    width: 50%;
-    height: 50%;
+    width: 70em !important;
+    height: 30em !important;
 }
 
 .geocoder {
@@ -50,4 +55,16 @@
         height: 50px;
         border-radius: 50%;
         cursor: pointer;
+      }
+
+      .color-box {
+        width: 20px;
+        height: 20px;
+        margin-top: 5px;
+        display: inline-block;
+      }
+
+      .accidentImage{
+          height: 12%;
+          width: 12%;
       }
