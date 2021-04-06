@@ -40,7 +40,7 @@ Vue.component('video-component', require('./components/videoComponent.vue').defa
 Vue.component('tipus-recursos', require('./components/tipusRecursosComponent.vue').default);
 Vue.component('mapa-incidencies', require('./components/mapComponent.vue').default);
 Vue.component('help-box', require('./components/helpBoxComponent.vue').default);
-
+Vue.component('incidencies-component', require('./components/incidenciesComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
