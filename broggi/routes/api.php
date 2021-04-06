@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\IncidenciesController;
 use App\Http\Controllers\Api\TipusRecursController;
 use App\Http\Controllers\Api\TipusAlertantsController;
 use App\Http\Controllers\Api\QuestionController;
+use App\Http\Controllers\Api\AnswerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,4 @@ Route::apiResource('tipusalertants', TipusAlertantsController::class);
 Route::apiResource('municipis', MunicipisController::class);
 Route::apiResource('rols', RolsController::class);
 Route::apiResource('questions', QuestionController::class);
+Route::apiResource('answers', AnswerController::class);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Answer;
 use Illuminate\Http\Request;
+use App\Http\Resources\AnswerResource;
 
 class AnswerController extends Controller
 {
@@ -15,7 +16,8 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        //
+        $answers = Answer::all();
+        return AnswerResource::collection($answers);
     }
 
     /**
