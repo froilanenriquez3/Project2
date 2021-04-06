@@ -9,10 +9,7 @@
             <div id="questionsDiv">
               <ul>
                 <li v-for="(question, index) in questions" :key="index">
-                  {{ question.id }}
-                  {{ question.showAnswers }}
                   <p>{{ question.questionText }}</p>
-
                   <button
                     v-show="!qShowA[index]"
                     id="showButton"
@@ -30,7 +27,7 @@
 
                   <div id="answersDiv" v-show="qShowA[index]">
                     <ul v-for="answer in question.answers" :key="answer.id">
-                      <li>{{ answer }}</li>
+                      <li>{{ answer.answerText }}</li>
                     </ul>
                   </div>
                 </li>
@@ -49,6 +46,7 @@ export default {
     return {
       questions: [],
       qShowA: [],
+      answers: [],
       //   question: {
       //     text: "",
       //     answers: [],
@@ -60,12 +58,10 @@ export default {
         let me = this;
       console.log("Show answers");
       Vue.set(me.qShowA, index, true);
-
     },
     hideQuestionAnswers(index) {
           let me = this;
         Vue.set(me.qShowA, index, false);
-
     },
     getQuestions() {
       let me = this;
@@ -81,6 +77,20 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
+    getAnswers(){
+        let me = this;
+      axios
+        .get("/answers")
+        .then((response) => {
+          console.log(response.data);
+          me.answers = response.data;
+          me.setShowAnswers();
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => (this.loading = false));
+    },
     setShowAnswers() {
       let me = this;
       for (let i in me.questions) {
@@ -88,11 +98,13 @@ export default {
         me.qShowA.push(false);
       }
     },
+
   },
 
   mounted() {
     console.log("Component mounted.");
     this.getQuestions();
-  },
+
+    },
 };
 </script>
