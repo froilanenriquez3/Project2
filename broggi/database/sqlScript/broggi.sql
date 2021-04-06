@@ -1558,5 +1558,23 @@ VALUES("Cecos", "$2y$12$hrnHGBQFTxofRxmtPOPlAu72hmhqaEdJWT97OdnJ4C4IEaYMmacse", 
 INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id)
 VALUES("Recurs", "$2y$12$H1E5Jy3gzLqe9DaG9k7jHeAhMMUbeBgNXLGRAzJWPnkDmPz5Go0iG", "admin@mail.com", "Recurs", "mobil", 3);
 
+INSERT INTO Question (questionText, incidencies_id)
+VALUES("What's the location of your emergency?", 1);
+INSERT INTO Answer (answerText, question_id)
+VALUES("At my house", 1);
+INSERT INTO Answer (answerText, question_id)
+VALUES("At my place of work", 1);
+INSERT INTO Answer (answerText, question_id)
+VALUES("At my school", 1);
+
+INSERT INTO Question (questionText, incidencies_id)
+VALUES("When did this happen?", 1);
+INSERT INTO Answer (answerText, question_id)
+VALUES("Five minutes ago", 2);
+INSERT INTO Answer (answerText, question_id)
+VALUES("One hour ago", 2);
+INSERT INTO Answer (answerText, question_id)
+VALUES("I don't know", 2);
+
 
 COMMIT;
