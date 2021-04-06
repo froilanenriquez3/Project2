@@ -7,18 +7,20 @@
 
           <div class="card-body">
             <div id="questionsDiv">
-              <ul v-for="question in questions" :key="question.id">
-                <li>
+              <ul>
+                <li  v-for="(question, index) in questions" :key="index">
+                    {{ question.id }}
+                    {{ question.showAnswers }}
                   <p>{{ question.questionText }}</p>
 
-                  <button v-if='question.showAnswers == "false"' id="showButton" @click="showQuestionAnswers(question.id)">
+                  <button v-show="!question.showAnswers" id="showButton" @click="showQuestionAnswers(index)">
                     See answers
                   </button>
-                  <button v-else id="hideButton" @click="hideQuestionAnswers(question.id)" >
+                  <button v-show="question.showAnswers" id="hideButton" @click="hideQuestionAnswers(index)" >
                     Hide answers
                   </button>
 
-                  <div id="answersDiv" v-show="question.showAnswers == 'true'">
+                  <div id="answersDiv" v-show="question.showAnswers">
                     <ul v-for="answer in question.answers" :key="answer.id">
                       <li>{{ answer }}</li>
                     </ul>
@@ -38,24 +40,24 @@ export default {
   data() {
     return {
       questions: [],
-      question: {
-        text: "",
-        answers: [],
-      },
+    //   question: {
+    //     text: "",
+    //     answers: [],
+    //   },
     };
   },
   methods: {
     showQuestionAnswers(id) {
         console.log("Show answers");
-      id -= 1;
-         console.log(this.questions[id].showAnswers);
-      this.questions[id].showAnswers = "true";
+    //   id -= 1;
+        console.log(this.questions[id].showAnswers);
+      this.questions[id].showAnswers = true;
       console.log(this.questions[id].showAnswers);
     },
     hideQuestionAnswers(id) {
-      id -= 1;
+    //   id -= 1;
 
-      this.questions[id].showAnswers = "false";
+      this.questions[id].showAnswers = false;
     },
     getQuestions() {
       let me = this;
@@ -74,7 +76,7 @@ export default {
     setShowAnswers() {
       let me = this;
       for (let i in me.questions) {
-        me.questions[i].showAnswers = "false";
+        me.questions[i].showAnswers = false;
       }
     },
 
