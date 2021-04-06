@@ -8,19 +8,27 @@
           <div class="card-body">
             <div id="questionsDiv">
               <ul>
-                <li  v-for="(question, index) in questions" :key="index">
-                    {{ question.id }}
-                    {{ question.showAnswers }}
+                <li v-for="(question, index) in questions" :key="index">
+                  {{ question.id }}
+                  {{ question.showAnswers }}
                   <p>{{ question.questionText }}</p>
 
-                  <button v-show="!question.showAnswers" id="showButton" @click="showQuestionAnswers(index)">
+                  <button
+                    v-show="!qShowA[index]"
+                    id="showButton"
+                    @click="showQuestionAnswers(index)"
+                  >
                     See answers
                   </button>
-                  <button v-show="question.showAnswers" id="hideButton" @click="hideQuestionAnswers(index)" >
+                  <button
+                    v-show="qShowA[index]"
+                    id="hideButton"
+                    @click="hideQuestionAnswers(index)"
+                  >
                     Hide answers
                   </button>
 
-                  <div id="answersDiv" v-show="question.showAnswers">
+                  <div id="answersDiv" v-show="qShowA[index]">
                     <ul v-for="answer in question.answers" :key="answer.id">
                       <li>{{ answer }}</li>
                     </ul>
@@ -40,24 +48,24 @@ export default {
   data() {
     return {
       questions: [],
-    //   question: {
-    //     text: "",
-    //     answers: [],
-    //   },
+      qShowA: [],
+      //   question: {
+      //     text: "",
+      //     answers: [],
+      //   }
     };
   },
   methods: {
-    showQuestionAnswers(id) {
-        console.log("Show answers");
-    //   id -= 1;
-        console.log(this.questions[id].showAnswers);
-      this.questions[id].showAnswers = true;
-      console.log(this.questions[id].showAnswers);
-    },
-    hideQuestionAnswers(id) {
-    //   id -= 1;
+    showQuestionAnswers(index) {
+        let me = this;
+      console.log("Show answers");
+      Vue.set(me.qShowA, index, true);
 
-      this.questions[id].showAnswers = false;
+    },
+    hideQuestionAnswers(index) {
+          let me = this;
+        Vue.set(me.qShowA, index, false);
+
     },
     getQuestions() {
       let me = this;
@@ -77,15 +85,14 @@ export default {
       let me = this;
       for (let i in me.questions) {
         me.questions[i].showAnswers = false;
+        me.qShowA.push(false);
       }
     },
-
   },
 
   mounted() {
     console.log("Component mounted.");
     this.getQuestions();
-
   },
 };
 </script>
