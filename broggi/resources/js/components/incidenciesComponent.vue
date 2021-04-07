@@ -1,9 +1,7 @@
 <template>
   <div class="container">
-
-      <label class="" for="">Tipus Incidencia</label>
-      <select class="" name=""></select>
-
+    <label class="" for="">Tipus Incidencia</label>
+    <select class="" name=""></select>
 
     <div class="form-group row">
       <label class="col-2" for="">Adreça</label>
@@ -14,10 +12,10 @@
       <input class="col-10" type="tel" name="" />
     </div>
     <div>
-        <label for="">Municipi</label>
-        <select name="" id="">
-          <option value=""></option>
-        </select>
+      <label for="">Municipi</label>
+      <select name="" id="">
+        <option value=""></option>
+      </select>
     </div>
 
     <div class="form-group row">
@@ -28,7 +26,7 @@
       <input class="col-2" type="date" name="" />
     </div>
 
-     <div class="form-group row">
+    <div class="form-group row">
       <label class="col-2" for="">Descripcio</label>
       <textarea class="col-10" type="" name=""> </textarea>
     </div>
@@ -38,9 +36,7 @@
       <input class="col-10" type="tel" name="" />
     </div>
 
-    <alertant-form></alertant-form>
 
-    <br>
 
     <!-- add fa plus icon -->
     <button class="btn btn-primary" :click="addAlertantInput()">
@@ -51,9 +47,11 @@
 
 <script>
 import alertantFormComponent from "./alertantFormComponent.vue";
+import afectatFormComponent from "./afectatFormComponent.vue";
 export default {
   data() {
     return {
+      afectatFormComponent,
       alertantFormComponent,
       incidencia: {},
       incidencies: [],
