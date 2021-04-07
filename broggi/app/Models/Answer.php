@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Answer extends Model
 {
     use HasFactory;
+    protected $table = 'Answer';
+    public $timestamps = false;
+
+    public function question(){
+        return $this->belongsTo(Question::class, 'Question_id');
+    }
 }

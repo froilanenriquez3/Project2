@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Question;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class QuestionResource extends JsonResource
@@ -14,6 +15,12 @@ class QuestionResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        //return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'incidencies_id' => $this->incidencies_id,
+            'questionText' => $this->questionText,
+            'answers' => Question::with('answer')->find($this->id)->answer
+        ];
     }
 }
