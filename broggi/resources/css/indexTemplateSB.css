@@ -7,14 +7,24 @@ body{
 
 /* Placeholder for nav*/
 #navbarHolder {
-    border: dashed black 1px;
+    /* border: dashed black 1px; */
     width: 100%;
     height: 15vh;
 }
 
+.navbar {
+    /*an absolute dirty hack*/
+    margin: 0%;
+    clip-path: inset(0% 0% 0% 20%);
+}
+
+.navbar > a.logo {
+    display: none;
+}
+
 /* Placeholder for sidebar*/
 aside {
-    border: dashed black 1px;
+    /* border: dashed black 1px; */
     height: 100vh;
     width: 20%;
 
