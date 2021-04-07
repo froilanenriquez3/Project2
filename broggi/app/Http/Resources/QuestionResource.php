@@ -20,7 +20,8 @@ class QuestionResource extends JsonResource
             'id' => $this->id,
             'incidencies_id' => $this->incidencies_id,
             'questionText' => $this->questionText,
-            'answers' => Question::with('answer')->find($this->id)->answer
+            'answers' => $this->answer
+            //'answers' => Question::with('answer')->find($this->id)->answer
         ];
     }
 }
