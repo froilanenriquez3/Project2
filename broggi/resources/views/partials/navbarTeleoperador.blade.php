@@ -20,7 +20,7 @@
 </li>
 <!--Recursos móviles-->
 <li class="nav-recursos mr-2">
-    <a class="nav-link navbarLinks" href="{{ url('/alertants')}}"><i class="fas fa-ambulance"></i> Recursos móviles </a>
+    <a class="nav-link navbarLinks" href="{{ url('/recursos')}}"><i class="fas fa-ambulance"></i> Recursos móviles </a>
 </li>
 
 
