@@ -8,11 +8,11 @@
 
  <!--Nueva incidencias-->
  <li class="nav-incidencias mr-2">
-    <a class="nav-link navbarLinks" style=":hover {color: yellow}" href="#"><i class="fas fa-plus-circle"></i> Nueva incidencia </a>
+    <a class="nav-link navbarLinks" style=":hover {color: yellow}" href="{{ url('/incidencies/create') }}"><i class="fas fa-plus-circle"></i> Nueva incidencia </a>
 </li>
 <!--Incidencias-->
 <li class="nav-usuaris mr-2">
-    <a class="nav-link navbarLinks" href="#"><i class="fas fa-exclamation-triangle"></i> Incidencias </a>
+    <a class="nav-link navbarLinks" href=" {{ url('/incidencies') }}"><i class="fas fa-exclamation-triangle"></i> Incidencias </a>
 </li>
 <!--Alertantes habituales-->
 <li class="nav-habituales mr-2">
