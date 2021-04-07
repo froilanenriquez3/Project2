@@ -56,7 +56,6 @@ export default {
   methods: {
     showQuestionAnswers(index) {
         let me = this;
-      console.log("Show answers");
       Vue.set(me.qShowA, index, true);
     },
     hideQuestionAnswers(index) {
@@ -68,7 +67,7 @@ export default {
       axios
         .get("/questions")
         .then((response) => {
-          console.log(response.data);
+          //console.log(response.data);
           me.questions = response.data;
           me.setShowAnswers();
         })
