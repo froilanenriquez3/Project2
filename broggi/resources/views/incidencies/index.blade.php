@@ -2,10 +2,11 @@
 @section('title','Incidencies')
 
 @section('links')
- <link rel="stylesheet" href=" {{ asset('../resources/css/incidencies/create.css?'.rand()) }}">
+
  <link href="{{ url('https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css')}}" rel='stylesheet' />
  <script src="{{ url('https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js')}}"></script>
 <link href="{{ url('https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css')}}" rel="stylesheet"/>
+<link rel="stylesheet" href=" {{ asset('../resources/css/incidencies/create.css?'.rand()) }}">
 @endsection
 
 {{-- Navbar teleoperador --}}

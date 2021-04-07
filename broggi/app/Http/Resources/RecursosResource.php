@@ -21,7 +21,7 @@ class RecursosResource extends JsonResource
             'codi' => $this->codi,
             'actiu' => $this->actiu,
             'tipus_recursos_id'=> $this->tipus_recursos_id,
-            'recurs' => $this->tipus_recursos->codi,
+            'recurs' => $this->tipus_recursos->tipus,
             'lat' => $this->lat,
             'lon' => $this->lon
         ];

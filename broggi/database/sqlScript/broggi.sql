@@ -1583,11 +1583,11 @@ VALUES("One hour ago", 2);
 INSERT INTO Answer (answerText, question_id)
 VALUES("I don't know", 2);
 
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('12345', '1', '1', '2.16992', '41.3879');
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('54321', '0', '2', '2.0', '40.0');
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('66555', '0', '3', '3.6', '42.000');
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('55444', '1', '4', '3.4552', '42.6663');
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('77766', '0', '2', '1.4444', '41.5566');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('12345', '1', '1', '41.3879', '2.16992');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('54321', '0', '2', '41.899', '2.1988');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('66555', '0', '3', '42.000', '1.8');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('55444', '1', '4', '41.4566', '1.93222');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('77766', '0', '2', '41.5566', '1.951');
 
 
 COMMIT;
