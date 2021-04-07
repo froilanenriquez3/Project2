@@ -27,7 +27,10 @@
             </div>
         </a>
         <div>
-            <p>Incidencias</p>
+            <a href="{{ url('/incidencies') }}">
+                <p>Incidencias</p>
+            </a>
+
         </div>
     </section>
 
