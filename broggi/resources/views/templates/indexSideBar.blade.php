@@ -19,8 +19,8 @@
 <body>
 
     <aside>
-        {{-- import for sidebar --}}
-        <p>temporary</p>
+        {{-- Modify --}}
+        @include('templates.sideBar')
     </aside>
 
     <main>
