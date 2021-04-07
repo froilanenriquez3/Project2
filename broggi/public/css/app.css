@@ -4980,7 +4980,7 @@ input[type=button].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #282828;
+  background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
@@ -5780,7 +5780,7 @@ a.badge-dark.focus {
   position: relative;
   display: block;
   padding: 0.75rem 1.25rem;
-  background-color: #222;
+  background-color: #fff;
   border: 1px solid #282828;
 }
 
@@ -10948,7 +10948,7 @@ a.text-dark:focus {
 }
 
 .navbar.bg-primary {
-  border: 1px solid #fff;
+  border: 1px solid #282828;
 }
 
 .navbar.bg-dark {
@@ -11127,12 +11127,13 @@ legend {
 
 .nav-tabs .nav-link,
 .nav-pills .nav-link {
-  color: #fff;
+  color: #000;
 }
 
 .nav-tabs .nav-link:hover,
 .nav-pills .nav-link:hover {
-  background-color: #282828;
+  background-color: #11adc4;
+  color: #fff;
 }
 
 .nav-tabs .nav-link.disabled,
