@@ -24,7 +24,8 @@
 
 <video-component></video-component>
 <help-box></help-box>
-
+<incidencies-component></incidencies-component>
+{{--
 <div class="form-group row">
     <label class="col-2" for="">Numero de incidente</label>
     <input class="col-10" type="number"  name="">
@@ -65,7 +66,7 @@
     <label class="col-2" for="">Alertant</label>
     <input class="col-10" type="text"  name="">
 </div>
-
+ --}}
 @endsection
 
 @section('cancelButton')

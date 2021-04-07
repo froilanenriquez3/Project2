@@ -18,9 +18,9 @@ class IncidenciesController extends Controller
      */
     public function index()
     {
-        $usuaris= Incidencies::all();
+        $incidencies= Incidencies::all();
 
-        return IncidenciesResource::collection($usuaris);
+        return IncidenciesResource::collection($incidencies);
     }
 
     /**
