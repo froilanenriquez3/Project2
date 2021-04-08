@@ -5,6 +5,11 @@
     flex-wrap: wrap;
 }
 
+.logo{
+    visibility: hidden;
+}
+
+
 .tableSection{
     margin-top: 3%;
     width: 60%;
