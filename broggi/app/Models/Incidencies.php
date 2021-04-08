@@ -21,9 +21,9 @@ class Incidencies extends Model
         return $this->hasMany(Question::class, 'incidencies_id');
     }
 
-    public function incidencies_has_recursos(){
+    /* public function incidencies_has_recursos(){
         return $this->belongsToMany(Recursos::class, 'incidencies_has_recursos', 'incidencies_id', 'recursos_id')->withPivot('id');
-    }
+    } */
 
     public function usuaris()
     {
@@ -46,7 +46,11 @@ class Incidencies extends Model
         return $this->belongsTo(Municipis::class, 'municipis_id');
     }
 
+    public function recursos()
+    {
+        return $this->belongsToMany(Recursos::class, )->withPivot('id');
+    }
 
-  
+
 
 }
