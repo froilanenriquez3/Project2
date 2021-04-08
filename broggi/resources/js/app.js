@@ -41,6 +41,7 @@ Vue.component('tipus-recursos', require('./components/tipusRecursosComponent.vue
 Vue.component('mapa-incidencies', require('./components/mapComponent.vue').default);
 Vue.component('help-box', require('./components/helpBoxComponent.vue').default);
 Vue.component('incidencies-component', require('./components/incidenciesComponent.vue').default);
+Vue.component('alertant-form', require('./components/alertantFormComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

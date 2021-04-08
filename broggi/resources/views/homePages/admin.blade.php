@@ -26,12 +26,11 @@
                 <p>Usuarios</p>
             </div>
         </a>
+        <a href="{{ url('/incidencies') }}">
         <div>
-            <a href="{{ url('/incidencies') }}">
                 <p>Incidencias</p>
-            </a>
-
         </div>
+        </a>
     </section>
 
 @endsection
