@@ -44,6 +44,7 @@ Vue.component('incidencies-component', require('./components/incidenciesComponen
 Vue.component('alertant-form', require('./components/alertantFormComponent.vue').default);
 Vue.component('sidebar-component', require('./components/sidebarComponent.vue').default);
 Vue.component('container-recursos', require('./components/ContainerRecursosMovilesComponent.vue').default);
+Vue.component('afectat-form', require('./components/afectatFormComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
