@@ -120,7 +120,7 @@ export default {
                 let div= document.createElement('div');
                 //Texto dentro de popup
                 let p = document.createElement('p');
-                p.innerHTML= element.codi + ' - ' + element.recurs.tipus;
+                p.innerHTML= element.codi + ' - ' + element.recurs;
                 // Botón dentro del popup de cada marcador
                 let button = document.createElement("button");
                 button.classList.add("btn", "btn-primary", "marker-button");
@@ -166,8 +166,8 @@ export default {
         this.map = new mapboxgl.Map({
             container: "mapa-mapbox", // container ID
             style: "mapbox://styles/mapbox/streets-v11", // style URL
-            center: [2.16992, 41.3879], // starting position [lng, lat]
-            zoom: 9 // starting zoom
+            center: [1.8676800, 41.8204600], // starting position [lng, lat]
+            zoom: 7 // starting zoom
         });
 
         let imageAccident= document.createElement("img");
