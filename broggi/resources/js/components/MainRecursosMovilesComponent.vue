@@ -37,7 +37,7 @@
                         </div>
                     </td>
 
-                    <td>{{ recurs.recurs.tipus }}</td>
+                    <td>{{ recurs.recurs }}</td>
 
                     <td>
                         <button
@@ -119,9 +119,9 @@
 <script>
 import FilterSelect from './filterSelect.vue';
 export default {
+  components: { FilterSelect },
     data() {
         return {
-            FilterSelect,
             itemsToDisplay: [],
             action: "",
             recursos: [],
@@ -165,6 +165,7 @@ export default {
                 this.recurs.tipus_recursos_id='';
                 this.recurs.lat='';
                 this.recurs.lon='';
+                this.recurs.recurs='';
             }
 
         },

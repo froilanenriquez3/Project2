@@ -1,4 +1,4 @@
-@extends('templates.indexSideBar')
+@extends('templates.components')
 
 @section('links')
 @endsection
@@ -8,9 +8,9 @@
     @include('partials.navbarAdmin')
 @endsection
 
-
 @section('title', 'Recursos Moviles')
 
 @section('table')
-<main-recursos-moviles></main-recursos-moviles>
+    <container-recursos></container-recursos>
 @endsection
+
