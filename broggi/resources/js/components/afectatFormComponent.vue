@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div id="alertantsDiv">
+    <div id="afectatsDiv">
       <div>
         <h5>Afectat 1</h5>
 
