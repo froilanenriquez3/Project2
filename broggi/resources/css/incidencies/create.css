@@ -3,7 +3,7 @@
     height: 10vh;
 }
 
-#formSection{
+#formSection {
     padding-top: 1%;
 }
 
@@ -26,12 +26,12 @@
     top: 10vh;
 }
 
-.map-container{
+.map-container {
     width: 70%;
     height: 60%;
 }
 
-#mapa-mapbox{
+#mapa-mapbox {
     width: 70em !important;
     height: 30em !important;
 }
@@ -43,29 +43,38 @@
     left: 50%;
     margin-left: -25%;
     top: 10px;
-    }
-    .mapboxgl-ctrl-geocoder {
+}
+.mapboxgl-ctrl-geocoder {
     min-width: 100%;
-    }
+}
+
+.marker {
+    background-image: url("mapbox-icon.png");
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.color-box {
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+.accidentImage {
+    height: 12%;
+    width: 12%;
+}
+
+#afectatsDiv {
 
 
-    .marker {
-        background-image: url('mapbox-icon.png');
-        background-size: cover;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        cursor: pointer;
-      }
+}
 
-      .color-box {
-        width: 20px;
-        height: 20px;
-        margin-top: 5px;
-        display: inline-block;
-      }
+#alertantsDiv{
 
-      .accidentImage{
-          height: 12%;
-          width: 12%;
-      }
+
+}

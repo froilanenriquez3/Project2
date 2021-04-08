@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <div id="alertantsDiv">
+    <div id="afectatsDiv">
       <div>
-        <h5>Alertant 1</h5>
+        <h5>Afectat 1</h5>
 
         <label for="">Tipus d'alertant</label>
         <select name="" id="">
