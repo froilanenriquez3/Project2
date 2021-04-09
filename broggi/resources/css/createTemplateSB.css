@@ -13,7 +13,8 @@ body{
 .navbar {
     /*an absolute dirty hack*/
     margin: 0%;
-    clip-path: inset(0% 0% 0% 20%);
+    /* clip-path: inset(0% 0% 0% 20%); */
+
 }
 
 .navbar > div {

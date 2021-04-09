@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\UsuarisController;
 use App\Http\Controllers\Api\RecursosController;
 use App\Http\Controllers\Api\AlertantsController;
 use App\Http\Controllers\Api\MunicipisController;
-use App\Http\Controllers\Api\IncidenciesController;
+// use App\Http\Controllers\Api\IncidenciesController;
 use App\Http\Controllers\Api\TipusRecursController;
 use App\Http\Controllers\Api\TipusAlertantsController;
 use App\Http\Controllers\Api\QuestionController;
@@ -29,7 +29,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('usuaris', UsuarisController::class);
-Route::apiResource('incidencies', IncidenciesController::class);
+// Route::apiResource('incidencies', IncidenciesController::class);
 Route::apiResource('alertants', AlertantsController::class);
 Route::apiResource('recursos', RecursosController::class);
 Route::apiResource('tipusrecursos', TipusRecursController::class);

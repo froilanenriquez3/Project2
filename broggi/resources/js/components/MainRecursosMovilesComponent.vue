@@ -5,6 +5,10 @@
         <!-- Filtro -->
         <filter-select :listToFilter="recursos" :filterBy="tipus_recursos" :filterField="'tipus'" :relatedId="'tipus_recursos_id'"
         @applyFilterResults="filter($event)"></filter-select>
+<<<<<<< HEAD
+        <button type="button" @click="selectAction('afegir')" class="btn btn-primary">Afegir</button>
+=======
+>>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
         <!-- Si no hay nada que cumpla con lo buscado, no sale la tabla y solo mostramos mensaje -->
         <div v-if="itemsToDisplay.length == 0"> No s'han trobat elements d'aquestes característiques</div>
 
@@ -36,7 +40,11 @@
                         </div>
                     </td>
 
+<<<<<<< HEAD
+                    <td>{{ recurs.recurs.tipus }}</td>
+=======
                     <td>{{ recurs.recurs }}</td>
+>>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
 
                     <td>
                         <button
@@ -59,17 +67,24 @@
                     </td>
                 </tr>
             </tbody>
+<<<<<<< HEAD
+=======
 
         </table>
         <div class="bottomTable">
+>>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
             <b-pagination
                      v-model="currentPage"
                     :total-rows="totalRows"
                     :per-page="perPage"
                     aria-controls="my-table"
             ></b-pagination>
+<<<<<<< HEAD
+        </table>
+=======
             </div>
             <button type="button" @click="selectAction('afegir')" class="btn btn-primary">Afegir</button>
+>>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
         </div>
 
         <!-- Si se selecciona la opción añadir, se muestra el formulario -->
@@ -122,15 +137,25 @@
 <script>
 import FilterSelect from './filterSelect.vue';
 export default {
+<<<<<<< HEAD
+    data() {
+        return {
+            FilterSelect,
+=======
   components: { FilterSelect },
     data() {
         return {
+>>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
             itemsToDisplay: [],
             action: "",
             recursos: [],
             tipus_recursos:[],
             insert: false,
+<<<<<<< HEAD
+             perPage: 4,
+=======
              perPage: 5,
+>>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
             currentPage: 1,
             totalRows: '',
             recurs: {
@@ -168,7 +193,10 @@ export default {
                 this.recurs.tipus_recursos_id='';
                 this.recurs.lat='';
                 this.recurs.lon='';
+<<<<<<< HEAD
+=======
                 this.recurs.recurs='';
+>>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
             }
 
         },

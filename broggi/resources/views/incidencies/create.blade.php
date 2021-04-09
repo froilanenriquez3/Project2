@@ -26,8 +26,6 @@
 <help-box></help-box>
 <incidencies-component></incidencies-component>
 
-<alertant-form></alertant-form>
-<afectat-form></afectat-form>
 {{--
 <div class="form-group row">
     <label class="col-2" for="">Numero de incidente</label>
