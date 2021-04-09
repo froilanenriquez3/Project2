@@ -14,21 +14,29 @@
     width: 90%;
     padding: 20px;
     height: fit-content;
+<<<<<<< HEAD
     display: flex;
     flex-wrap: wrap;
 }
 
 
+=======
+}
+
+>>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
 #divForm > div {
     padding: 10px;
 }
 
+<<<<<<< HEAD
 #helpBoxDiv{
     height: 50vh;
     width: 30vw;
 }
 
 
+=======
+>>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
 #formButtons {
     position: relative;
     left: 30vw;

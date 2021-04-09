@@ -1,5 +1,9 @@
 -- MySQL Workbench Forward Engineering
+<<<<<<< HEAD
 -- set foreign_key_checks= 0;
+=======
+set foreign_key_checks= 0;
+>>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -205,6 +209,10 @@ DROP TABLE IF EXISTS `broggi`.`incidencies` ;
 
 CREATE TABLE IF NOT EXISTS `broggi`.`incidencies` (
   `id` INT NOT NULL AUTO_INCREMENT,
+<<<<<<< HEAD
+=======
+  `num_incident` INT NOT NULL,
+>>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
   `data` DATE NOT NULL,
   `hora` TIME NOT NULL,
   `telefon_alertant` INT(10) NOT NULL,
@@ -218,6 +226,10 @@ CREATE TABLE IF NOT EXISTS `broggi`.`incidencies` (
   `usuaris_id` INT NOT NULL,
   `duracion` INT NULL,
   PRIMARY KEY (`id`),
+<<<<<<< HEAD
+=======
+  UNIQUE INDEX `num_incident_UNIQUE` (`num_incident` ASC) ,
+>>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
   INDEX `fk_incidencies_tipus_incidents1_idx` (`tipus_incidencies_id` ASC) ,
   INDEX `fk_incidencies_alertants1_idx` (`alertants_id` ASC) ,
   INDEX `fk_incidencies_municipis1_idx` (`municipis_id` ASC) ,

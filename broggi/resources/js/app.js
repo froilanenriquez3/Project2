@@ -42,6 +42,11 @@ Vue.component('mapa-incidencies', require('./components/mapComponent.vue').defau
 Vue.component('help-box', require('./components/helpBoxComponent.vue').default);
 Vue.component('incidencies-component', require('./components/incidenciesComponent.vue').default);
 Vue.component('alertant-form', require('./components/alertantFormComponent.vue').default);
+<<<<<<< HEAD
+=======
+Vue.component('sidebar-component', require('./components/sidebarComponent.vue').default);
+Vue.component('container-recursos', require('./components/ContainerRecursosMovilesComponent.vue').default);
+>>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
 Vue.component('afectat-form', require('./components/afectatFormComponent.vue').default);
 
 /**
