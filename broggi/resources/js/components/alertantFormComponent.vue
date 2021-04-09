@@ -4,33 +4,43 @@
       <div>
         <h5>Alertant 1</h5>
 
-        <label for="">Tipus d'alertant</label>
-        <select name="" id="">
-          <option value=""></option>
-        </select>
+        <div class="form-group row">
+          <label class="col-2" for="">Tipus d'alertant</label>
+          <select name="" id="" class="col-10">
+            <option value=""></option>
+          </select>
+        </div>
 
-        <label class="" for="">Nom</label>
-        <input class="" type="text" name="" />
+        <div class="form-group row">
+          <label class="col-2" for="">Nom</label>
+          <input class="col-10" type="text" name="" />
+        </div>
 
-        <label class="" for="">Cognom</label>
-        <input class="" type="text" name="" />
+        <div class="form-group row">
+          <label class="col-2" for="">Cognom</label>
+          <input class="col-10" type="text" name="" />
+        </div>
 
-        <label class="" for="">Telefon Alertant</label>
-        <input class="" type="tel" name="" />
+        <div class="form-group row">
+          <label class="col-2" for="">Telefon Alertant</label>
+          <input class="col-10" type="tel" name="" />
+        </div>
 
-        <br />
+        <div class="form-group row">
+          <label class="col-2" for="">Adreça</label>
+          <input class="col-10" type="text" name="" />
+        </div>
 
-        <label class="" for="">Adreça</label>
-        <input class="" type="text" name="" />
+        <div class="form-group row">
+          <label class="col-2" for="">Municipi</label>
+          <select class="col-10" name="" id="">
+            <option value=""></option>
+          </select>
+        </div>
 
-        <label for="">Municipi</label>
-        <select name="" id="">
-          <option value=""></option>
-        </select>
       </div>
 
-
-        <button class="btn btn-primary">Submit</button>
+      <button class="btn btn-primary">Submit</button>
     </div>
   </div>
 </template>

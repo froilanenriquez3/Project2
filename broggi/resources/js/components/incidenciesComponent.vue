@@ -4,6 +4,9 @@
       <label class="col-2" for="">Tipus Incidencia</label>
       <select class="col-10" name="" v-model="incidencia.tipus_incidencies_id">
         <option value=""></option>
+        <option v-for="(tipo, index) in tipusIncidencies" :key="index" value="">
+          {{ tipo.nom }}
+        </option>
       </select>
     </div>
 
@@ -24,6 +27,9 @@
       <label class="col-2" for="">Municipi</label>
       <select class="col-10" name="" id="" v-model="incidencia.municipis_id">
         <option value=""></option>
+        <option v-for="(municipi, index) in municipis" :key="index" value="">
+          {{ municipi.nom }}
+        </option>
       </select>
     </div>
 
@@ -46,14 +52,14 @@
       <input class="col-10" type="tel" name="" v-model="incidencia.nom_metge" />
     </div>
 
-    <!-- <alertant-form></alertant-form> -->
+    <alertant-form></alertant-form>
 
     <!-- add fa plus icon -->
     <button class="btn btn-primary" @click="addAfectatInput()">
       Añadir afectat
     </button>
 
-    <!-- <afectat-form></afectat-form> -->
+    <afectat-form></afectat-form>
 
     <button class="btn btn-primary" @click="createIncidencia()">
       Afegir incidencia
@@ -67,6 +73,9 @@ import afectatFormComponent from "./afectatFormComponent.vue";
 export default {
   data() {
     return {
+      tipusAlertants: [],
+      tipusIncidencies: [],
+      municipis: [],
       afectatFormComponent,
       alertantFormComponent,
       incidencia: {
@@ -86,7 +95,7 @@ export default {
     };
   },
   methods: {
-    selectIncidencies() {
+    getIncidencies() {
       let me = this;
       axios
         .get("/incidencies")
@@ -109,7 +118,7 @@ export default {
 
           console.log(response);
           me.clearInput();
-          me.selectIncidencies();
+          me.getIncidencies();
           //me.action=""
         })
         .catch((error) => {
@@ -124,19 +133,44 @@ export default {
       //let input = document.createElement("");
     },
     getMunicipis() {
-        let me = this;
+      let me = this;
       axios
         .get("/municipis")
         .then((response) => {
           console.log(response.data);
-          me.incidencies = response.data;
+          me.municipis = response.data;
         })
         .catch((error) => {
           console.log(error);
         })
         .finally(() => (this.loading = false));
     },
-    getTipusAlertant() {},
+    getTipusAlertant() {
+      let me = this;
+      axios
+        .get("/tipusalertants")
+        .then((response) => {
+          console.log(response.data);
+          me.tipusAlertants = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => (this.loading = false));
+    },
+    getTipusIncidencies(){
+        let me = this;
+      axios
+        .get("/tipusincidencies")
+        .then((response) => {
+          console.log(response.data);
+          me.tipusAlertants = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => (this.loading = false));
+    },
     clearInput() {
       this.incidencia = {
         data: null,
@@ -155,6 +189,7 @@ export default {
   },
   created() {
     //this.selectIncidencies();
+    this.getMunicipis();
   },
   mounted() {
     console.log("Component mounted.");
