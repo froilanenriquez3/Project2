@@ -56,7 +56,7 @@
                         </button>
                     </td>
                 </tr>
-                <b-pagination
+            <b-pagination
                      v-model="currentPage"
                     :total-rows="totalRows"
                     :per-page="perPage"
@@ -148,7 +148,7 @@ export default {
             rols: [],
             recursos: [],
             insert: false,
-            perPage: 4,
+            perPage: 5,
             currentPage: 1,
             totalRows: '',
             usuari: {
