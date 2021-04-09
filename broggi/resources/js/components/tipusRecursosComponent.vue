@@ -12,7 +12,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="tipo in tipus_recursos" :key="tipo.id">
+          <tr v-for="tipo in paginator(tipus_recursos)" :key="tipo.id">
             <th scope="row">{{ tipo.id }}</th>
             <td>{{ tipo.tipus }}</td>
             <td>
@@ -37,6 +37,12 @@
           </tr>
         </tbody>
       </table>
+                  <b-pagination
+                     v-model="currentPage"
+                    :total-rows="totalRows"
+                    :per-page="perPage"
+                    aria-controls="my-table"
+            ></b-pagination>
     </div>
 
     <!-- Si se selecciona la opción añadir, se muestra el formulario -->
@@ -75,52 +81,6 @@
       <button  type="button" @click="cancel()" class="btn btn-primary" id="cancelButton">Cancelar</button>
     </div>
 
-    <!-- Modal Delete -->
-    <div
-      class="modal fade"
-      id="deleteModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Esborrar tipus</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div id="modalText" class="modal-body">
-            Està segur d'esborrar el tipus {{ tipo.tipus }} ?
-          </div>
-          <div class="modal-footer">
-               <button
-              type="button"
-              class="btn btn-primary"
-              data-dismiss="modal"
-            >
-              Tancar
-            </button>
-            <button
-              id="buttonDeleteModal"
-              @click="deleteTipo()"
-              type="submit"
-              class="btn btn-secondary"
-            >
-              Esborrar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <button
       class="btn btn-primary"
       id="addButton"
@@ -128,6 +88,27 @@
     >
       Afegir
     </button>
+
+    <!-- Modal Delete -->
+            <div class="modal fade" id="deleteModalTipus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Esborrar tipus de Recurs</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="modalText" class="modal-body">
+            Està segur d'esborrar el tipus de Recurs {{ tipo.tipus }}?
+        </div>
+        <div class="modal-footer">
+            <button id="buttonDeleteModal"  @click="deleteTipo()" type="submit" class="btn btn-secondary">Esborrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   </div>
 </template>
 
@@ -136,6 +117,9 @@ export default {
   data() {
     return {
       action: "",
+        perPage: 5,
+        currentPage: 1,
+        totalRows: '',
       tipus_recursos: [],
       insert: false,
       tipo: {
@@ -159,7 +143,7 @@ export default {
         .get("/tipusrecursos")
         .then((response) => {
           me.tipus_recursos = response.data;
-          console.log(me.tipus_recursos);
+        me.totalRows= me.tipus_recursos.length;
         })
         .catch((error) => {
           console.log(error);
@@ -211,7 +195,7 @@ export default {
     },
     confirmDeleteTipo(tipo) {
       this.tipo = tipo;
-      $("#deleteModal").modal("show");
+      $('#deleteModalTipus').modal('show');
     },
     deleteTipo() {
         console.log("deleting");
@@ -220,13 +204,13 @@ export default {
         .delete("/tipusrecursos/" + me.tipo.id)
         .then((response) => {
           me.selectTipus();
-          $("#deleteModal").modal("hide");
+          $("#deleteModalTipus").modal("hide");
             me.action='';
           //me.infoMessage= response.data.missatge;
         })
         .catch((error) => {
           //me.errorMessage = error.response.data.error;
-          $("#deleteModal").modal("hide");
+          $("#deleteModalTipus").modal("hide");
             me.action='';
         });
     },
@@ -240,6 +224,15 @@ export default {
         this.tipo = tipo;
       }
     },
+     paginator(recursos) {
+        //  Devuelve parte del array que va a usar esa página concreta.
+      const beginning = (this.currentPage - 1) * this.perPage;
+      const end =
+       beginning + this.perPage > recursos.length
+          ? recursos.length
+          : beginning  + this.perPage;
+      return recursos.slice(beginning , end );
+    }
   },
   created() {
     this.selectTipus();
