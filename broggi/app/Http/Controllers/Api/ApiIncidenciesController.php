@@ -6,10 +6,11 @@ use App\Clases\Utilitat;
 use App\Models\Incidencies;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use App\Http\Resources\IncidenciesResource;
 
-class IncidenciesController extends Controller
+class ApiIncidenciesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,7 +32,42 @@ class IncidenciesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $incidencia = new Incidencies();
+
+        $incidencia->num_incident = $request->input('numIncident');
+        $incidencia->data = $request->input('data');
+        $incidencia->hora = $request->input('hora');
+        $incidencia->telefon_alertant = $request->input('telefon_alertant');
+        $incidencia->adreca = $request->input('adreca');
+        $incidencia->adreca_complement = $request->input('adreca_complement');
+        $incidencia->descripcio = $request->input('descripcio');
+        $incidencia->nom_metge = $request->input('nom_metge');
+        $incidencia->tipus_incidencies_id = $request->input('tipus_incidencies_id');
+        $incidencia->alertants_id = $request->input('alertants_id');
+        $incidencia->municipis_id = $request->input('municipis_id');
+
+        $incidencia->duracion = $request->input('duracion');
+
+        $incidencia->telefon_alertant = "123456789";
+
+        $userId = Auth::user();
+
+        $incidencia->usuaris_id  = $userId->id;
+
+        try{
+            $incidencia->save();
+            $response = (new IncidenciesResource($incidencia))
+                    ->response()
+                    ->setStatusCode(201);
+        } catch (QueryException $ex) {
+            $message = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $message], 400);
+
+        }
+
+
+
+        return $response;
     }
 
     /**

@@ -28,6 +28,8 @@ class UsuarisController extends Controller
             if (Hash::check($password, $user->contrasenya)) {
                 Auth::login($user);
 
+                //print_r(Auth::user());
+
                 $userRol = $user->rols_id;
                 switch ($userRol) {
                     case 1:

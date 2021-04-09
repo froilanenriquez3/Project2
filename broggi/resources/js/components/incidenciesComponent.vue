@@ -38,10 +38,17 @@
       <input class="col-10" type="tel" name="" v-model="incidencia.nom_metge"/>
     </div>
 
+    <alertant-form></alertant-form>
+
     <!-- add fa plus icon -->
-    <button class="btn btn-primary" :click="addAfectatInput()">
+    <button class="btn btn-primary" @click="addAfectatInput()">
       Añadir afectat
     </button>
+
+    <afectat-form></afectat-form>
+
+    <button class="btn btn-primary" @click="createIncidencia()">Afegir incidencia</button>
+
   </div>
 </template>
 
@@ -54,7 +61,7 @@ export default {
       afectatFormComponent,
       alertantFormComponent,
       incidencia: {
-            numIncident: null,
+            numIncident: 1,
             data: null,
             hora: null,
             telefon_alertant: null,
@@ -62,10 +69,9 @@ export default {
             adreca_complement: null,
             descripcio: null,
             nom_metge: null,
-            tipus_incidencies_id: null,
-            alertants_id: null,
-            municipis_id: null,
-            usuaris_id: null,
+            tipus_incidencies_id: 1,
+            alertants_id: 1,
+            municipis_id: 1,
             duracion: null
       },
       incidencies: [],
@@ -86,6 +92,7 @@ export default {
         .finally(() => (this.loading = false));
     },
     createIncidencia() {
+        console.log("submitting incidencia");
       let me = this;
       axios
         .post("/incidencies", me.incidencia)
@@ -106,10 +113,10 @@ export default {
       //let input = document.createElement("");
     },
     getMunicipis() {},
-    getTipusAlertant() {},
+    getTipusAlertant() {}
   },
   created() {
-    this.selectIncidencies();
+    //this.selectIncidencies();
   },
   mounted() {
     console.log("Component mounted.");

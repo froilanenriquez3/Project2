@@ -9,6 +9,8 @@ use App\Http\Controllers\IncidenciesController;
 use App\Http\Controllers\TipusRecursosController;
 use App\Http\Controllers\TipusAlertantsController;
 
+use App\Http\Controllers\Api\ApiIncidenciesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +48,8 @@ Route::middleware(['auth'])->group(function () {
         return $view;
     });
 
+});
+
+Route::prefix('api')->group(function(){
+    Route::apiResource('incidencies', ApiIncidenciesController::class);
 });
