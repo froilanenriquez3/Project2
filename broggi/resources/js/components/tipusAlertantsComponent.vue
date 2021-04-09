@@ -12,7 +12,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="tipo in tipus_alertants" :key="tipo.id">
+          <tr v-for="tipo in paginator(tipus_alertants)" :key="tipo.id">
             <th scope="row">{{ tipo.id }}</th>
             <td>{{ tipo.tipus }}</td>
             <td>
@@ -37,6 +37,12 @@
           </tr>
         </tbody>
       </table>
+      <b-pagination
+                     v-model="currentPage"
+                    :total-rows="totalRows"
+                    :per-page="perPage"
+                    aria-controls="my-table"
+            ></b-pagination>
     </div>
 
     <!-- Si se selecciona la opción añadir, se muestra el formulario -->
@@ -136,6 +142,9 @@ export default {
   data() {
     return {
       action: "",
+       perPage: 5,
+        currentPage: 1,
+        totalRows: '',
       tipus_alertants: [],
       insert: false,
       tipo: {
@@ -159,7 +168,7 @@ export default {
         .get("/tipusalertants")
         .then((response) => {
           me.tipus_alertants = response.data;
-          console.log(me.tipus_alertants);
+          me.totalRows= me.tipus_alertants.length;
         })
         .catch((error) => {
           console.log(error);
@@ -240,6 +249,15 @@ export default {
         this.tipo = tipo;
       }
     },
+    paginator(recursos) {
+        //  Devuelve parte del array que va a usar esa página concreta.
+      const beginning = (this.currentPage - 1) * this.perPage;
+      const end =
+       beginning + this.perPage > recursos.length
+          ? recursos.length
+          : beginning  + this.perPage;
+      return recursos.slice(beginning , end );
+    }
   },
   created() {
     this.selectTipus();
