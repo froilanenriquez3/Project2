@@ -13,10 +13,11 @@ a.navbarLinks:focus{
 }
 
 .logo:hover{
-    background-color: white;
+    background-color: white!important;
 }
 
 .logout:hover{
-    background-color: grey;
-
+    background-color: white;
+    color:rgba(0, 0, 0, 0.5)!important;
+    font-style: bold;
 }
