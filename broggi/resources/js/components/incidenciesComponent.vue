@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <div class="form-group row">
+
+        <!-- Tag incidencias -->
+        <div v-show="section == 'Incident' || section == 'Tot'">
+        <div class="form-group row">
       <label class="col-2" for="">Tipus Incidencia</label>
       <select class="col-10" name="" v-model="incidencia.tipus_incidencies_id">
         <option value=""></option>
@@ -51,15 +54,24 @@
       <label class="col-2" for="">Nom Metge</label>
       <input class="col-10" type="tel" name="" v-model="incidencia.nom_metge" />
     </div>
+    </div>
 
-    <alertant-form></alertant-form>
+    <!-- Tag Alertante -->
+    <alertant-form v-show="section == 'Alertant' || section == 'Tot'"></alertant-form>
 
+    <!-- Tag Afectado -->
     <!-- add fa plus icon -->
+    <div v-show="section == 'Afectats' || section == 'Tot'">
     <button class="btn btn-primary" @click="addAfectatInput()">
       Añadir afectat
     </button>
-
     <afectat-form></afectat-form>
+    </div>
+
+    <!-- Tag Recursos -->
+    <map-component v-show="section == 'Recursos' || section == 'Tot'"></map-component>
+
+
 
     <button class="btn btn-primary" @click="createIncidencia()">
       Afegir incidencia
@@ -70,7 +82,16 @@
 <script>
 import alertantFormComponent from "./alertantFormComponent.vue";
 import afectatFormComponent from "./afectatFormComponent.vue";
+import mapComponent from './mapComponent.vue';
 export default {
+  components: { mapComponent },
+    props: {
+        //Sección que se tiene que mostrar
+        section: {
+            type: String,
+            required: true
+        }
+    },
   data() {
     return {
       tipusAlertants: [],
