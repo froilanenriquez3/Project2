@@ -1,5 +1,6 @@
 #videoDiv{
     height: 50vh;
+    width: 30vw;
     border: solid rgb(0, 172, 194) 3px;
 }
 

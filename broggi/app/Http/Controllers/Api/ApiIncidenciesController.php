@@ -34,7 +34,6 @@ class ApiIncidenciesController extends Controller
     {
         $incidencia = new Incidencies();
 
-        $incidencia->num_incident = $request->input('numIncident');
         $incidencia->data = $request->input('data');
         $incidencia->hora = $request->input('hora');
         $incidencia->telefon_alertant = $request->input('telefon_alertant');

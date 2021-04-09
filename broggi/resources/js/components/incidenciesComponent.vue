@@ -13,9 +13,9 @@
       <label class="col-2" for="">Adreça Complement</label>
       <input class="col-10" type="tel" name="" v-model="incidencia.adreca_complement"/>
     </div>
-    <div>
-      <label for="">Municipi</label>
-      <select name="" id="" v-model="incidencia.municipis_id">
+    <div class="form-group row">
+      <label class="col-2" for="">Municipi</label>
+      <select class="col-10" name="" id="" v-model="incidencia.municipis_id">
         <option value=""></option>
       </select>
     </div>
@@ -38,14 +38,14 @@
       <input class="col-10" type="tel" name="" v-model="incidencia.nom_metge"/>
     </div>
 
-    <alertant-form></alertant-form>
+    <!-- <alertant-form></alertant-form> -->
 
     <!-- add fa plus icon -->
     <button class="btn btn-primary" @click="addAfectatInput()">
       Añadir afectat
     </button>
 
-    <afectat-form></afectat-form>
+    <!-- <afectat-form></afectat-form> -->
 
     <button class="btn btn-primary" @click="createIncidencia()">Afegir incidencia</button>
 
@@ -61,7 +61,6 @@ export default {
       afectatFormComponent,
       alertantFormComponent,
       incidencia: {
-            numIncident: 1,
             data: null,
             hora: null,
             telefon_alertant: null,
@@ -97,6 +96,7 @@ export default {
       axios
         .post("/incidencies", me.incidencia)
         .then(function (response) {
+            alert("Incidencia inserted correctly!");
           console.log(response);
           me.selectIncidencies();
           //me.action=""
@@ -113,7 +113,22 @@ export default {
       //let input = document.createElement("");
     },
     getMunicipis() {},
-    getTipusAlertant() {}
+    getTipusAlertant() {},
+    clearInput(){
+        this.incidencia = {
+            data: null,
+            hora: null,
+            telefon_alertant: null,
+            adreca: null,
+            adreca_complement: null,
+            descripcio: null,
+            nom_metge: null,
+            tipus_incidencies_id: null,
+            alertants_id: null,
+            municipis_id: null,
+            duracion: null
+      };
+    }
   },
   created() {
     //this.selectIncidencies();

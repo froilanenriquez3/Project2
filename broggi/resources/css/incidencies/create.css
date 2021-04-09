@@ -14,11 +14,20 @@
     width: 90%;
     padding: 20px;
     height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
 }
+
 
 #divForm > div {
     padding: 10px;
 }
+
+#helpBoxDiv{
+    height: 50vh;
+    width: 30vw;
+}
+
 
 #formButtons {
     position: relative;
