@@ -2,7 +2,7 @@
   <div class="container">
     <div id="alertantsDiv">
       <div>
-        <h5>Alertant 1</h5>
+        <h5>Alertant</h5>
 
         <div class="form-group row">
           <label class="col-2" for="">Tipus d'alertant</label>
