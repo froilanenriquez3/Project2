@@ -1,17 +1,24 @@
 <template>
   <div class="container">
-    <label class="" for="">Tipus Incidencia</label>
-    <select class="" name="" v-model="incidencia.tipus_incidencies_id">
+    <div class="form-group row">
+      <label class="col-2" for="">Tipus Incidencia</label>
+      <select class="col-10" name="" v-model="incidencia.tipus_incidencies_id">
         <option value=""></option>
-    </select>
+      </select>
+    </div>
 
     <div class="form-group row">
       <label class="col-2" for="">Adreça</label>
-      <input class="col-10" type="tel" name="" v-model="incidencia.adreca"/>
+      <input class="col-10" type="tel" name="" v-model="incidencia.adreca" />
     </div>
     <div class="form-group row">
       <label class="col-2" for="">Adreça Complement</label>
-      <input class="col-10" type="tel" name="" v-model="incidencia.adreca_complement"/>
+      <input
+        class="col-10"
+        type="tel"
+        name=""
+        v-model="incidencia.adreca_complement"
+      />
     </div>
     <div class="form-group row">
       <label class="col-2" for="">Municipi</label>
@@ -22,20 +29,21 @@
 
     <div class="form-group row">
       <label class="col-2" for="">Hora</label>
-      <input class="col-2" type="number" name="" v-model="incidencia.hora"/>
+      <input class="col-2" type="number" name="" v-model="incidencia.hora" />
 
       <label class="col-2" for="">Data</label>
-      <input class="col-2" type="date" name="" v-model="incidencia.data"/>
+      <input class="col-2" type="date" name="" v-model="incidencia.data" />
     </div>
 
     <div class="form-group row">
       <label class="col-2" for="">Descripcio</label>
-      <textarea class="col-10" type="" name="" v-model="incidencia.descripcio"> </textarea>
+      <textarea class="col-10" type="" name="" v-model="incidencia.descripcio">
+      </textarea>
     </div>
 
     <div class="form-group row">
       <label class="col-2" for="">Nom Metge</label>
-      <input class="col-10" type="tel" name="" v-model="incidencia.nom_metge"/>
+      <input class="col-10" type="tel" name="" v-model="incidencia.nom_metge" />
     </div>
 
     <!-- <alertant-form></alertant-form> -->
@@ -47,8 +55,9 @@
 
     <!-- <afectat-form></afectat-form> -->
 
-    <button class="btn btn-primary" @click="createIncidencia()">Afegir incidencia</button>
-
+    <button class="btn btn-primary" @click="createIncidencia()">
+      Afegir incidencia
+    </button>
   </div>
 </template>
 
@@ -61,17 +70,17 @@ export default {
       afectatFormComponent,
       alertantFormComponent,
       incidencia: {
-            data: null,
-            hora: null,
-            telefon_alertant: null,
-            adreca: null,
-            adreca_complement: null,
-            descripcio: null,
-            nom_metge: null,
-            tipus_incidencies_id: 1,
-            alertants_id: 1,
-            municipis_id: 1,
-            duracion: null
+        data: null,
+        hora: null,
+        telefon_alertant: null,
+        adreca: null,
+        adreca_complement: null,
+        descripcio: null,
+        nom_metge: null,
+        tipus_incidencies_id: 1,
+        alertants_id: 1,
+        municipis_id: 1,
+        duracion: null,
       },
       incidencies: [],
     };
@@ -91,13 +100,15 @@ export default {
         .finally(() => (this.loading = false));
     },
     createIncidencia() {
-        console.log("submitting incidencia");
+      console.log("submitting incidencia");
       let me = this;
       axios
         .post("/incidencies", me.incidencia)
         .then(function (response) {
-            alert("Incidencia inserted correctly!");
+          alert("Incidencia inserted correctly!");
+
           console.log(response);
+          me.clearInput();
           me.selectIncidencies();
           //me.action=""
         })
@@ -112,23 +123,35 @@ export default {
       //add limit for num alertants
       //let input = document.createElement("");
     },
-    getMunicipis() {},
+    getMunicipis() {
+        let me = this;
+      axios
+        .get("/municipis")
+        .then((response) => {
+          console.log(response.data);
+          me.incidencies = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => (this.loading = false));
+    },
     getTipusAlertant() {},
-    clearInput(){
-        this.incidencia = {
-            data: null,
-            hora: null,
-            telefon_alertant: null,
-            adreca: null,
-            adreca_complement: null,
-            descripcio: null,
-            nom_metge: null,
-            tipus_incidencies_id: null,
-            alertants_id: null,
-            municipis_id: null,
-            duracion: null
+    clearInput() {
+      this.incidencia = {
+        data: null,
+        hora: null,
+        telefon_alertant: null,
+        adreca: null,
+        adreca_complement: null,
+        descripcio: null,
+        nom_metge: null,
+        tipus_incidencies_id: null,
+        alertants_id: null,
+        municipis_id: null,
+        duracion: null,
       };
-    }
+    },
   },
   created() {
     //this.selectIncidencies();
