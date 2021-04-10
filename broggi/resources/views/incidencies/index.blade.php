@@ -1,4 +1,4 @@
-@extends('templates.index')
+@extends('templates.components')
 @section('title','Incidencies')
 
 @section('links')
@@ -22,7 +22,7 @@
 @endsection
 
 @section('table')
-<mapa-incidencies></mapa-incidencies>
+<container-incidencies></container-incidencies>
 
 {{-- Table
     Campos para mostrar (erase me):

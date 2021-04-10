@@ -27,6 +27,7 @@
         data() {
         return {
             recursos: [ 'Recursos' , 'Tipus de Recursos'],
+            incidencies: [ 'Incident', 'Alertant', 'Afectats', 'Recursos', 'Tot'],
             selectedList: [],
             selectedSection: ''
         }
@@ -40,7 +41,9 @@
         // Por defecto se mostrará primero la primera opción
                     this.selectedSection= this.selectedList[0]
                     break;
-
+                case 'incidencies':
+                    this.selectedList= this.incidencies;
+                    this.selectedSection= this.selectedList[0]
                 default:
                     break;
             }
