@@ -5,10 +5,9 @@
         <div v-show="section == 'Incident' || section == 'Tot'">
         <div class="form-group row">
       <label class="col-2" for="">Tipus Incidencia</label>
-      <select class="col-10" name="" v-model="incidencia.tipus_incidencies_id">
-        <option value=""></option>
-        <option v-for="(tipo, index) in tipusIncidencies" :key="index" value="">
-          {{ tipo.nom }}
+      <select class="col-10" name="tipus_incidencia" v-model="incidencia.tipus_incidencies_id">
+        <option v-for="tipo in tipusIncidencies" :key="tipo.id" v-bind:value="tipo.id">
+          {{ tipo.tipus }}
         </option>
       </select>
     </div>
@@ -30,7 +29,7 @@
       <label class="col-2" for="">Municipi</label>
       <select class="col-10" name="" id="" v-model="incidencia.municipis_id">
         <option value=""></option>
-        <option v-for="(municipi, index) in municipis" :key="index" value="">
+        <option v-for="(municipi, index) in municipis" :key="index" v-bind:value="municipi.id">
           {{ municipi.nom }}
         </option>
       </select>
@@ -57,7 +56,7 @@
     </div>
 
     <!-- Tag Alertante -->
-    <alertant-form v-show="section == 'Alertant' || section == 'Tot'"></alertant-form>
+    <alertant-form @onSectionChanges="updateAlertant($event)" :section="section" v-show="section == 'Alertant' || section == 'Tot'"></alertant-form>
 
     <!-- Tag Afectado -->
     <!-- add fa plus icon -->
@@ -96,6 +95,7 @@ export default {
     return {
       tipusAlertants: [],
       tipusIncidencies: [],
+      alertantIncidencia: {},
       municipis: [],
       afectatFormComponent,
       alertantFormComponent,
@@ -158,7 +158,6 @@ export default {
       axios
         .get("/municipis")
         .then((response) => {
-          console.log(response.data);
           me.municipis = response.data;
         })
         .catch((error) => {
@@ -166,26 +165,25 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
-    getTipusAlertant() {
-      let me = this;
-      axios
-        .get("/tipusalertants")
-        .then((response) => {
-          console.log(response.data);
-          me.tipusAlertants = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => (this.loading = false));
-    },
+    // getTipusAlertant() {
+    //   let me = this;
+    //   axios
+    //     .get("/tipusalertants")
+    //     .then((response) => {
+    //       me.tipusAlertants = response.data;
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     })
+    //     .finally(() => (this.loading = false));
+    // },
     getTipusIncidencies(){
         let me = this;
       axios
         .get("/tipusincidencies")
         .then((response) => {
           console.log(response.data);
-          me.tipusAlertants = response.data;
+          me.tipusIncidencies = response.data;
         })
         .catch((error) => {
           console.log(error);
@@ -207,10 +205,14 @@ export default {
         duracion: null,
       };
     },
+    updateAlertant(alertant){
+        this.alertantIncidencia= alertant;
+    }
   },
   created() {
     //this.selectIncidencies();
     this.getMunicipis();
+    this.getTipusIncidencies();
   },
   mounted() {
     console.log("Component mounted.");

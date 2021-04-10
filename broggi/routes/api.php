@@ -3,15 +3,16 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\RolsController;
+use App\Http\Controllers\Api\AnswerController;
 use App\Http\Controllers\Api\UsuarisController;
+use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\RecursosController;
+// use App\Http\Controllers\Api\IncidenciesController;
 use App\Http\Controllers\Api\AlertantsController;
 use App\Http\Controllers\Api\MunicipisController;
-// use App\Http\Controllers\Api\IncidenciesController;
 use App\Http\Controllers\Api\TipusRecursController;
 use App\Http\Controllers\Api\TipusAlertantsController;
-use App\Http\Controllers\Api\QuestionController;
-use App\Http\Controllers\Api\AnswerController;
+use App\Http\Controllers\Api\TipusIncidenciesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,4 @@ Route::apiResource('municipis', MunicipisController::class);
 Route::apiResource('rols', RolsController::class);
 Route::apiResource('questions', QuestionController::class);
 Route::apiResource('answers', AnswerController::class);
+Route::apiResource('tipusincidencies', TipusIncidenciesController::class);
