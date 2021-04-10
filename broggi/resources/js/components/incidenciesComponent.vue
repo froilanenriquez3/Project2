@@ -56,15 +56,20 @@
     </div>
 
     <!-- Tag Alertante -->
-    <alertant-form @onSectionChanges="updateAlertant($event)" :section="section" v-show="section == 'Alertant' || section == 'Tot'"></alertant-form>
+    <alertant-form :municipis="municipis" @onSectionChanges="updateAlertant($event)" :section="section" v-show="section == 'Alertant' || section == 'Tot'"></alertant-form>
 
     <!-- Tag Afectado -->
     <!-- add fa plus icon -->
     <div v-show="section == 'Afectats' || section == 'Tot'">
-    <button class="btn btn-primary" @click="addAfectatInput()">
-      Añadir afectat
-    </button>
-    <afectat-form></afectat-form>
+        <div class="form-group row">
+      <label class="col-2" for="numAfectats">Nombre d'afectats</label>
+      <input class="col-10" type="number" name="numAfectats" v-model="numAfectats" @change="adjustAfectatsArray"/>
+    </div>
+
+    <div v-if="numAfectats < 4">
+            <afectat-form v-for="(afectat, index) in afectats" :key="index"></afectat-form>
+    </div>
+
     </div>
 
     <!-- Tag Recursos -->
@@ -96,6 +101,8 @@ export default {
       tipusAlertants: [],
       tipusIncidencies: [],
       alertantIncidencia: {},
+      numAfectats: '',
+      afectats: [],
       municipis: [],
       afectatFormComponent,
       alertantFormComponent,
@@ -149,6 +156,22 @@ export default {
           // me.errorMessage= error.response.data.error;
         });
     },
+    adjustAfectatsArray(){
+        let afectat = {
+            id: '',
+            telefon: '',
+            cip: '',
+            nom: '',
+            cognoms: '',
+            edat: '',
+            te_cip: '',
+            sexes_id: ''
+        }
+
+        for(let i= 0; i< this.numAfectats; i++){
+            this.afectats.push(afectat)
+        }
+    },
     addAfectatInput() {
       //add limit for num alertants
       //let input = document.createElement("");
@@ -165,18 +188,6 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
-    // getTipusAlertant() {
-    //   let me = this;
-    //   axios
-    //     .get("/tipusalertants")
-    //     .then((response) => {
-    //       me.tipusAlertants = response.data;
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     })
-    //     .finally(() => (this.loading = false));
-    // },
     getTipusIncidencies(){
         let me = this;
       axios

@@ -55,6 +55,11 @@ export default {
         section: {
             type: String,
             required: true
+        },
+        // Vienen del padre para ahorrarnos una llamada a la api.
+        municipis: {
+            type: Array,
+            required: true
         }
     },
     data() {
@@ -62,7 +67,6 @@ export default {
       action: "",
       //alertants: [],
       tipus_alertants: [],
-      municipis: [],
       alertant: {
         id: "",
         telefon: "",
@@ -88,19 +92,7 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
-    selectMunicipis(){
-         let me = this;
-      axios
-        .get("/municipis")
-        .then((response) => {
-          me.municipis = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => (this.loading = false));
-    },
-    guardarAlertant(){
+        guardarAlertant(){
       let me = this;
            axios
         .post("/alertants", me.alertant)
@@ -116,7 +108,6 @@ export default {
         });
   }},
   created(){
-      this.selectMunicipis();
       this.selectTipus();
   },
   mounted() {
