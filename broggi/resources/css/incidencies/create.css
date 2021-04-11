@@ -7,15 +7,22 @@
     padding-top: 1%;
 }
 
-#divForm {
-    position: relative;
+/* .tableSection{
     border: solid rgb(0, 172, 194) 3px;
     border-radius: 5%;
-    width: 90%;
-    padding: 20px;
-    height: fit-content;
-    display: flex;
-    flex-wrap: wrap;
+    width: 70%;
+} */
+
+#divForm {
+    /* position: relative; */
+    margin-top: 2%;
+    border: solid rgb(0, 172, 194) 3px;
+    border-radius: 5%;
+    width: 70%;
+    /* padding: 20px; */
+    /* height: fit-content; */
+    /* display: flex; */
+    /* flex-wrap: wrap; */
 }
 
 
@@ -87,14 +94,4 @@
 .accidentImage {
     height: 12%;
     width: 12%;
-}
-
-#afectatsDiv {
-
-
-}
-
-#alertantsDiv{
-
-
 }
