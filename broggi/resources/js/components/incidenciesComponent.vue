@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" >
 
         <!-- Tag incidencias -->
         <div v-show="section == 'Incident' || section == 'Tot'">
