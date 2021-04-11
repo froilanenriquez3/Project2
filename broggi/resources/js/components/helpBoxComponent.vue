@@ -10,18 +10,18 @@
               <ul>
                 <li v-for="(question, index) in questions" :key="index">
                   <p>{{ question.questionText }}</p>
+                  <button class="btn btn-primary" id="playAudio" @click="playAudio(question.id)"><i class="fas fa-volume-up"></i></button>
+                  <audio :src=" '../audio/' + question.id  + '.m4a' " :id=" 'audio' + question.id " ></audio>
                   <button
                     v-show="!qShowA[index]"
                     id="showButton"
-                    @click="showQuestionAnswers(index)"
-                  >
+                    @click="showQuestionAnswers(index)">
                     See answers
                   </button>
                   <button
                     v-show="qShowA[index]"
                     id="hideButton"
-                    @click="hideQuestionAnswers(index)"
-                  >
+                    @click="hideQuestionAnswers(index)">
                     Hide answers
                   </button>
 
@@ -97,6 +97,9 @@ export default {
         me.qShowA.push(false);
       }
     },
+    playAudio(id){
+        document.querySelector('#audio' + id).play();
+    }
 
   },
 
