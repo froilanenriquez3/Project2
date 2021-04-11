@@ -1584,6 +1584,15 @@ VALUES("One hour ago", 2);
 INSERT INTO Answer (answerText, question_id)
 VALUES("I don't know", 2);
 
+INSERT INTO Question (questionText, incidencies_id)
+VALUES("What is your emergency?", 1);
+INSERT INTO Answer (answerText, question_id)
+VALUES("My house is on fire", 3);
+INSERT INTO Answer (answerText, question_id)
+VALUES("My friend is having a heart attack", 3);
+INSERT INTO Answer (answerText, question_id)
+VALUES("I have been in a car accident", 3);
+
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('12345', '1', '1', '41.3879', '2.16992');
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('54321', '0', '2', '41.899', '2.1988');
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('66555', '0', '3', '42.000', '1.8');
