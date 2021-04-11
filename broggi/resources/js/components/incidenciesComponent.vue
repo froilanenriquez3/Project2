@@ -27,7 +27,7 @@
     </div>
     <div class="form-group row">
       <label class="col-2" for="">Municipi</label>
-      <select class="col-10" name="" id="" v-model="indicencia.municipis_id">
+      <select class="col-10" name="" id="" v-model="municipi">
         <option value=""></option>
         <option v-for="(municipi, index) in municipis" :key="index" v-bind:value="municipi">
           {{ municipi.nom }}
@@ -63,7 +63,7 @@
     <div v-show="section == 'Afectats' || section == 'Tot'">
         <div class="form-group row">
       <label class="col-2" for="numAfectats">Nombre d'afectats</label>
-      <input class="col-10" type="number" name="numAfectats" v-model="numAfectats" @change="adjustAfectatsArray"/>
+      <input class="col-10" type="number" name="numAfectats" v-model="numAfectats" @change="adjustAfectatsArray()"/>
     </div>
 
     <div v-if="numAfectats < 4">
@@ -74,6 +74,8 @@
 
     <!-- Tag Recursos -->
     <map-component :direccioCompleta="direccio" v-show="section == 'Recursos' || section == 'Tot'"></map-component>
+
+
 
     <button class="btn btn-primary" @click="createIncidencia()">
       Afegir incidencia
