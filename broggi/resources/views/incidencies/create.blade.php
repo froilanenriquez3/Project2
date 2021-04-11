@@ -24,7 +24,7 @@
 
 <video-component></video-component>
 <help-box></help-box>
-{{-- <incidencies-component></incidencies-component> --}}
+<incidencies-component></incidencies-component>
 
 {{--
 <div class="form-group row">
