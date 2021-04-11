@@ -115,6 +115,22 @@ export default {
       this.timestamp = videoElem.duration;
       videoElem.addEventListener("timeupdate", this.pauseAtTimestamp);
     },
+    highlightSection() {
+      let videoElem = document.querySelector(this.videoId);
+      if (videoElem.currentTime < this.section2time) {
+        document.querySelector("#section1").style.backgroundColor = "red";
+        document.querySelector("#section2").style.backgroundColor = "#11ADC4";
+        document.querySelector("#section3").style.backgroundColor = "#11ADC4";
+      } else if (videoElem.currentTime < this.section3time) {
+        document.querySelector("#section2").style.backgroundColor = "red";
+        document.querySelector("#section1").style.backgroundColor = "#11ADC4";
+        document.querySelector("#section3").style.backgroundColor = "#11ADC4";
+      } else {
+        document.querySelector("#section3").style.backgroundColor = "red";
+        document.querySelector("#section1").style.backgroundColor = "#11ADC4";
+        document.querySelector("#section2").style.backgroundColor = "#11ADC4";
+      }
+    },
   },
   created() {},
   mounted() {
@@ -138,6 +154,8 @@ export default {
     document
       .querySelector("#section3")
       .addEventListener("click", this.playSection3);
+
+    document.querySelector("#myVideo").addEventListener("timeupdate", this.highlightSection);
 
     //setInterval(this.displayProgress, 1000);
   },
