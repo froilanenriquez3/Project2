@@ -12,13 +12,13 @@
                   <p>{{ question.questionText }}</p>
                   <button class="btn btn-primary" id="playAudio" @click="playAudio(question.id)"><i class="fas fa-volume-up"></i></button>
                   <audio :src=" '../audio/' + question.id  + '.m4a' " :id=" 'audio' + question.id " ></audio>
-                  <button
+                  <button class="btn btn-primary"
                     v-show="!qShowA[index]"
                     id="showButton"
                     @click="showQuestionAnswers(index)">
                     See answers
                   </button>
-                  <button
+                  <button class="btn btn-primary"
                     v-show="qShowA[index]"
                     id="hideButton"
                     @click="hideQuestionAnswers(index)">
