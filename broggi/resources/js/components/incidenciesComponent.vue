@@ -27,9 +27,9 @@
     </div>
     <div class="form-group row">
       <label class="col-2" for="">Municipi</label>
-      <select class="col-10" name="" id="" v-model="incidencia.municipis_id">
+      <select class="col-10" name="" id="" v-model="indicencia.municipis_id">
         <option value=""></option>
-        <option v-for="(municipi, index) in municipis" :key="index" v-bind:value="municipi.id">
+        <option v-for="(municipi, index) in municipis" :key="index" v-bind:value="municipi">
           {{ municipi.nom }}
         </option>
       </select>
@@ -73,14 +73,17 @@
     </div>
 
     <!-- Tag Recursos -->
-    <map-component v-show="section == 'Recursos' || section == 'Tot'"></map-component>
-
-
+    <map-component :direccioCompleta="direccio" v-show="section == 'Recursos' || section == 'Tot'"></map-component>
 
     <button class="btn btn-primary" @click="createIncidencia()">
       Afegir incidencia
     </button>
+
   </div>
+
+
+
+
 </template>
 
 <script>
@@ -104,6 +107,7 @@ export default {
       numAfectats: '',
       afectats: [],
       municipis: [],
+      municipi: {},
       afectatFormComponent,
       alertantFormComponent,
       incidencia: {
@@ -157,6 +161,8 @@ export default {
         });
     },
     adjustAfectatsArray(){
+        // reseteamos afectats
+        this.afectats = [];
         let afectat = {
             id: '',
             telefon: '',
@@ -171,10 +177,6 @@ export default {
         for(let i= 0; i< this.numAfectats; i++){
             this.afectats.push(afectat)
         }
-    },
-    addAfectatInput() {
-      //add limit for num alertants
-      //let input = document.createElement("");
     },
     getMunicipis() {
       let me = this;
@@ -228,5 +230,10 @@ export default {
   mounted() {
     console.log("Component mounted.");
   },
+  computed:{
+      direccio: function(){
+          return `${this.incidencia.adreca}, ${this.municipi.nom}`;
+      }
+  }
 };
 </script>

@@ -15,6 +15,12 @@ import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 export default {
+    props: {
+        direccioCompleta: {
+            type: String,
+            required: true
+        }
+    },
     data() {
         return {
             key:
@@ -44,6 +50,10 @@ export default {
         colorRecurs(recurs) {
             this.color = recurs.actiu ? "#e1157a" : "#11adc4";
         },
+        // setInputValue(){
+        //     let input= document.getElementsByClassName("mapboxgl-ctrl-geocoder--input")[0];
+        //     input.value= direccioCompleta
+        // },
         // Para asignar un recurso a la incidencia
         activarRecurs() {
             this.recurs.actiu = true;
@@ -155,7 +165,7 @@ export default {
                     this.button = button;
                 });
             });
-        }
+        },
     },
     created() {
         this.selectRecursos();
@@ -179,11 +189,23 @@ export default {
                 element: imageAccident,
             },
             mapboxgl: mapboxgl
+
         });
 
         this.map.addControl(geocoder);
         this.map.addControl(new mapboxgl.NavigationControl());
 
-    }
+    },
+
+    // watch: {
+    //     direccioCompleta: {
+    //         deep:true,
+    //         function(val){
+    //         this.map.geocoder.setInput(val);
+    //     }
+
+    //     }
+
+    // }
 };
 </script>
