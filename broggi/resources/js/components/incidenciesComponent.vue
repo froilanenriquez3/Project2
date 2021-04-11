@@ -27,7 +27,7 @@
     </div>
     <div class="form-group row">
       <label class="col-2" for="">Municipi</label>
-      <select class="col-10" name="" id="" v-model="indicencia.municipis_id">
+      <select class="col-10" name="" id="" v-model="incidencia.municipis_id">
         <option value=""></option>
         <option v-for="(municipi, index) in municipis" :key="index" v-bind:value="municipi">
           {{ municipi.nom }}

@@ -1,7 +1,6 @@
 <template>
   <div id="helpBoxDiv">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
+
         <div class="card">
           <div class="card-header">English Helpbox</div>
 
@@ -11,7 +10,7 @@
                 <li v-for="(question, index) in questions" :key="index">
                   <p>{{ question.questionText }}</p>
                   <button class="btn btn-primary" id="playAudio" @click="playAudio(question.id)"><i class="fas fa-volume-up"></i></button>
-                  <audio :src=" '../audio/' + question.id  + '.m4a' " :id=" 'audio' + question.id " ></audio>
+                  <audio :src=" '../public/audio/' + question.id  + '.m4a' " :id=" 'audio' + question.id " ></audio>
                   <button class="btn btn-primary"
                     v-show="!qShowA[index]"
                     id="showButton"
@@ -35,8 +34,7 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
+
   </div>
 </template>
 
