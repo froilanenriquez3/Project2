@@ -1,20 +1,26 @@
 <template>
-  <div class="container" id="videoDiv">
-    <video muted id="myVideo" width="320" height="240">
-      <source
-        src="http://localhost:8080/Project2/broggi/public/video/videosBroggi.mp4"
-        type="video/mp4"
-      />
-      Your browser does not support the video tag.
-    </video>
-    <p id="videoProgress"></p>
-    <button v-if="action == 'play'" class="btn btn-primary" id="playButton">
-      <i class="fas fa-play"></i> Play
-    </button>
+  <div id="videoDiv">
+    <div class="card">
+      <div class="card-header">Videos Broggi</div>
 
-    <button class="btn btn-primary" id="section1">Section 1</button>
-    <button class="btn btn-primary" id="section2">Section 2</button>
-    <button class="btn btn-primary" id="section3">Section 3</button>
+      <div class="card-body">
+        <video muted id="myVideo" width="320" height="240">
+          <source
+            src="http://localhost:8080/Project2/broggi/public/video/videosBroggi.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+        <p id="videoProgress"></p>
+        <button v-if="action == 'play'" class="btn btn-primary" id="playButton">
+          <i class="fas fa-play"></i> Play
+        </button>
+
+        <button class="btn btn-primary" id="section1">Section 1</button>
+        <button class="btn btn-primary" id="section2">Section 2</button>
+        <button class="btn btn-primary" id="section3">Section 3</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -115,6 +121,22 @@ export default {
       this.timestamp = videoElem.duration;
       videoElem.addEventListener("timeupdate", this.pauseAtTimestamp);
     },
+    highlightSection() {
+      let videoElem = document.querySelector(this.videoId);
+      if (videoElem.currentTime < this.section2time) {
+        document.querySelector("#section1").style.backgroundColor = "red";
+        document.querySelector("#section2").style.backgroundColor = "#11ADC4";
+        document.querySelector("#section3").style.backgroundColor = "#11ADC4";
+      } else if (videoElem.currentTime < this.section3time) {
+        document.querySelector("#section2").style.backgroundColor = "red";
+        document.querySelector("#section1").style.backgroundColor = "#11ADC4";
+        document.querySelector("#section3").style.backgroundColor = "#11ADC4";
+      } else {
+        document.querySelector("#section3").style.backgroundColor = "red";
+        document.querySelector("#section1").style.backgroundColor = "#11ADC4";
+        document.querySelector("#section2").style.backgroundColor = "#11ADC4";
+      }
+    },
   },
   created() {},
   mounted() {
@@ -138,6 +160,10 @@ export default {
     document
       .querySelector("#section3")
       .addEventListener("click", this.playSection3);
+
+    document
+      .querySelector("#myVideo")
+      .addEventListener("timeupdate", this.highlightSection);
 
     //setInterval(this.displayProgress, 1000);
   },

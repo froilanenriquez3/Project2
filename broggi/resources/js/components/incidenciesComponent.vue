@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" >
 
         <!-- Tag incidencias -->
         <div v-show="section == 'Incident' || section == 'Tot'">
@@ -27,7 +27,11 @@
     </div>
     <div class="form-group row">
       <label class="col-2" for="">Municipi</label>
+<<<<<<< HEAD
       <select class="col-10" name="" id="" v-model="municipi">
+=======
+      <select class="col-10" name="" id="" v-model="incidencia.municipis_id">
+>>>>>>> ff5b5b92fe2ee9fb57e05ec9f4c28c1c22dffd66
         <option value=""></option>
         <option v-for="(municipi, index) in municipis" :key="index" v-bind:value="municipi">
           {{ municipi.nom }}

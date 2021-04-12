@@ -1,7 +1,6 @@
 <template>
   <div id="helpBoxDiv">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
+
         <div class="card">
           <div class="card-header">English Helpbox</div>
 
@@ -10,18 +9,18 @@
               <ul>
                 <li v-for="(question, index) in questions" :key="index">
                   <p>{{ question.questionText }}</p>
-                  <button
+                  <button class="btn btn-primary" id="playAudio" @click="playAudio(question.id)"><i class="fas fa-volume-up"></i></button>
+                  <audio :src=" '../public/audio/' + question.id  + '.m4a' " :id=" 'audio' + question.id " ></audio>
+                  <button class="btn btn-primary"
                     v-show="!qShowA[index]"
                     id="showButton"
-                    @click="showQuestionAnswers(index)"
-                  >
+                    @click="showQuestionAnswers(index)">
                     See answers
                   </button>
-                  <button
+                  <button class="btn btn-primary"
                     v-show="qShowA[index]"
                     id="hideButton"
-                    @click="hideQuestionAnswers(index)"
-                  >
+                    @click="hideQuestionAnswers(index)">
                     Hide answers
                   </button>
 
@@ -35,8 +34,7 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
+
   </div>
 </template>
 
@@ -97,6 +95,9 @@ export default {
         me.qShowA.push(false);
       }
     },
+    playAudio(id){
+        document.querySelector('#audio' + id).play();
+    }
 
   },
 
