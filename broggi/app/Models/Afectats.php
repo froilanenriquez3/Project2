@@ -28,5 +28,12 @@ class Afectats extends Model
         return $this->belongsToMany(Incidencies::class, 'incidencies_has_afectats', 'afectats_id', 'incidencies_id');
     }
 
+    public function incidencies_has_recursos()
+    {
+        return $this->belongsToMany(Recursos::class, 'incidencies_has_recursos', 'incidencies_id', 'recursos_id')
+        ->withPivot('hora_activacio', 'hora_mobilitzacio', 'hora_assistencia', 'hora_transport', 'hora_arribada_hospital', 'hora_transferencia', 'hora_finalitzacio', 'prioritat', 'desti');
+
+    }
+
 
 }
