@@ -42,6 +42,8 @@ class UsuarisController extends Controller
                         $route = view('homePages.recurs');
                         break;
                 }
+            } else {
+                $request->session()->put('error', 'Contrasenya incorrecta!');
             }
         }
         return $route;
