@@ -2,6 +2,10 @@
 
 @section('title','Incidencia Recursos Formulario')
 
+@section('links')
+<link rel="stylesheet" href="{{ asset('../resources/css/incidenciesRecursos/incidenciesRecursos.css?'.rand())}}">
+@endsection
+
 @section('navbar')
 {{-- Add if for admin navbar --}}
 @if(Auth::user()->rols_id == 1)
@@ -14,5 +18,5 @@
 @endsection
 
 @section('form')
-
+    <incidencies-recursos></incidencies-recursos>
 @endsection
