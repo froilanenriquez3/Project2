@@ -8,7 +8,7 @@
 
 <!--Incidencia actual-->
 <li class="nav-usuaris mr-2">
-    <a class="nav-link navbarLinks" href="#"><i class="fas fa-exclamation-triangle"></i> Incidencia actual </a>
+    <a class="nav-link navbarLinks" href="{{ url('/incidenciesrecursos')}}"><i class="fas fa-exclamation-triangle"></i> Incidencia actual </a>
 </li>
 <!--Ver historial-->
 <li class="nav-habituales mr-2">
