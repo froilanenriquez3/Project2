@@ -25,14 +25,6 @@
         </header>
 
 
-        <div id="divModoFormacion">
-            <p>Modo formacion</p>
-            <label class="switch" id="btnModoFormacion">
-                <input type="checkbox">
-                <span class="slider round"></span>
-            </label>
-        </div>
-
 
         <section id="formSection">
             <div id="divForm" class="container-fluid">
