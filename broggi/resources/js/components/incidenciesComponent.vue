@@ -27,11 +27,7 @@
     </div>
     <div class="form-group row">
       <label class="col-2" for="">Municipi</label>
-<<<<<<< HEAD
-      <select class="col-10" name="" id="" v-model="municipi">
-=======
       <select class="col-10" name="" id="" v-model="incidencia.municipis_id">
->>>>>>> ff5b5b92fe2ee9fb57e05ec9f4c28c1c22dffd66
         <option value=""></option>
         <option v-for="(municipi, index) in municipis" :key="index" v-bind:value="municipi">
           {{ municipi.nom }}
@@ -67,14 +63,25 @@
     <div v-show="section == 'Afectats' || section == 'Tot'">
         <div class="form-group row">
       <label class="col-2" for="numAfectats">Nombre d'afectats</label>
-      <input class="col-10" type="number" name="numAfectats" v-model="numAfectats" @change="adjustAfectatsArray()"/>
+      <input class="col-10" type="number" min="1" name="numAfectats" v-model="numAfectats" @change="adjustAfectatsArray()"/>
     </div>
 
     <div v-if="numAfectats < 4">
-            <afectat-form v-for="(afectat, index) in afectats" :key="index"></afectat-form>
+            <afectat-form @setAfectat="guardarAfectat" v-for="(afectat, index) in afectats" :position="index" :key="index"></afectat-form>
     </div>
 
+    <div v-else>
+        <div class="form-group row">
+      <label class="col-2" for="numDones">Número de dones afectades</label>
+      <input class="col-10" min="0" type="number" name="numDones" v-model="numDones"/>
     </div>
+    <div class="form-group row">
+      <label class="col-2" for="numDones">Número d'homes afectats</label>
+      <input class="col-10" min="0" type="number" name="numHomes" v-model="numDones"/>
+    </div>
+    </div>
+
+
 
     <!-- Tag Recursos -->
     <map-component :direccioCompleta="direccio" v-show="section == 'Recursos' || section == 'Tot'"></map-component>
@@ -88,7 +95,7 @@
   </div>
 
 
-
+  </div>
 
 </template>
 
@@ -113,6 +120,8 @@ export default {
       numAfectats: '',
       afectats: [],
       municipis: [],
+      numDones: '',
+      numHomes: '',
       municipi: {},
       afectatFormComponent,
       alertantFormComponent,
@@ -226,6 +235,9 @@ export default {
     },
     updateAlertant(alertant){
         this.alertantIncidencia= alertant;
+    },
+    guardarAfectat: function(afectat, position){
+        this.afectats[position]= afectat;
     }
   },
   created() {
