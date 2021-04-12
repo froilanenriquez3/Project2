@@ -27,12 +27,19 @@ main {
     height: 30vh;
     border: solid #2a9fd6 3px;
     margin: 3%;
-    border-radius: 5%;
+    border-radius: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    font-size: 25px;
+    text-decoration: none;
 }
+
+#menuSection > div, #menuSection > a:hover{
+    color: white;
+    background-color: #2a9fd6;
+}
+
 
 a{
     color: black;
