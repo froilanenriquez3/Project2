@@ -47,6 +47,7 @@ Vue.component('container-recursos', require('./components/ContainerRecursosMovil
 Vue.component('afectat-form', require('./components/afectatFormComponent.vue').default);
 Vue.component('container-incidencies', require('./components/ContainerIncidenciesComponent.vue').default);
 Vue.component('incidencies-recursos', require('./components/incidenciesRecursosComponent.vue').default);
+Vue.component('increc-table', require('./components/incidenciesRecursosTableComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
