@@ -1,6 +1,19 @@
 <template>
-  <div class="container" >
+<div class="biggerContainer">
 
+    <div id="divModoFormacion">
+
+                <button class="btn btn-primary" @click="openModalVideo()" v-bind:class="{ hidden: !formacio }">Veure video CPR</button>
+    <button class="btn btn-primary" @click="openModalHelp()" v-bind:class="{ hidden: !formacio }">Ajuda amb l'anglès</button>
+    <div class="formacionBox">
+    <p>Modo formacion</p>
+            <label class="switch" id="btnModoFormacion">
+                <input @click="toggleFormacio()" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            </div>
+        </div>
+  <div class="container" >
         <!-- Tag incidencias -->
         <div v-show="section == 'Incident' || section == 'Tot'">
         <div class="form-group row">
@@ -80,6 +93,7 @@
       <input class="col-10" min="0" type="number" name="numHomes" v-model="numDones"/>
     </div>
     </div>
+    </div>
 
 
 
@@ -87,24 +101,64 @@
     <map-component :direccioCompleta="direccio" v-show="section == 'Recursos' || section == 'Tot'"></map-component>
 
 
+    <!-- Modal Video -->
+        <div class="modal fade" id="modalVideo" tabindex="-1" role="dialog" aria-labelledby="modalVideolLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalVideolLabel">Vídeo CPR</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="modalText" class="modal-body">
+            <video-component></video-component>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalHelpbox" tabindex="-1" role="dialog" aria-labelledby="modalVideolLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalVideolLabel">Vídeo CPR</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="modalText" class="modal-body">
+            <help-box-component></help-box-component>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 
     <button class="btn btn-primary" @click="createIncidencia()">
       Afegir incidencia
     </button>
 
+
+
+
   </div>
-
-
-  </div>
-
+</div>
 </template>
 
 <script>
 import alertantFormComponent from "./alertantFormComponent.vue";
 import afectatFormComponent from "./afectatFormComponent.vue";
 import mapComponent from './mapComponent.vue';
+import HelpBoxComponent from './helpBoxComponent.vue';
 export default {
-  components: { mapComponent },
+  components: { mapComponent, HelpBoxComponent },
     props: {
         //Sección que se tiene que mostrar
         section: {
@@ -114,6 +168,7 @@ export default {
     },
   data() {
     return {
+    formacio: false,
       tipusAlertants: [],
       tipusIncidencies: [],
       alertantIncidencia: {},
@@ -193,6 +248,12 @@ export default {
             this.afectats.push(afectat)
         }
     },
+    openModalVideo(){
+        $('#modalVideo').modal('show');
+    },
+        openModalHelp(){
+        $('#modalHelpbox').modal('show');
+    },
     getMunicipis() {
       let me = this;
       axios
@@ -238,6 +299,9 @@ export default {
     },
     guardarAfectat: function(afectat, position){
         this.afectats[position]= afectat;
+    },
+    toggleFormacio(){
+        this.formacio = !this.formacio;
     }
   },
   created() {

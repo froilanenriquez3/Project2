@@ -1,10 +1,6 @@
-#videoDiv{
-    width: 60vw;
-    border: solid rgb(0, 172, 194) 3px;
-    padding: 5px;
-}
+
 #myVideo{
-    height: 30vh;
+    height: 40vh;
 }
 
 button {

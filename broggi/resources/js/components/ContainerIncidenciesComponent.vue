@@ -8,11 +8,6 @@
     <div id="divForm">
       <section class="tableSection">
         <incidencies-component :section="pageToDisplay"></incidencies-component>
-
-        <div id="modoFormacion">
-          <video-component></video-component>
-          <help-box></help-box>
-        </div>
       </section>
     </div>
   </div>
