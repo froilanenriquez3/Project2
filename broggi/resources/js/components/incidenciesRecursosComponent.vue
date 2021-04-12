@@ -4,32 +4,28 @@
            <div class="form-group row">
                <label class="col-2" for="">Hora Activacio</label>
                <input class="col-2" type="time">
-           </div>
 
-           <div class="form-group row">
                <label class="col-2" for="">Hora Mobilitzacio</label>
                <input class="col-2" type="time" >
+
            </div>
 
            <div class="form-group row">
-               <label class="col-2" for="">Hora Assistencia</label>
+                <label class="col-2" for="">Hora Assistencia</label>
+               <input class="col-2" type="time">
+
+                <label class="col-2" for="">Hora Transport</label>
                <input class="col-2" type="time">
            </div>
 
            <div class="form-group row">
-               <label class="col-2" for="">Hora Transport</label>
+                <label class="col-2" for="">Hora Arribada Hospital</label>
+               <input class="col-2" type="time">
+
+                <label class="col-2" for="">Hora Transferencia</label>
                <input class="col-2" type="time">
            </div>
 
-           <div class="form-group row">
-               <label class="col-2" for="">Hora Arribada Hospital</label>
-               <input class="col-2" type="time">
-           </div>
-
-           <div class="form-group row">
-               <label class="col-2" for="">Hora Transferencia</label>
-               <input class="col-2" type="time">
-           </div>
 
            <div class="form-group row">
                <label class="col-2" for="">Hora Finalitzacio</label>
@@ -38,7 +34,7 @@
 
            <div class="form-group row">
                <label class="col-2" for="">Desti</label>
-               <input class="col-10" type="text">
+               <input class="col-6" type="text">
            </div>
 
            <button class="btn btn-primary" id="submitForm" @click="submitForm()">Siguiente</button>
