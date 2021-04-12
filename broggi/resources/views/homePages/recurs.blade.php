@@ -9,14 +9,16 @@
 @endsection
 @section('content')
     <section id="menuSection">
-        <a href="{{ url('/incidenciesrecursos') }}">
+        <a href="{{ url('/incidenciesrecursos/create') }}">
             <div>
                 <p>Incidencia actual</p>
             </div>
         </a>
-        <div>
-            <p>Ver historial</p>
-        </div>
+        <a href="{{ url('/incidenciesrecursos') }}">
+            <div>
+                <p>Ver historial</p>
+            </div>
+        </a>
 
     </section>
 

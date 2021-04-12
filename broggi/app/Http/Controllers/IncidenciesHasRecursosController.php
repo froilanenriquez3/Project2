@@ -14,7 +14,7 @@ class IncidenciesHasRecursosController extends Controller
      */
     public function index()
     {
-        return view('incidenciesHasRecursos.create');
+        return view('incidenciesHasRecursos.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class IncidenciesHasRecursosController extends Controller
      */
     public function create()
     {
-        //
+        return view('incidenciesHasRecursos.create');
     }
 
     /**
