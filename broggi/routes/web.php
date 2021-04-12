@@ -10,7 +10,7 @@ use App\Http\Controllers\TipusRecursosController;
 use App\Http\Controllers\TipusAlertantsController;
 
 use App\Http\Controllers\Api\ApiIncidenciesController;
-
+use App\Http\Controllers\IncidenciesHasRecursosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/alertants', AlertantsController::class);
     Route::resource('/recursos', RecursosController::class);
     Route::resource('/usuaris', UsuarisController::class);
-
+    Route::resource('/incidenciesrecursos', IncidenciesHasRecursosController::class);
     Route::resource('/tipusalertants', TipusAlertantsController::class);
     Route::resource('/tipusrecursos', TipusRecursosController::class);
 

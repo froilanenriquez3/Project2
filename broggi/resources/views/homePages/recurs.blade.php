@@ -2,20 +2,22 @@
 @section('links')
     <link rel="stylesheet" href="{{ asset('../resources/css/homePages/recurs.css?' . rand()) }}">
 @endsection
-@section('title','Recursos móviles')
-{{-- Navbar recursos --}}
+@section('title', 'Recursos móviles')
+    {{-- Navbar recursos --}}
 @section('navbar')
-@include('partials.navbarRecursos')
+    @include('partials.navbarRecursos')
 @endsection
 @section('content')
-<section id="menuSection">
-    <div >
-        <p>Incidencia actual</p>
-    </div>
-    <div>
-        <p>Ver historial</p>
-    </div>
+    <section id="menuSection">
+        <a href="{{ url('/incidenciesrecursos') }}">
+            <div>
+                <p>Incidencia actual</p>
+            </div>
+        </a>
+        <div>
+            <p>Ver historial</p>
+        </div>
 
-</section>
+    </section>
 
 @endsection
