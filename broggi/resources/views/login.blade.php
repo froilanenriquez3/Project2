@@ -29,7 +29,7 @@
 
             <div class="loginInputs">
                 <label class="" for="username">Usuario</label>
-                <input class="" name="username" id="username" type="text">
+                <input class="" name="username" id="username" type="text" autofocus>
             </div>
 
             <div class="loginInputs">

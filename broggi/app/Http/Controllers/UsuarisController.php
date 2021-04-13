@@ -42,7 +42,11 @@ class UsuarisController extends Controller
                         $route = view('homePages.recurs');
                         break;
                 }
+            } else {
+                $request->session()->flash('error', 'Contrasenya incorrecta!');
             }
+        } else {
+            $request->session()->flash('error', "Nom d'usuari incorrecte!");
         }
         return $route;
     }
