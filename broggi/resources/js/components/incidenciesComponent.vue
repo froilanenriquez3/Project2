@@ -103,13 +103,12 @@
         <map-component :direccioCompleta="direccio"></map-component>
         <div id="recursosAfectats">
             <ul>
-                <li v-for="(afectat, index) in afectats" :key="index">
-                    {{ afectat.nom + " " + afectat.cognoms }}
-                    <select name="" id="recursosToAssign">
+                <li v-for="(afectat, index) in afectats" :key="index" class="row">
+                    <p class="col-4">{{ afectat.nom + " " + afectat.cognoms }}</p>
+                    <select name="" id="recursosToAssign" class="col-4">
                         <option value=""></option>
-                        <option :value="recurso.id" v-for="(recurso, index) in recursos" :key="index">
-                            <p v-show="!recurso.actiu">{{recurso.codi}}</p>
-
+                        <option :value="recurso.id" v-for="(recurso, index) in freeRecursos" :key="index">
+                            <p >{{recurso.codi}}</p>
                         </option>
                     </select>
                 </li>
@@ -195,6 +194,7 @@ export default {
       numAfectats: '',
       afectats: [],
       recursos: [],
+      freeRecursos: [],
       municipis: [],
       numDones: '',
       numHomes: '',
@@ -336,11 +336,19 @@ export default {
                 .get("/recursos")
                 .then(response => {
                     me.recursos = response.data;
+                    me.getFreeRecurs();
                 })
                 .catch(error => {
                     console.log(error);
                 })
                 .finally(() => (this.loading = false));
+    },
+    getFreeRecurs(){
+        for(let i in this.recursos){
+            if(!this.recursos[i].actiu){
+                this.freeRecursos.push(this.recursos[i]);
+            }
+        }
     },
     clearInput() {
       this.incidencia = {
