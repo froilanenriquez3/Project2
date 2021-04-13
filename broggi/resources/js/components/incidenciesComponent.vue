@@ -370,7 +370,7 @@ export default {
         };
         this.infoRecursos.push(infoRecurs);
         this.incidencia.infoRecursos = this.infoRecursos;
-        console.log(this.incidencia);
+
     },
     clearInput() {
       this.incidencia = {
