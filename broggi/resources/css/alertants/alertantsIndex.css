@@ -1,17 +1,19 @@
-body{
+#app{
+    background-color: white;
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
 }
 
 #indexSBMain{
-    width: 80%;
+    width: 80vw;
 }
 
 
-#tableNav{
+/* #tableNav{
     position: absolute;
     left: 1%;
     bottom: 1%;
 }
-
+ */
 
