@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Sexes;
+use App\Models\Recursos;
+use App\Models\Incidencies;
+use App\Models\IncidenciesHasRecursos;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\AfectatsController;
 use Illuminate\Database\Eloquent\Relations\HasMany;
