@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\IncidenciesHasRecursos;
+use App\Http\Controllers\Controller;
 use App\Models\Incidencies;
 use Illuminate\Http\Request;
 
@@ -24,7 +27,9 @@ class IncidenciesHasRecursosController extends Controller
      */
     public function create()
     {
+
         return view('incidenciesHasRecursos.create');
+
     }
 
     /**
@@ -41,10 +46,11 @@ class IncidenciesHasRecursosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Incidencies  $incidencies
+
+     * @param  \App\Models\IncidenciesHasRecursos  $incidenciesHasRecursos
      * @return \Illuminate\Http\Response
      */
-    public function show(Incidencies $incidencies)
+    public function show(IncidenciesHasRecursos $incidenciesHasRecursos)
     {
         //
     }
@@ -52,10 +58,11 @@ class IncidenciesHasRecursosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Incidencies  $incidencies
+
+     * @param  \App\Models\IncidenciesHasRecursos  $incidenciesHasRecursos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Incidencies $incidencies)
+    public function edit(IncidenciesHasRecursos $incidenciesHasRecursos)
     {
         //
     }
@@ -64,10 +71,11 @@ class IncidenciesHasRecursosController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Incidencies  $incidencies
+     * @param  \App\Models\IncidenciesHasRecursos  $incidenciesHasRecursos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Incidencies $incidencies)
+    public function update(Request $request, IncidenciesHasRecursos $incidenciesHasRecursos)
+
     {
         //
     }
@@ -75,10 +83,12 @@ class IncidenciesHasRecursosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Incidencies  $incidencies
+
+     * @param  \App\Models\IncidenciesHasRecursos  $incidenciesHasRecursos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Incidencies $incidencies)
+    public function destroy(IncidenciesHasRecursos $incidenciesHasRecursos)
+
     {
         //
     }

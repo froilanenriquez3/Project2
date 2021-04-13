@@ -326,7 +326,7 @@ CREATE TABLE IF NOT EXISTS `broggi`.`incidencies_has_recursos` (
   `hora_finalitzacio` DATETIME NULL,
   `prioritat` INT NULL,
   `desti` VARCHAR(100) NULL,
-  `afectat_id` INT NULL,
+  `afectat_id` INT NOT NULL,
   PRIMARY KEY (`incidencies_id`, `recursos_id`),
   INDEX `fk_incidencies_has_recursos_recursos1_idx` (`recursos_id` ASC),
   INDEX `fk_incidencies_has_recursos_incidencies1_idx` (`incidencies_id` ASC),
