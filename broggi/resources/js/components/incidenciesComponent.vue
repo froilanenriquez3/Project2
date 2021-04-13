@@ -103,14 +103,16 @@
         <map-component :direccioCompleta="direccio"></map-component>
         <div id="recursosAfectats">
             <ul>
+                <p>Afectats</p>
                 <li v-for="(afectat, index) in afectats" :key="index" class="row">
                     <p class="col-4">{{ afectat.nom + " " + afectat.cognoms }}</p>
-                    <select name="" id="recursosToAssign" class="col-4">
+                    <select name="" :id="'recursosToAssign' + index" class="col-4" @change="assignRecurs(index, afectat.id)">
                         <option value=""></option>
                         <option :value="recurso.id" v-for="(recurso, index) in freeRecursos" :key="index">
                             <p >{{recurso.codi}}</p>
                         </option>
                     </select>
+                    <!-- <button>Assignar recurs</button> -->
                 </li>
             </ul>
 
@@ -195,6 +197,7 @@ export default {
       afectats: [],
       recursos: [],
       freeRecursos: [],
+      infoRecursos: [],
       municipis: [],
       numDones: '',
       numHomes: '',
@@ -349,6 +352,25 @@ export default {
                 this.freeRecursos.push(this.recursos[i]);
             }
         }
+    },
+    assignRecurs(index, afectatId){
+        let recursId = Number(document.getElementById("recursosToAssign" + index).value);
+        let infoRecurs = {
+            recursos_id: recursId,
+            hora_activacio: null,
+            hora_mobilitzacio: null,
+            hora_assistencia: null,
+            hora_transport: null,
+            hora_arribada_hospital: null,
+            hora_transferencia: null,
+            hora_finalitzacio: null,
+            prioritat: null,
+            desti: null,
+            afectat_id: afectatId
+        };
+        this.infoRecursos.push(infoRecurs);
+        this.incidencia.infoRecursos = this.infoRecursos;
+        console.log(this.incidencia);
     },
     clearInput() {
       this.incidencia = {
