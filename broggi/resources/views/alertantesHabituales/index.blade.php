@@ -18,8 +18,8 @@
 @endif
 
 @section('sidebar')
- {{-- @include('templates.sideBar') --}}
-    <sidebar-component></sidebar-component>
+ @include('templates.sideBar')
+    {{-- <sidebar-component></sidebar-component> --}}
 @endsection
 
 @section('table')
