@@ -30,7 +30,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('usuaris', UsuarisController::class);
-// Route::apiResource('incidencies', IncidenciesController::class);
+Route::apiResource('incidencies', ApiIncidenciesController::class);
 Route::apiResource('alertants', AlertantsController::class);
 Route::apiResource('recursos', RecursosController::class);
 Route::apiResource('tipusrecursos', TipusRecursController::class);

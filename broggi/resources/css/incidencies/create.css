@@ -10,22 +10,22 @@
 .container{
     padding: 4%;
 }
-/* .tableSection{
-    border: solid rgb(0, 172, 194) 3px;
-    border-radius: 5%;
-    width: 70%;
-} */
+.tableSection{
+    /* border: solid rgb(0, 172, 194) 3px;
+    border-radius: 5%; */
+    width: 100%;
+}
 
 #divForm {
-    /* position: relative; */
+    position: relative;
     margin-top: 2%;
-    border: solid rgb(0, 172, 194) 3px;
-    border-radius: 5%;
+    /* border: solid rgb(0, 172, 194) 3px;
+    border-radius: 5%; */
     width: 70%;
-    /* padding: 20px; */
-    /* height: fit-content; */
-    /* display: flex; */
-    /* flex-wrap: wrap; */
+    padding: 20px;
+     height: fit-content;
+    display: flex;
+     flex-wrap: wrap;
 }
 
 #container{
@@ -79,8 +79,8 @@
 }
 
 #mapa-mapbox {
-    width: 70em !important;
-    height: 30em !important;
+    width: 40%;
+    height: 40%;
 }
 
 .geocoder {

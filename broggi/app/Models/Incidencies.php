@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Incidencies extends Model
 {
@@ -38,10 +39,10 @@ class Incidencies extends Model
         return $this->belongsTo(Municipis::class, 'municipis_id');
     }
 
-    public function incidencies_has_recursos(){
-        return $this->belongsToMany(Recursos::class, 'incidencies_has_recursos', 'incidencies_id', 'recursos_id')
-        ->withPivot('hora_activacio', 'hora_mobilitzacio', 'hora_assistencia', 'hora_transport', 'hora_arribada_hospital', 'hora_transferencia', 'hora_finalitzacio', 'prioritat', 'desti');
-    }
+    // public function incidencies_has_recursos(){
+    //     return $this->belongsToMany(Recursos::class, 'incidencies_has_recursos', 'incidencies_id', 'recursos_id')
+    //     ->withPivot('hora_activacio', 'hora_mobilitzacio', 'hora_assistencia', 'hora_transport', 'hora_arribada_hospital', 'hora_transferencia', 'hora_finalitzacio', 'prioritat', 'desti');
+    // }
 
     //Relación con la tabla afectats MN
     public function incidencies_has_afectats()
@@ -49,6 +50,8 @@ class Incidencies extends Model
         return $this->belongsToMany(Afectats::class, 'incidencies_has_afectats', 'incidencies_id', 'afectats_id');
     }
 
-
+    public function incidencies_has_recursos(): HasMany{
+        return $this->hasMany(IncidenciesHasRecursos::class, 'incidencies_id');
+    }
 
 }

@@ -37,12 +37,15 @@ class IncidenciesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Incidencies  $incidencies
+     * @param  \App\Models\Incidencies  $incidency
      * @return \Illuminate\Http\Response
      */
     public function show(Incidencies $incidencies)
     {
-        //
+       $incidency= Incidencies::with(['incidencies_has_recursos.recursos_id',
+       'incidencies_has_recursos.afectat_id'])->find($incidencies->id);
+
+        return new IncidenciesResource($incidency);
     }
 
     /**

@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Clases\Utilitat;
 use App\Models\Incidencies;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use App\Http\Resources\IncidenciesResource;
+use App\Models\IncidenciesHasRecursos;
 
 class ApiIncidenciesController extends Controller
 {
@@ -32,6 +34,8 @@ class ApiIncidenciesController extends Controller
      */
     public function store(Request $request)
     {
+
+        DB::beginTransaction();
         $incidencia = new Incidencies();
 
         $incidencia->data = $request->input('data');
@@ -45,9 +49,11 @@ class ApiIncidenciesController extends Controller
         $incidencia->alertants_id = $request->input('alertants_id');
         $incidencia->municipis_id = $request->input('municipis_id');
 
-        $incidencia->duracion = $request->input('duracion');
+        // Campo de la ternaria
+        $infoRecursos = $request->input('infoRecursos');
 
-        $incidencia->telefon_alertant = "123456789";
+
+        // $incidencia->telefon_alertant = '';
 
         $userId = Auth::user();
 
@@ -55,10 +61,34 @@ class ApiIncidenciesController extends Controller
 
         try{
             $incidencia->save();
+
+            foreach ($infoRecursos as $infoRecurs) {
+                $ihr= new IncidenciesHasRecursos();
+                // $ihr->incidencies_id= $incidencia->id;
+                $ihr->data = $infoRecurs['recursos_id'];
+                $ihr->data = $infoRecurs['hora_activacio'];
+                $ihr->data = $infoRecurs['hora_movilitzacio'];
+                $ihr->data = $infoRecurs['hora_assistencia'];
+                $ihr->data = $infoRecurs['hora_transport'];
+                $ihr->data = $infoRecurs['hora_arribada_hospital'];
+                $ihr->data = $infoRecurs['hora_transferencia'];
+                $ihr->data = $infoRecurs['hora_finalitzacio'];
+                $ihr->data = $infoRecurs['prioritat'];
+                $ihr->data = $infoRecurs['desti'];
+                $ihr->data = $infoRecurs['afectat_id'];
+
+                $incidencia->incidencies_has_recursos()->save($ihr);
+
+            }
+
+            DB::commit();
+            $incidencia->refresh();
+
             $response = (new IncidenciesResource($incidencia))
                     ->response()
                     ->setStatusCode(201);
         } catch (QueryException $ex) {
+            DB::rollBack();
             $message = Utilitat::errorMessage($ex);
             $response = \response()->json(['error' => $message], 400);
 
@@ -72,12 +102,16 @@ class ApiIncidenciesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Incidencies  $incidencies
+     * @param  \App\Models\Incidencies  $incidency
      * @return \Illuminate\Http\Response
      */
-    public function show(Incidencies $incidencies)
+    public function show(Incidencies $incidency)
     {
-        //
+
+           $incidency= Incidencies::with(['incidencies_has_recursos.recursos', 'incidencies_has_recursos.afectats'])->find($incidency->id);
+
+            return new IncidenciesResource($incidency);
+
     }
 
     /**
