@@ -1599,5 +1599,8 @@ INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `l
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('55444', '1', '4', '41.4566', '1.93222');
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('77766', '0', '2', '41.5566', '1.951');
 
+insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Jack", 'Jack', 12, true, 1) ;
+insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Violet", 'Incredible', 12, true, 1) ;
+insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Dash", 'Incredible', 12, true, 1) ;
 
 COMMIT;
