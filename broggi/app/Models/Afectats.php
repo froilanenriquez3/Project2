@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\AfectatsController;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Controllers\AfectatsController;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Afectats extends Model
 {
@@ -28,5 +30,8 @@ class Afectats extends Model
         return $this->belongsToMany(Incidencies::class, 'incidencies_has_afectats', 'afectats_id', 'incidencies_id');
     }
 
+    public function incidencies_has_recursos(): HasMany{
+        return $this->hasMany(IncidenciesHasRecursos::class, 'afectat_id');
+    }
 
 }
