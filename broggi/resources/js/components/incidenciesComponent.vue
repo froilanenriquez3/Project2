@@ -42,7 +42,7 @@
       <label class="col-2" for="">Municipi</label>
       <select class="col-10" name="" id="" v-model="incidencia.municipis_id">
         <option value=""></option>
-        <option v-for="(municipi, index) in municipis" :key="index" v-bind:value="municipi">
+        <option v-for="(municipi, index) in municipis" :key="index" v-bind:value="municipi.id">
           {{ municipi.nom }}
         </option>
       </select>
@@ -183,7 +183,7 @@ export default {
       incidencia: {
         data: null,
         hora: null,
-        telefon_alertant: null,
+        telefon_alertant: 123456789,
         adreca: null,
         adreca_complement: null,
         descripcio: null,
@@ -196,7 +196,7 @@ export default {
         {
             recursos_id: 1,
             hora_activacio: "01:00:00",
-            hora_movilitzacio: "01:00:00",
+            hora_mobilitzacio: "01:00:00",
             hora_assistencia: "01:00:00",
             hora_transport: "01:00:00",
             hora_arribada_hospital: "01:00:00",
@@ -204,9 +204,9 @@ export default {
             hora_finalitzacio: "01:00:00",
             prioritat: 3,
             desti: "Hospital clinic",
-            afectat_id: 2
+            afectat_id: 1
         }
-    ]
+        ]
       },
       incidencies: [],
     };
