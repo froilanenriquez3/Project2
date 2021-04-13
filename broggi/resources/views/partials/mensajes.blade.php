@@ -1,6 +1,6 @@
 @if (Session::has('error'))
 
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
+<div class="alert alert-danger alert-dismissible fade show log-feedback" role="alert">
     {{ Session::get('error') }}
     <button type="button" class="close" data-dismiss="alert" aria-label="close">
         <span aria-hidden="true">&times;</span>
@@ -11,7 +11,7 @@
 
 @if( Session::has('mensaje'))
 
-<div class="alert alert-success alert-dismissible fade show" role="alert">
+<div class="alert alert-success alert-dismissible fade show log-feedback" role="alert">
     {{ Session::get('mensaje') }}
     <button type="button" class="close" data-dismiss="alert" aria-label="close">
         <span aria-hidden="true">&times;</span>

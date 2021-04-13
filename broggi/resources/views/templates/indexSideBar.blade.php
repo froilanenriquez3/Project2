@@ -9,12 +9,9 @@
 
     @include('partials.headerLinks')
 
-<<<<<<< HEAD
     <link rel="stylesheet" href="{{ asset('../resources/css/indexTemplateSB.css?' . rand()) }}">
-=======
     {{-- <link rel="stylesheet" href="{{ asset('../resources/css/indexTemplateSB.css?' . rand()) }}"> --}}
     <link rel="stylesheet" href="{{ asset('../resources/css/sidebar.css?' . rand()) }}">
->>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
 
     @yield('links')
 
@@ -22,54 +19,36 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-
-    <aside>
-        {{-- Modify --}}
-        @include('templates.sideBar')
-=======
     <div id="app">
-    <aside>
-        {{-- Modify --}}
-        {{-- @include('templates.sideBar') --}}
-        @yield('sidebar')
->>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
-    </aside>
+        <aside>
+            {{-- Modify --}}
+            {{-- @include('templates.sideBar') --}}
+            @yield('sidebar')
+        </aside>
 
-    <main>
-        <header>
-            <nav id="navbarHolder">
-                @yield('navbar')
-            </nav>
-        </header>
+        <main>
+            <header>
+                <nav id="navbarHolder">
+                    @yield('navbar')
+                </nav>
+            </header>
 
-        <section id="tableSection">
-            <div id="filterSection">
-                <p>Filters</p>
-            </div>
+            <section id="tableSection">
+                <div id="filterSection">
+                    <p>Filters</p>
+                </div>
 
-            <div id="divTable">
-<<<<<<< HEAD
-            <div id="app">
-                @yield('table')
-            </div>
-            </div>
-=======
+                <div id="divTable">
+                    <div id="app">
+                        @yield('table')
+                    </div>
+                </div>
 
-                @yield('table')
-            </div>
-
->>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
-
-        </section>
+            </section>
 
 
-    </main>
-<<<<<<< HEAD
-
-=======
-</div>
->>>>>>> 5fc40b11c12fae5f34040ebaf43c4b648db9ad9c
+        </main>
+    </div>
     @include('partials.scripts')
 </body>
 
