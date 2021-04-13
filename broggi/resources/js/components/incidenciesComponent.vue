@@ -50,7 +50,7 @@
 
     <div class="form-group row">
       <label class="col-2" for="">Hora</label>
-      <input class="col-2" type="number" name="" v-model="incidencia.hora" />
+      <input class="col-2" type="time" name="" v-model="incidencia.hora" />
 
       <label class="col-2" for="">Data</label>
       <input class="col-2" type="date" name="" v-model="incidencia.data" />
@@ -192,6 +192,21 @@ export default {
         alertants_id: 1,
         municipis_id: 1,
         duracion: null,
+        infoRecursos: [
+        {
+            recursos_id: 1,
+            hora_activacio: "01:00:00",
+            hora_movilitzacio: "01:00:00",
+            hora_assistencia: "01:00:00",
+            hora_transport: "01:00:00",
+            hora_arribada_hospital: "01:00:00",
+            hora_transferencia: "01:00:00",
+            hora_finalitzacio: "01:00:00",
+            prioritat: 3,
+            desti: "Hospital clinic",
+            afectat_id: 2
+        }
+    ]
       },
       incidencies: [],
     };
@@ -212,6 +227,7 @@ export default {
     },
     createIncidencia() {
       console.log("submitting incidencia");
+      console.log(this.incidencia);
       let me = this;
       axios
         .post("/incidencies", me.incidencia)

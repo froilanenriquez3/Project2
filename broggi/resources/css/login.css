@@ -69,3 +69,7 @@ section{
     left: 4vh;
     background-color: rgb(0, 172, 194);
 }
+
+.log-feedback {
+    left: 10%;
+}
