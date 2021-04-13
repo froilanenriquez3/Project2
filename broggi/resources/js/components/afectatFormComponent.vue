@@ -30,12 +30,12 @@
         </div>
 
         <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" value="2" v-model="afectat.sexes_id" name="customRadioInline1" class="custom-control-input">
-        <label class="custom-control-label" for="dona">Dona</label>
+        <input type="radio" :id="idRadioDona" value="2" v-model="afectat.sexes_id" :name="nameRadio" class="custom-control-input">
+        <label class="custom-control-label" :for="idRadioDona">Dona</label>
         </div>
         <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" value="1" v-model="afectat.sexes_id" name="customRadioInline1" class="custom-control-input">
-        <label class="custom-control-label" for="home">Home</label>
+        <input type="radio" :id="idRadioHome" value="1" v-model="afectat.sexes_id" :name="nameRadio" class="custom-control-input">
+        <label class="custom-control-label" :for="idRadioHome">Home</label>
         </div>
 
 
@@ -68,12 +68,27 @@ export default {
         },
 
   methods: {
-      setAfectat(){
+      insertAfectat(){
+
           this.$emit('setAfectat', this.afectat, this.position)
       }
   },
   mounted() {
     console.log("Component mounted.");
   },
-};
+  computed: {
+    // Añadimos la posición para que cada radio de cada afectado tenga diferente ID.
+      idRadioDona: function () {
+
+      return 'dona'+this.position;
+  },
+   idRadioHome: function () {
+
+      return 'home'+this.position;
+  },
+    nameRadio: function (){
+        return 'radio'+this.position
+    }
+}
+}
 </script>
