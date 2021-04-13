@@ -10,9 +10,9 @@
             </thead>
             <tbody>
                 <tr v-for="incidencia in paginator(incidencies)" :key="incidencia.id">
-                    <td>{{ incidencia.id }}</td>
-                    <td>{{ incidencia.recurs }}</td>
-                    <td>{{ incidencia.afectat }}</td>
+                    <td>{{ incidencia.recursos_id }}</td>
+                    <td>{{ incidencia.incidencies_id }}</td>
+                    <td>{{ incidencia.afectat_id }}</td>
                 </tr>
             </tbody>
         </table>
