@@ -103,9 +103,13 @@
         <map-component :direccioCompleta="direccio"></map-component>
         <div id="recursosAfectats">
             <ul>
-                <p>Afectats</p>
+                <li class="row">
+                    <p class="col-6">Afectats</p>
+                    <p class="col-4">Recursos</p>
+                </li>
+
                 <li v-for="(afectat, index) in afectats" :key="index" class="row">
-                    <p class="col-4">{{ afectat.nom + " " + afectat.cognoms }}</p>
+                    <p class="col-6">{{ afectat.nom + " " + afectat.cognoms }}</p>
                     <select name="" :id="'recursosToAssign' + index" class="col-4" @change="assignRecurs(index, afectat.id)">
                         <option value=""></option>
                         <option :value="recurso.id" v-for="(recurso, index) in freeRecursos" :key="index">
