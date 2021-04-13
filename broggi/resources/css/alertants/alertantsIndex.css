@@ -1,6 +1,17 @@
+body{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#indexSBMain{
+    width: 80%;
+}
+
+
 #tableNav{
     position: absolute;
     left: 1%;
     bottom: 1%;
 }
+
 

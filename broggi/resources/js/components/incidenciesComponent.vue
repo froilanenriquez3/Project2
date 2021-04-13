@@ -192,7 +192,8 @@ export default {
         alertants_id: 1,
         municipis_id: 1,
         duracion: null,
-        infoRecursos: [
+        infoRecursos: []
+        /* infoRecursos: [
         {
             recursos_id: 1,
             hora_activacio: "01:00:00",
@@ -206,7 +207,7 @@ export default {
             desti: "Hospital clinic",
             afectat_id: 1
         }
-        ]
+        ] */
       },
       incidencies: [],
     };
