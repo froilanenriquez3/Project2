@@ -1,8 +1,11 @@
 @extends('templates/index')
 
 @section('links')
+{{-- <link rel="stylesheet" href="{{ asset('../resources/css/indexTemplateSB.css?'.rand())}}"> --}}
 <link rel="stylesheet" href="{{ asset('../resources/css/alertants/alertantsIndex.css?' . rand()) }}">
 @endsection
+
+@section('title','Alertantes')
 
 @section('navbar')
 {{-- Add if for admin navbar --}}
@@ -14,7 +17,9 @@
     @include('partials.navbarTeleoperador')
 @endif
 
-@section('title','Alertantes')
+@section('sidebar')
+ @include('templates.sideBar')
+@endsection
 
 @section('table')
 <table class="table table-striped">

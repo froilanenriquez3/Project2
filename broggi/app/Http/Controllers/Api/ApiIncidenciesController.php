@@ -50,6 +50,7 @@ class ApiIncidenciesController extends Controller
         $incidencia->municipis_id = $request->input('municipis_id');
 
         // Campo de la ternaria
+        // $infoRecursos = [];
         $infoRecursos = $request->input('infoRecursos');
 
 
