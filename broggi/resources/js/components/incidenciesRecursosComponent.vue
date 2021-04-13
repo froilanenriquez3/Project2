@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-       <div id="incidenciesRecursosDiv">
+       <div id="incidenciesRecursosDiv" v-show="displayForm">
            <div class="form-group row">
                <label class="col-2" for="">1: Hora Activacio</label>
                <input class="col-2" type="time">
@@ -40,6 +40,10 @@
            <button class="btn btn-primary" id="submitForm" @click="submitForm()">Siguiente</button>
 
        </div>
+
+       <div v-show="!displayForm">
+           <p>No hi ha cap incident assignat</p>
+       </div>
     </div>
 </template>
 
@@ -47,6 +51,8 @@
     export default {
         data(){
             return {
+                displayForm: true,
+                incidenciesRecursos: [],
                 incidenciaId: null,
                 afectatId: null,
                 incidencia: {
@@ -79,6 +85,23 @@
                         console.log(error.response.data);
 
                     })
+            },
+            selectIncidencies(){
+                let me = this;
+                axios
+                    .get("/incidencies")
+                    .then((response) => {
+                    console.log(response.data);
+                    me.incidencies = response.data;
+                    })
+                    .catch((error) => {
+                    console.log(error);
+                    })
+                    .finally(() => (this.loading = false));
+
+            },
+            selectIncidenciesRecursos(){
+
             }
         },
         mounted() {
