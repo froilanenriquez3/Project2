@@ -92,13 +92,33 @@
       <label class="col-2" for="numDones">Número d'homes afectats</label>
       <input class="col-10" min="0" type="number" name="numHomes" v-model="numDones"/>
     </div>
+
     </div>
     </div>
 
 
 
     <!-- Tag Recursos -->
-    <map-component :direccioCompleta="direccio" v-show="section == 'Recursos' || section == 'Tot'"></map-component>
+    <div v-show="section == 'Recursos' || section == 'Tot'" id="recursosPage">
+        <map-component :direccioCompleta="direccio"></map-component>
+        <div id="recursosAfectats">
+            <ul>
+                <li v-for="(afectat, index) in afectats" :key="index">
+                    {{ afectat.nom + " " + afectat.cognoms }}
+                    <select name="" id="recursosToAssign">
+                        <option value=""></option>
+                        <option :value="recurso.id" v-for="(recurso, index) in recursos" :key="index">
+                            <p v-show="!recurso.actiu">{{recurso.codi}}</p>
+
+                        </option>
+                    </select>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
 
 
     <!-- Modal Video -->
@@ -174,6 +194,7 @@ export default {
       alertantIncidencia: {},
       numAfectats: '',
       afectats: [],
+      recursos: [],
       municipis: [],
       numDones: '',
       numHomes: '',
@@ -296,6 +317,31 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
+    getAfectats(){
+        let me = this;
+      axios
+        .get("/afectats")
+        .then((response) => {
+          console.log(response.data);
+          me.afectats = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => (this.loading = false));
+    },
+    getRecurs(){
+        let me = this;
+            axios
+                .get("/recursos")
+                .then(response => {
+                    me.recursos = response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+                .finally(() => (this.loading = false));
+    },
     clearInput() {
       this.incidencia = {
         data: null,
@@ -325,6 +371,8 @@ export default {
     //this.selectIncidencies();
     this.getMunicipis();
     this.getTipusIncidencies();
+    this.getAfectats();
+    this.getRecurs();
   },
   mounted() {
     console.log("Component mounted.");
