@@ -92,13 +92,34 @@
       <label class="col-2" for="numDones">Número d'homes afectats</label>
       <input class="col-10" min="0" type="number" name="numHomes" v-model="numDones"/>
     </div>
+
     </div>
     </div>
 
 
 
     <!-- Tag Recursos -->
-    <map-component :direccioCompleta="direccio" v-show="section == 'Recursos' || section == 'Tot'"></map-component>
+    <div v-show="section == 'Recursos' || section == 'Tot'" id="recursosPage">
+        <map-component :direccioCompleta="direccio"></map-component>
+        <div id="recursosAfectats">
+            <ul>
+                <p>Afectats</p>
+                <li v-for="(afectat, index) in afectats" :key="index" class="row">
+                    <p class="col-4">{{ afectat.nom + " " + afectat.cognoms }}</p>
+                    <select name="" :id="'recursosToAssign' + index" class="col-4" @change="assignRecurs(index, afectat.id)">
+                        <option value=""></option>
+                        <option :value="recurso.id" v-for="(recurso, index) in freeRecursos" :key="index">
+                            <p >{{recurso.codi}}</p>
+                        </option>
+                    </select>
+                    <!-- <button>Assignar recurs</button> -->
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
 
 
     <!-- Modal Video -->
@@ -174,6 +195,9 @@ export default {
       alertantIncidencia: {},
       numAfectats: '',
       afectats: [],
+      recursos: [],
+      freeRecursos: [],
+      infoRecursos: [],
       municipis: [],
       numDones: '',
       numHomes: '',
@@ -296,6 +320,58 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
+    getAfectats(){
+        let me = this;
+      axios
+        .get("/afectats")
+        .then((response) => {
+          console.log(response.data);
+          me.afectats = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => (this.loading = false));
+    },
+    getRecurs(){
+        let me = this;
+            axios
+                .get("/recursos")
+                .then(response => {
+                    me.recursos = response.data;
+                    me.getFreeRecurs();
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+                .finally(() => (this.loading = false));
+    },
+    getFreeRecurs(){
+        for(let i in this.recursos){
+            if(!this.recursos[i].actiu){
+                this.freeRecursos.push(this.recursos[i]);
+            }
+        }
+    },
+    assignRecurs(index, afectatId){
+        let recursId = Number(document.getElementById("recursosToAssign" + index).value);
+        let infoRecurs = {
+            recursos_id: recursId,
+            hora_activacio: null,
+            hora_mobilitzacio: null,
+            hora_assistencia: null,
+            hora_transport: null,
+            hora_arribada_hospital: null,
+            hora_transferencia: null,
+            hora_finalitzacio: null,
+            prioritat: null,
+            desti: null,
+            afectat_id: afectatId
+        };
+        this.infoRecursos.push(infoRecurs);
+        this.incidencia.infoRecursos = this.infoRecursos;
+
+    },
     clearInput() {
       this.incidencia = {
         data: null,
@@ -325,6 +401,8 @@ export default {
     //this.selectIncidencies();
     this.getMunicipis();
     this.getTipusIncidencies();
+    this.getAfectats();
+    this.getRecurs();
   },
   mounted() {
     console.log("Component mounted.");

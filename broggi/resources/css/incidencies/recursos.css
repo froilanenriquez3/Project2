@@ -1,0 +1,8 @@
+#recursosPage {
+    display: flex;
+    justify-content: center;
+}
+
+#recursosAfectats {
+    width : 50%;
+}

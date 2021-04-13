@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Afectats;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\AfectatsResource;
 
 class AfectatsController extends Controller
 {
@@ -15,7 +16,8 @@ class AfectatsController extends Controller
      */
     public function index()
     {
-        //
+        $afectats = Afectats::all();
+        return AfectatsResource::collection($afectats);
     }
 
     /**
