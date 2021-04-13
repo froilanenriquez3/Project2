@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Usuaris;
+use App\Models\Incidencies;
+use App\Models\Tipus_recursos;
+use App\Models\IncidenciesHasRecursos;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
