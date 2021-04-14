@@ -60,6 +60,9 @@ export default {
         municipis: {
             type: Array,
             required: true
+        },
+        alertant:{
+            required: true
         }
     },
     data() {
@@ -67,15 +70,6 @@ export default {
       action: "",
       //alertants: [],
       tipus_alertants: [],
-      alertant: {
-        id: "",
-        telefon: "",
-        nom: "",
-        cognoms: "",
-        adreca: "",
-        municipis_id: "",
-        tipus_alertants_id: "",
-      },
     };
   },
   methods: {
@@ -112,12 +106,6 @@ export default {
   },
   mounted() {
     console.log("Component mounted.");
-  },
-  watch: {
-  section: function () {
-      console.log(this.alertant)
-      this.$emit('onSectionChanges', this.alertant);
   }
-}
 }
 </script>

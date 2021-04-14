@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Clases\Utilitat;
 use App\Models\Afectats;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\QueryException;
 use App\Http\Resources\AfectatsResource;
 
 class AfectatsController extends Controller
@@ -28,7 +30,28 @@ class AfectatsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $afectats= new Afectats();
+
+        $afectats->telefon= $request->input('telefon');
+        $afectats->cip= $request->input('cip');
+        $afectats->nom= $request->input('nom');
+        $afectats->cognoms= $request->input('cognoms');
+        $afectats->edat= $request->input('edat');
+        $afectats->te_cip = ($request->input('te_cip') == 'te_cip');
+        $afectats->sexes_id= $request->input('sexes_id');
+
+        try{
+        $afectats->save();
+        $response= (new AfectatsResource($afectats))
+                    ->response()
+                    ->setStatusCode(201);
+        } catch (QueryException $ex){
+            $message = Utilitat::errorMessage($ex);
+            $response = \response()
+                        ->json(['error'=> $message], 400);
+        }
+
+        return $response;
     }
 
     /**

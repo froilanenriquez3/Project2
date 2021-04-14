@@ -2,8 +2,7 @@
 <div class="biggerContainer">
 
     <div id="divModoFormacion">
-
-                <button class="btn btn-primary" @click="openModalVideo()" v-bind:class="{ hidden: !formacio }">Veure video CPR</button>
+        <button class="btn btn-primary" @click="openModalVideo()" v-bind:class="{ hidden: !formacio }">Veure video CPR</button>
     <button class="btn btn-primary" @click="openModalHelp()" v-bind:class="{ hidden: !formacio }">Ajuda amb l'anglès</button>
     <div class="formacionBox">
     <p>Modo formacion</p>
@@ -69,31 +68,17 @@
     </div>
 
     <!-- Tag Alertante -->
-    <alertant-form :municipis="municipis" @onSectionChanges="updateAlertant($event)" :section="section" v-show="section == 'Alertant' || section == 'Tot'"></alertant-form>
+    <alertant-form :municipis="municipis" :alertant="alertantIncidencia" :section="section" v-show="section == 'Alertant' || section == 'Tot'"></alertant-form>
 
     <!-- Tag Afectado -->
     <!-- add fa plus icon -->
     <div v-show="section == 'Afectats' || section == 'Tot'">
-        <div class="form-group row">
-      <label class="col-2" for="numAfectats">Nombre d'afectats</label>
-      <input class="col-10" type="number" min="1" name="numAfectats" v-model="numAfectats" @change="adjustAfectatsArray()"/>
-    </div>
 
-    <div v-if="numAfectats < 4">
-            <afectat-form @setAfectat="guardarAfectat" v-for="(afectat, index) in afectats" :position="index" :key="index"></afectat-form>
-    </div>
+         <button @click="nouAfectat()" class="btn btn-primary">Afegir afectat</button>
+        <button class="btn btn-primary">Múltiples afectats (+3)</button>
 
-    <div v-else>
-        <div class="form-group row">
-      <label class="col-2" for="numDones">Número de dones afectades</label>
-      <input class="col-10" min="0" type="number" name="numDones" v-model="numDones"/>
-    </div>
-    <div class="form-group row">
-      <label class="col-2" for="numDones">Número d'homes afectats</label>
-      <input class="col-10" min="0" type="number" name="numHomes" v-model="numDones"/>
-    </div>
+        <div ref="afectatsContainer"></div>
 
-    </div>
     </div>
 
 
@@ -150,7 +135,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalVideolLabel">Vídeo CPR</h5>
+          <h5 class="modal-title" id="modalVideolLabel">HelpBox</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -182,6 +167,7 @@ import alertantFormComponent from "./alertantFormComponent.vue";
 import afectatFormComponent from "./afectatFormComponent.vue";
 import mapComponent from './mapComponent.vue';
 import HelpBoxComponent from './helpBoxComponent.vue';
+import Vue from 'vue';
 export default {
   components: { mapComponent, HelpBoxComponent },
     props: {
@@ -197,7 +183,7 @@ export default {
       tipusAlertants: [],
       tipusIncidencies: [],
       alertantIncidencia: {},
-      numAfectats: '',
+      numAfectats: 0,
       afectats: [],
       recursos: [],
       freeRecursos: [],
@@ -221,21 +207,6 @@ export default {
         municipis_id: 1,
         duracion: null,
         infoRecursos: []
-        /* infoRecursos: [
-        {
-            recursos_id: 1,
-            hora_activacio: "01:00:00",
-            hora_mobilitzacio: "01:00:00",
-            hora_assistencia: "01:00:00",
-            hora_transport: "01:00:00",
-            hora_arribada_hospital: "01:00:00",
-            hora_transferencia: "01:00:00",
-            hora_finalitzacio: "01:00:00",
-            prioritat: 3,
-            desti: "Hospital clinic",
-            afectat_id: 1
-        }
-        ] */
       },
       incidencies: [],
     };
@@ -275,23 +246,20 @@ export default {
           // me.errorMessage= error.response.data.error;
         });
     },
-    adjustAfectatsArray(){
-        // reseteamos afectats
-        this.afectats = [];
-        let afectat = {
-            id: '',
-            telefon: '',
-            cip: '',
-            nom: '',
-            cognoms: '',
-            edat: '',
-            te_cip: '',
-            sexes_id: ''
-        }
+    nouAfectat(){
+      let afectat=  {}
 
-        for(let i= 0; i< this.numAfectats; i++){
-            this.afectats.push(afectat)
-        }
+      this.afectats.push(afectat);
+
+    //Creamos afectatFormComponent y le pasamos el afectat de la posición numAfectats y la posición que ocupará en la array;
+        let ComponentClass= Vue.extend(afectatFormComponent)
+        let form= new ComponentClass({
+            propsData: { position: this.numAfectats, afectat: this.afectats[this.numAfectats] }
+        });
+
+        form.$mount()
+        this.$refs.afectatsContainer.appendChild(form.$el)
+       this.numAfectats++;
     },
     openModalVideo(){
         $('#modalVideo').modal('show');
@@ -324,19 +292,19 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
-    getAfectats(){
-        let me = this;
-      axios
-        .get("/afectats")
-        .then((response) => {
-          console.log(response.data);
-          me.afectats = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => (this.loading = false));
-    },
+    // getAfectats(){
+    //     let me = this;
+    //   axios
+    //     .get("/afectats")
+    //     .then((response) => {
+    //       console.log(response.data);
+    //       me.afectats = response.data;
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     })
+    //     .finally(() => (this.loading = false));
+    // },
     getRecurs(){
         let me = this;
             axios
@@ -397,8 +365,16 @@ export default {
     updateAlertant(alertant){
         this.alertantIncidencia= alertant;
     },
-    guardarAfectat: function(afectat, position){
-        this.afectats[position]= afectat;
+// Creamos objeto infoRecursos.
+    guardarAfectat(id){
+        debugger;
+        let afectat= {
+            afectat_id: id,
+            recursos_id: ''
+        }
+
+        this.incidencia.infoRecursos.push(afectat);
+
     },
     toggleFormacio(){
         this.formacio = !this.formacio;
@@ -408,7 +384,7 @@ export default {
     //this.selectIncidencies();
     this.getMunicipis();
     this.getTipusIncidencies();
-    this.getAfectats();
+    // this.getAfectats();
     this.getRecurs();
   },
   mounted() {
