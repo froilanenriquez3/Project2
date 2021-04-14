@@ -29,12 +29,12 @@
 
             <div class="loginInputs">
                 <label class="" for="username">Usuario</label>
-                <input class="" name="username" id="username" type="text" autofocus>
+                <input class="" name="username" id="username" type="text" autofocus required>
             </div>
 
             <div class="loginInputs">
                 <label class="" for="contrasenya">Contraseña</label>
-                <input class="" name="contrasenya" id="contrasenya" type="password">
+                <input class="" name="contrasenya" id="contrasenya" type="password" required>
             </div>
 
             <button id="entrarBtn" class="btn btn-primary" type="submit">Entrar</button>
