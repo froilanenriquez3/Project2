@@ -65,7 +65,10 @@
     right: 0;
 }
 
-
+.afectatActiu{
+    color: #e1157a;
+    border-color: #e1157a;
+}
 
 #formButtons {
     position: relative;
@@ -79,8 +82,8 @@
 }
 
 #mapa-mapbox {
-    width: 40%;
-    height: 40%;
+    width: 50%;
+    height: 50%;
 }
 
 .geocoder {

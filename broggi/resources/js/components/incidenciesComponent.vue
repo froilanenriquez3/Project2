@@ -13,8 +13,9 @@
             </div>
         </div>
   <div class="container" >
-        <!-- Tag incidencias -->
-        <div v-show="section == 'Incident' || section == 'Tot'">
+
+        <!-- TAG INCIDENCIAS -->
+        <div v-show="section == 'Incident'">
         <div class="form-group row">
       <label class="col-2" for="">Tipus Incidencia</label>
       <select class="col-10" name="tipus_incidencia" v-model="incidencia.tipus_incidencies_id">
@@ -67,40 +68,61 @@
     </div>
     </div>
 
-    <!-- Tag Alertante -->
-    <alertant-form :municipis="municipis" :alertant="alertantIncidencia" :section="section" v-show="section == 'Alertant' || section == 'Tot'"></alertant-form>
+    <!-- TAG ALERTANTE -->
+    <alertant-form :municipis="municipis" :alertant="alertantIncidencia" :section="section" v-show="section == 'Alertant'"></alertant-form>
 
-    <!-- Tag Afectado -->
+    <!-- TAG AFECTADO -->
     <!-- add fa plus icon -->
-    <div v-show="section == 'Afectats' || section == 'Tot'">
+    <div v-show="section == 'Afectats' ">
 
-         <button @click="nouAfectat()" class="btn btn-primary">Afegir afectat</button>
-        <button class="btn btn-primary">Múltiples afectats (+3)</button>
+        <button @click="notMultiple()" class="btn btn-secondary">Menys de 3 afectats</button>
+        <button @click="isMultiple()" class="btn btn-secondary">Múltiples afectats (+3)</button>
 
-        <div ref="afectatsContainer"></div>
+        <div v-show="multiple == false">
+             <button @click="nouAfectat()" class="btn btn-warning">Nou Afectat</button>
+             <div  ref="afectatsContainer"></div>
+        </div>
+
+
+        <div v-show="multiple == true" >
+            <div class="form-group row">
+    <label for="multiplesAfectats">Descripció afectats</label>
+    <textarea v-model="multiplesAfectatsText"
+    placeholder="Indica el sexe dels alertants i el rang d'edats aproximat"
+     class="form-control" id="multiplesAfectats" rows="3"></textarea>
+            </div>
+
+        </div>
 
     </div>
 
 
 
-    <!-- Tag Recursos -->
-    <div v-show="section == 'Recursos' || section == 'Tot'" id="recursosPage">
-        <map-component :direccioCompleta="direccio"></map-component>
+    <!-- TAG RECURSOS -->
+    <div v-show="section == 'Recursos'" id="recursosPage">
+        <map-component @assignantRecurs="setRecursFromMap($event)" :direccioCompleta="direccio"></map-component>
         <div id="recursosAfectats">
-            <ul>
+            <ul>Clica sobre una persona per assignar-li un recurs
                 <li class="row">
                     <p class="col-6">Afectats</p>
                     <p class="col-4">Recursos</p>
                 </li>
 
                 <li v-for="(afectat, index) in afectats" :key="index" class="row">
-                    <p class="col-6">{{ afectat.nom + " " + afectat.cognoms }}</p>
-                    <select name="" :id="'recursosToAssign' + index" class="col-4" @change="assignRecurs(index, afectat.id)">
+
+                    <button v-bind:class="{ afectatActiu: afectat.id == afectatActiu}" @click="setAfectatActual(afectat)" class="btn btn-outline-primary col-6" >{{ afectat.nom + " " + afectat.cognoms }}</button>
+                    <div class="col-4" v-if="afectat.id == afectatActiu &&
+                    (infoRecursos[afectat.id] == undefined)
+                    ">El recurs que marquis al mapa serà assignat a aquesta persona</div>
+                    <div :id="'afectat' + afectat.id" class="col-4" v-else></div>
+
+
+                    <!-- <select :name="'recursos'+ index" :id="'recursosToAssign' + index" class="col-4" @change="assignRecurs(index, afectat.id)">
                         <option value=""></option>
                         <option :value="recurso.id" v-for="(recurso, index) in freeRecursos" :key="index">
                             <p >{{recurso.codi}}</p>
                         </option>
-                    </select>
+                    </select> -->
                     <!-- <button>Assignar recurs</button> -->
                 </li>
             </ul>
@@ -151,7 +173,7 @@
   </div>
 
 
-    <button class="btn btn-primary" @click="createIncidencia()">
+    <button class="btn btn-primary mt-2" @click="afegirIncidencia()">
       Afegir incidencia
     </button>
 
@@ -188,10 +210,11 @@ export default {
       recursos: [],
       freeRecursos: [],
       infoRecursos: [],
-      municipis: [],
-      numDones: '',
-      numHomes: '',
       municipi: {},
+      municipis: [],
+      multiple: 'inicio',
+      multiplesAfectatsText: '',
+        afectatActiu: 0,
       afectatFormComponent,
       alertantFormComponent,
       incidencia: {
@@ -225,6 +248,28 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
+    setRecursFromMap(recurs){
+        debugger;
+        // Aquí el id del afectado aún es el que tiene en la array! Lo substituiremos al añadir la incidencia.
+        let infoRecurs = {
+            recursos_id: recurs.id,
+            hora_activacio: null,
+            hora_mobilitzacio: null,
+            hora_assistencia: null,
+            hora_transport: null,
+            hora_arribada_hospital: null,
+            hora_transferencia: null,
+            hora_finalitzacio: null,
+            prioritat: null,
+            desti: null,
+            afectat_id: this.afectatActiu
+        };
+        // Los ponemos en el mismo orden que los afectados para ahorrarnos problemas.
+        this.infoRecursos[this.afectatActiu]= infoRecurs;
+        this.incidencia.infoRecursos = this.infoRecursos;
+        // Hacemos que se muestre el recurso seleccionado en el tipo de recurso.
+        document.getElementById('afectat' + this.afectatActiu).innerHTML= recurs.codi
+    },
     createIncidencia() {
       console.log("submitting incidencia");
       console.log(this.incidencia);
@@ -246,8 +291,15 @@ export default {
           // me.errorMessage= error.response.data.error;
         });
     },
+    setAfectatActual(afectat){
+        this.afectatActiu= afectat.id;
+    },
+    isMultiple(){
+        this.multiple= true;
+    },
     nouAfectat(){
-      let afectat=  {}
+        this.multiple= false;
+      let afectat= {}
 
       this.afectats.push(afectat);
 
@@ -292,19 +344,19 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
-    // getAfectats(){
-    //     let me = this;
-    //   axios
-    //     .get("/afectats")
-    //     .then((response) => {
-    //       console.log(response.data);
-    //       me.afectats = response.data;
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     })
-    //     .finally(() => (this.loading = false));
-    // },
+    getAfectats(){
+        let me = this;
+      axios
+        .get("/afectats")
+        .then((response) => {
+          console.log(response.data);
+
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => (this.loading = false));
+    },
     getRecurs(){
         let me = this;
             axios
@@ -325,10 +377,11 @@ export default {
             }
         }
     },
-    getAfectatsIncidencia(){
-
+    notMultiple(){
+        this.multiple= false;
     },
     assignRecurs(index, afectatId){
+        // Aquí el id del afectado aún es el que tiene en la array! Lo substituiremos al añadir la incidencia.
         let recursId = Number(document.getElementById("recursosToAssign" + index).value);
         let infoRecurs = {
             recursos_id: recursId,
@@ -343,9 +396,9 @@ export default {
             desti: null,
             afectat_id: afectatId
         };
-        this.infoRecursos.push(infoRecurs);
+        // Los ponemos en el mismo orden que los afectados para ahorrarnos problemas.
+        this.infoRecursos[afectatId]= infoRecurs;
         this.incidencia.infoRecursos = this.infoRecursos;
-
     },
     clearInput() {
       this.incidencia = {
@@ -365,20 +418,38 @@ export default {
     updateAlertant(alertant){
         this.alertantIncidencia= alertant;
     },
-// Creamos objeto infoRecursos.
-    guardarAfectat(id){
-        debugger;
-        let afectat= {
-            afectat_id: id,
-            recursos_id: ''
-        }
-
-        this.incidencia.infoRecursos.push(afectat);
-
-    },
     toggleFormacio(){
         this.formacio = !this.formacio;
-    }
+    },
+    afegirIncidencia(){
+        console.log(this.afectats)
+        let me= this;
+        console.log(me.afectats)
+        me.afectats.forEach(function (afectat) {
+             // guardamos el id que marca el orden de la array para poder recuperarlo luego.
+            let oldId= afectat.id;
+            afectat.id= null;
+        axios
+        .post("/afectats", afectat)
+        .then(function (response) {
+          console.log(response);
+          debugger;
+        //   Actualizamos toda la info de afectat con el id que nos devuelve la base de datos.
+          afectat.id = response.data.id;
+          me.incidencia.infoRecursos[oldId].afectat_id= response.data.id;
+        })
+        .catch((error) => {
+          console.log(error.response.status);
+          console.log(error.response.data);
+          // me.errorMessage= error.response.data.error;
+
+        });
+        });
+
+        // PROBLEMA: Llega aquí antes de guardar todos los afectats.
+        // Ahora ya tenemos los datos para poder insertar la incidencia + incidencias_has_recursos
+        this.createIncidencia();
+  }
   },
   created() {
     //this.selectIncidencies();

@@ -61,7 +61,7 @@ class RecursosController extends Controller
      */
     public function show(Recursos $recurso)
     {
-        $recurso = Recursos::with('tipus_recursos')->find($recurso->id);
+        $recurso = Recursos::with(['tipus_recursos, incidencies_has_recursos.incidencies'])->find($recurso->id);
         return new RecursosResource($recurso);
     }
 
