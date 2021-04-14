@@ -157,7 +157,7 @@ class ApiIncidenciesController extends Controller
         try{
             $incidency->update();
             foreach ($infoRecursos as $infoRecurs) {
-                $ihr = new IncidenciesHasRecursos($infoRecurs);
+               /*  $ihr = new IncidenciesHasRecursos($infoRecurs);
                 $ihr->recursos_id = $infoRecurs['recursos_id'];
                 $ihr->hora_activacio = $infoRecurs['hora_activacio'];
                 $ihr->hora_mobilitzacio = $infoRecurs['hora_mobilitzacio'];
@@ -168,7 +168,7 @@ class ApiIncidenciesController extends Controller
                 $ihr->hora_finalitzacio = $infoRecurs['hora_finalitzacio'];
                 $ihr->prioritat = $infoRecurs['prioritat'];
                 $ihr->desti = $infoRecurs['desti'];
-                $ihr->afectat_id = $infoRecurs['afectat_id'];
+                $ihr->afectat_id = $infoRecurs['afectat_id']; */
 
 
                 $incidency->incidencies_has_recursos()->update(
