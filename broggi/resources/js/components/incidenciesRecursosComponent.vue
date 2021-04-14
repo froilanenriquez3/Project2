@@ -4,13 +4,13 @@
            <p id="incNumDisp"> </p>
            <div class="form-group row">
                <label class="col-2" for="">1: Hora Activacio</label>
-               <input class="col-2" type="time">
+               <input class="col-2" type="time" v-model="infoRecursos.hora_activacio">
 
                <label class="col-2" for="">2: Hora Mobilitzacio</label>
-               <input class="col-2" type="time" >
+               <input class="col-2" type="time" v-model="infoRecursos.hora_mobilitzacio">
 
                <label class="col-2" for="">3: Hora Assistencia</label>
-               <input class="col-2" type="time">
+               <input class="col-2" type="time" v-model="infoRecursos.hora_assistencia">
 
 
            </div>
@@ -18,13 +18,13 @@
            <div class="form-group row">
 
                 <label class="col-2" for="">4: Hora Transport</label>
-               <input class="col-2" type="time">
+               <input class="col-2" type="time" v-model="infoRecursos.hora_transport">
 
                 <label class="col-2" for="">5: Hora Arribada Hospital</label>
-               <input class="col-2" type="time">
+               <input class="col-2" type="time" v-model="infoRecursos.hora_arribada_hospital">
 
                 <label class="col-2" for="">6: Hora Transferencia</label>
-               <input class="col-2" type="time">
+               <input class="col-2" type="time" v-model="infoRecursos.hora_transferencia">
 
 
 
@@ -32,10 +32,10 @@
 
            <div class="form-group row">
                  <label class="col-2" for="">7: Hora Finalitzacio</label>
-               <input class="col-2" type="time">
+               <input class="col-2" type="time" v-model="infoRecursos.hora_finalitzacio">
 
                 <label class="col-2" for="">Desti</label>
-               <input class="col-6" type="text">
+               <input class="col-6" type="text" v-model="infoRecursos.desti">
            </div>
 
            <!-- <button class="btn btn-primary" id="submitForm" @click="submitForm()">Siguiente</button> -->
@@ -62,33 +62,36 @@
                 displayForm: false,
                 incidencies: [],
                 incidenciesRecursos: [],
+                arrayPos: null,
                 incidenciaId: null,
                 afectatId: null,
                 incidencia: null,
                 infoRecursos: {
-                    incidenciaId: null,
-                    activacio: null,
-                    mobilitzacio: null,
-                    assistencia: null,
-                    transport: null,
-                    arribadaHospital: null,
-                    transferencia: null,
-                    finalitzacio: null,
+                    incidencies_id: null,
+                    hora_activacio: null,
+                    hora_mobilitzacio: null,
+                    hora_assistencia: null,
+                    hora_transport: null,
+                    hora_arribada_hospital: null,
+                    hora_transferencia: null,
+                    hora_finalitzacio: null,
                     prioritat: null,
                     desti: null,
-                    afectatId:null
+                    afectat_id:null
                 }
             }
         },
         methods : {
             submitForm(){
-                console.log("Submitting form");
                 let me = this;
+                console.log("Submitting form");
+                me.infoRecursos.hora_transport = "12:00:01";
+                me.incidencia.incidencies_has_recursos[me.arrayPos] = me.infoRecursos;
+
                 axios
-                    .post("/incidenciesRecusos", me.incidencia)
+                    .put("/incidencies/"+me.incidencia.id, me.incidencia)
                     .then((response)=>{
                         console.log(response);
-
                     })
                     .catch((error)=>{
                         console.log(error.response.status);
@@ -145,6 +148,8 @@
                             && (me.incidenciesRecursos[i].incidencies_has_recursos[j].hora_finalitzacio == null)
                         ){
                             me.incidencia = me.incidenciesRecursos[i];
+                            me.infoRecursos = me.incidenciesRecursos[i].incidencies_has_recursos[j];
+                            me.arrayPos = j;
                             document.getElementById("incNumDisp").innerHTML = "Incidencia #" + me.incidencia.id;
                             this.displayForm = true;
                             console.log("FOUND!");
@@ -165,8 +170,9 @@
             console.log('Component mounted.')
             console.log(this.userrecursoid);
             this.selectIncidencies();
+            let me = this;
              document.getElementById("formSubmit").onclick = function () {
-                this.submitForm();
+                me.submitForm();
             };
         }
     }
