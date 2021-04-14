@@ -1,17 +1,9 @@
-@extends('templates.components')
-@section('title','Incidencies')
+@extends('templates/index')
 
 @section('links')
-
- <link href="{{ url('https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css')}}" rel='stylesheet' />
- <script src="{{ url('https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js')}}"></script>
-<link href="{{ url('https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css')}}" rel="stylesheet"/>
-<link rel="stylesheet" href=" {{ asset('../resources/css/incidencies/create.css?'.rand()) }}">
-<link rel="stylesheet" href=" {{ asset('../resources/css/incidencies/recursos.css?'.rand()) }}">
-<link rel="stylesheet" href="{{ asset('../resources/css/videoComponent.css?'.rand()) }}">
+{{-- <link rel="stylesheet" href="{{ asset('../resources/css/incidenciesRecursos/incidenciesRecursos.css?' . rand()) }}"> --}}
 @endsection
 
-{{-- Navbar teleoperador --}}
 @section('navbar')
 {{-- Add if for admin navbar --}}
 @if(Auth::user()->rols_id == 1)
@@ -21,19 +13,14 @@
 {{-- Navbar teleoperador --}}
     @include('partials.navbarTeleoperador')
 @endif
-@endsection
+
+@section('title','Incidencies')
 
 @section('table')
-<container-incidencies></container-incidencies>
 
-{{-- Table
-    Campos para mostrar (erase me):
-    Numero(id)
-    Calle
-    Descripcion (shortened)
-    Municipio
-    Numero telefono de alertante
-    --}}
 
 @endsection
 
+@section('addButton')
+    {{-- <a href="{{ url('/alertants/create') }}"> <button class="btn btn-primary" id="addButton">Afegir</button></a> --}}
+@endsection
