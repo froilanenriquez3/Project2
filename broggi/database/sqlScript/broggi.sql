@@ -268,7 +268,7 @@ DROP TABLE IF EXISTS `broggi`.`afectats` ;
 
 CREATE TABLE IF NOT EXISTS `broggi`.`afectats` (
   `id` INT NOT NULL auto_increment,
-  `telefon` INT(10) NOT NULL,
+  `telefon` INT(10) NULL,
   `cip` VARCHAR(45) NULL,
   `nom` VARCHAR(45) NULL,
   `cognoms` VARCHAR(45) NULL,
