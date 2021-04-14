@@ -48,7 +48,7 @@ Vue.component('afectat-form', require('./components/afectatFormComponent.vue').d
 Vue.component('container-incidencies', require('./components/ContainerIncidenciesComponent.vue').default);
 Vue.component('incidencies-recursos', require('./components/incidenciesRecursosComponent.vue').default);
 Vue.component('increc-table', require('./components/incidenciesRecursosTableComponent.vue').default);
-
+Vue.component('incidencies-table', require('./components/incidenciesTableComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
