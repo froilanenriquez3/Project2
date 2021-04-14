@@ -17,6 +17,7 @@ class IncidenciesHasRecursos extends Model
     protected $primaryKey= ['afectat_id', 'recursos_id', 'incidencies_id'];
     public $incrementing = false;
     public $timestamps= false;
+    protected $fillable = [0];
 
     public function incidencies(): BelongsTo{
         return $this->belongsTo(Incidencies::class, 'incidencies_id');
