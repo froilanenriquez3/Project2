@@ -357,6 +357,9 @@ export default {
             }
         }
     },
+    getAfectatsIncidencia(){
+
+    },
     assignRecurs(index, afectatId){
         let recursId = Number(document.getElementById("recursosToAssign" + index).value);
         let infoRecurs = {
