@@ -173,7 +173,7 @@
   </div>
 
 
-    <button class="btn btn-primary mt-2" @click="afegirIncidencia()">
+    <button class="btn btn-primary mt-2" @click="afegirIncidencia()" id="btnAddIncidencia">
       Afegir incidencia
     </button>
 
