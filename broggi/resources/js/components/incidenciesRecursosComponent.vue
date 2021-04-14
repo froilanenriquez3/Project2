@@ -26,8 +26,6 @@
                 <label class="col-2" for="">6: Hora Transferencia</label>
                <input class="col-2" type="time" v-model="infoRecursos.hora_transferencia">
 
-
-
            </div>
 
            <div class="form-group row">
@@ -85,7 +83,7 @@
             submitForm(){
                 let me = this;
                 console.log("Submitting form");
-                me.infoRecursos.hora_transport = "12:00:01";
+                // me.infoRecursos.hora_transport = "12:00:01";
                 me.incidencia.incidencies_has_recursos[me.arrayPos] = me.infoRecursos;
 
                 axios
@@ -119,7 +117,7 @@
                 axios
                     .get("/incidencies/" + id)
                     .then((response) => {
-                    console.log(response.data);
+                    // console.log(response.data);
                     me.incidencia = response.data;
                     me.incidenciesRecursos.push(me.incidencia);
                         me.findActiveIncidencia();
@@ -131,7 +129,7 @@
                     })
                     .finally(() => {
                         this.loading = false;
-                        console.log(me.incidencia);
+                        // console.log(me.incidencia);
                     });
 
             },
@@ -142,7 +140,7 @@
                 for(let i in me.incidenciesRecursos){
 
                     for(let j in me.incidenciesRecursos[i].incidencies_has_recursos){
-                        console.log("Incidencia recurso id:" + me.incidenciesRecursos[i].id);
+                        // console.log("Incidencia recurso id:" + me.incidenciesRecursos[i].id);
 
                         if((me.incidenciesRecursos[i].incidencies_has_recursos[j].recursos_id == me.userrecursoid )
                             && (me.incidenciesRecursos[i].incidencies_has_recursos[j].hora_finalitzacio == null)
@@ -168,7 +166,7 @@
         },
         mounted() {
             console.log('Component mounted.')
-            console.log(this.userrecursoid);
+            // console.log(this.userrecursoid);
             this.selectIncidencies();
             let me = this;
              document.getElementById("formSubmit").onclick = function () {

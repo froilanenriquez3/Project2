@@ -122,25 +122,26 @@ class ApiIncidenciesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Incidencies  $incidencies
+     * @param  \App\Models\Incidencies  $incidency
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Incidencies $incidencies)
+    public function update(Request $request, Incidencies $incidency)
     {
         DB::beginTransaction();
-        $incidencia = $incidencies;
 
-        $incidencia->data = $request->input('data');
-        $incidencia->hora = $request->input('hora');
-        $incidencia->telefon_alertant = $request->input('telefon_alertant');
-        $incidencia->adreca = $request->input('adreca');
-        $incidencia->adreca_complement = $request->input('adreca_complement');
-        $incidencia->descripcio = $request->input('descripcio');
-        $incidencia->nom_metge = $request->input('nom_metge');
-        $incidencia->tipus_incidencies_id = $request->input('tipus_incidencies_id');
-        $incidencia->alertants_id = $request->input('alertants_id');
-        $incidencia->municipis_id = $request->input('municipis_id');
-        $incidencia->duracion = $request->input('duracion');
+        // $incidency = Incidencies::find($request->input('id'));
+        // $incidencies->id = $request->input('id');
+        $incidency->hora = $request->input('hora');
+        $incidency->telefon_alertant = $request->input('telefon_alertant');
+        $incidency->data = $request->input('data');
+        $incidency->adreca = $request->input('adreca');
+        $incidency->adreca_complement = $request->input('adreca_complement');
+        $incidency->descripcio = $request->input('descripcio');
+        $incidency->nom_metge = $request->input('nom_metge');
+        $incidency->tipus_incidencies_id = $request->input('tipus_incidencies_id');
+        $incidency->alertants_id = $request->input('alertants_id');
+        $incidency->municipis_id = $request->input('municipis_id');
+        $incidency->duracion = $request->input('duracion');
 
         // Campo de la ternaria
         // $infoRecursos = [];
@@ -150,17 +151,13 @@ class ApiIncidenciesController extends Controller
         // $incidencia->telefon_alertant = '';
 
         $userId = Auth::user();
-
-        $incidencia->usuaris_id  = $userId->id;
-
+        $incidency->usuaris_id  = $userId->id;
         // $incidencia->usuaris_id  = 1;
 
         try{
-            $incidencia->save();
-
+            $incidency->update();
             foreach ($infoRecursos as $infoRecurs) {
-                $ihr = $incidencies->incidencies_has_recursos;
-                // $ihr->incidencies_id= $incidencia->id;
+                $ihr = new IncidenciesHasRecursos($infoRecurs);
                 $ihr->recursos_id = $infoRecurs['recursos_id'];
                 $ihr->hora_activacio = $infoRecurs['hora_activacio'];
                 $ihr->hora_mobilitzacio = $infoRecurs['hora_mobilitzacio'];
@@ -173,14 +170,31 @@ class ApiIncidenciesController extends Controller
                 $ihr->desti = $infoRecurs['desti'];
                 $ihr->afectat_id = $infoRecurs['afectat_id'];
 
-                $incidencia->incidencies_has_recursos()->save($ihr);
 
+                $incidency->incidencies_has_recursos()->update(
+                    [
+                        'recursos_id' => $infoRecurs['recursos_id'],
+                        'hora_activacio' => $infoRecurs['hora_activacio'],
+                        'hora_mobilitzacio' => $infoRecurs['hora_mobilitzacio'],
+                        'hora_assistencia' => $infoRecurs['hora_assistencia'],
+                        'hora_transport' => $infoRecurs['hora_transport'],
+                        'hora_arribada_hospital' => $infoRecurs['hora_arribada_hospital'],
+                        'hora_transferencia' => $infoRecurs['hora_transferencia'],
+                        'hora_finalitzacio' => $infoRecurs['hora_finalitzacio'],
+                        'prioritat' => $infoRecurs['prioritat'],
+                        'desti' => $infoRecurs['desti'],
+                        'afectat_id' => $infoRecurs['afectat_id'],
+                    ]
+                );
+
+                // $incidency->incidencies_has_recursos()->save($ihr);
             }
 
-            DB::commit();
-            $incidencia->refresh();
 
-            $response = (new IncidenciesResource($incidencia))
+            DB::commit();
+            $incidency->refresh();
+
+            $response = (new IncidenciesResource($incidency))
                     ->response()
                     ->setStatusCode(201);
         } catch (QueryException $ex) {

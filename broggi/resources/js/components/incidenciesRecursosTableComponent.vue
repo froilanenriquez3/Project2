@@ -5,14 +5,18 @@
                 <tr>
                     <th>Incidencia ID</th>
                     <th>Recurs ID</th>
+                    <th>Recurs Codi</th>
                     <th>Afectat ID</th>
+                    <th>Afectat Nom</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="incidencia in paginator(incidencies)" :key="incidencia.id">
-                    <td>{{ incidencia.recursos_id }}</td>
+                <tr v-for="incidencia in paginator(incRecs)" :key="incidencia.id">
                     <td>{{ incidencia.incidencies_id }}</td>
+                    <td>{{ incidencia.recursos_id }}</td>
+                    <td></td>
                     <td>{{ incidencia.afectat_id }}</td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
@@ -29,10 +33,12 @@
     export default {
         data(){
             return {
+                itemsToDisplay: [],
                 perPage: 5,
                 currentPage: 1,
                 totalRows: '',
-                incidencies: []
+                incidencies: [],
+                incRecs: []
             }
         },
         methods : {
@@ -47,22 +53,33 @@
             selectIncidencies(){
                  let me = this;
                 axios
-                    .get("")
+                    .get("/incidencies")
                     .then((response) => {
-                    console.log(response.data);
-                    // me.incidencies = response.data;
+                        me.incidencies = response.data;
+
+                    response.data.forEach(incidencia => {
+                        incidencia.incidencies_has_recursos.forEach( i =>{
+                             me.incRecs.push(i);
+                        });
+                    });
+
                     })
                     .catch((error) => {
                     console.log(error);
                     })
-                    .finally(() => (this.loading = false));
+                    .finally(() => {
+                        this.loading = false;
+                        console.log(me.incRecs);
+                        me.itemsToDisplay= me.incRecs;
+                        me.totalRows= me.itemsToDisplay.length;
+                    });
 
                 this.totalRows = this.incidencies.length;
             }
         },
         mounted() {
             console.log('Component mounted.')
-            // this.selectIncidencies();
+            this.selectIncidencies();
         }
     }
 </script>
