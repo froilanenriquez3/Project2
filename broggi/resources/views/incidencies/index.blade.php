@@ -18,6 +18,7 @@
 
 @section('table')
 
+<incidencies-table></incidencies-table>
 
 @endsection
 
