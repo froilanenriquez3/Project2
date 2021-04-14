@@ -127,8 +127,6 @@
                     })
                     .finally(() => {
                         this.loading = false;
-                        document.getElementById("incNumDisp").innerHTML += me.incidencia.id;
-                        this.displayForm = true;
                         console.log(me.incidencia);
                     });
 
@@ -138,6 +136,9 @@
                 for(let i in me.incidenciesRecursos){
                     if(me.incidenciesRecursos[i].incidencies_has_recursos.recursos_id == me.userrecursoid){
                         me.incidencia = me.incidenciesRecursos[i];
+                        document.getElementById("incNumDisp").innerHTML += me.incidencia.id;
+                        this.displayForm = true;
+                        console.log("FOUND!");
                     }
                 }
 
@@ -152,6 +153,7 @@
         },
         mounted() {
             console.log('Component mounted.')
+            console.log(this.userrecursoid);
             this.selectIncidencies();
              document.getElementById("formSubmit").onclick = function () {
                 this.submitForm();

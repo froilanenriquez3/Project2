@@ -21,7 +21,7 @@
             <!--PERFIL-->
 
             <li class="nav-cuenta dropdown ml-auto">
-                <a id="id-cuenta" class="nav-link dropdown-toggle navbarLinks"  data-toggle="dropdown"  href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-alt"></i> Perfil </a>
+                <a id="id-cuenta" class="nav-link dropdown-toggle navbarLinks"  data-toggle="dropdown"  href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-alt"></i> {{ Auth::user()->username}} </a>
                 <div class="dropdown-menu bg-primary">
                   <!--<a class="dropdown-item" href="#" style="color: white;"> Editar perfil</a>-->
                   <a class="dropdown-item logout" href="{{ url('/logout')}}" style="color: white;"><i class="fas fa-sign-out-alt"></i> Salir </a>
