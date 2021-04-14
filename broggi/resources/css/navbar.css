@@ -8,7 +8,7 @@ a.navbarLinks:focus{
     font-style: bold;
     background-color: #11ADC4;
     border-radius: 50px;
-    color:white;
+    color: white !important;
 
 }
 
@@ -16,7 +16,8 @@ a.navbarLinks:focus{
     background-color: white;
 }
 
-.logout:hover{
-    background-color: grey;
+.logout:hover {
+    background-color: #7B7F91;
+    border-radius: 50em;
 
 }
