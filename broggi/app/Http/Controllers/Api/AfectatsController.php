@@ -18,9 +18,8 @@ class AfectatsController extends Controller
      */
     public function index()
     {
-        $alertants= Afectats::all();
-
-        return AfectatsResource::collection($alertants);
+        $afectats = Afectats::all();
+        return AfectatsResource::collection($afectats);
     }
 
     /**

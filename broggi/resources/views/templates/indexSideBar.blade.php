@@ -9,7 +9,7 @@
 
     @include('partials.headerLinks')
 
-    <link rel="stylesheet" href="{{ asset('../resources/css/indexTemplateSB.css?' . rand()) }}">
+    {{-- <link rel="stylesheet" href="{{ asset('../resources/css/indexTemplateSB.css?' . rand()) }}"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('../resources/css/indexTemplateSB.css?' . rand()) }}"> --}}
     <link rel="stylesheet" href="{{ asset('../resources/css/sidebar.css?' . rand()) }}">
 
@@ -26,7 +26,7 @@
             @yield('sidebar')
         </aside>
 
-        <main>
+        <main id="indexSBMain">
             <header>
                 <nav id="navbarHolder">
                     @yield('navbar')

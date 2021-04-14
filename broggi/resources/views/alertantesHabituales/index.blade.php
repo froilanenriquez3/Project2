@@ -1,7 +1,7 @@
-@extends('templates/index')
+@extends('templates/indexSideBar')
 
 @section('links')
-{{-- <link rel="stylesheet" href="{{ asset('../resources/css/indexTemplateSB.css?'.rand())}}"> --}}
+{{-- <link rel="stylesheet" href="{{ asset('../resources/css/side.css?'.rand())}}"> --}}
 <link rel="stylesheet" href="{{ asset('../resources/css/alertants/alertantsIndex.css?' . rand()) }}">
 @endsection
 
@@ -19,6 +19,7 @@
 
 @section('sidebar')
  @include('templates.sideBar')
+    {{-- <sidebar-component></sidebar-component> --}}
 @endsection
 
 @section('table')

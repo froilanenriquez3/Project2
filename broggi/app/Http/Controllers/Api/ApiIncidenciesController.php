@@ -48,6 +48,7 @@ class ApiIncidenciesController extends Controller
         $incidencia->tipus_incidencies_id = $request->input('tipus_incidencies_id');
         $incidencia->alertants_id = $request->input('alertants_id');
         $incidencia->municipis_id = $request->input('municipis_id');
+        $incidencia->duracion = $request->input('duracion');
 
         // Campo de la ternaria
         // $infoRecursos = [];
@@ -66,17 +67,17 @@ class ApiIncidenciesController extends Controller
             foreach ($infoRecursos as $infoRecurs) {
                 $ihr= new IncidenciesHasRecursos();
                 // $ihr->incidencies_id= $incidencia->id;
-                $ihr->data = $infoRecurs['recursos_id'];
-                $ihr->data = $infoRecurs['hora_activacio'];
-                $ihr->data = $infoRecurs['hora_movilitzacio'];
-                $ihr->data = $infoRecurs['hora_assistencia'];
-                $ihr->data = $infoRecurs['hora_transport'];
-                $ihr->data = $infoRecurs['hora_arribada_hospital'];
-                $ihr->data = $infoRecurs['hora_transferencia'];
-                $ihr->data = $infoRecurs['hora_finalitzacio'];
-                $ihr->data = $infoRecurs['prioritat'];
-                $ihr->data = $infoRecurs['desti'];
-                $ihr->data = $infoRecurs['afectat_id'];
+                $ihr->recursos_id = $infoRecurs['recursos_id'];
+                $ihr->hora_activacio = $infoRecurs['hora_activacio'];
+                $ihr->hora_mobilitzacio = $infoRecurs['hora_mobilitzacio'];
+                $ihr->hora_assistencia = $infoRecurs['hora_assistencia'];
+                $ihr->hora_transport = $infoRecurs['hora_transport'];
+                $ihr->hora_arribada_hospital = $infoRecurs['hora_arribada_hospital'];
+                $ihr->hora_transferencia = $infoRecurs['hora_transferencia'];
+                $ihr->hora_finalitzacio = $infoRecurs['hora_finalitzacio'];
+                $ihr->prioritat = $infoRecurs['prioritat'];
+                $ihr->desti = $infoRecurs['desti'];
+                $ihr->afectat_id = $infoRecurs['afectat_id'];
 
                 $incidencia->incidencies_has_recursos()->save($ihr);
 

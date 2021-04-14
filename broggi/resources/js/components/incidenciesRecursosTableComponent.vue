@@ -10,9 +10,9 @@
             </thead>
             <tbody>
                 <tr v-for="incidencia in paginator(incidencies)" :key="incidencia.id">
-                    <td>{{ incidencia.id }}</td>
-                    <td>{{ incidencia.recurs }}</td>
-                    <td>{{ incidencia.afectat }}</td>
+                    <td>{{ incidencia.recursos_id }}</td>
+                    <td>{{ incidencia.incidencies_id }}</td>
+                    <td>{{ incidencia.afectat_id }}</td>
                 </tr>
             </tbody>
         </table>
@@ -45,76 +45,24 @@
                 return incidencies.slice(beginning , end );
             },
             selectIncidencies(){
-                this.incidencies = [
-                    {
-                        id: 1,
-                        recurs: 1,
-                        afectat: 1
-                    },
-                    {
-                        id: 2,
-                        recurs: 2,
-                        afectat: 2
-                    },
-                    {
-                        id: 3,
-                        recurs: 1,
-                        afectat: 1
-                    },
-                    {
-                        id: 4,
-                        recurs: 2,
-                        afectat: 2
-                    },{
-                        id: 5,
-                        recurs: 1,
-                        afectat: 1
-                    },
-                    {
-                        id: 6,
-                        recurs: 2,
-                        afectat: 2
-                    },{
-                        id: 7,
-                        recurs: 1,
-                        afectat: 1
-                    },
-                    {
-                        id: 8,
-                        recurs: 2,
-                        afectat: 2
-                    },{
-                        id: 9,
-                        recurs: 1,
-                        afectat: 1
-                    },
-                    {
-                        id: 10,
-                        recurs: 2,
-                        afectat: 2
-                    },
-                    {
-                        id: 8,
-                        recurs: 2,
-                        afectat: 2
-                    },{
-                        id: 9,
-                        recurs: 1,
-                        afectat: 1
-                    },
-                    {
-                        id: 10,
-                        recurs: 2,
-                        afectat: 2
-                    }
-                ];
+                 let me = this;
+                axios
+                    .get("")
+                    .then((response) => {
+                    console.log(response.data);
+                    // me.incidencies = response.data;
+                    })
+                    .catch((error) => {
+                    console.log(error);
+                    })
+                    .finally(() => (this.loading = false));
 
                 this.totalRows = this.incidencies.length;
             }
         },
         mounted() {
             console.log('Component mounted.')
-            this.selectIncidencies();
+            // this.selectIncidencies();
         }
     }
 </script>

@@ -2,6 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Usuaris;
+use App\Models\Afectats;
+use App\Models\Question;
+use App\Models\Recursos;
+use App\Models\Alertants;
+use App\Models\Municipis;
+use App\Models\Tipus_incidencias;
+use App\Models\IncidenciesHasRecursos;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -45,7 +53,7 @@ class Incidencies extends Model
     // }
 
     //Relación con la tabla afectats MN
-    public function incidencies_has_afectats()
+    public function afectats()
     {
         return $this->belongsToMany(Afectats::class, 'incidencies_has_afectats', 'incidencies_id', 'afectats_id');
     }

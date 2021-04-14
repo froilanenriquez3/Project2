@@ -1,6 +1,19 @@
-#tableNav{
+#app{
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#indexSBMain{
+    width: 80vw;
+}
+
+
+/* #tableNav{
     position: absolute;
     left: 1%;
     bottom: 1%;
 }
+ */
 

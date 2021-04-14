@@ -317,13 +317,13 @@ DROP TABLE IF EXISTS `broggi`.`incidencies_has_recursos` ;
 CREATE TABLE IF NOT EXISTS `broggi`.`incidencies_has_recursos` (
   `incidencies_id` INT NOT NULL,
   `recursos_id` INT NOT NULL,
-  `hora_activacio` DATETIME NULL,
-  `hora_mobilitzacio` DATETIME NULL,
-  `hora_assistencia` DATETIME NULL,
-  `hora_transport` DATETIME NULL,
-  `hora_arribada_hospital` DATETIME NULL,
-  `hora_transferencia` DATETIME NULL,
-  `hora_finalitzacio` DATETIME NULL,
+  `hora_activacio` TIME NULL,
+  `hora_mobilitzacio` TIME NULL,
+  `hora_assistencia` TIME NULL,
+  `hora_transport` TIME NULL,
+  `hora_arribada_hospital` TIME NULL,
+  `hora_transferencia` TIME NULL,
+  `hora_finalitzacio` TIME NULL,
   `prioritat` INT NULL,
   `desti` VARCHAR(100) NULL,
   `afectat_id` INT NOT NULL,
@@ -1599,5 +1599,8 @@ INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `l
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('55444', '1', '4', '41.4566', '1.93222');
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('77766', '0', '2', '41.5566', '1.951');
 
+insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Jack", 'Jack', 12, true, 1) ;
+insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Violet", 'Incredible', 12, true, 1) ;
+insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Dash", 'Incredible', 12, true, 1) ;
 
 COMMIT;

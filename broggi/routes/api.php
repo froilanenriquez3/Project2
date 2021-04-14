@@ -42,3 +42,4 @@ Route::apiResource('rols', RolsController::class);
 Route::apiResource('questions', QuestionController::class);
 Route::apiResource('answers', AnswerController::class);
 Route::apiResource('tipusincidencies', TipusIncidenciesController::class);
+Route::apiResource('afectats', AfectatsController::class);

@@ -1,7 +1,7 @@
 @extends('templates/index')
 
 @section('links')
-<link rel="stylesheet" href="{{ asset('../resources/css/alertants/alertantsIndex.css?' . rand()) }}">
+<link rel="stylesheet" href="{{ asset('../resources/css/incidenciesRecursos/incidenciesRecursos.css?' . rand()) }}">
 @endsection
 
 @section('navbar')
