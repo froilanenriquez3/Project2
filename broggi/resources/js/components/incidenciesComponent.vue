@@ -68,14 +68,14 @@
     </div>
 
     <!-- Tag Alertante -->
-    <alertant-form :municipis="municipis" @onSectionChanges="updateAlertant($event)" :section="section" v-show="section == 'Alertant' || section == 'Tot'"></alertant-form>
+    <alertant-form :municipis="municipis" :alertant="alertantIncidencia" :section="section" v-show="section == 'Alertant' || section == 'Tot'"></alertant-form>
 
     <!-- Tag Afectado -->
     <!-- add fa plus icon -->
     <div v-show="section == 'Afectats' || section == 'Tot'">
 
          <button @click="nouAfectat()" class="btn btn-primary">Afegir afectat</button>
-        <button @click="multiple()" class="btn btn-primary">Múltiples afectats (+3)</button>
+        <button class="btn btn-primary">Múltiples afectats (+3)</button>
 
         <div ref="afectatsContainer"></div>
 
@@ -292,19 +292,19 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
-    getAfectats(){
-        let me = this;
-      axios
-        .get("/afectats")
-        .then((response) => {
-          console.log(response.data);
-          me.afectats = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => (this.loading = false));
-    },
+    // getAfectats(){
+    //     let me = this;
+    //   axios
+    //     .get("/afectats")
+    //     .then((response) => {
+    //       console.log(response.data);
+    //       me.afectats = response.data;
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     })
+    //     .finally(() => (this.loading = false));
+    // },
     getRecurs(){
         let me = this;
             axios
@@ -384,7 +384,7 @@ export default {
     //this.selectIncidencies();
     this.getMunicipis();
     this.getTipusIncidencies();
-    this.getAfectats();
+    // this.getAfectats();
     this.getRecurs();
   },
   mounted() {
