@@ -18,5 +18,5 @@
 @endsection
 
 @section('form')
-    <incidencies-recursos></incidencies-recursos>
+    <incidencies-recursos :userrecursoid='{{ $recursosId }}'></incidencies-recursos>
 @endsection

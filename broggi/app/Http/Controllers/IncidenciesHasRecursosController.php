@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\IncidenciesHasRecursos;
-use App\Http\Controllers\Controller;
 use App\Models\Incidencies;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Models\IncidenciesHasRecursos;
 
 class IncidenciesHasRecursosController extends Controller
 {
@@ -27,8 +28,8 @@ class IncidenciesHasRecursosController extends Controller
      */
     public function create()
     {
-
-        return view('incidenciesHasRecursos.create');
+        $recursosId = Auth::user()->recursos_id;
+        return view('incidenciesHasRecursos.create', compact('recursosId'));
 
     }
 

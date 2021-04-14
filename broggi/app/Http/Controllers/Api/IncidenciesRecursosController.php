@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Models\Recursos;
 use App\Models\Incidencies;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\RecursosResource;
+use App\Http\Resources\IncidenciesResource;
 
 class IncidenciesRecursosController extends Controller
 {
@@ -15,7 +18,9 @@ class IncidenciesRecursosController extends Controller
      */
     public function index()
     {
-        //
+        $incidencies= Incidencies::all();
+
+        return IncidenciesResource::collection($incidencies);
     }
 
     /**
@@ -32,12 +37,13 @@ class IncidenciesRecursosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Incidencies  $incidencies
+     * @param  \App\Models\Recursos  $recurso
      * @return \Illuminate\Http\Response
      */
-    public function show(Incidencies $incidencies)
+    public function show(Recursos $recurso)
     {
-        //
+        $recurso = Recursos::with(['incidencies_has_recursos.incidencies', 'incidencies_has_recursos.afectats', 'tipus_recursos'])->find($recurso->id);
+        return new RecursosResource($recurso);
     }
 
     /**
