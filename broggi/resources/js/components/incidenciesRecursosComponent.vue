@@ -89,7 +89,23 @@
                 axios
                     .put("/incidencies/"+me.incidencia.id, me.incidencia)
                     .then((response)=>{
+                        alert("Formulari enviat correctament");
                         console.log(response);
+                        me.incidencia = null;
+                        me.infoRecursos = {
+                            incidencies_id: null,
+                            hora_activacio: null,
+                            hora_mobilitzacio: null,
+                            hora_assistencia: null,
+                            hora_transport: null,
+                            hora_arribada_hospital: null,
+                            hora_transferencia: null,
+                            hora_finalitzacio: null,
+                            prioritat: null,
+                            desti: null,
+                            afectat_id:null
+                        }
+
                     })
                     .catch((error)=>{
                         console.log(error.response.status);
