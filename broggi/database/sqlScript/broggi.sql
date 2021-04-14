@@ -268,7 +268,7 @@ DROP TABLE IF EXISTS `broggi`.`afectats` ;
 
 CREATE TABLE IF NOT EXISTS `broggi`.`afectats` (
   `id` INT NOT NULL auto_increment,
-  `telefon` INT(10) NOT NULL,
+  `telefon` INT(10) NULL,
   `cip` VARCHAR(45) NULL,
   `nom` VARCHAR(45) NULL,
   `cognoms` VARCHAR(45) NULL,
@@ -1563,8 +1563,10 @@ INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id)
 VALUES("Admin", "$2y$12$H1mP/taqaFI7rFpYWtrRNe3rofNVNz2v47cmxKSedKH28i7BpFbJS", "admin@mail.com", "Admin", "istrator", 1);
 INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id)
 VALUES("Cecos", "$2y$12$hrnHGBQFTxofRxmtPOPlAu72hmhqaEdJWT97OdnJ4C4IEaYMmacse", "admin@mail.com", "Tele", "operador", 2);
-INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id)
-VALUES("Recurs", "$2y$12$H1E5Jy3gzLqe9DaG9k7jHeAhMMUbeBgNXLGRAzJWPnkDmPz5Go0iG", "admin@mail.com", "Recurs", "mobil", 3);
+INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id, recursos_id)
+VALUES("Recurs", "$2y$12$H1E5Jy3gzLqe9DaG9k7jHeAhMMUbeBgNXLGRAzJWPnkDmPz5Go0iG", "admin@mail.com", "Recurs", "mobil", 3, 1);
+INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id, recursos_id)
+VALUES("Recurs2", "$2y$12$H1E5Jy3gzLqe9DaG9k7jHeAhMMUbeBgNXLGRAzJWPnkDmPz5Go0iG", "admin@mail.com", "Recurs", "mobil", 3, 2);
 
 INSERT INTO Question (questionText, incidencies_id)
 VALUES("What's the location of your emergency?", 1);

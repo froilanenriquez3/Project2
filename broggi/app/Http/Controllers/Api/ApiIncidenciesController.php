@@ -61,6 +61,8 @@ class ApiIncidenciesController extends Controller
 
         $incidencia->usuaris_id  = $userId->id;
 
+        // $incidencia->usuaris_id  = 1;
+
         try{
             $incidencia->save();
 
