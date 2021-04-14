@@ -50,7 +50,6 @@
         <br />
       </div>
 
-      <button @click="saveAfectat()" class="btn btn-primary">Guardar afectat</button>
     </div>
   </div>
 </template>
@@ -68,39 +67,14 @@ export default {
     data() {
         return {
             afectatId:'',
-            // afectat: {
-            //     telefon: '',
-            //     cip: '',
-            //     nom: '',
-            //     cogmoms: '',
-            //     edat: '',
-            //     te_cip: '',
-            //     sexes_id:''
-            // }
+
         }
         },
-
-  methods: {
-      saveAfectat(){
-          console.log(this.position)
-        //    let me = this;
-        //    axios
-        // .post("/afectats", me.afectat)
-        // .then(function (response) {
-        //   console.log(response);
-        // // Pasamos id para guardarlo en afectat_id en incidencias_has_recursos.
-        //   me.afectatId = response.data.id;
-        //   me.$emit('saveAfectat', me.afectatId)
-        // })
-        // .catch((error) => {
-        //   console.log(error.response.status);
-        //   console.log(error.response.data);
-        //   // me.errorMessage= error.response.data.error;
-        // });
-      }
-  },
   mounted() {
     console.log("Component mounted.");
+    // Id momentaneo para poder asignarlos a recursos. Cuando se inserten en la db,
+    // los substituiremos por el id que tengan allí.
+    this.afectat.id= this.position
   },
   computed: {
     // Añadimos la posición para que cada radio o checkbox de cada afectado tenga diferente ID.
@@ -118,11 +92,5 @@ export default {
         return 'checkbox'+this.position
     }
 },
- watch: {
-  section: function () {
-      debugger;
-      this.$emit('onChanges', [this.position, this.afectat]);
-  }
-}
 }
 </script>

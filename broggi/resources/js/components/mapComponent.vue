@@ -19,7 +19,14 @@ export default {
         direccioCompleta: {
             type: String,
             required: true
-        }
+        },
+        // afectatActiu:{
+        //     type: String,
+        //     required:true
+        // },
+        // recursosInfo:{
+        //     required:true
+        // }
     },
     data() {
         return {
@@ -55,6 +62,13 @@ export default {
         //     input.value= direccioCompleta
         // },
         // Para asignar un recurso a la incidencia
+        assignarRecurs(){
+            debugger;
+            this.$emit('assignantRecurs', this.recurs);
+
+            this.button.innerHTML = "Ja assignat!";
+            this.button.style.backgroundColor = "#fdc619";
+        },
         activarRecurs() {
             this.recurs.actiu = true;
             this.recursActivat= true;
@@ -136,12 +150,12 @@ export default {
                 button.classList.add("btn", "btn-primary", "marker-button");
                 button.setAttribute('data-id', element.id);
                 button.style.backgroundColor = this.color;
-                button.innerHTML = "Activar";
+                button.innerHTML = "Assignar";
                 if (element.actiu) {
                     button.setAttribute("disabled", true);
                 }
 
-                button.addEventListener("click", this.activarRecurs);
+                button.addEventListener("click", this.assignarRecurs);
 
                 div.appendChild(p)
                 div.appendChild(button)
@@ -180,13 +194,12 @@ export default {
             zoom: 7 // starting zoom
         });
 
-        let imageAccident= document.createElement("img");
-        imageAccident.classList.add('accidentImage');
-        imageAccident.setAttribute('src', 'img/marcadorAccident.svg');
+
         let geocoder = new MapboxGeocoder({
             accessToken: this.key,
+            placeholder: 'Buscar accident',
             marker: {
-                element: imageAccident,
+                color: "#FDC619"
             },
             mapboxgl: mapboxgl
 
@@ -195,6 +208,10 @@ export default {
         this.map.addControl(geocoder);
         this.map.addControl(new mapboxgl.NavigationControl());
 
+    // No funciona :(
+        this.map.on('load', () =>{
+            this.addRecursosToMap;
+        })
     },
 
     // watch: {
