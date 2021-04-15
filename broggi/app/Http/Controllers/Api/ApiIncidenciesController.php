@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Clases\Utilitat;
+use App\Models\Afectats;
 use App\Models\Incidencies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\QueryException;
-use App\Http\Resources\IncidenciesResource;
 use App\Models\IncidenciesHasRecursos;
+use Illuminate\Database\QueryException;
+use App\Http\Resources\AfectatsResource;
+use App\Http\Resources\IncidenciesResource;
 
 class ApiIncidenciesController extends Controller
 {
@@ -36,6 +38,30 @@ class ApiIncidenciesController extends Controller
     {
 
         DB::beginTransaction();
+        $afectats= $request->input('afectats');
+        $infoRecursos = $request->input('infoRecursos');
+
+        foreach ($afectats as $afectat) {
+            $afectatStore=new Afectats();
+
+           $positionArray= $afectat['id'];
+           $afectatStore->telefon= $afectat['telefon'];
+           $afectatStore->cip= $afectat['cip'];
+           $afectatStore->nom= $afectat['nom'];
+           $afectatStore->cognoms= $afectat['cognoms'];
+           $afectatStore->edat= $afectat['edat'];
+           $afectatStore->sexes_id= $afectat['sexes_id'];
+
+            $afectatStore->save();
+
+            $afectatNewId= $afectatStore->id;
+
+
+            $infoRecursos[$positionArray]['afectat_id']= $afectatNewId;
+
+    }
+
+
         $incidencia = new Incidencies();
 
         $incidencia->data = $request->input('data');
@@ -52,7 +78,7 @@ class ApiIncidenciesController extends Controller
 
         // Campo de la ternaria
         // $infoRecursos = [];
-        $infoRecursos = $request->input('infoRecursos');
+
 
 
         // $incidencia->telefon_alertant = '';
