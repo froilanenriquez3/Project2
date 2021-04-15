@@ -1,11 +1,11 @@
 <template>
 <div class="biggerContainer">
 
-    <div id="divModoFormacion">
+    <div id="divModoFormacion" v-bind:class="{ formacionActive: formacio }">
         <button class="btn btn-primary" @click="openModalVideo()" v-bind:class="{ hidden: !formacio }">Veure video CPR</button>
     <button class="btn btn-primary" @click="openModalHelp()" v-bind:class="{ hidden: !formacio }">Ajuda amb l'anglès</button>
     <div class="formacionBox">
-    <p>Modo formacion</p>
+    <p>Modo formación</p>
             <label class="switch" id="btnModoFormacion">
                 <input @click="toggleFormacio()" type="checkbox">
                 <span class="slider round"></span>
@@ -108,6 +108,7 @@
     <div v-show="section == 'Recursos'" id="recursosPage">
         <map-component @assignantRecurs="setRecursFromMap($event)" :direccioCompleta="direccio"></map-component>
         <div id="recursosAfectats">
+        <div v-show="!multiple">
             <ul>Clica sobre una persona per assignar-li un recurs
                 <li class="row">
                     <p class="col-6">Afectats</p>
@@ -130,17 +131,9 @@
                     </div>
 
                     <div  v-show="(infoRecursos[afectat.id] != undefined)" :id="'afectat' + afectat.id" class="col-4" ></div>
-
-
-                    <!-- <select :name="'recursos'+ index" :id="'recursosToAssign' + index" class="col-4" @change="assignRecurs(index, afectat.id)">
-                        <option value=""></option>
-                        <option :value="recurso.id" v-for="(recurso, index) in freeRecursos" :key="index">
-                            <p >{{recurso.codi}}</p>
-                        </option>
-                    </select> -->
-                    <!-- <button>Assignar recurs</button> -->
                 </li>
             </ul>
+        </div>
 
         </div>
 

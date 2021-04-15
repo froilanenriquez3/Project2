@@ -8,7 +8,8 @@
 }
 
 .container{
-    padding: 4%;
+    padding: 2% 4%;
+
 }
 .tableSection{
     /* border: solid rgb(0, 172, 194) 3px;
@@ -22,7 +23,7 @@
     /* border: solid rgb(0, 172, 194) 3px;
     border-radius: 5%; */
     width: 70%;
-    padding: 20px;
+    padding: 2px 20px;
      height: fit-content;
     display: flex;
      flex-wrap: wrap;
@@ -53,16 +54,16 @@
 }
 
 #divModoFormacion{
+    padding: 10px;
     display: flex;
     width: 100%;
-    margin-bottom: 5px;
     position: relative;
 }
 
 .formacionBox{
     display: flex;
     position: absolute;
-    right: 0;
+    right: 010px;
 }
 
 .afectatActiu{
@@ -126,4 +127,9 @@
 #btnAddIncidencia {
     position: relative;
     left: 80%;
+}
+
+.formacionActive{
+    background-color: rgba(0, 171, 194, 0.356);
+    border-radius: 10px;
 }

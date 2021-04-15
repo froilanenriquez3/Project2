@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <div id="alertantsDiv">
       <div>
         <h5>Alertant</h5>
