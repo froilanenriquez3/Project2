@@ -75,7 +75,8 @@
                     hora_finalitzacio: null,
                     prioritat: null,
                     desti: null,
-                    afectat_id:null
+                    afectat_id:null,
+                    recursos_id: null
                 }
             }
         },
@@ -84,6 +85,8 @@
                 let me = this;
                 // me.infoRecursos.hora_transport = "12:00:01";
                 me.incidencia.incidencies_has_recursos[me.arrayPos] = me.infoRecursos;
+                me.incidencia.saveRecurs = me.infoRecursos.recursos_id;
+                console.log("Save recurs:" + me.incidencia.saveRecurs);
 
                 axios
                     .put("/incidencies/"+me.incidencia.id, me.incidencia)
@@ -102,14 +105,17 @@
                             hora_finalitzacio: null,
                             prioritat: null,
                             desti: null,
-                            afectat_id:null
+                            afectat_id: null,
+                            recursos_id: null
                         }
                          window.location.href = "/Project2/broggi/public/incidenciesrecursos";
 
                     })
                     .catch((error)=>{
+                         console.log(error);
                         console.log(error.response.status);
                         console.log(error.response.data);
+
 
                     })
             },
@@ -133,7 +139,7 @@
                 axios
                     .get("/incidencies/" + id)
                     .then((response) => {
-                    console.log(response.data);
+                    // console.log(response.data);
                     me.incidencia = response.data;
                     me.incidenciesRecursos.push(me.incidencia);
                         me.findActiveIncidencia();
