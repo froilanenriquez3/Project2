@@ -183,7 +183,9 @@ class ApiIncidenciesController extends Controller
 
                 if ($request->input('saveRecurs') == $infoRecurs['recursos_id']) {
 
-                    $incidency->incidencies_has_recursos()->update(
+                    $incidency->incidencies_has_recursos()
+                    ->where('recursos_id', $infoRecurs['recursos_id'])
+                    ->update(
                         [
                             // 'recursos_id' => $infoRecurs['recursos_id'],
                             'hora_activacio'        => $infoRecurs['hora_activacio'],
