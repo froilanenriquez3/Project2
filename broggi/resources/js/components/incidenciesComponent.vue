@@ -75,8 +75,14 @@
     <!-- add fa plus icon -->
     <div v-show="section == 'Afectats' ">
 
-        <button @click="notMultiple()" class="btn btn-secondary">Menys de 3 afectats</button>
-        <button @click="isMultiple()" class="btn btn-secondary">Múltiples afectats (+3)</button>
+       <!--  <button @click="notMultiple()" class="btn btn-secondary">Menys de 3 afectats</button>
+        <button @click="isMultiple()" class="btn btn-secondary">Múltiples afectats (+3)</button> -->
+       <span>Menys de 3 afectats</span>
+        <label class="switch" id="btnNumAfectats">
+                <input type="checkbox" @click="toggleMultiple()">
+                <span class="slider round"></span>
+            </label>
+        <span>Múltiples afectats (+3)</span>
 
         <div v-show="multiple == false">
              <button @click="nouAfectat()" class="btn btn-warning">Nou Afectat</button>
@@ -213,7 +219,7 @@ export default {
       infoRecursos: [],
       municipi: {},
       municipis: [],
-      multiple: 'inicio',
+      multiple: false,
       multiplesAfectatsText: '',
         afectatActiu: 0,
       afectatFormComponent,
@@ -454,6 +460,10 @@ export default {
         // PROBLEMA: Llega aquí antes de guardar todos los afectats.
         // Ahora ya tenemos los datos para poder insertar la incidencia + incidencias_has_recursos
         this.createIncidencia();
+  },
+  toggleMultiple(){
+      if(this.multiple) this.multiple = false;
+      else this.multiple = true;
   }
   },
   created() {
@@ -465,6 +475,7 @@ export default {
   },
   mounted() {
     console.log("Component mounted.");
+    this.nouAfectat();
   },
   computed:{
       direccio: function(){
