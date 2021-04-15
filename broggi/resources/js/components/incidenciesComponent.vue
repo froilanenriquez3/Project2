@@ -116,7 +116,15 @@
 
                 <li v-for="(afectat, index) in afectats" :key="index" class="row">
 
-                    <button :id="'btnAfectat' + afectat.id" v-bind:class="{ afectatActiu: afectat.id == afectatActiu}" @click="setAfectatActual(afectat)" class="btn btn-outline-primary col-6" >{{ afectat.nom + " " + afectat.cognoms }}</button>
+                    <button :id="'btnAfectat' + afectat.id" v-bind:class="{ afectatActiu: afectat.id == afectatActiu}" @click="setAfectatActual(afectat)" class="btn btn-outline-primary col-6" >
+                        <p v-show="afectat.nom != ''">{{ afectat.nom }}</p>
+                        <p v-if="afectat.sexes_id == 1">
+                             {{ "Home de " + afectat.edat  + " anys"}}
+                        </p>
+                        <p v-else-if="afectat.sexes_id == 2">
+                             {{ "Dona de " + afectat.edat  + " anys"}}
+                        </p>
+                    </button>
                     <div v-if="afectat.id == afectatActiu && (infoRecursos[afectat.id] == undefined)" class="col-4" >
                         El recurs que marquis al mapa serà assignat a aquesta persona
                     </div>
