@@ -4,10 +4,11 @@ a.navbarLinks{
 }
 a.navbarLinks:hover,
 a.navbarLinks:active,
+/* a.navbarLinks:active:before, */
 a.navbarLinks:focus{
-    font-style: bold;
-    background-color: #11ADC4;
-    border-radius: 50px;
+    font-style: bold!important;
+    background-color: #11ADC4!important;
+    border-radius: 50px!important;
     color: white !important;
 
 }

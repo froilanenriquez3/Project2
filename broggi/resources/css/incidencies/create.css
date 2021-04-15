@@ -119,3 +119,8 @@
     height: 12%;
     width: 12%;
 }
+/* cambios para que el botón este a la derecha */
+.btn{
+    float: right!important
+
+}
