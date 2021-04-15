@@ -14,8 +14,9 @@
                 <tr v-for="incidencia in paginator(incRecs)" :key="incidencia.id">
                     <td>{{ incidencia.incidencies_id }}</td>
                     <td>{{ incidencia.recursos_id }}</td>
-                    <td></td>
+                    <td>{{ incidencia.recursos.codi}}</td>
                     <td>{{ incidencia.afectat_id }}</td>
+                    <td>{{ incidencia.afectats.nom}}</td>
                     <td></td>
                 </tr>
             </tbody>
@@ -38,6 +39,7 @@
                 currentPage: 1,
                 totalRows: '',
                 incidencies: [],
+                incidenciesRecursos: [],
                 incRecs: []
             }
         },
@@ -51,16 +53,20 @@
                 return incidencies.slice(beginning , end );
             },
             selectIncidencies(){
-                 let me = this;
+                let me = this;
                 axios
                     .get("/incidencies")
                     .then((response) => {
-                        me.incidencies = response.data;
+                    me.incidencies = response.data;
 
-                    response.data.forEach(incidencia => {
+                    /* response.data.forEach(incidencia => {
                         incidencia.incidencies_has_recursos.forEach( i =>{
                              me.incRecs.push(i);
                         });
+                    }); */
+
+                    me.incidencies.forEach( incidencia =>{
+                        me.showIncidenciaRecurso(incidencia.id);
                     });
 
                     })
@@ -69,13 +75,34 @@
                     })
                     .finally(() => {
                         this.loading = false;
-                        console.log(me.incRecs);
-                        me.itemsToDisplay= me.incRecs;
-                        me.totalRows= me.itemsToDisplay.length;
+                        console.log("Select incidencies" + me.incRecs);
+
                     });
 
                 this.totalRows = this.incidencies.length;
-            }
+            },
+             showIncidenciaRecurso(id){
+                let me = this;
+                axios
+                    .get("/incidencies/" + id)
+                    .then((response) => {
+                        // console.log(response.data);
+                        me.incidencia = response.data;
+                        me.incidencia.incidencies_has_recursos.forEach(i => {
+                            me.incRecs.push(i);
+                        });
+                        me.itemsToDisplay= me.incRecs;
+                        me.totalRows= me.itemsToDisplay.length;
+                    })
+                    .catch((error) => {
+                    console.log(error);
+                    })
+                    .finally(() => {
+                        this.loading = false;
+                        // console.log(me.incidencia);
+                    });
+
+            },
         },
         mounted() {
             console.log('Component mounted.')

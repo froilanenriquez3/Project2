@@ -82,7 +82,6 @@
         methods : {
             submitForm(){
                 let me = this;
-                console.log("Submitting form");
                 // me.infoRecursos.hora_transport = "12:00:01";
                 me.incidencia.incidencies_has_recursos[me.arrayPos] = me.infoRecursos;
 
@@ -105,6 +104,7 @@
                             desti: null,
                             afectat_id:null
                         }
+                         window.location.href = "/Project2/broggi/public/incidenciesrecursos";
 
                     })
                     .catch((error)=>{
@@ -133,7 +133,7 @@
                 axios
                     .get("/incidencies/" + id)
                     .then((response) => {
-                    // console.log(response.data);
+                    console.log(response.data);
                     me.incidencia = response.data;
                     me.incidenciesRecursos.push(me.incidencia);
                         me.findActiveIncidencia();
