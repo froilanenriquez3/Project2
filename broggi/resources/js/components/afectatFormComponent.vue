@@ -78,7 +78,7 @@ export default {
   },
   computed: {
     // Añadimos la posición para que cada radio o checkbox de cada afectado tenga diferente ID.
-      idRadioDona: function () {
+    idRadioDona: function () {
 
       return 'dona'+this.position;
   },

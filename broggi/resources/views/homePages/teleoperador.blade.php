@@ -11,25 +11,21 @@
 
 @section('content')
     <section id="menuSection">
-        <div id="incidencias">
-            <p>Formulario, nueva incidencia</p>
+        <a href="{{ url('/incidencies/create') }}">
             <div>
-                <a href=" {{ url('/incidencies/create') }}">Modo normal</a>
-                <p> | </p>
-                <a href="">Modo formacion</a>
+                <p>Nueva Incidencia</p>
             </div>
-
-        </div>
+        </a>
         <a href="{{ asset('/alertants') }}">
             <div>
                 <p>Alertantes habituales</p>
             </div>
         </a>
-        <div>
-            <a href="{{ url('/incidencies') }}">
-                <p>Incidencias</p>
-            </a>
-        </div>
+        <a href="{{ asset('/incidencies') }}">
+            <div>
+                <p>Ver incidencias</p>
+            </div>
+        </a>
         <a href="{{ asset('/recursos') }}">
             <div>
                 <p>Recursos móviles</p>
