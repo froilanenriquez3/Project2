@@ -38,6 +38,10 @@
     padding: 10px;
 }
 
+.formacionActive{
+    background-color: rgba(0, 171, 194, 0.479);
+}
+
 /* Modo formacion and helpbox styles */
 #modoFormacion{
     display: flex;
@@ -56,8 +60,10 @@
 #divModoFormacion{
     padding: 10px;
     display: flex;
+    align-items: center;
     width: 100%;
     position: relative;
+    border-radius: 10px;
 }
 
 .formacionBox{
@@ -67,8 +73,8 @@
 }
 
 .afectatActiu{
-    color: #e1157a;
-    border-color: #e1157a;
+    color: white;
+    background-color: #e1157b9f;
 }
 
 #formButtons {
@@ -77,14 +83,19 @@
     top: 10vh;
 }
 
-.map-container {
-    width: 65%;
-    height: 60%;
-}
 
 #mapa-mapbox {
     width: 50%;
     height: 50%;
+}
+
+.afectat{
+    cursor:pointer;
+}
+
+.afectat:hover{
+    color: white;
+    background-color: #e1157b9f;
 }
 
 .geocoder {
@@ -124,17 +135,11 @@
     width: 12%;
 }
 
-/* cambios para que el botón este a la derecha */
+#btnAddIncidencia {
+    position: relative;
+    left: 80%;
+}
 /* .btn{
     float: right!important
 
 } */
-#btnAddIncidencia {
-    position: relative;
-
-}
-
-.formacionActive{
-    background-color: rgba(0, 171, 194, 0.356);
-    border-radius: 10px;
-}

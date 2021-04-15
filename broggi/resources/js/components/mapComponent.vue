@@ -63,11 +63,16 @@ export default {
         // },
         // Para asignar un recurso a la incidencia
         assignarRecurs(){
+            this.recurs.actiu = true;
+            this.recursActivat= true;
             debugger;
             this.$emit('assignantRecurs', this.recurs);
 
             this.button.innerHTML = "Ja assignat!";
+            this.button.setAttribute('disabled', true);
             this.button.style.backgroundColor = "#fdc619";
+            this.button.style.color= "black";
+
         },
         activarRecurs() {
             this.recurs.actiu = true;
@@ -198,6 +203,7 @@ export default {
         let geocoder = new MapboxGeocoder({
             accessToken: this.key,
             placeholder: 'Buscar accident',
+            zoom: 12,
             marker: {
                 color: "#FDC619"
             },

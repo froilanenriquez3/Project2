@@ -85,7 +85,7 @@
         <span>Múltiples afectats (+3)</span>
 
         <div v-show="multiple == false">
-             <button @click="nouAfectat()" class="btn btn-warning">Nou Afectat</button>
+             <button @click="nouAfectat()" class="btn btn-primary">Nou Afectat</button>
              <div  ref="afectatsContainer"></div>
         </div>
 
@@ -106,37 +106,43 @@
 
     <!-- TAG RECURSOS -->
     <div v-show="section == 'Recursos'" id="recursosPage">
+        <div id="insideRecursos" v-show="!multiple">
         <map-component @assignantRecurs="setRecursFromMap($event)" :direccioCompleta="direccio"></map-component>
-        <div id="recursosAfectats">
-        <div v-show="!multiple">
-            <ul>Clica sobre una persona per assignar-li un recurs
-                <li class="row">
-                    <p class="col-6">Afectats</p>
-                    <p class="col-4">Recursos</p>
-                </li>
 
-                <li v-for="(afectat, index) in afectats" :key="index" class="row">
+        <div id="recursosAfectats"><table class="table">
+  <thead>
+    <tr class="row">
+      <th class="col-6">Afectat</th>
+      <th class="col-6">Recurs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="row" v-for="(afectat, index) in afectats" :key="index">
+      <td class="afectat col-6" :id="'btnAfectat' + afectat.id"  @click="setAfectatActual(afectat)" v-bind:class="{ afectatActiu: afectat.id == afectatActiu}">
+          <div >
+              <p v-if="afectat.sexes_id == 1">Home
+                            <span v-show="afectat.edat != ''">{{', '+ afectat.edat  + " anys "}}</span>
+                              <span v-show="afectat.nom != ''">{{ '('+afectat.nom+')' }}</span>
 
-                    <button :id="'btnAfectat' + afectat.id" v-bind:class="{ afectatActiu: afectat.id == afectatActiu}" @click="setAfectatActual(afectat)" class="btn btn-outline-primary col-6" >
-                        <p v-show="afectat.nom != ''">{{ afectat.nom }}</p>
-                        <p v-if="afectat.sexes_id == 1">
-                             {{ "Home de " + afectat.edat  + " anys"}}
+                        <p v-else-if="afectat.sexes_id == 2">Dona
+                           <span v-show="afectat.edat != ''">{{', '+ afectat.edat  + " anys "}}</span>
+                              <span v-show="afectat.nom != ''">{{'(' +afectat.nom+ ')' }}</span>
                         </p>
-                        <p v-else-if="afectat.sexes_id == 2">
-                             {{ "Dona de " + afectat.edat  + " anys"}}
-                        </p>
-                    </button>
-                    <div v-if="afectat.id == afectatActiu && (infoRecursos[afectat.id] == undefined)" class="col-4" >
-                        El recurs que marquis al mapa serà assignat a aquesta persona
+          </div>
+      </td>
+      <td class="col-6">
+           <div v-show="afectat.id == afectatActiu && (infoRecursos[afectat.id] == undefined)">
+                        assigna un recurs del mapa
                     </div>
+            <div  v-show="(infoRecursos[afectat.id] != undefined)" :id="'afectat' + afectat.id" ></div>
+      </td>
 
-                    <div  v-show="(infoRecursos[afectat.id] != undefined)" :id="'afectat' + afectat.id" class="col-4" ></div>
-                </li>
-            </ul>
+    </tr>
+  </tbody>
+</table>
+
         </div>
-
-        </div>
-
+</div>
     </div>
 
 
@@ -258,7 +264,6 @@ export default {
         .finally(() => (this.loading = false));
     },
     setRecursFromMap(recurs){
-        // debugger;
         // Aquí el id del afectado aún es el que tiene en la array! Lo substituiremos al añadir la incidencia.
         let infoRecurs = {
             recursos_id: recurs.id,
