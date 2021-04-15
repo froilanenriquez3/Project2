@@ -105,6 +105,7 @@
                             desti: null,
                             afectat_id:null
                         }
+                         window.location.href = "/Project2/broggi/public/incidenciesrecursos";
 
                     })
                     .catch((error)=>{
@@ -133,7 +134,7 @@
                 axios
                     .get("/incidencies/" + id)
                     .then((response) => {
-                    // console.log(response.data);
+                    console.log(response.data);
                     me.incidencia = response.data;
                     me.incidenciesRecursos.push(me.incidencia);
                         me.findActiveIncidencia();
