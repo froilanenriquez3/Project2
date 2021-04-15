@@ -12,17 +12,17 @@
             </label>
             </div>
         </div>
-  <div class="container" >
+    <div class="container" >
 
         <!-- TAG INCIDENCIAS -->
         <div v-show="section == 'Incident'">
         <div class="form-group row">
-      <label class="col-2" for="">Tipus Incidencia</label>
-      <select class="col-10" name="tipus_incidencia" v-model="incidencia.tipus_incidencies_id">
-        <option v-for="tipo in tipusIncidencies" :key="tipo.id" v-bind:value="tipo.id">
-          {{ tipo.tipus }}
-        </option>
-      </select>
+        <label class="col-2" for="">Tipus Incidencia</label>
+        <select class="col-10" name="tipus_incidencia" v-model="incidencia.tipus_incidencies_id">
+            <option v-for="tipo in tipusIncidencies" :key="tipo.id" v-bind:value="tipo.id">
+            {{ tipo.tipus }}
+            </option>
+        </select>
     </div>
 
     <div class="form-group row">
@@ -47,13 +47,13 @@
         </option>
       </select>
     </div>
-
+<!--  -->
     <div class="form-group row">
       <label class="col-2" for="">Hora</label>
-      <input class="col-2" type="time" name="" v-model="incidencia.hora" />
+      <input class="col-3" type="time" name="" v-model="incidencia.hora" />
 
       <label class="col-2" for="">Data</label>
-      <input class="col-2" type="date" name="" v-model="incidencia.data" />
+      <input class="col-3" type="date" name="" v-model="incidencia.data" />
     </div>
 
     <div class="form-group row">
