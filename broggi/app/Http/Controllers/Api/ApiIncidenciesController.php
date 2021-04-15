@@ -212,6 +212,8 @@ class ApiIncidenciesController extends Controller
             $response = (new IncidenciesResource($incidency))
                 ->response()
                 ->setStatusCode(201);
+
+            $request->session()->flash('message', "Incidencia afegida correctament");
         } catch (QueryException $ex) {
             DB::rollBack();
             $message = Utilitat::errorMessage($ex);

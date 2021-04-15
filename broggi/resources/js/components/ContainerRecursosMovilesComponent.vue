@@ -33,3 +33,8 @@ import TipusRecursosComponent from './tipusRecursosComponent';
         }
     }
 </script>
+<style scoped>
+    .recursosMovilsContainer, .tiposContainer {
+        width: 70vw;
+    }
+</style>

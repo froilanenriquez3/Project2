@@ -8,6 +8,9 @@
                     <th>Recurs Codi</th>
                     <th>Afectat ID</th>
                     <th>Afectat Nom</th>
+                    <th>Desti</th>
+                    <th>Hora Activacio</th>
+                    <th>Hora Finalitzacio</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,7 +20,9 @@
                     <td>{{ incidencia.recursos.codi}}</td>
                     <td>{{ incidencia.afectat_id }}</td>
                     <td>{{ incidencia.afectats.nom}}</td>
-                    <td></td>
+                    <td>{{ incidencia.desti}}</td>
+                    <td>{{ incidencia.hora_activacio}}</td>
+                    <td>{{ incidencia.hora_finalitzacio}}</td>
                 </tr>
             </tbody>
         </table>
