@@ -23,7 +23,7 @@ class ApiIncidenciesController extends Controller
      */
     public function index()
     {
-        $incidencies= Incidencies::all();
+        $incidencies = Incidencies::all();
 
         return IncidenciesResource::collection($incidencies);
     }
@@ -38,28 +38,27 @@ class ApiIncidenciesController extends Controller
     {
 
         DB::beginTransaction();
-        $afectats= $request->input('afectats');
+        $afectats = $request->input('afectats');
         $infoRecursos = $request->input('infoRecursos');
 
         foreach ($afectats as $afectat) {
-            $afectatStore=new Afectats();
+            $afectatStore = new Afectats();
 
-           $positionArray= $afectat['id'];
-           $afectatStore->telefon= $afectat['telefon'];
-           $afectatStore->cip= $afectat['cip'];
-           $afectatStore->nom= $afectat['nom'];
-           $afectatStore->cognoms= $afectat['cognoms'];
-           $afectatStore->edat= $afectat['edat'];
-           $afectatStore->sexes_id= $afectat['sexes_id'];
+            $positionArray = $afectat['id'];
+            $afectatStore->telefon = $afectat['telefon'];
+            $afectatStore->cip = $afectat['cip'];
+            $afectatStore->nom = $afectat['nom'];
+            $afectatStore->cognoms = $afectat['cognoms'];
+            $afectatStore->edat = $afectat['edat'];
+            $afectatStore->sexes_id = $afectat['sexes_id'];
 
             $afectatStore->save();
 
-            $afectatNewId= $afectatStore->id;
+            $afectatNewId = $afectatStore->id;
 
 
-            $infoRecursos[$positionArray]['afectat_id']= $afectatNewId;
-
-    }
+            $infoRecursos[$positionArray]['afectat_id'] = $afectatNewId;
+        }
 
 
         $incidencia = new Incidencies();
@@ -89,11 +88,11 @@ class ApiIncidenciesController extends Controller
 
         // $incidencia->usuaris_id  = 1;
 
-        try{
+        try {
             $incidencia->save();
 
             foreach ($infoRecursos as $infoRecurs) {
-                $ihr= new IncidenciesHasRecursos();
+                $ihr = new IncidenciesHasRecursos();
                 // $ihr->incidencies_id= $incidencia->id;
                 $ihr->recursos_id = $infoRecurs['recursos_id'];
                 $ihr->hora_activacio = $infoRecurs['hora_activacio'];
@@ -108,20 +107,18 @@ class ApiIncidenciesController extends Controller
                 $ihr->afectat_id = $infoRecurs['afectat_id'];
 
                 $incidencia->incidencies_has_recursos()->save($ihr);
-
             }
 
             DB::commit();
             $incidencia->refresh();
 
             $response = (new IncidenciesResource($incidencia))
-                    ->response()
-                    ->setStatusCode(201);
+                ->response()
+                ->setStatusCode(201);
         } catch (QueryException $ex) {
             DB::rollBack();
             $message = Utilitat::errorMessage($ex);
             $response = \response()->json(['error' => $message], 400);
-
         }
 
 
@@ -138,10 +135,9 @@ class ApiIncidenciesController extends Controller
     public function show(Incidencies $incidency)
     {
 
-           $incidency= Incidencies::with(['incidencies_has_recursos.recursos', 'incidencies_has_recursos.afectats'])->find($incidency->id);
+        $incidency = Incidencies::with(['incidencies_has_recursos.recursos', 'incidencies_has_recursos.afectats'])->find($incidency->id);
 
-            return new IncidenciesResource($incidency);
-
+        return new IncidenciesResource($incidency);
     }
 
     /**
@@ -171,7 +167,6 @@ class ApiIncidenciesController extends Controller
 
         // Campo de la ternaria
         // $infoRecursos = [];
-        $infoRecursos = $request->input('incidencies_has_recursos');
 
 
         // $incidencia->telefon_alertant = '';
@@ -180,38 +175,32 @@ class ApiIncidenciesController extends Controller
         $incidency->usuaris_id  = $userId->id;
         // $incidencia->usuaris_id  = 1;
 
-        try{
-            $incidency->update();
+        $infoRecursos = $request->input('incidencies_has_recursos');
+
+        try {
+            // $incidency->update();
             foreach ($infoRecursos as $infoRecurs) {
-               /*  $ihr = new IncidenciesHasRecursos($infoRecurs);
-                $ihr->recursos_id = $infoRecurs['recursos_id'];
-                $ihr->hora_activacio = $infoRecurs['hora_activacio'];
-                $ihr->hora_mobilitzacio = $infoRecurs['hora_mobilitzacio'];
-                $ihr->hora_assistencia = $infoRecurs['hora_assistencia'];
-                $ihr->hora_transport = $infoRecurs['hora_transport'];
-                $ihr->hora_arribada_hospital = $infoRecurs['hora_arribada_hospital'];
-                $ihr->hora_transferencia = $infoRecurs['hora_transferencia'];
-                $ihr->hora_finalitzacio = $infoRecurs['hora_finalitzacio'];
-                $ihr->prioritat = $infoRecurs['prioritat'];
-                $ihr->desti = $infoRecurs['desti'];
-                $ihr->afectat_id = $infoRecurs['afectat_id']; */
 
+                if ($request->input('saveRecurs') == $infoRecurs['recursos_id']) {
 
-                $incidency->incidencies_has_recursos()->update(
-                    [
-                        'recursos_id' => $infoRecurs['recursos_id'],
-                        'hora_activacio' => $infoRecurs['hora_activacio'],
-                        'hora_mobilitzacio' => $infoRecurs['hora_mobilitzacio'],
-                        'hora_assistencia' => $infoRecurs['hora_assistencia'],
-                        'hora_transport' => $infoRecurs['hora_transport'],
-                        'hora_arribada_hospital' => $infoRecurs['hora_arribada_hospital'],
-                        'hora_transferencia' => $infoRecurs['hora_transferencia'],
-                        'hora_finalitzacio' => $infoRecurs['hora_finalitzacio'],
-                        'prioritat' => $infoRecurs['prioritat'],
-                        'desti' => $infoRecurs['desti'],
-                        'afectat_id' => $infoRecurs['afectat_id'],
-                    ]
-                );
+                    $incidency->incidencies_has_recursos()
+                    ->where('recursos_id', $infoRecurs['recursos_id'])
+                    ->update(
+                        [
+                            // 'recursos_id' => $infoRecurs['recursos_id'],
+                            'hora_activacio'        => $infoRecurs['hora_activacio'],
+                            'hora_mobilitzacio'     => $infoRecurs['hora_mobilitzacio'],
+                            'hora_assistencia'      => $infoRecurs['hora_assistencia'],
+                            'hora_transport'        => $infoRecurs['hora_transport'],
+                            'hora_arribada_hospital'=> $infoRecurs['hora_arribada_hospital'],
+                            'hora_transferencia'    => $infoRecurs['hora_transferencia'],
+                            'hora_finalitzacio'     => $infoRecurs['hora_finalitzacio'],
+                            'prioritat'             => $infoRecurs['prioritat'],
+                            'desti'                 => $infoRecurs['desti'],
+                            // 'afectat_id'            => $infoRecurs['afectat_id'],
+                        ]
+                    );
+                }
 
                 // $incidency->incidencies_has_recursos()->save($ihr);
             }
@@ -221,13 +210,12 @@ class ApiIncidenciesController extends Controller
             $incidency->refresh();
 
             $response = (new IncidenciesResource($incidency))
-                    ->response()
-                    ->setStatusCode(201);
+                ->response()
+                ->setStatusCode(201);
         } catch (QueryException $ex) {
             DB::rollBack();
             $message = Utilitat::errorMessage($ex);
             $response = \response()->json(['error' => $message], 400);
-
         }
 
 
@@ -243,17 +231,16 @@ class ApiIncidenciesController extends Controller
      */
     public function destroy(Incidencies $incidencies)
     {
-        try{
+        try {
             $incidencies->delete();
-            $response= \response()
-                        ->json(['message'=>'Registro borrado correctamente'], 200);
-        } catch (QueryException $ex){
+            $response = \response()
+                ->json(['message' => 'Registro borrado correctamente'], 200);
+        } catch (QueryException $ex) {
             $message = Utilitat::errorMessage($ex);
-            $response= \response()
-                        ->json(['error'=> $message], 400);
+            $response = \response()
+                ->json(['error' => $message], 400);
         }
 
-            return $response;
-        }
-
+        return $response;
+    }
 }
