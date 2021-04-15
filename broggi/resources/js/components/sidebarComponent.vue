@@ -27,7 +27,7 @@
         data() {
         return {
             recursos: [ 'Recursos' , 'Tipus de Recursos'],
-            incidencies: [ 'Incident', 'Alertant', 'Afectats', 'Recursos', 'Tot'],
+            incidencies: [ 'Incident', 'Alertant', 'Afectats', 'Recursos'],
             selectedList: [],
             selectedSection: ''
         }

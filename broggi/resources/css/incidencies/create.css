@@ -55,7 +55,7 @@
 #divModoFormacion{
     display: flex;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     position: relative;
 }
 
@@ -65,7 +65,10 @@
     right: 0;
 }
 
-
+.afectatActiu{
+    color: #e1157a;
+    border-color: #e1157a;
+}
 
 #formButtons {
     position: relative;
@@ -74,13 +77,13 @@
 }
 
 .map-container {
-    width: 50%;
+    width: 65%;
     height: 60%;
 }
 
 #mapa-mapbox {
-    width: 40%;
-    height: 40%;
+    width: 50%;
+    height: 50%;
 }
 
 .geocoder {
@@ -119,8 +122,12 @@
     height: 12%;
     width: 12%;
 }
+
 /* cambios para que el botón este a la derecha */
 .btn{
     float: right!important
-
+}
+#btnAddIncidencia {
+    position: relative;
+    left: 80%;
 }

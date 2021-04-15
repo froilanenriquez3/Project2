@@ -5,14 +5,19 @@
                 <tr>
                     <th>Incidencia ID</th>
                     <th>Recurs ID</th>
+                    <th>Recurs Codi</th>
                     <th>Afectat ID</th>
+                    <th>Afectat Nom</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="incidencia in paginator(incidencies)" :key="incidencia.id">
-                    <td>{{ incidencia.id }}</td>
-                    <td>{{ incidencia.recurs }}</td>
-                    <td>{{ incidencia.afectat }}</td>
+                <tr v-for="incidencia in paginator(incRecs)" :key="incidencia.id">
+                    <td>{{ incidencia.incidencies_id }}</td>
+                    <td>{{ incidencia.recursos_id }}</td>
+                    <td>{{ incidencia.recursos.codi}}</td>
+                    <td>{{ incidencia.afectat_id }}</td>
+                    <td>{{ incidencia.afectats.nom}}</td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
@@ -29,10 +34,13 @@
     export default {
         data(){
             return {
+                itemsToDisplay: [],
                 perPage: 5,
                 currentPage: 1,
                 totalRows: '',
-                incidencies: []
+                incidencies: [],
+                incidenciesRecursos: [],
+                incRecs: []
             }
         },
         methods : {
@@ -45,72 +53,56 @@
                 return incidencies.slice(beginning , end );
             },
             selectIncidencies(){
-                this.incidencies = [
-                    {
-                        id: 1,
-                        recurs: 1,
-                        afectat: 1
-                    },
-                    {
-                        id: 2,
-                        recurs: 2,
-                        afectat: 2
-                    },
-                    {
-                        id: 3,
-                        recurs: 1,
-                        afectat: 1
-                    },
-                    {
-                        id: 4,
-                        recurs: 2,
-                        afectat: 2
-                    },{
-                        id: 5,
-                        recurs: 1,
-                        afectat: 1
-                    },
-                    {
-                        id: 6,
-                        recurs: 2,
-                        afectat: 2
-                    },{
-                        id: 7,
-                        recurs: 1,
-                        afectat: 1
-                    },
-                    {
-                        id: 8,
-                        recurs: 2,
-                        afectat: 2
-                    },{
-                        id: 9,
-                        recurs: 1,
-                        afectat: 1
-                    },
-                    {
-                        id: 10,
-                        recurs: 2,
-                        afectat: 2
-                    },
-                    {
-                        id: 8,
-                        recurs: 2,
-                        afectat: 2
-                    },{
-                        id: 9,
-                        recurs: 1,
-                        afectat: 1
-                    },
-                    {
-                        id: 10,
-                        recurs: 2,
-                        afectat: 2
-                    }
-                ];
+                let me = this;
+                axios
+                    .get("/incidencies")
+                    .then((response) => {
+                    me.incidencies = response.data;
+
+                    /* response.data.forEach(incidencia => {
+                        incidencia.incidencies_has_recursos.forEach( i =>{
+                             me.incRecs.push(i);
+                        });
+                    }); */
+
+                    me.incidencies.forEach( incidencia =>{
+                        me.showIncidenciaRecurso(incidencia.id);
+                    });
+
+                    })
+                    .catch((error) => {
+                    console.log(error);
+                    })
+                    .finally(() => {
+                        this.loading = false;
+                        console.log("Select incidencies" + me.incRecs);
+
+                    });
 
                 this.totalRows = this.incidencies.length;
-            }
+            },
+             showIncidenciaRecurso(id){
+                let me = this;
+                axios
+                    .get("/incidencies/" + id)
+                    .then((response) => {
+                        // console.log(response.data);
+                        me.incidencia = response.data;
+                        me.incidencia.incidencies_has_recursos.forEach(i => {
+                            me.incRecs.push(i);
+                        });
+                        me.itemsToDisplay= me.incRecs;
+                        me.totalRows= me.itemsToDisplay.length;
+                    })
+                    .catch((error) => {
+                    console.log(error);
+                    })
+                    .finally(() => {
+                        this.loading = false;
+                        // console.log(me.incidencia);
+                    });
+
+            },
         },
         mounted() {
             console.log('Component mounted.')
