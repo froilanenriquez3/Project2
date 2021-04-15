@@ -125,9 +125,10 @@
 }
 
 /* cambios para que el botón este a la derecha */
-.btn{
+/* .btn{
     float: right!important
-}
+
+} */
 #btnAddIncidencia {
     position: relative;
 
