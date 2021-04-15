@@ -15,16 +15,15 @@
           <tr v-for="tipo in paginator(tipus_alertants)" :key="tipo.id">
             <th scope="row">{{ tipo.id }}</th>
             <td>{{ tipo.tipus }}</td>
-            <td>
+            <td >
               <button
                 type="submit"
                 class="btn btn-warning btn-sm d-flex"
-                @click="selectAction('editar', tipo)"
-              >
+                @click="selectAction('editar', tipo)">
                 Editar
               </button>
             </td>
-            <td>
+            <td >
               <button
                 id="deleteB"
                 type="submit"
@@ -267,3 +266,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+    .tiposContainer{
+        width: 100vw;
+    }
+
+</style>
