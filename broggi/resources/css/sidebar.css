@@ -3,10 +3,11 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+
 }
 
 .logo{
-    visibility: hidden;
+     visibility: hidden;
 }
 
 
@@ -27,6 +28,11 @@ aside {
     min-height: 100%;
     width: 20%;
     background-color: white;
+    /* position: fixed!important;
+    top:0!important; */
+
+
+
 
 }
 

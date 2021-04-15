@@ -124,6 +124,10 @@
     width: 12%;
 }
 
+/* cambios para que el botón este a la derecha */
+.btn{
+    float: right!important
+}
 #btnAddIncidencia {
     position: relative;
     left: 80%;

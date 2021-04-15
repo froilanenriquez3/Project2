@@ -1,5 +1,5 @@
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white container-fluid fixed-top p-2">
+<nav class="navbar navbar-expand-lg navbar-light bg-white container-fluid fixed-top p-2 mb-2">
 
     <a class="logo ml-3" href="#"><img src="{{ asset('img/logo.png')}}" width="205" height="45"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
