@@ -110,11 +110,12 @@
 
                 <li v-for="(afectat, index) in afectats" :key="index" class="row">
 
-                    <button v-bind:class="{ afectatActiu: afectat.id == afectatActiu}" @click="setAfectatActual(afectat)" class="btn btn-outline-primary col-6" >{{ afectat.nom + " " + afectat.cognoms }}</button>
-                    <div class="col-4" v-if="afectat.id == afectatActiu &&
-                    (infoRecursos[afectat.id] == undefined)
-                    ">El recurs que marquis al mapa serà assignat a aquesta persona</div>
-                    <div :id="'afectat' + afectat.id" class="col-4" v-else></div>
+                    <button :id="'btnAfectat' + afectat.id" v-bind:class="{ afectatActiu: afectat.id == afectatActiu}" @click="setAfectatActual(afectat)" class="btn btn-outline-primary col-6" >{{ afectat.nom + " " + afectat.cognoms }}</button>
+                    <div v-if="afectat.id == afectatActiu && (infoRecursos[afectat.id] == undefined)" class="col-4" >
+                        El recurs que marquis al mapa serà assignat a aquesta persona
+                    </div>
+
+                    <div  v-show="(infoRecursos[afectat.id] != undefined)" :id="'afectat' + afectat.id" class="col-4" ></div>
 
 
                     <!-- <select :name="'recursos'+ index" :id="'recursosToAssign' + index" class="col-4" @change="assignRecurs(index, afectat.id)">
@@ -249,7 +250,7 @@ export default {
         .finally(() => (this.loading = false));
     },
     setRecursFromMap(recurs){
-        debugger;
+        // debugger;
         // Aquí el id del afectado aún es el que tiene en la array! Lo substituiremos al añadir la incidencia.
         let infoRecurs = {
             recursos_id: recurs.id,
@@ -268,7 +269,9 @@ export default {
         this.infoRecursos[this.afectatActiu]= infoRecurs;
         this.incidencia.infoRecursos = this.infoRecursos;
         // Hacemos que se muestre el recurso seleccionado en el tipo de recurso.
-        document.getElementById('afectat' + this.afectatActiu).innerHTML= recurs.codi
+        document.getElementById('afectat' + this.afectatActiu).innerHTML= recurs.codi;
+        console.log("btnAfectat"+this.afectatActiu);
+        document.getElementById("btnAfectat"+this.afectatActiu).setAttribute("disabled", true);
     },
     createIncidencia() {
       console.log("submitting incidencia");
@@ -293,6 +296,7 @@ export default {
     },
     setAfectatActual(afectat){
         this.afectatActiu= afectat.id;
+
     },
     isMultiple(){
         this.multiple= true;
@@ -399,6 +403,7 @@ export default {
         // Los ponemos en el mismo orden que los afectados para ahorrarnos problemas.
         this.infoRecursos[afectatId]= infoRecurs;
         this.incidencia.infoRecursos = this.infoRecursos;
+
     },
     clearInput() {
       this.incidencia = {
@@ -433,7 +438,7 @@ export default {
         .post("/afectats", afectat)
         .then(function (response) {
           console.log(response);
-          debugger;
+        //   debugger;
         //   Actualizamos toda la info de afectat con el id que nos devuelve la base de datos.
           afectat.id = response.data.id;
           me.incidencia.infoRecursos[oldId].afectat_id= response.data.id;

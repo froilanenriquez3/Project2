@@ -76,8 +76,7 @@
                     .finally(() => {
                         this.loading = false;
                         console.log("Select incidencies" + me.incRecs);
-                        me.itemsToDisplay= me.incRecs;
-                        me.totalRows= me.itemsToDisplay.length;
+
                     });
 
                 this.totalRows = this.incidencies.length;
@@ -90,12 +89,10 @@
                         // console.log(response.data);
                         me.incidencia = response.data;
                         me.incidencia.incidencies_has_recursos.forEach(i => {
-                            console.log(i);
                             me.incRecs.push(i);
                         });
-
-                        // me.infoRecursos = me.incidencia.incidencies_has_recursos;
-                        // console.log(me.infoRecursos);
+                        me.itemsToDisplay= me.incRecs;
+                        me.totalRows= me.itemsToDisplay.length;
                     })
                     .catch((error) => {
                     console.log(error);
