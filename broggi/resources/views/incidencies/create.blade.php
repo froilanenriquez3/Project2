@@ -24,6 +24,9 @@
 @endsection
 
 @section('table')
+
+@include('partials.mensajes')
+
 <container-incidencies></container-incidencies>
 
 {{-- Table

@@ -12,11 +12,11 @@
                 </li>
 
                 <li class="sidebar mb-2">
-                    <a  class="nav-link"  data-toggle="pill" href="#" role="tab" aria-controls="v-pills-profile" aria-selected="false"> Nuevo Alertante </a>
+                    <a  class="nav-link"  data-toggle="pill" href="#" role="tab" aria-selected="false"> Nuevo Alertante </a>
                 </li>
 
                 <li class="sidebar mb-2">
-                    <a  class="nav-link"  data-toggle="pill" href="#" role="tab" aria-controls="v-pills-messages" aria-selected="false"> Tipos de alertantes </a>
+                    <a  class="nav-link"  data-toggle="pill" href="{{ url('/tipusalertants') }}" role="tab"  aria-selected="false"> Tipos de alertantes </a>
                 </li>
 
             </ul>
