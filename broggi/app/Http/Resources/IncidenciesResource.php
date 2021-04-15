@@ -25,6 +25,7 @@ class IncidenciesResource extends JsonResource
             'descripcio' => $this->descripcio,
             'nom_metge' => $this->nom_metge,
             'tipus_incidencies_id' => $this->tipus_incidencies_id,
+            'tipus_incidencia' => $this->tipus_incidencies,
             'alertants_id' => $this->alertants_id,
             'municipis_id' => $this->municipis_id,
             'usuaris_id' => $this->usuaris_id,
