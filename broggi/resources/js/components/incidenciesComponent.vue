@@ -244,7 +244,8 @@ export default {
         alertants_id: 1,
         municipis_id: 1,
         duracion: null,
-        infoRecursos: []
+        infoRecursos: [],
+        afectats: []
       },
       incidencies: [],
     };
@@ -287,27 +288,6 @@ export default {
         console.log("btnAfectat"+this.afectatActiu);
         document.getElementById("btnAfectat"+this.afectatActiu).setAttribute("disabled", true);
     },
-    createIncidencia() {
-      console.log("submitting incidencia");
-      console.log(this.incidencia);
-      let me = this;
-      axios
-        .post("/incidencies", me.incidencia)
-        .then(function (response) {
-         alert("Formulari enviat correctament");
-
-          console.log(response);
-          me.clearInput();
-          me.getIncidencies();
-          //me.action=""
-        })
-        .catch((error) => {
-          console.log(error.response.status);
-          console.log(error.response.data);
-          me.action = "";
-          // me.errorMessage= error.response.data.error;
-        });
-    },
     setAfectatActual(afectat){
         this.afectatActiu= afectat.id;
 
@@ -317,7 +297,16 @@ export default {
     },
     nouAfectat(){
         this.multiple= false;
-      let afectat= {}
+      let afectat= {
+          id: '',
+          telefon: '',
+          cip: '',
+          nom:'',
+          cognoms: '',
+          edat:'',
+          te_cip:'',
+          sexes_id:''
+      }
 
       this.afectats.push(afectat);
 
@@ -441,33 +430,27 @@ export default {
         this.formacio = !this.formacio;
     },
     afegirIncidencia(){
-        console.log(this.afectats)
-        let me= this;
-        console.log(me.afectats)
-        me.afectats.forEach(function (afectat) {
-             // guardamos el id que marca el orden de la array para poder recuperarlo luego.
-            let oldId= afectat.id;
-            afectat.id= null;
+         this.incidencia.afectats= this.afectats;
+        console.log("submitting incidencia");
+        console.log(this.incidencia);
+        let me = this;
         axios
-        .post("/afectats", afectat)
+        .post("/incidencies", me.incidencia)
         .then(function (response) {
+        //   alert("Incidencia inserted correctly!");
           console.log(response);
-        //   debugger;
-        //   Actualizamos toda la info de afectat con el id que nos devuelve la base de datos.
-          afectat.id = response.data.id;
-          me.incidencia.infoRecursos[oldId].afectat_id= response.data.id;
+          me.clearInput();
+          me.getIncidencies();
+          //me.action=""
         })
         .catch((error) => {
           console.log(error.response.status);
           console.log(error.response.data);
+          me.action = "";
           // me.errorMessage= error.response.data.error;
-
-        });
         });
 
-        // PROBLEMA: Llega aquí antes de guardar todos los afectats.
-        // Ahora ya tenemos los datos para poder insertar la incidencia + incidencias_has_recursos
-        this.createIncidencia();
+
   },
   toggleMultiple(){
       if(this.multiple) this.multiple = false;
