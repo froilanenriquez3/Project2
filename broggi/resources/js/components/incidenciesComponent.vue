@@ -75,8 +75,14 @@
     <!-- add fa plus icon -->
     <div v-show="section == 'Afectats' ">
 
-        <button @click="notMultiple()" class="btn btn-secondary">Menys de 3 afectats</button>
-        <button @click="isMultiple()" class="btn btn-secondary">Múltiples afectats (+3)</button>
+       <!--  <button @click="notMultiple()" class="btn btn-secondary">Menys de 3 afectats</button>
+        <button @click="isMultiple()" class="btn btn-secondary">Múltiples afectats (+3)</button> -->
+       <span>Menys de 3 afectats</span>
+        <label class="switch" id="btnNumAfectats">
+                <input type="checkbox" @click="toggleMultiple()">
+                <span class="slider round"></span>
+            </label>
+        <span>Múltiples afectats (+3)</span>
 
         <div v-show="multiple == false">
              <button @click="nouAfectat()" class="btn btn-warning">Nou Afectat</button>
@@ -86,10 +92,10 @@
 
         <div v-show="multiple == true" >
             <div class="form-group row">
-    <label for="multiplesAfectats">Descripció afectats</label>
-    <textarea v-model="multiplesAfectatsText"
-    placeholder="Indica el sexe dels alertants i el rang d'edats aproximat"
-     class="form-control" id="multiplesAfectats" rows="3"></textarea>
+            <label for="multiplesAfectats">Descripció afectats</label>
+            <textarea v-model="multiplesAfectatsText"
+            placeholder="Indica el sexe dels alertants i el rang d'edats aproximat"
+            class="form-control" id="multiplesAfectats" rows="3"></textarea>
             </div>
 
         </div>
@@ -110,11 +116,20 @@
 
                 <li v-for="(afectat, index) in afectats" :key="index" class="row">
 
-                    <button v-bind:class="{ afectatActiu: afectat.id == afectatActiu}" @click="setAfectatActual(afectat)" class="btn btn-outline-primary col-6" >{{ afectat.nom + " " + afectat.cognoms }}</button>
-                    <div class="col-4" v-if="afectat.id == afectatActiu &&
-                    (infoRecursos[afectat.id] == undefined)
-                    ">El recurs que marquis al mapa serà assignat a aquesta persona</div>
-                    <div :id="'afectat' + afectat.id" class="col-4" v-else></div>
+                    <button :id="'btnAfectat' + afectat.id" v-bind:class="{ afectatActiu: afectat.id == afectatActiu}" @click="setAfectatActual(afectat)" class="btn btn-outline-primary col-6" >
+                        <p v-show="afectat.nom != ''">{{ afectat.nom }}</p>
+                        <p v-if="afectat.sexes_id == 1">
+                             {{ "Home de " + afectat.edat  + " anys"}}
+                        </p>
+                        <p v-else-if="afectat.sexes_id == 2">
+                             {{ "Dona de " + afectat.edat  + " anys"}}
+                        </p>
+                    </button>
+                    <div v-if="afectat.id == afectatActiu && (infoRecursos[afectat.id] == undefined)" class="col-4" >
+                        El recurs que marquis al mapa serà assignat a aquesta persona
+                    </div>
+
+                    <div  v-show="(infoRecursos[afectat.id] != undefined)" :id="'afectat' + afectat.id" class="col-4" ></div>
 
 
                     <!-- <select :name="'recursos'+ index" :id="'recursosToAssign' + index" class="col-4" @change="assignRecurs(index, afectat.id)">
@@ -173,7 +188,7 @@
   </div>
 
 
-    <button class="btn btn-primary mt-2" @click="afegirIncidencia()">
+    <button class="btn btn-primary mt-2" @click="afegirIncidencia()" id="btnAddIncidencia">
       Afegir incidencia
     </button>
 
@@ -212,7 +227,7 @@ export default {
       infoRecursos: [],
       municipi: {},
       municipis: [],
-      multiple: 'inicio',
+      multiple: false,
       multiplesAfectatsText: '',
         afectatActiu: 0,
       afectatFormComponent,
@@ -250,7 +265,7 @@ export default {
         .finally(() => (this.loading = false));
     },
     setRecursFromMap(recurs){
-        debugger;
+        // debugger;
         // Aquí el id del afectado aún es el que tiene en la array! Lo substituiremos al añadir la incidencia.
         let infoRecurs = {
             recursos_id: recurs.id,
@@ -269,31 +284,13 @@ export default {
         this.infoRecursos[this.afectatActiu]= infoRecurs;
         this.incidencia.infoRecursos = this.infoRecursos;
         // Hacemos que se muestre el recurso seleccionado en el tipo de recurso.
-        document.getElementById('afectat' + this.afectatActiu).innerHTML= recurs.codi
-    },
-    createIncidencia() {
-      console.log("submitting incidencia");
-      console.log(this.incidencia);
-      let me = this;
-      axios
-        .post("/incidencies", me.incidencia)
-        .then(function (response) {
-          alert("Incidencia inserted correctly!");
-
-          console.log(response);
-          me.clearInput();
-          me.getIncidencies();
-          //me.action=""
-        })
-        .catch((error) => {
-          console.log(error.response.status);
-          console.log(error.response.data);
-          me.action = "";
-          // me.errorMessage= error.response.data.error;
-        });
+        document.getElementById('afectat' + this.afectatActiu).innerHTML= recurs.codi;
+        console.log("btnAfectat"+this.afectatActiu);
+        document.getElementById("btnAfectat"+this.afectatActiu).setAttribute("disabled", true);
     },
     setAfectatActual(afectat){
         this.afectatActiu= afectat.id;
+
     },
     isMultiple(){
         this.multiple= true;
@@ -409,6 +406,7 @@ export default {
         // Los ponemos en el mismo orden que los afectados para ahorrarnos problemas.
         this.infoRecursos[afectatId]= infoRecurs;
         this.incidencia.infoRecursos = this.infoRecursos;
+
     },
     clearInput() {
       this.incidencia = {
@@ -432,39 +430,14 @@ export default {
         this.formacio = !this.formacio;
     },
     afegirIncidencia(){
-        // console.log(this.afectats)
-        // let me= this;
-        // console.log(me.afectats)
-        // me.afectats.forEach(function (afectat) {
-        //      // guardamos el id que marca el orden de la array para poder recuperarlo luego.
-        //     let oldId= afectat.id;
-        //     afectat.id= null;
-        // axios
-        // .post("/afectats", afectat)
-        // .then(function (response) {
-        //   console.log(response);
-        //   debugger;
-        // //   Actualizamos toda la info de afectat con el id que nos devuelve la base de datos.
-        //   afectat.id = response.data.id;
-        //   me.incidencia.infoRecursos[oldId].afectat_id= response.data.id;
-        // })
-        // .catch((error) => {
-        //   console.log(error.response.status);
-        //   console.log(error.response.data);
-        //   // me.errorMessage= error.response.data.error;
-
-        // });
-        // });
-
-        this.incidencia.afectats= this.afectats;
+         this.incidencia.afectats= this.afectats;
         console.log("submitting incidencia");
         console.log(this.incidencia);
         let me = this;
         axios
         .post("/incidencies", me.incidencia)
         .then(function (response) {
-          alert("Incidencia inserted correctly!");
-
+        //   alert("Incidencia inserted correctly!");
           console.log(response);
           me.clearInput();
           me.getIncidencies();
@@ -477,8 +450,11 @@ export default {
           // me.errorMessage= error.response.data.error;
         });
 
-        // Ahora ya tenemos los datos para poder insertar la incidencia + incidencias_has_recursos
-        // this.createIncidencia();
+
+  },
+  toggleMultiple(){
+      if(this.multiple) this.multiple = false;
+      else this.multiple = true;
   }
   },
   created() {
@@ -490,6 +466,7 @@ export default {
   },
   mounted() {
     console.log("Component mounted.");
+    this.nouAfectat();
   },
   computed:{
       direccio: function(){

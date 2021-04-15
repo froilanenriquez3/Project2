@@ -122,3 +122,8 @@
     height: 12%;
     width: 12%;
 }
+
+#btnAddIncidencia {
+    position: relative;
+    left: 80%;
+}

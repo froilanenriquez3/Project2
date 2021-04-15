@@ -14,7 +14,7 @@
         <div id="incidencias">
             <p>Formulario, nueva incidencia</p>
             <div>
-                <a href=" {{ url('/incidencies') }}">Modo normal</a>
+                <a href=" {{ url('/incidencies/create') }}">Modo normal</a>
                 <p> | </p>
                 <a href="">Modo formacion</a>
             </div>

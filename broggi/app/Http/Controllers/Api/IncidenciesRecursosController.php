@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Clases\Utilitat;
 use App\Models\Recursos;
 use App\Models\Incidencies;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\QueryException;
 use App\Http\Resources\RecursosResource;
 use App\Http\Resources\IncidenciesResource;
 
@@ -55,7 +58,30 @@ class IncidenciesRecursosController extends Controller
      */
     public function update(Request $request, Incidencies $incidencies)
     {
-        //
+        DB::beginTransaction();
+
+        $array = $request->input('incidencies_has_recursos');
+
+        try{
+            $ihr = $array[0];
+
+
+            $incidencies->incidencies_has_recursos()->save($ihr);
+            DB::commit();
+            $incidencies->refresh();
+
+            $response = (new IncidenciesResource($incidencies))
+                    ->response()
+                    ->setStatusCode(201);
+        } catch (QueryException $ex) {
+            DB::rollBack();
+            $message = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $message], 400);
+
+        }
+
+
+        return $response;
     }
 
     /**
