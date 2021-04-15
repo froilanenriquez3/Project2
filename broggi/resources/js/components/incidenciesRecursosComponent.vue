@@ -82,7 +82,6 @@
         methods : {
             submitForm(){
                 let me = this;
-                console.log("Submitting form");
                 // me.infoRecursos.hora_transport = "12:00:01";
                 me.incidencia.incidencies_has_recursos[me.arrayPos] = me.infoRecursos;
 

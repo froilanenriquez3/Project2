@@ -280,7 +280,7 @@ export default {
       axios
         .post("/incidencies", me.incidencia)
         .then(function (response) {
-          alert("Incidencia inserted correctly!");
+         alert("Formulari enviat correctament");
 
           console.log(response);
           me.clearInput();
