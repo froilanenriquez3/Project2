@@ -16,7 +16,7 @@
                 </li>
 
                 <li class="sidebar mb-2">
-                    <a  class="nav-link"  data-toggle="pill" href="{{ url('/tipusalertants') }}" role="tab"  aria-selected="false"> Tipos de alertantes </a>
+                    <a  class="nav-link"  href="{{ url('/tipusalertants') }}" > Tipos de alertantes </a>
                 </li>
 
             </ul>
