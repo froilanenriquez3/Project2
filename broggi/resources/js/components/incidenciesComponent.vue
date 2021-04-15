@@ -92,10 +92,10 @@
 
         <div v-show="multiple == true" >
             <div class="form-group row">
-    <label for="multiplesAfectats">Descripció afectats</label>
-    <textarea v-model="multiplesAfectatsText"
-    placeholder="Indica el sexe dels alertants i el rang d'edats aproximat"
-     class="form-control" id="multiplesAfectats" rows="3"></textarea>
+            <label for="multiplesAfectats">Descripció afectats</label>
+            <textarea v-model="multiplesAfectatsText"
+            placeholder="Indica el sexe dels alertants i el rang d'edats aproximat"
+            class="form-control" id="multiplesAfectats" rows="3"></textarea>
             </div>
 
         </div>
