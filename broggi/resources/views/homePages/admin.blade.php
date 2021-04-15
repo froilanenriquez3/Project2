@@ -13,23 +13,27 @@
     <section id="menuSection">
         <a href="{{ asset('/alertants') }}">
             <div>
+                <i class="icon fas fa-users  d-flex justify-content-center pb-3"></i>
                 <p>Alertantes habituales</p>
             </div>
         </a>
         <a href="{{ asset('/recursos') }}">
             <div>
+                <i class="icon fas fa-ambulance  d-flex justify-content-center pb-3"></i>
                 <p>Recursos móviles</p>
             </div>
         </a>
         <a href="{{ asset('/usuaris') }}">
             <div>
+                <i class="icon fas fa-users-cog  d-flex justify-content-center pb-3"></i>
                 <p>Usuarios</p>
             </div>
         </a>
         <a href="{{ url('/incidencies') }}">
-        <div>
+            <div>
+                <i class="icon fas fa-exclamation-triangle  d-flex justify-content-center pb-3"></i>
                 <p>Incidencias</p>
-        </div>
+            </div>
         </a>
     </section>
 

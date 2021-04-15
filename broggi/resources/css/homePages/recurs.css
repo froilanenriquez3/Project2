@@ -6,3 +6,16 @@ main{
     height: 75vh;
     align-items: center;
 }
+#menuSection a{
+
+    /* color: #2a9fd6 ; */
+    color: #11ADC4;
+
+}
+.icon{
+    font-size:70px;
+
+}
+#menuSection p{
+    font-size: 20px;
+}
