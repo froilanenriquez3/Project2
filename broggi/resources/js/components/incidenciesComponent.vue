@@ -435,7 +435,7 @@ export default {
         axios
         .post("/incidencies", me.incidencia)
         .then(function (response) {
-        //   alert("Incidencia inserted correctly!");
+          alert("Incidencia inserted correctly!");
           console.log(response);
           me.clearInput();
           me.getIncidencies();
