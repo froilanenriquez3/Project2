@@ -5,7 +5,7 @@
         <button class="btn btn-primary" @click="openModalVideo()" v-bind:class="{ hidden: !formacio }">Veure video CPR</button>
     <button class="btn btn-primary" @click="openModalHelp()" v-bind:class="{ hidden: !formacio }">Ajuda amb l'anglès</button>
     <div class="formacionBox">
-    <p>Modo formación</p>
+    <p>Modo formació</p>
             <label class="switch" id="btnModoFormacion">
                 <input @click="toggleFormacio()" type="checkbox">
                 <span class="slider round"></span>
