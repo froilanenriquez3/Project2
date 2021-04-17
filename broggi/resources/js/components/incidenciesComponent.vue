@@ -148,7 +148,7 @@
 
 
     <!-- Modal Video -->
-        <div class="modal fade" id="modalVideo" tabindex="-1" role="dialog" aria-labelledby="modalVideolLabel" aria-hidden="true">
+    <div class="modal fade" id="modalVideo" tabindex="-1" role="dialog" aria-labelledby="modalVideolLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -435,7 +435,7 @@ export default {
         axios
         .post("/incidencies", me.incidencia)
         .then(function (response) {
-        //   alert("Incidencia inserted correctly!");
+          alert("Incidencia inserted correctly!");
           console.log(response);
           me.clearInput();
           me.getIncidencies();
