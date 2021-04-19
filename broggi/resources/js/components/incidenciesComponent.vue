@@ -279,13 +279,14 @@ export default {
             hora_arribada_hospital: null,
             hora_transferencia: null,
             hora_finalitzacio: null,
-            prioritat: this.prioritat,
+            prioritat: Number(this.prioritat),
             desti: null,
             afectat_id: this.afectatActiu
         };
         // Los ponemos en el mismo orden que los afectados para ahorrarnos problemas.
         this.infoRecursos[this.afectatActiu]= infoRecurs;
         this.incidencia.infoRecursos = this.infoRecursos;
+        console.log(this.incidencia);
         // Hacemos que se muestre el recurso seleccionado en el tipo de recurso.
         document.getElementById('afectat' + this.afectatActiu).innerHTML= recurs.codi;
         console.log("btnAfectat"+this.afectatActiu);
