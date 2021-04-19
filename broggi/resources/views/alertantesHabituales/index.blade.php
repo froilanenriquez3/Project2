@@ -18,7 +18,7 @@
 @endif
 
 @section('sidebar')
- @include('partials.sideBar')
+ @include('partials.alSideBar')
     {{-- <sidebar-component></sidebar-component> --}}
 @endsection
 

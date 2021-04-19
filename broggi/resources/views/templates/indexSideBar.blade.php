@@ -1,6 +1,6 @@
 {{-- Page template for index of each table page --}}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 
 <head>
     <meta charset="UTF-8">
