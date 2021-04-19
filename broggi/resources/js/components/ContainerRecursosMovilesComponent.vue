@@ -24,7 +24,7 @@ import TipusRecursosComponent from './tipusRecursosComponent';
         };
     },
         mounted() {
-            console.log(`Component mounted`)
+            // console.log(`Component mounted`);
         },
         methods: {
             changePage(pageToDisplay){

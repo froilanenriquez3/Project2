@@ -71,7 +71,7 @@ export default {
         }
         },
   mounted() {
-    console.log("Component mounted.");
+    // console.log("Component mounted.");
     // Id momentaneo para poder asignarlos a recursos. Cuando se inserten en la db,
     // los substituiremos por el id que tengan allí.
     this.afectat.id= this.position

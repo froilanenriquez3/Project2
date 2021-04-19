@@ -1,39 +1,44 @@
 <template>
     <div class="container">
        <div id="incidenciesRecursosDiv" v-show="displayForm">
-           <p id="incNumDisp"> </p>
            <div class="form-group row">
-               <label class="col-2" for="">1: Hora Activacio</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_activacio">
+                <p id="incNumDisp" class="col-2"> </p>
+                <span class="col-8"></span>
+                <p id="incPrioritatDisp" class="col-2"></p>
+           </div>
 
-               <label class="col-2" for="">2: Hora Mobilitzacio</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_mobilitzacio">
+           <div class="form-group row">
+               <label class="col-2" for="inActivacio">1: Hora Activacio</label>
+               <input class="col-2" type="time" v-model="infoRecursos.hora_activacio" id="inActivacio" name="inActivacio">
 
-               <label class="col-2" for="">3: Hora Assistencia</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_assistencia">
+               <label class="col-2" for="inMobilitzacio">2: Hora Mobilitzacio</label>
+               <input class="col-2" type="time" v-model="infoRecursos.hora_mobilitzacio" id="inMobilitzacio" name="inMobilitzacio">
+
+               <label class="col-2" for="inAssistencia">3: Hora Assistencia</label>
+               <input class="col-2" type="time" v-model="infoRecursos.hora_assistencia" id="inAssistencia" name="inAssistencia">
 
 
            </div>
 
            <div class="form-group row">
 
-                <label class="col-2" for="">4: Hora Transport</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_transport">
+                <label class="col-2" for="inTransport">4: Hora Transport</label>
+               <input class="col-2" type="time" v-model="infoRecursos.hora_transport" id="inTransport" name="inTransport">
 
-                <label class="col-2" for="">5: Hora Arribada Hospital</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_arribada_hospital">
+                <label class="col-2" for="inArribadaHospital">5: Hora Arribada Hospital</label>
+               <input class="col-2" type="time" v-model="infoRecursos.hora_arribada_hospital" id="inArribadaHospital" name="inArribadaHospital">
 
-                <label class="col-2" for="">6: Hora Transferencia</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_transferencia">
+                <label class="col-2" for="inHoraTransferencia">6: Hora Transferencia</label>
+               <input class="col-2" type="time" v-model="infoRecursos.hora_transferencia" id="inHoraTransferencia" name="inHoraTransferencia">
 
            </div>
 
            <div class="form-group row">
-                 <label class="col-2" for="">7: Hora Finalitzacio</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_finalitzacio">
+                 <label class="col-2" for="inFinalitzacio">7: Hora Finalitzacio</label>
+               <input class="col-2" type="time" v-model="infoRecursos.hora_finalitzacio" id="inFinalitzacio" name="inFinalitzacio">
 
-                <label class="col-2" for="">Desti</label>
-               <input class="col-6" type="text" v-model="infoRecursos.desti">
+                <label class="col-2" for="inDesti">Desti</label>
+               <input class="col-6" type="text" v-model="infoRecursos.desti" id="inDesti" name="inDesti">
            </div>
 
            <!-- <button class="btn btn-primary" id="submitForm" @click="submitForm()">Siguiente</button> -->
@@ -171,6 +176,7 @@
                             me.infoRecursos = me.incidenciesRecursos[i].incidencies_has_recursos[j];
                             me.arrayPos = j;
                             document.getElementById("incNumDisp").innerHTML = "Incidencia #" + me.incidencia.id;
+                            document.getElementById("incPrioritatDisp").innerHTML = "Prioritat: " + me.infoRecursos.prioritat;
                             this.displayForm = true;
                             console.log("FOUND!");
                         }
@@ -187,7 +193,7 @@
             }
         },
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
             // console.log(this.userrecursoid);
             this.selectIncidencies();
             let me = this;

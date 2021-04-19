@@ -152,7 +152,7 @@ export default {
   },
   created() {},
   mounted() {
-    console.log("Component mounted.");
+    // console.log("Component mounted.");
     //this.playVideo();
     this.video= document.querySelector('#myVideo');
 
