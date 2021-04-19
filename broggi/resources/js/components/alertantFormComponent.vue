@@ -6,7 +6,7 @@
 
         <div class="form-group row">
          <label class="col-2" for="tipus_alertant">Tipus</label>
-            <select class="form-select" v-model="alertant.tipus_alertants_id" aria-label="Default select example">
+            <select class="form-select col-4" v-model="alertant.tipus_alertants_id" aria-label="Default select example">
                 <option v-for="tipus in tipus_alertants" :key="tipus.id"
                 v-bind:value="tipus.id" >{{tipus.tipus}}</option>
             </select>
@@ -24,7 +24,7 @@
 
         <div class="form-group row">
           <label class="col-2" for="telefon">Telefon Alertant</label>
-          <input class="col-10" required type="tel" name="telefon" v-model="alertant.telefon"/>
+          <input class="col-4" required type="tel" name="telefon" v-model="alertant.telefon"/>
         </div>
 
         <div class="form-group row">
@@ -34,7 +34,7 @@
 
         <div class="form-group row">
           <label class="col-2" for="municipi_alertant">Municipi</label>
-           <select class="form-select" v-model="alertant.municipis_id" aria-label="Default select example">
+           <select class="form-select col-4" v-model="alertant.municipis_id" aria-label="Default select example">
                 <option v-for="municipi in municipis" :key="municipi.id"
                 v-bind:value="municipi.id" >{{municipi.nom}}</option>
             </select>

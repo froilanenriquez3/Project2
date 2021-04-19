@@ -26,7 +26,7 @@
 
         <div class="form-group row">
           <label class="col-2" for="">Edat</label>
-          <input class="col-10" v-model="afectat.edat" type="number" name="edat" />
+          <input class="col-4" v-model="afectat.edat" type="number" name="edat" min="0" />
         </div>
 
          <div class="form-group row">

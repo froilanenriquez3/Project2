@@ -105,6 +105,7 @@ class ApiIncidenciesController extends Controller
                 $ihr->prioritat = $infoRecurs['prioritat'];
                 $ihr->desti = $infoRecurs['desti'];
                 $ihr->afectat_id = $infoRecurs['afectat_id'];
+                $ihr->prioritat = $infoRecurs['prioritat'];
 
                 $incidencia->incidencies_has_recursos()->save($ihr);
             }

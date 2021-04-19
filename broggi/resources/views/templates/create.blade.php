@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 
 <head>
     <meta charset="UTF-8">
@@ -36,7 +36,7 @@
             <div id="formButtons">
                 @yield('cancelButton')
 
-                <button class="btn btn-primary" id="formSubmit" >Siguiente</button>
+                <button class="btn btn-primary" id="formSubmit" >Afegir</button>
             </div>
 
         </section>

@@ -18,11 +18,12 @@
 @endif
 
 @section('sidebar')
- @include('partials.sideBar')
+ @include('partials.alSideBar')
     {{-- <sidebar-component></sidebar-component> --}}
 @endsection
 
 @section('table')
+
 <table class="table table-striped">
     <thead>
       <tr>
