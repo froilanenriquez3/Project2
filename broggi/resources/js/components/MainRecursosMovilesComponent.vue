@@ -93,6 +93,8 @@
             </select>
             </div>
 
+            <map-insert :recurs="this.recurs" :action="action"></map-insert>
+
 
             <button v-if="action == 'afegir' " type="button" @click="afegirRecurs()" class="btn btn-primary">Afegir</button>
             <button v-else type="button" @click="editarRecurs()" class="btn btn-warning">Editar</button>
@@ -122,8 +124,9 @@
 
 <script>
 import FilterSelect from './filterSelect.vue';
+import mapInsert from './mapInsert.vue';
 export default {
-  components: { FilterSelect },
+  components: { FilterSelect, mapInsert },
     data() {
         return {
             itemsToDisplay: [],
@@ -141,7 +144,9 @@ export default {
                 tipus_recursos_id: '',
                 lat: '',
                 lon: ''
-            }
+            },
+            newLat: '',
+            newLon: ''
         };
     },
     methods: {
@@ -164,14 +169,18 @@ export default {
             if(action == 'editar' || action == 'borrar'){
                 this.recurs = recurs;
             } else {
+                this.cleanResource;
+            }
+
+        },
+        cleanResource(){
+                this.recurs.id='';
                 this.recurs.codi='';
                 this.recurs.actiu= false;
                 this.recurs.tipus_recursos_id='';
                 this.recurs.lat='';
                 this.recurs.lon='';
                 this.recurs.recurs='';
-            }
-
         },
         filter(itemsFiltered){
             this.itemsToDisplay= itemsFiltered;
@@ -190,7 +199,8 @@ export default {
                 })
                 .finally(() => (this.loading = false));
         },
-        afegirRecurs(){
+            afegirRecurs(){
+            this.retrieveLatLng();
             let me= this;
             axios
                 .post('/recursos', me.recurs)
@@ -205,9 +215,22 @@ export default {
                     me.action=''
                     // me.errorMessage= error.response.data.error;
                 })
+            this.resetLatLng();
+            this.cleanResource();
+        },
+        retrieveLatLng(){
+           let latLngString= document.getElementById('latLongInfo').innerHTML;
+           let latLng= latLngString.split(';');
+           this.recurs.lon= latLng[0];
+           this.recurs.lat= latLng[1];
+        },
+        resetLatLng(){
+            // Volvemos a dejar los valores por defecto.
+           document.getElementById('latLongInfo').innerHTML="1.8676800;41.8204600";
         },
         editarRecurs(){
-                       let me= this;
+                this.retrieveLatLng();
+                let me= this;
                 axios
                 .put('/recursos/' + me.recurs.id , me.recurs)
                 .then(function (response) {
@@ -221,6 +244,8 @@ export default {
                     me.action=''
                     // me.errorMessage= error.response.data.error;
                 })
+                this.resetLatLng();
+                this.cleanResource();
             },
             confirmDeleteRecurs(recurs){
                 this.recurs= recurs;

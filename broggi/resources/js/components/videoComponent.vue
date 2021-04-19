@@ -4,13 +4,17 @@
       <div class="card-header">Videos Broggi</div>
 
       <div class="card-body row align-items-center">
-        <video muted id="myVideo" width="320" height="240" class="col-12">
+        <video muted class="col-12" @timeupdate="changeProgress($event)" @canplay="changeProgress($event)"
+        id="myVideo" width="320" height="240">
           <source
             src="http://localhost:8080/Project2/broggi/public/video/videosBroggi.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.
         </video>
+        <div @click="setProgress($event)" class="progress-range">
+            <div class="progress-bar"></div>
+        </div>
         <p id="videoProgress"></p>
         <div class="row align-items-center ml-4">
             <button v-if="action == 'play'" class="btn btn-primary m-1" id="playButton">
@@ -37,12 +41,12 @@ export default {
       section1time: 0,
       section2time: 233,
       section3time: 311,
+      video: ''
     };
   },
   methods: {
     playVideo() {
-      let videoElem = document.querySelector(this.videoId);
-      if (videoElem.paused) videoElem.play();
+      if (this.video.paused) this.video.play();
 
       document.querySelector(
         "#playButton"
@@ -55,8 +59,7 @@ export default {
         .addEventListener("click", this.pauseVideo);
     },
     pauseVideo() {
-      let videoElem = document.querySelector(this.videoId);
-      videoElem.pause();
+      this.video.pause();
 
       document.querySelector(
         "#playButton"
@@ -69,68 +72,59 @@ export default {
         .addEventListener("click", this.playVideo);
     },
     skipTen() {
-      let videoElem = document.querySelector(this.videoId);
-      videoElem.currentTime += 10;
+      this.video.currentTime += 10;
     },
     rewindTen() {
-      let videoElem = document.querySelector(this.videoId);
-      videoElem.currentTime -= 10;
+      this.video.currentTime -= 10;
     },
     setTimestamp() {
-      let videoElem = document.querySelector(this.videoId);
-      videoElem.currentTime = this.timestamp;
+      this.video.currentTime = this.timestamp;
     },
     videoEventHandler() {
       console.log("Video event handler");
-      let videoElem = document.querySelector(this.videoId);
-      videoElem.addEventListener("timeupdate", this.pauseAtTimestamp);
+      this.video.addEventListener("timeupdate", this.pauseAtTimestamp);
     },
     pauseAtTimestamp() {
-      let videoElem = document.querySelector(this.videoId);
       //If you dont want video to pause from fast fowarding, remove greater than
-      if (videoElem.currentTime >= this.timestamp) {
-        videoElem.pause();
-        videoElem.removeEventListener("timeupdate", this.pauseAtTimestamp);
+      if (this.video.currentTime >= this.timestamp) {
+        this.video.pause();
+        this.video.removeEventListener("timeupdate", this.pauseAtTimestamp);
       }
     },
     displayProgress() {
-      let videoElem = document.querySelector(this.videoId);
-      // vLength = videoElem.duration;
+      // vLength = this.video.duration;
       document.querySelector("#videoProgress").innerHTML =
         "The video is at timestamp: " +
         Math.floor(
-          videoElem.currentTime
-        ) /* videoElem.currentTime.toFixed(2) */;
+          this.video.currentTime
+        ) /* this.video.currentTime.toFixed(2) */;
     },
 
     playSection1() {
-      let videoElem = document.querySelector(this.videoId);
-      videoElem.currentTime = this.section1time;
+      this.video.currentTime = this.section1time;
       this.playVideo();
       this.timestamp = this.section2time;
-      videoElem.addEventListener("timeupdate", this.pauseAtTimestamp);
+      this.video.addEventListener("timeupdate", this.pauseAtTimestamp);
     },
     playSection2() {
-      let videoElem = document.querySelector(this.videoId);
-      videoElem.currentTime = this.section2time;
+      this.video.currentTime = this.section2time;
       this.playVideo();
       this.timestamp = this.section3time;
-      videoElem.addEventListener("timeupdate", this.pauseAtTimestamp);
+      this.video.addEventListener("timeupdate", this.pauseAtTimestamp);
     },
     playSection3() {
-      let videoElem = document.querySelector(this.videoId);
-      videoElem.currentTime = this.section3time;
+      this.video.currentTime = this.section3time;
       this.playVideo();
-      this.timestamp = videoElem.duration;
-      videoElem.addEventListener("timeupdate", this.pauseAtTimestamp);
+      this.timestamp = this.video.duration;
+      this.video.addEventListener("timeupdate", this.pauseAtTimestamp);
     },
     highlightSection() {
-      let videoElem = document.querySelector(this.videoId);
-      if (videoElem.currentTime < this.section2time) {
+
+      if (this.video.currentTime < this.section2time) {
         document.querySelector("#section1").style.backgroundColor = "red";
         document.querySelector("#section2").style.backgroundColor = "#11ADC4";
         document.querySelector("#section3").style.backgroundColor = "#11ADC4";
-      } else if (videoElem.currentTime < this.section3time) {
+      } else if (this.video.currentTime < this.section3time) {
         document.querySelector("#section2").style.backgroundColor = "red";
         document.querySelector("#section1").style.backgroundColor = "#11ADC4";
         document.querySelector("#section3").style.backgroundColor = "#11ADC4";
@@ -140,13 +134,29 @@ export default {
         document.querySelector("#section2").style.backgroundColor = "#11ADC4";
       }
     },
+    changeProgress(event){
+        let progressBar=document.querySelector('.progress-bar');
+        // Adaptamos el % de barra pintada conforme avanza el video.
+        progressBar.style.width= event.target.currentTime/event.target.duration *100 + '%'
+    },
+    setProgress(event){
+        // Dividimos el punto en el que hemos clicado entre el total del div.
+        let progressRange= document.querySelector('.progress-range')
+        let newTime= event.offsetX / progressRange.offsetWidth;
+        let progressBar=document.querySelector('.progress-bar');
+        // Cambiamos porcentaje de la barra
+        progressBar.style.width= newTime * 100 + '%';
+        // Cambiamos punto del video en el que estamos.
+        this.video.currentTime= newTime * this.video.duration;
+    }
   },
   created() {},
   mounted() {
     // console.log("Component mounted.");
     //this.playVideo();
+    this.video= document.querySelector('#myVideo');
 
-    document.querySelector("#myVideo").setAttribute("controls", "true");
+    // document.querySelector("#myVideo").setAttribute("controls", "true");
 
     document
       .querySelector("#playButton")
