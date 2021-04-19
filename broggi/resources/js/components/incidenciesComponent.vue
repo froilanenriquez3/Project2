@@ -112,13 +112,17 @@
         <div id="recursosAfectats"><table class="table">
   <thead>
     <tr class="row">
-      <th class="col-6">Afectat</th>
-      <th class="col-6">Recurs</th>
+        <th class="col-2">Prioritat</th>
+      <th class="col-5">Afectat</th>
+      <th class="col-5">Recurs</th>
     </tr>
   </thead>
   <tbody>
     <tr class="row" v-for="(afectat, index) in afectats" :key="index">
-      <td class="afectat col-6" :id="'btnAfectat' + afectat.id"  @click="setAfectatActual(afectat)" v-bind:class="{ afectatActiu: afectat.id == afectatActiu}">
+        <td class="col-2">
+            <input type="number" min="1" max="4" id="prioritat" name="prioritat" placeholder="1" v-model="prioritat">
+        </td>
+      <td class="afectat col-5" :id="'btnAfectat' + afectat.id"  @click="setAfectatActual(afectat)" v-bind:class="{ afectatActiu: afectat.id == afectatActiu}">
           <div >
               <p v-if="afectat.sexes_id == 1">Home
                             <span v-show="afectat.edat != ''">{{', '+ afectat.edat  + " anys "}}</span>
@@ -130,7 +134,7 @@
                         </p>
           </div>
       </td>
-      <td class="col-6">
+      <td class="col-5">
            <div v-show="afectat.id == afectatActiu && (infoRecursos[afectat.id] == undefined)">
                         assigna un recurs del mapa
                     </div>
@@ -222,6 +226,7 @@ export default {
       numAfectats: 0,
       afectats: [],
       recursos: [],
+      prioritat: null,
       freeRecursos: [],
       infoRecursos: [],
       municipi: {},
@@ -274,7 +279,7 @@ export default {
             hora_arribada_hospital: null,
             hora_transferencia: null,
             hora_finalitzacio: null,
-            prioritat: null,
+            prioritat: this.prioritat,
             desti: null,
             afectat_id: this.afectatActiu
         };
