@@ -162,8 +162,10 @@ export default {
 
                 button.addEventListener("click", this.assignarRecurs);
 
-                div.appendChild(p)
-                div.appendChild(button)
+                if(element.codi != "ghost"){
+                    div.appendChild(p)
+                    div.appendChild(button)
+
                 // Popup
                 let popup = new mapboxgl.Popup({ offset: 25 }).setDOMContent(
                    div
@@ -177,12 +179,14 @@ export default {
                     .setPopup(popup)
                     .addTo(this.map);
 
+
                 // Marcador
                 marker.getElement().addEventListener("click", () => {
                     this.recurs = element;
                     this.marker = marker;
                     this.button = button;
                 });
+                }
             });
         },
     },
