@@ -49,6 +49,8 @@ Vue.component('container-incidencies', require('./components/ContainerIncidencie
 Vue.component('incidencies-recursos', require('./components/incidenciesRecursosComponent.vue').default);
 Vue.component('increc-table', require('./components/incidenciesRecursosTableComponent.vue').default);
 Vue.component('incidencies-table', require('./components/incidenciesTableComponent.vue').default);
+Vue.component('map-insert', require('./components/mapInsert.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
