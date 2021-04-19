@@ -469,7 +469,7 @@ export default {
     this.getRecurs();
   },
   mounted() {
-    console.log("Component mounted.");
+    // console.log("Component mounted.");
     this.nouAfectat();
   },
   computed:{

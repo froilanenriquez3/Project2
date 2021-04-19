@@ -143,7 +143,7 @@ export default {
   },
   created() {},
   mounted() {
-    console.log("Component mounted.");
+    // console.log("Component mounted.");
     //this.playVideo();
 
     document.querySelector("#myVideo").setAttribute("controls", "true");

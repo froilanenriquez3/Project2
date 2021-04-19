@@ -190,7 +190,7 @@ export default {
         this.selectRecursos();
     },
     mounted() {
-        console.log("Component mounted.");
+        // console.log("Component mounted.");
         mapboxgl.accessToken = this.key;
         this.map = new mapboxgl.Map({
             container: "mapa-mapbox", // container ID

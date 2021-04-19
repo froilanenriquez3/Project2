@@ -193,7 +193,7 @@
             }
         },
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
             // console.log(this.userrecursoid);
             this.selectIncidencies();
             let me = this;

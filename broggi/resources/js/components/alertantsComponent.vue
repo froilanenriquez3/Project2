@@ -167,7 +167,7 @@ export default {
     console.log(this.insert);
     console.log(this.editedalertant);
 
-    console.log("Component mounted.");
+    // console.log("Component mounted.");
   },
 };
 </script>
