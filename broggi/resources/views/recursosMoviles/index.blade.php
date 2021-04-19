@@ -1,6 +1,9 @@
 @extends('templates.components')
 
 @section('links')
+<link href="{{ url('https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css')}}" rel='stylesheet' />
+ <script src="{{ url('https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js')}}"></script>
+<link href="{{ url('https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css')}}" rel="stylesheet"/>
 @endsection
 
 @section('navbar')
