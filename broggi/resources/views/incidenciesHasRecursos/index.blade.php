@@ -18,7 +18,7 @@
 
 @section('table')
 
-<increc-table></increc-table>
+<increc-table :userrecursoid='{{ $recursosId }}'></increc-table>
 
 @endsection
 
