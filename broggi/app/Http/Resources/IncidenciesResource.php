@@ -30,7 +30,8 @@ class IncidenciesResource extends JsonResource
             'municipis_id' => $this->municipis_id,
             'usuaris_id' => $this->usuaris_id,
             'duracion' => $this->duracion,
-            'incidencies_has_recursos' => $this->incidencies_has_recursos
+            'incidencies_has_recursos' => $this->incidencies_has_recursos,
+            'incidencies_has_afectats' => $this->incidencies_has_afectats
         ];
     }
 }

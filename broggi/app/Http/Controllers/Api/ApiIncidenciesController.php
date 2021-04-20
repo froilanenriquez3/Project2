@@ -41,26 +41,6 @@ class ApiIncidenciesController extends Controller
         $afectats = $request->input('afectats');
         $infoRecursos = $request->input('infoRecursos');
 
-        /*foreach ($afectats as $afectat) {
-            $afectatStore = new Afectats();
-
-            $positionArray = $afectat['id'];
-            $afectatStore->telefon = $afectat['telefon'];
-            $afectatStore->cip = $afectat['cip'];
-            $afectatStore->nom = $afectat['nom'];
-            $afectatStore->cognoms = $afectat['cognoms'];
-            $afectatStore->edat = $afectat['edat'];
-            $afectatStore->sexes_id = $afectat['sexes_id'];
-
-            $afectatStore->save();
-
-            $afectatNewId = $afectatStore->id;
-
-
-            $infoRecursos[$positionArray]['afectat_id'] = $afectatNewId;
-        }*/
-
-
         $incidencia = new Incidencies();
 
         $incidencia->data = $request->input('data');
@@ -106,7 +86,7 @@ class ApiIncidenciesController extends Controller
 
                 $infoRecursos[$positionArray]['afectat_id'] = $afectatNewId;
 
-                $incidencia->afectats()->save($afectatStore);
+                $incidencia->incidencies_has_afectats()->save($afectatStore);
             }
 
             foreach ($infoRecursos as $infoRecurs) {
@@ -247,15 +227,26 @@ class ApiIncidenciesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Incidencies  $incidencies
+     * @param  \App\Models\Incidencies  $incidency
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Incidencies $incidencies)
+    public function destroy(Incidencies $incidency)
     {
+        DB::beginTransaction();
+
         try {
-            $incidencies->delete();
+            $incidency->incidencies_has_recursos()->delete();
+
+            $incidency->incidencies_has_afectats()->detach();
+            $incidency->incidencies_has_afectats()->delete();
+
+            $incidency->delete();
+
+            DB::commit();
+            $incidency->refresh();
+
             $response = \response()
-                ->json(['message' => 'Registro borrado correctamente'], 200);
+                ->json(['message' => 'Incidencia borrado correctamente'], 200);
         } catch (QueryException $ex) {
             $message = Utilitat::errorMessage($ex);
             $response = \response()

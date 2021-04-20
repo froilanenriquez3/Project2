@@ -53,7 +53,7 @@ class Incidencies extends Model
     // }
 
     //Relación con la tabla afectats MN
-    public function afectats()
+    public function incidencies_has_afectats()
     {
         return $this->belongsToMany(Afectats::class, 'incidencies_has_afectats', 'incidencies_id', 'afectats_id');
     }
