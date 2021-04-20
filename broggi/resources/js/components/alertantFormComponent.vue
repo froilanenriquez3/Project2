@@ -5,11 +5,13 @@
         <h5>Alertant</h5>
 
         <div class="form-group row">
-         <label class="col-2" for="tipus_alertant">Tipus</label>
+         <label class="col-2" for="tipus_alertant"><b>Tipus</b></label>
             <select class="form-select col-4" v-model="alertant.tipus_alertants_id" aria-label="Default select example">
                 <option v-for="tipus in tipus_alertants" :key="tipus.id"
                 v-bind:value="tipus.id" >{{tipus.tipus}}</option>
             </select>
+            <label class="col-2" for="telefon"><b>Telefon Alertant</b></label>
+          <input class="col-4" required type="tel" name="telefon" v-model="alertant.telefon"/>
         </div>
 
         <div class="form-group row">
@@ -20,11 +22,6 @@
         <div class="form-group row">
           <label class="col-2" for="cognoms">Cognoms</label>
           <input class="col-10" type="text" name="cognoms" v-model="alertant.cognoms"/>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-2" for="telefon">Telefon Alertant</label>
-          <input class="col-4" required type="tel" name="telefon" v-model="alertant.telefon"/>
         </div>
 
         <div class="form-group row">
