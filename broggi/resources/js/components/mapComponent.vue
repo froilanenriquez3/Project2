@@ -35,7 +35,14 @@ export default {
             recursos: [],
             map: {},
             color: "",
-            recurs: {},
+            recurs: {
+                /* id: 12,
+                codi: "ghost",
+                actiu: true,
+                tipus_recursos_id: 1,
+                lat: 50,
+                lon: 1 */
+            },
             marker: {},
             button: {},
             recursActivat: false

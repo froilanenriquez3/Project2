@@ -1614,6 +1614,6 @@ insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values(
 insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Violet", 'Incredible', 12, true, 1) ;
 insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Dash", 'Incredible', 12, true, 1) ;
 
-insert into recursos(codi, actiu, tipus_recursos_id, lat, lon) values("ghost", '1', '1','50','1');
+insert into recursos(codi, actiu, tipus_recursos_id, lat, lon) values("cap", '1', '1','50','1');
 
 COMMIT;
