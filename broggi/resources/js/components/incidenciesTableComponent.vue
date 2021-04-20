@@ -1,5 +1,10 @@
 <template>
     <div id="incTableDiv">
+        <!-- Filtro -->
+        <filter-select :multiple="multiple" :name="'Tipus inciencia:'" :listToFilter="incidencies" :filterBy="tipusIncidencies" :filterField="'tipus'" :relatedId="'tipus_incidencies_id'"
+        @applyFilterResults="filter($event)"></filter-select>
+        <!-- Si no hay nada que cumpla con lo buscado, no sale la tabla y solo mostramos mensaje -->
+        <div v-if="itemsToDisplay.length == 0"> No s'han trobat elements d'aquestes característiques</div>
         <table class="table">
             <thead>
                 <tr>
@@ -12,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="incidencia in paginator(incidencies)" :key="incidencia.id">
+                <tr v-for="incidencia in paginator(itemsToDisplay)" :key="incidencia.id">
                     <td>{{ incidencia.id }}</td>
                     <td>{{ incidencia.data}}</td>
                     <td>{{ incidencia.telefon_alertant}}</td>
@@ -32,7 +37,9 @@
 </template>
 
 <script>
+    import FilterSelect from './filterSelect.vue';
     export default {
+         components: { FilterSelect },
         data(){
             return {
                 itemsToDisplay: [],
@@ -41,7 +48,8 @@
                 totalRows: '',
                 incidencies: [],
                 incidenciesRecursos: [],
-                incRecs: []
+                incRecs: [],
+                tipusIncidencies: []
             }
         },
         methods : {
@@ -60,6 +68,7 @@
                     .then((response) => {
 
                     me.incidencies = response.data;
+                    me.itemsToDisplay= me.incidencies;
                     console.log(me.incidencies);
                     /* response.data.forEach(incidencia => {
                         incidencia.incidencies_has_recursos.forEach( i =>{
@@ -83,6 +92,10 @@
 
                 this.totalRows = this.incidencies.length;
             },
+            filter(itemsFiltered){
+            this.itemsToDisplay= itemsFiltered;
+            this.totalRows= this.itemsToDisplay.length;
+            },
              showIncidenciaRecurso(id){
                 let me = this;
                 axios
@@ -105,10 +118,24 @@
                     });
 
             },
+            getTipusIncidencies(){
+        let me = this;
+      axios
+        .get("/tipusincidencies")
+        .then((response) => {
+          console.log(response.data);
+          me.tipusIncidencies = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => (this.loading = false));
+    }
         },
         mounted() {
             // console.log('Component mounted.');
             this.selectIncidencies();
+            this.getTipusIncidencies();
         }
     }
 </script>

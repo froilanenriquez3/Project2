@@ -19,11 +19,7 @@ export default {
         direccioCompleta: {
             type: String,
             required: true
-        },
-        // afectatActiu:{
-        //     type: String,
-        //     required:true
-        // },
+        }
         // recursosInfo:{
         //     required:true
         // }
@@ -72,7 +68,6 @@ export default {
         assignarRecurs(){
             this.recurs.actiu = true;
             this.recursActivat= true;
-            debugger;
             this.$emit('assignantRecurs', this.recurs);
 
             this.button.innerHTML = "Ja assignat!";
