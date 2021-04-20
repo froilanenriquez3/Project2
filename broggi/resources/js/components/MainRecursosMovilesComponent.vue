@@ -3,7 +3,7 @@
         <!-- Si no se selecciona una opción, se muestra la tabla -->
         <div v-show="action == ''">
         <!-- Filtro -->
-        <filter-select :listToFilter="recursos" :filterBy="tipus_recursos" :filterField="'tipus'" :relatedId="'tipus_recursos_id'"
+        <filter-select :name="'Tipus de Recurs'" :listToFilter="recursos" :filterBy="tipus_recursos" :filterField="'tipus'" :relatedId="'tipus_recursos_id'"
         @applyFilterResults="filter($event)"></filter-select>
         <button type="button" @click="selectAction('afegir')" class="btn btn-primary">Afegir</button>
         <!-- Si no hay nada que cumpla con lo buscado, no sale la tabla y solo mostramos mensaje -->

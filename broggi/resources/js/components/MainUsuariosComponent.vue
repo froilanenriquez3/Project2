@@ -4,7 +4,7 @@
         <!-- Si no se selecciona una opción, se muestra la tabla -->
         <div v-show="action == ''">
         <!-- Filtro -->
-        <filter-select :listToFilter="usuaris" :filterBy="rols" :filterField="'nom'" :relatedId="'rols_id'"
+        <filter-select :name="'Rol'" :listToFilter="usuaris" :filterBy="rols" :filterField="'nom'" :relatedId="'rols_id'"
         @applyFilterResults="filter($event)"></filter-select>
 
         <button type="button"
