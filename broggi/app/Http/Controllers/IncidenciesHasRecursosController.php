@@ -18,7 +18,8 @@ class IncidenciesHasRecursosController extends Controller
      */
     public function index()
     {
-        return view('incidenciesHasRecursos.index');
+        $recursosId = Auth::user()->recursos_id;
+        return view('incidenciesHasRecursos.index',  compact('recursosId'));
     }
 
     /**

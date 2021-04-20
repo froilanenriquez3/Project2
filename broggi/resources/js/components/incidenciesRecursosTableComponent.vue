@@ -37,6 +37,13 @@
 
 <script>
     export default {
+         props : {
+            userrecursoid: {
+                required: true,
+                type: Number
+
+            }
+        },
         data(){
             return {
                 itemsToDisplay: [],
@@ -94,6 +101,7 @@
                         // console.log(response.data);
                         me.incidencia = response.data;
                         me.incidencia.incidencies_has_recursos.forEach(i => {
+                            if(i.recursos.id == me.userrecursoid)
                             me.incRecs.push(i);
                         });
                         me.itemsToDisplay= me.incRecs;
