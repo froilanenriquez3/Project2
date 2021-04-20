@@ -2,13 +2,14 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\UsuarisController;
 use App\Http\Controllers\RecursosController;
 use App\Http\Controllers\AlertantsController;
 use App\Http\Controllers\IncidenciesController;
 use App\Http\Controllers\TipusRecursosController;
-use App\Http\Controllers\TipusAlertantsController;
 
+use App\Http\Controllers\TipusAlertantsController;
 use App\Http\Controllers\Api\ApiIncidenciesController;
 use App\Http\Controllers\IncidenciesHasRecursosController;
 
@@ -52,4 +53,28 @@ Route::middleware(['auth'])->group(function () {
 
 Route::prefix('api')->group(function(){
     Route::apiResource('incidencies', ApiIncidenciesController::class);
+});
+
+Route::get('/clearcache', function() {
+
+    $notice = 'CONFIG';
+    // Laravel Clear CONFIG Cache On Shared Hosting
+    $exitCode = Artisan::call('config:clear');
+    $exitCode = Artisan::call('config:cache');
+
+    $notice.= ' / APPLICATION';
+    // Laravel Clear APPLICATION Cache On Shared Hosting
+    $exitCode = Artisan::call('cache:clear');
+
+    $notice.= ' / VIEW';
+    // Laravel Clear VIEW Cache On Shared Hosting
+    $exitCode = Artisan::call('view:clear');
+
+    // $notice.= ' / ROUTE';
+     // Laravel Clear ROUTE Cache On Shared Hosting
+    // $exitCode = Artisan::call('route:cache');
+
+    $notice.= ' cleared';
+
+    return $notice;
 });
