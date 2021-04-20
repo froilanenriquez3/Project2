@@ -228,6 +228,16 @@ export default {
       tipusIncidencies: [],
       alertantIncidencia: {},
       numAfectats: 0,
+      afectat: {
+          id: '1',
+          telefon: '',
+          cip: '',
+          nom:'',
+          cognoms: '',
+          edat:'',
+          te_cip:'',
+          sexes_id:'1'
+      },
       afectats: [],
       recursos: [],
       prioritat: null,
@@ -326,7 +336,7 @@ export default {
     },
     nouAfectat(){
         this.multiple= false;
-      let afectat= {
+      this.afectat= {
           id: '',
           telefon: '',
           cip: '',
@@ -334,10 +344,10 @@ export default {
           cognoms: '',
           edat:'',
           te_cip:'',
-          sexes_id:''
+          sexes_id:'1'
       }
 
-      this.afectats.push(afectat);
+      this.afectats.push(this.afectat);
 
     //Creamos afectatFormComponent y le pasamos el afectat de la posición numAfectats y la posición que ocupará en la array;
         let ComponentClass= Vue.extend(afectatFormComponent)
@@ -496,7 +506,7 @@ export default {
   },
   mounted() {
     // console.log("Component mounted.");
-    this.nouAfectat();
+    // this.nouAfectat();
 
   },
   computed:{
