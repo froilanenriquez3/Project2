@@ -106,9 +106,13 @@
 
     <!-- TAG RECURSOS -->
     <div v-show="section == 'Recursos'" id="recursosPage">
+        <!-- El mapa se enseña en caso de que hayan escrito algo en afectados, tanto si éstos son múltiples
+        como si no. -->
+        <div v-show="(!multiple && numAfectats > 0) || multiple">
+        <map-component @assignantRecurs="setRecursFromMap($event)" :direccioCompleta="direccio"></map-component>
+        </div>
         <!-- No se muestra si no hay afectados aún puestos y no es múltiple -->
         <div id="insideRecursos" v-show="!multiple && numAfectats > 0">
-        <map-component @assignantRecurs="setRecursFromMap($event)" :direccioCompleta="direccio"></map-component>
 
         <div id="recursosAfectats"><table class="table">
   <thead>
@@ -143,7 +147,7 @@
             <div  v-show="(infoRecursos[afectat.id] != undefined)" :id="'afectat' + afectat.id" ></div>
       </td>
       <td class="col-2">
-          <button class="btn btn-primary" @click="setRecursFromMap(recurs)">Cap</button>
+          <button class="btn btn-primary" @click="setRecursFromMap(recurs)">No cal recurs</button>
       </td>
 
     </tr>
@@ -160,7 +164,29 @@
 
 <!-- Se muestra si hay múltiples afectados -->
     <div v-show="multiple">
-        
+        Assigna tants recursos com creguis necessaris utilitzant el mapa i seràn enviats a l'accident.
+         <div id="recursosAfectatsMultiples"><table class="table">
+  <thead>
+    <tr class="row">
+        <th class="col-2">Prioritat</th>
+        <th class="col-4">Recurs</th>
+        <th class="col-2"></th>
+    </tr>
+  </thead>
+  <tbody>
+      <!-- Como en este caso no hay afectados, se cogerá el index para diferenciar los recursos que enviaremos -->
+    <tr class="row" v-for="(recurs, index) in recursosToShow" :key="index">
+        <td class="col-2">
+            <input type="number" min="1" max="4" :id="'prioritat' + index" name="prioritat" value="1" v-model="prioritat" @change="setPrioritat(index)">
+        </td>
+      <td class="col-4">
+          {{recurs.tipus}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+        </div>
     </div>
 
     </div>
@@ -328,9 +354,16 @@ export default {
             hora_finalitzacio: null,
             prioritat: Number(this.prioritat),
             desti: null,
-            afectat_id: this.afectatActiu
+            afectat_id: this.afectatActiu,
+            tipus: recurs.codi
         };
-        // Los ponemos en el mismo orden que los afectados para ahorrarnos problemas.
+        // Si es múltiple vamos a tratar la información de manera distinta.
+        if(this.multiple){
+            // cambiamos el id por uno fantasma.
+            this.infoRecurs.afectat_id= 1;
+            this.infoRecursos.push(this.infoRecurs);
+        }else {
+            // Los ponemos en el mismo orden que los afectados para ahorrarnos problemas.
         this.infoRecursos[this.afectatActiu]= this.infoRecurs;
         this.incidencia.infoRecursos = this.infoRecursos;
         console.log(this.incidencia);
@@ -338,10 +371,11 @@ export default {
         document.getElementById('afectat' + this.afectatActiu).innerHTML= recurs.codi;
         console.log("btnAfectat"+this.afectatActiu);
         document.getElementById("btnAfectat"+this.afectatActiu).setAttribute("disabled", true);
+        }
+
     },
     setAfectatActual(afectat){
         this.afectatActiu= afectat.id;
-
     },
     isMultiple(){
         this.multiple= true;
@@ -482,6 +516,7 @@ export default {
     },
     afegirIncidencia(){
         this.incidencia.afectats= this.afectats;
+        this.incidencia.descripcio= this.multiplesAfectats;
 
         console.log("submitting incidencia");
         console.log(this.incidencia);
@@ -509,7 +544,12 @@ export default {
       else this.multiple = true;
   },
   setPrioritat(afectat){
-      this.infoRecursos[afectat.id].prioritat = Number(this.prioritat);
+      if(this.multiple){
+          this.infoRecursos[afectat].prioritat = Number(this.prioritat);
+      } else {
+          this.infoRecursos[afectat.id].prioritat = Number(this.prioritat);
+      }
+
   }
   },
   created() {
@@ -529,7 +569,17 @@ export default {
           return `${this.incidencia.adreca}, ${this.municipi.nom}`;
       },
       multiplesAfectats: function(){
+          let descripcioAfectats;
+          if(this.multiplesAfectatsText == ''){
+              descripcioAfectats = this.incidencia.descripcio;
+          }else{
+              descripcioAfectats = this.incidencia.descripcio + " (Múltiples Afectats: " +this.multiplesAfectatsText+ ")";
+          }
 
+          return descripcioAfectats;
+      },
+      recursosToShow: function(){
+          return this.infoRecursos;
       }
   }
 };

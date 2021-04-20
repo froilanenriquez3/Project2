@@ -1,7 +1,7 @@
 <template>
     <div id="incTableDiv">
         <!-- Filtro -->
-        <filter-select :name="'Tipus inciencia:'" :listToFilter="incidencies" :filterBy="tipusIncidencies" :filterField="'tipus'" :relatedId="'tipus_incidencies_id'"
+        <filter-select :multiple="multiple" :name="'Tipus inciencia:'" :listToFilter="incidencies" :filterBy="tipusIncidencies" :filterField="'tipus'" :relatedId="'tipus_incidencies_id'"
         @applyFilterResults="filter($event)"></filter-select>
         <!-- Si no hay nada que cumpla con lo buscado, no sale la tabla y solo mostramos mensaje -->
         <div v-if="itemsToDisplay.length == 0"> No s'han trobat elements d'aquestes característiques</div>
