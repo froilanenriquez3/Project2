@@ -82,7 +82,8 @@
                     desti: null,
                     afectat_id:null,
                     recursos_id: null
-                }
+                },
+                highestPrioritat: 0
             }
         },
         methods : {
@@ -171,13 +172,15 @@
 
                         if((me.incidenciesRecursos[i].incidencies_has_recursos[j].recursos_id == me.userrecursoid )
                             && (me.incidenciesRecursos[i].incidencies_has_recursos[j].hora_finalitzacio == null)
+                            && (me.incidenciesRecursos[i].incidencies_has_recursos[j].prioritat >= me.highestPrioritat)
                         ){
                             me.incidencia = me.incidenciesRecursos[i];
                             me.infoRecursos = me.incidenciesRecursos[i].incidencies_has_recursos[j];
                             me.arrayPos = j;
+                            me.highestPrioritat = me.incidenciesRecursos[i].incidencies_has_recursos[j].prioritat;
                             document.getElementById("incNumDisp").innerHTML = "Incidencia #" + me.incidencia.id;
                             document.getElementById("incPrioritatDisp").innerHTML = "Prioritat: " + me.infoRecursos.prioritat;
-                            this.displayForm = true;
+                            me.displayForm = true;
                             console.log("FOUND!");
                         }
                     }
