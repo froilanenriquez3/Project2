@@ -35,7 +35,14 @@ export default {
             recursos: [],
             map: {},
             color: "",
-            recurs: {},
+            recurs: {
+                /* id: 12,
+                codi: "ghost",
+                actiu: true,
+                tipus_recursos_id: 1,
+                lat: 50,
+                lon: 1 */
+            },
             marker: {},
             button: {},
             recursActivat: false
@@ -162,8 +169,10 @@ export default {
 
                 button.addEventListener("click", this.assignarRecurs);
 
-                div.appendChild(p)
-                div.appendChild(button)
+                if(element.codi != "ghost"){
+                    div.appendChild(p)
+                    div.appendChild(button)
+
                 // Popup
                 let popup = new mapboxgl.Popup({ offset: 25 }).setDOMContent(
                    div
@@ -177,12 +186,14 @@ export default {
                     .setPopup(popup)
                     .addTo(this.map);
 
+
                 // Marcador
                 marker.getElement().addEventListener("click", () => {
                     this.recurs = element;
                     this.marker = marker;
                     this.button = button;
                 });
+                }
             });
         },
     },

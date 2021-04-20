@@ -113,16 +113,17 @@
   <thead>
     <tr class="row">
         <th class="col-2">Prioritat</th>
-      <th class="col-5">Afectat</th>
-      <th class="col-5">Recurs</th>
+        <th class="col-4">Afectat</th>
+        <th class="col-4">Recurs</th>
+        <th class="col-2"></th>
     </tr>
   </thead>
   <tbody>
     <tr class="row" v-for="(afectat, index) in afectats" :key="index">
         <td class="col-2">
-            <input type="number" min="1" max="4" id="prioritat" name="prioritat" placeholder="1" v-model="prioritat">
+            <input type="number" min="1" max="4" id="prioritat" name="prioritat" value="1" v-model="prioritat">
         </td>
-      <td class="afectat col-5" :id="'btnAfectat' + afectat.id"  @click="setAfectatActual(afectat)" v-bind:class="{ afectatActiu: afectat.id == afectatActiu}">
+      <td class="afectat col-4" :id="'btnAfectat' + afectat.id"  @click="setAfectatActual(afectat)" v-bind:class="{ afectatActiu: afectat.id == afectatActiu}">
           <div >
               <p v-if="afectat.sexes_id == 1">Home
                             <span v-show="afectat.edat != ''">{{', '+ afectat.edat  + " anys "}}</span>
@@ -134,11 +135,14 @@
                         </p>
           </div>
       </td>
-      <td class="col-5">
+      <td class="col-4">
            <div v-show="afectat.id == afectatActiu && (infoRecursos[afectat.id] == undefined)">
                         assigna un recurs del mapa
                     </div>
             <div  v-show="(infoRecursos[afectat.id] != undefined)" :id="'afectat' + afectat.id" ></div>
+      </td>
+      <td class="col-2">
+          <button class="btn btn-primary" @click="setRecursFromMap(recurs)">Cap</button>
       </td>
 
     </tr>
@@ -229,6 +233,27 @@ export default {
       prioritat: null,
       freeRecursos: [],
       infoRecursos: [],
+      infoRecurs: {
+        recursos_id: 12,
+        hora_activacio: null,
+        hora_mobilitzacio: null,
+        hora_assistencia: null,
+        hora_transport: null,
+        hora_arribada_hospital: null,
+        hora_transferencia: null,
+        hora_finalitzacio: null,
+        prioritat: null,
+        desti: null,
+        afectat_id: null
+      },
+      recurs: {
+            id: 12,
+            codi: "ghost",
+            actiu: true,
+            tipus_recursos_id: 1,
+            lat: 50,
+            lon: 1
+        },
       municipi: {},
       municipis: [],
       multiple: false,
@@ -270,7 +295,7 @@ export default {
     },
     setRecursFromMap(recurs){
         // Aquí el id del afectado aún es el que tiene en la array! Lo substituiremos al añadir la incidencia.
-        let infoRecurs = {
+        this.infoRecurs = {
             recursos_id: recurs.id,
             hora_activacio: null,
             hora_mobilitzacio: null,
@@ -284,7 +309,7 @@ export default {
             afectat_id: this.afectatActiu
         };
         // Los ponemos en el mismo orden que los afectados para ahorrarnos problemas.
-        this.infoRecursos[this.afectatActiu]= infoRecurs;
+        this.infoRecursos[this.afectatActiu]= this.infoRecurs;
         this.incidencia.infoRecursos = this.infoRecursos;
         console.log(this.incidencia);
         // Hacemos que se muestre el recurso seleccionado en el tipo de recurso.
@@ -394,7 +419,7 @@ export default {
     assignRecurs(index, afectatId){
         // Aquí el id del afectado aún es el que tiene en la array! Lo substituiremos al añadir la incidencia.
         let recursId = Number(document.getElementById("recursosToAssign" + index).value);
-        let infoRecurs = {
+        this.infoRecurs = {
             recursos_id: recursId,
             hora_activacio: null,
             hora_mobilitzacio: null,
@@ -408,7 +433,7 @@ export default {
             afectat_id: afectatId
         };
         // Los ponemos en el mismo orden que los afectados para ahorrarnos problemas.
-        this.infoRecursos[afectatId]= infoRecurs;
+        this.infoRecursos[afectatId]= this.infoRecurs;
         this.incidencia.infoRecursos = this.infoRecursos;
 
     },
@@ -434,7 +459,8 @@ export default {
         this.formacio = !this.formacio;
     },
     afegirIncidencia(){
-         this.incidencia.afectats= this.afectats;
+        this.incidencia.afectats= this.afectats;
+
         console.log("submitting incidencia");
         console.log(this.incidencia);
         let me = this;
@@ -471,6 +497,7 @@ export default {
   mounted() {
     // console.log("Component mounted.");
     this.nouAfectat();
+
   },
   computed:{
       direccio: function(){
