@@ -1610,9 +1610,9 @@ INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `l
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78866', '1', '1', '41.236390721', '1.7750302332');
 
 
-insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Jack", 'Jack', 12, true, 1) ;
-insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Violet", 'Incredible', 12, true, 1) ;
-insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Dash", 'Incredible', 12, true, 1) ;
+insert into afectats( nom, cognoms, sexes_id) values( "", "",1) ;
+-- insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Violet", 'Incredible', 12, true, 1) ;
+-- insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Dash", 'Incredible', 12, true, 1) ;
 
 insert into recursos(codi, actiu, tipus_recursos_id, lat, lon) values("cap", '1', '1','50','1');
 
