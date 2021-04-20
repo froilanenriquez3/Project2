@@ -1,7 +1,7 @@
 <template>
     <div class="form-group row">
         <label class="col-2" for="rols_id">{{name}}</label>
-            <select class="form-select col-3" v-model="filterSelection"  @change="applyFilter()" aria-label="Default select example">
+            <select value="all" class="form-select col-3" v-model="filterSelection"  @change="applyFilter()" aria-label="Default select example">
                 <option value="all">Todos</option>
                 <option v-for="item in filterBy" :key="item.id"
                 v-bind:value="item.id">{{ item[filterField]}}</option>
