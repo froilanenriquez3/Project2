@@ -130,7 +130,7 @@
     }
         },
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.');
             this.selectIncidencies();
             this.getTipusIncidencies();
         }

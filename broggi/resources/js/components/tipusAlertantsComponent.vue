@@ -262,7 +262,7 @@ export default {
     this.selectTipus();
   },
   mounted() {
-    console.log("Component mounted.");
+    // console.log("Component mounted.");
   },
 };
 </script>

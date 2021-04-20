@@ -41,7 +41,7 @@ class ApiIncidenciesController extends Controller
         $afectats = $request->input('afectats');
         $infoRecursos = $request->input('infoRecursos');
 
-        foreach ($afectats as $afectat) {
+        /*foreach ($afectats as $afectat) {
             $afectatStore = new Afectats();
 
             $positionArray = $afectat['id'];
@@ -58,7 +58,7 @@ class ApiIncidenciesController extends Controller
 
 
             $infoRecursos[$positionArray]['afectat_id'] = $afectatNewId;
-        }
+        }*/
 
 
         $incidencia = new Incidencies();
@@ -78,8 +78,6 @@ class ApiIncidenciesController extends Controller
         // Campo de la ternaria
         // $infoRecursos = [];
 
-
-
         // $incidencia->telefon_alertant = '';
 
         $userId = Auth::user();
@@ -90,6 +88,26 @@ class ApiIncidenciesController extends Controller
 
         try {
             $incidencia->save();
+
+            foreach ($afectats as $afectat) {
+                $afectatStore = new Afectats();
+
+                $positionArray = $afectat['id'];
+                $afectatStore->telefon = $afectat['telefon'];
+                $afectatStore->cip = $afectat['cip'];
+                $afectatStore->nom = $afectat['nom'];
+                $afectatStore->cognoms = $afectat['cognoms'];
+                $afectatStore->edat = $afectat['edat'];
+                $afectatStore->sexes_id = $afectat['sexes_id'];
+
+                $afectatStore->save();
+
+                $afectatNewId = $afectatStore->id;
+
+                $infoRecursos[$positionArray]['afectat_id'] = $afectatNewId;
+
+                $incidencia->afectats()->save($afectatStore);
+            }
 
             foreach ($infoRecursos as $infoRecurs) {
                 $ihr = new IncidenciesHasRecursos();

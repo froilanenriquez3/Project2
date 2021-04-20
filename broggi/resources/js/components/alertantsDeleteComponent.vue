@@ -63,7 +63,7 @@ export default {
   mounted() {
     this.alertantDelete = this.alertant;
     this.id = "deleteAlertantModal" + this.alertant.id;
-    console.log("Component mounted.");
+    // console.log("Component mounted.");
   },
 };
 </script>
