@@ -248,7 +248,7 @@ export default {
       },
       recurs: {
             id: 12,
-            codi: "ghost",
+            codi: "cap",
             actiu: true,
             tipus_recursos_id: 1,
             lat: 50,
