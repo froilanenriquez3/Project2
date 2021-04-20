@@ -1617,3 +1617,4 @@ insert into afectats( nom, cognoms, sexes_id) values( "", "",1) ;
 insert into recursos(codi, actiu, tipus_recursos_id, lat, lon) values("cap", '1', '1','50','1');
 
 COMMIT;
+set foreign_key_checks = 1;
