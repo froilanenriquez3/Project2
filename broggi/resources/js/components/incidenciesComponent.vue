@@ -106,7 +106,8 @@
 
     <!-- TAG RECURSOS -->
     <div v-show="section == 'Recursos'" id="recursosPage">
-        <div id="insideRecursos" v-show="!multiple">
+        <!-- No se muestra si no hay afectados aún puestos y no es múltiple -->
+        <div id="insideRecursos" v-show="!multiple && numAfectats > 0">
         <map-component @assignantRecurs="setRecursFromMap($event)" :direccioCompleta="direccio"></map-component>
 
         <div id="recursosAfectats"><table class="table">
@@ -151,6 +152,17 @@
 
         </div>
 </div>
+
+<!-- Se muestra si no es múltiple pero el teleoperador aún no ha escrito en afectados -->
+    <div v-show="!multiple && numAfectats == 0">
+        <p>Encara no s'han registrat afectats. Es necessita un mínim d'un afectat perquè l'incidència sigui vàlida.</p>
+    </div>
+
+<!-- Se muestra si hay múltiples afectados -->
+    <div v-show="multiple">
+        
+    </div>
+
     </div>
 
 
@@ -512,6 +524,9 @@ export default {
   computed:{
       direccio: function(){
           return `${this.incidencia.adreca}, ${this.municipi.nom}`;
+      },
+      multiplesAfectats: function(){
+
       }
   }
 };
