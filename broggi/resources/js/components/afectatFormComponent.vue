@@ -10,41 +10,43 @@
         </div>
 
         <div class="form-group row">
-          <label class="col-2" for="">CIP</label>
-          <input class="col-10" v-model="afectat.cip" type="text" name="cip" />
+          <label class="col-2" for=""><b>Nom</b></label>
+          <input class="col-4" v-model="afectat.nom" type="text" name="nom" />
+
+          <label class="col-2" for=""><b>Cognoms</b></label>
+          <input class="col-4" v-model="afectat.cognoms" type="text" name="cognoms" />
         </div>
 
         <div class="form-group row">
-          <label class="col-2" for="">Nom</label>
-          <input class="col-10" v-model="afectat.nom" type="text" name="nom" />
-        </div>
-
-        <div class="form-group row">
-          <label class="col-2" for="">Cognoms</label>
-          <input class="col-10" v-model="afectat.cognoms" type="text" name="cognoms" />
-        </div>
-
-        <div class="form-group row">
-          <label class="col-2" for="">Edat</label>
+          <label class="col-2" for=""><b>Edat</b></label>
           <input class="col-4" v-model="afectat.edat" type="number" name="edat" min="0" />
+
         </div>
 
          <div class="form-group row">
             <label class="form-check-label col-2" for="actiu">Té cip?</label>
-            <div class="custom-control custom-checkbox col-10">
+            <div class="custom-control custom-checkbox col-4">
                 <input v-model="afectat.te_cip" class="form-check-input" type="checkbox" value="te_cip" :name="nameCheckbox" :id="nameCheckbox">
             </div>
+             <label class="col-2" for="">CIP</label>
+          <input class="col-4" v-model="afectat.cip" type="text" name="cip" />
          </div>
 
-        <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" :id="idRadioDona" value="2" v-model="afectat.sexes_id" :name="nameRadio" class="custom-control-input">
-        <label class="custom-control-label" :for="idRadioDona">Dona</label>
+        <div class="form-group row">
+             <div class="custom-control custom-radio custom-control-inline col-2">
+                <input type="radio" :id="idRadioDona" value="2" v-model="afectat.sexes_id" :name="nameRadio" class="custom-control-input ">
+                <label class="custom-control-label" :for="idRadioDona">Dona</label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline col-2">
+                <input type="radio" :id="idRadioHome" value="1" v-model="afectat.sexes_id" :name="nameRadio" class="custom-control-input">
+                <label class="custom-control-label" :for="idRadioHome">Home</label>
+            </div>
         </div>
 
-        <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" :id="idRadioHome" value="1" v-model="afectat.sexes_id" :name="nameRadio" class="custom-control-input">
-        <label class="custom-control-label" :for="idRadioHome">Home</label>
-        </div>
+
+
+
 
 
         <br />
