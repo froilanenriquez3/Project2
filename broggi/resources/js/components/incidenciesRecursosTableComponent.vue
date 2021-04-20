@@ -1,6 +1,7 @@
 <template>
     <div id="incRecTableDiv">
-        <table class="table">
+        <div v-show="incRecs.length > 0">
+            <table class="table">
             <thead>
                 <tr>
                     <th>Incidencia ID</th>
@@ -32,6 +33,8 @@
             :per-page="perPage"
             aria-controls="my-table">
         </b-pagination>
+        </div>
+        <p v-show="incRecs.length == 0">No hi ha incidents</p>
     </div>
 </template>
 
