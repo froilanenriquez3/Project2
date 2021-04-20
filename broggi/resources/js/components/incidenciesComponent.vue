@@ -121,7 +121,7 @@
   <tbody>
     <tr class="row" v-for="(afectat, index) in afectats" :key="index">
         <td class="col-2">
-            <input type="number" min="1" max="4" id="prioritat" name="prioritat" value="1" v-model="prioritat">
+            <input type="number" min="1" max="4" :id="'prioritat' + afectat.id" name="prioritat" value="1" v-model="prioritat" @change="setPrioritat(afectat)">
         </td>
       <td class="afectat col-4" :id="'btnAfectat' + afectat.id"  @click="setAfectatActual(afectat)" v-bind:class="{ afectatActiu: afectat.id == afectatActiu}">
           <div >
@@ -495,6 +495,9 @@ export default {
   toggleMultiple(){
       if(this.multiple) this.multiple = false;
       else this.multiple = true;
+  },
+  setPrioritat(afectat){
+      this.infoRecursos[afectat.id].prioritat = Number(this.prioritat);
   }
   },
   created() {
