@@ -16,7 +16,7 @@
                 </li>
 
                 <li class="sidebar mb-2">
-                    <a  class="nav-link"  href="{{ url('/tipusalertants') }}" > Tipus d'alertantes </a>
+                    <a  class="nav-link"  href="{{ url('/tipusalertants') }}" > Tipus d'alertants </a>
                 </li>
 
             </ul>

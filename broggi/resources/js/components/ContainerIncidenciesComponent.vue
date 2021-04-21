@@ -1,9 +1,9 @@
 <template>
   <div class="containerRecursos">
     <aside>
-      <sidebar-component
-        @changeOption="changePage($event)"
-        :page="'incidencies'"></sidebar-component>
+      <sidebar-component @changeOption="changePage($event)" :page="'incidencies'">
+
+      </sidebar-component>
     </aside>
     <div id="divForm">
       <section class="tableSection">

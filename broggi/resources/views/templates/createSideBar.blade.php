@@ -17,7 +17,7 @@
 <body>
 
     <aside>
-        @include('templates.sideBar')
+        @yield('sidebar')
     </aside>
 
     <main id="app">
