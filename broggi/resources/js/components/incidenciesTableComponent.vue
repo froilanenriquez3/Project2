@@ -1,8 +1,9 @@
 <template>
     <div id="incTableDiv">
         <!-- Filtro -->
-        <filter-select :name="'Tipus inciencia:'" :listToFilter="incidencies" :filterBy="tipusIncidencies" :filterField="'tipus'" :relatedId="'tipus_incidencies_id'"
-        @applyFilterResults="filter($event)"></filter-select>
+        <filter-select :name="'Tipus inciencia:'" :listToFilter="incidencies" :filterBy="tipusIncidencies" :filterField="'tipus'"
+        :relatedId="'tipus_incidencies_id'" @applyFilterResults="filter($event)">
+        </filter-select>
         <!-- Si no hay nada que cumpla con lo buscado, no sale la tabla y solo mostramos mensaje -->
         <div v-if="itemsToDisplay.length == 0"> No s'han trobat elements d'aquestes característiques</div>
         <table class="table">
@@ -27,7 +28,7 @@
                     <td>{{ incidencia.tipus_incidencia.tipus}}</td>
                     <td>{{ incidencia.descripcio.substring(0,20)}}</td>
                     <td> <button class="btn btn-warning">Editar</button> </td>
-                    <td> <button class="btn btn-secondary">Esborrar</button> </td>
+                    <td> <button class="btn btn-secondary" @click="confirmDelete(incidencia)" >Esborrar</button> </td>
                 </tr>
             </tbody>
         </table>
@@ -37,6 +38,38 @@
             :per-page="perPage"
             aria-controls="my-table">
         </b-pagination>
+
+
+         <!-- Modal Delete -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalLabel" aria-hidden="true" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Esborrar incidencia</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="modalText" class="modal-body">
+                Està segur d'esborrar el incidencia {{ incidencia.id }} ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    Tancar
+                </button>
+                <button id="buttonDeleteModal" @click="deleteIncidencia()" type="submit"
+                class="btn btn-secondary">
+                    Esborrar
+                </button>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+
     </div>
 </template>
 
@@ -50,7 +83,9 @@
                 perPage: 5,
                 currentPage: 1,
                 totalRows: '',
-                incidencia: null,
+                incidencia: {
+                    id: null,
+                },
                 incidencies: [],
                 incidenciesRecursos: [],
                 incRecs: [],
@@ -139,14 +174,21 @@
             deleteIncidencia(){
                 let me = this;
                 axios
-                    .get("/incidencies/" + me.incidencia.id)
+                    .delete("/incidencies/" + me.incidencia.id)
                     .then(response => {
                         console.log(response.data)
+                        me.selectIncidencies();
                     })
                     .catch(error => {
-                        console.log(error);
+                        console.log(error.response.data);
                     })
-                    .finally();
+                    .finally(()=> {
+                        $("#deleteModal").modal("hide");
+                    });
+            },
+            confirmDelete(incidencia){
+                this.incidencia = incidencia;
+                $("#deleteModal").modal("show");
             }
         },
         mounted() {
