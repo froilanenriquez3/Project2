@@ -1,5 +1,12 @@
 <template>
     <div class="recursosMovilsContainer">
+
+        <div v-show="errorMessage != ''" class="alert alert-secondary alert-dismissible fade show" role="alert">
+        {{errorMessage}}
+        <button type="button" @click="resetError()" class="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
         <!-- Si no se selecciona una opción, se muestra la tabla -->
         <div v-show="action == ''">
         <!-- Filtro -->
@@ -129,6 +136,7 @@ export default {
   components: { FilterSelect, mapInsert },
     data() {
         return {
+            errorMessage: '',
             itemsToDisplay: [],
             action: "",
             recursos: [],
@@ -161,8 +169,12 @@ export default {
                 })
                 .catch(error => {
                     console.log(error);
+                    me.errorMessage= error.response.data.error;
                 })
                 .finally(() => (this.loading = false));
+        },
+        resetError(){
+            this.errorMessage= '';
         },
         selectAction(action, recurs) {
             this.action = action;
@@ -195,6 +207,7 @@ export default {
                     console.log(me.tipus_recursos);
                 })
                 .catch(error => {
+                    me.errorMessage= error.response.data.error;
                     console.log(error);
                 })
                 .finally(() => (this.loading = false));
@@ -213,7 +226,7 @@ export default {
                     console.log(error.response.status);
                     console.log(error.response.data);
                     me.action=''
-                    // me.errorMessage= error.response.data.error;
+                    me.errorMessage= error.response.data.error;
                 })
             this.resetLatLng();
             this.cleanResource();
@@ -242,10 +255,15 @@ export default {
                     console.log(error.response.status);
                     console.log(error.response.data);
                     me.action=''
-                    // me.errorMessage= error.response.data.error;
+                    me.errorMessage= error.response.data.error;
                 })
+                .finally(() =>{
+                    this.selectRecursos();
+                });
+
                 this.resetLatLng();
                 this.cleanResource();
+
             },
             confirmDeleteRecurs(recurs){
                 this.recurs= recurs;
@@ -262,10 +280,13 @@ export default {
                     //me.infoMessage= response.data.missatge;
                 })
                 .catch(error => {
-                    //me.errorMessage = error.response.data.error;
+                    me.errorMessage = error.response.data.error;
                     $('#deleteModal').modal('hide');
                     me.action=''
                 })
+                .finally(() =>{
+                    this.selectRecursos();
+                });
 
             },
              paginator(recursos) {

@@ -13,6 +13,9 @@ class Utilitat
             case 1062:
                 $message = "Registro duplicado";
                 break;
+            case 1048:
+                $message = "Error al actualizar. Por favor rellene los campos obligatorios";
+                break;
             case 1451;
                 $message = "Registro con elementos relacionados.";
                 break;
