@@ -1,7 +1,7 @@
 <template>
     <div class="recursosMovilsContainer">
         <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
-            <strong>ALERTA!</strong>
+            <strong>Error: </strong>
             {{errorMessage}}
             <button type="button" @click="resetError()" class="close">
                 <span aria-hidden="true">&times;</span>
