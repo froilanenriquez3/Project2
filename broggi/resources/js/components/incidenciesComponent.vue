@@ -170,14 +170,13 @@
     <tr class="row">
         <th class="col-2">Prioritat</th>
         <th class="col-4">Recurs</th>
-        <th class="col-2"></th>
     </tr>
   </thead>
   <tbody>
       <!-- Como en este caso no hay afectados, se cogerá el index para diferenciar los recursos que enviaremos -->
     <tr class="row" v-for="(recurs, index) in recursosToShow" :key="index">
         <td class="col-2">
-            <input type="number" min="1" max="4" :id="'prioritat' + index" name="prioritat" value="1" v-model="prioritat" @change="setPrioritat(index)">
+            <input type="number" min="1" max="4" :id="'prioritat' + index" name="prioritat" v-model="recurs.prioritat">
         </td>
       <td class="col-4">
           {{recurs.tipus}}
@@ -362,6 +361,7 @@ export default {
             // cambiamos el id por uno fantasma.
             this.infoRecurs.afectat_id= 1;
             this.infoRecursos.push(this.infoRecurs);
+            this.incidencia.infoRecursos = this.infoRecursos;
         }else {
             // Los ponemos en el mismo orden que los afectados para ahorrarnos problemas.
         this.infoRecursos[this.afectatActiu]= this.infoRecurs;
@@ -544,6 +544,7 @@ export default {
       else this.multiple = true;
   },
   setPrioritat(afectat){
+      debugger
       if(this.multiple){
           this.infoRecursos[afectat].prioritat = Number(this.prioritat);
       } else {

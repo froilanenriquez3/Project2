@@ -194,6 +194,9 @@ export default {
           console.log(error.response.data);
             me.action='';
           // me.errorMessage= error.response.data.error;
+        })
+        .finally(() =>{
+            this.selectTipus();
         });
     },
     editarTipo() {
@@ -215,6 +218,9 @@ export default {
           console.log(error.response.data);
             me.action='';
           // me.errorMessage= error.response.data.error;
+        })
+        .finally(() =>{
+            this.selectTipus();
         });
     },
     confirmDeleteTipo(tipo) {
@@ -236,7 +242,11 @@ export default {
           //me.errorMessage = error.response.data.error;
           $("#deleteModal").modal("hide");
             me.action='';
+        })
+        .finally(() =>{
+            this.selectTipus();
         });
+
     },
     selectAction(action, tipo) {
       this.action = action;

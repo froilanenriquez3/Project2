@@ -241,6 +241,9 @@ export default {
                     me.action=''
                     // me.errorMessage= error.response.data.error;
                 })
+                .finally(() =>{
+                    this.selectUsuaris();
+                });
         },
         paginator(usuaris) {
         //  Devuelve parte del array que va a usar esa página concreta.
@@ -266,6 +269,9 @@ export default {
                     me.action=''
                     // me.errorMessage= error.response.data.error;
                 })
+                .finally(() =>{
+                    this.selectUsuaris();
+                });
             },
             confirmDeleteUsuari(usuari){
                 this.usuari= usuari;
