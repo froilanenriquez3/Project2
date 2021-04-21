@@ -8,11 +8,11 @@
             <ul id="side-menu nav-pills" class="nav flex-column " >
 
                 <li class="sidebar mb-2">
-                    <a  class="nav-link"  data-toggle="pill" href="#" role="tab" aria-controls="v-pills-home" aria-selected="true"> Alertantes Habituales </a>
+                    <a  class="nav-link" href="{{ url('/alertants')}}" > Alertantes Habituales </a>
                 </li>
 
                 <li class="sidebar mb-2">
-                    <a  class="nav-link"  data-toggle="pill" href="#" role="tab" aria-selected="false"> Nuevo Alertante </a>
+                    <a  class="nav-link" href="{{ url('/alertants/create')}}" > Nuevo Alertante </a>
                 </li>
 
                 <li class="sidebar mb-2">

@@ -69,9 +69,9 @@ main {
 
 
 #formButtons {
-    position: relative;
-    right: 5%;
-    bottom: 5%;
+    /* position: relative; */
+    right: 10%;
+    bottom: 10%;
 }
 
 
