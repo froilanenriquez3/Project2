@@ -11,12 +11,12 @@ button {
     border-radius: 10px;
     cursor: pointer;
     height: 8px;
-    width: calc(100%- 10px);
+    width: 94%;
     background-color:  rgb(0, 172, 194);
 }
 
 .progress-bar{
-    background: #e1157b94;
+    background: #e1157b9d;
     width: 20%;
     height: 100%;
     border-radius: 10px;
