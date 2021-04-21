@@ -44,7 +44,7 @@
             <div id="formButtons">
                 @yield('cancelButton')
 
-                 <button class="btn btn-primary" id="formSubmit" >Siguiente</button>
+                 <button class="btn btn-primary" id="formSubmit" >Següent</button>
              </div>
 
         </section>

@@ -35,7 +35,7 @@
 
             <section id="tableSection">
                 <div id="filterSection">
-                    <p>Filters</p>
+                    <p>Filtres</p>
                 </div>
 
                 <div id="divTable">

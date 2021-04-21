@@ -28,12 +28,12 @@
             @include('partials.mensajes')
 
             <div class="loginInputs">
-                <label class="" for="username">Usuario</label>
+                <label class="" for="username">Usuari</label>
                 <input class="" name="username" id="username" type="text" autofocus required>
             </div>
 
             <div class="loginInputs">
-                <label class="" for="contrasenya">Contraseña</label>
+                <label class="" for="contrasenya">Contrasenya</label>
                 <input class="" name="contrasenya" id="contrasenya" type="password" required>
             </div>
 

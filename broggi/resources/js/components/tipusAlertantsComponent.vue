@@ -77,7 +77,7 @@
       </button>
 
 
-      <button  type="button" @click="cancel()" class="btn btn-primary" id="cancelButton">Cancelar</button>
+      <button  type="button" @click="cancel()" class="btn btn-primary" id="cancelButton">Cancel·lar</button>
     </div>
 
     <!-- Modal Delete -->

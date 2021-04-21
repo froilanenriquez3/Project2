@@ -11,16 +11,13 @@ class Utilitat
     if (!empty($exception->errorInfo[1])) {
         switch ($exception->errorInfo[1]) {
             case 1048:
-                $message = "No se ha podido actualizar, por favor rellene todos los campos. ";
+                $message = "No s'ha pogut actualitzar. Siusplau ompli tots els camps obligatoris. ";
                 break;
             case 1062:
-                $message = "Registro duplicado";
-                break;
-            case 1048:
-                $message = "Error al actualizar. Por favor rellene los campos obligatorios";
+                $message = "Registre duplicat";
                 break;
             case 1451;
-                $message = "Registro con elementos relacionados.";
+                $message = "Registre amb elements relacionats.";
                 break;
             default:
                 $message = $exception->errorInfo[1] . '-' . $exception->errorInfo[2];
@@ -29,13 +26,13 @@ class Utilitat
     }else {
         switch ($exception->getCode()) {
             case 1044:
-                $message = "Incorrect information";
+                $message = "Informació incorrecta";
                 break;
             case 1049:
-                $message = "Unknown database";
+                $message = "Base de dades desconeguda";
                 break;
             case 2002:
-                $message = "Could not find the server";
+                $message = "No s'ha pogut trobar el servidor";
                 break;
             default:
                 $message = $exception->getCode() . '-' . $exception->getMessage();

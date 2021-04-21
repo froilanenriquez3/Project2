@@ -14,13 +14,13 @@
         <a href="{{ asset('/alertants') }}">
             <div>
                 <i class="icon fas fa-users  d-flex justify-content-center pb-3"></i>
-                <p>Alertantes habituales</p>
+                <p>Alertants habituals</p>
             </div>
         </a>
         <a href="{{ asset('/recursos') }}">
             <div>
                 <i class="icon fas fa-ambulance  d-flex justify-content-center pb-3"></i>
-                <p>Recursos móviles</p>
+                <p>Recursos mòbils</p>
             </div>
         </a>
         <a href="{{ asset('/usuaris') }}">
@@ -32,7 +32,7 @@
         <a href="{{ url('/incidencies') }}">
             <div>
                 <i class="icon fas fa-exclamation-triangle  d-flex justify-content-center pb-3"></i>
-                <p>Incidencias</p>
+                <p>Incidències</p>
             </div>
         </a>
     </section>

@@ -8,13 +8,13 @@
            </div>
 
            <div class="form-group row">
-               <label class="col-2" for="inActivacio">1: Hora Activacio</label>
+               <label class="col-2" for="inActivacio">1: Hora Activació</label>
                <input class="col-2" type="time" v-model="infoRecursos.hora_activacio" id="inActivacio" name="inActivacio">
 
-               <label class="col-2" for="inMobilitzacio">2: Hora Mobilitzacio</label>
+               <label class="col-2" for="inMobilitzacio">2: Hora Mobilització</label>
                <input class="col-2" type="time" v-model="infoRecursos.hora_mobilitzacio" id="inMobilitzacio" name="inMobilitzacio">
 
-               <label class="col-2" for="inAssistencia">3: Hora Assistencia</label>
+               <label class="col-2" for="inAssistencia">3: Hora Assistència</label>
                <input class="col-2" type="time" v-model="infoRecursos.hora_assistencia" id="inAssistencia" name="inAssistencia">
 
 
@@ -46,7 +46,7 @@
        </div>
 
        <div v-show="!displayForm">
-           <p>No hi ha cap incident assignat</p>
+           <p>No hi ha cap incidència assignada</p>
        </div>
     </div>
 </template>

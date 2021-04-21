@@ -12,13 +12,13 @@
         <a href="{{ url('/incidenciesrecursos/create') }}">
             <div>
                 <i class="icon fas fa-exclamation-triangle  d-flex justify-content-center pb-3"></i>
-                <p>Incidencia actual</p>
+                <p>Incidència actual</p>
             </div>
         </a>
         <a href="{{ url('/incidenciesrecursos') }}">
             <div>
                 <i class="icon fas fa-file-medical  d-flex justify-content-center pb-3"></i>
-                <p>Ver historial</p>
+                <p>Veure historial</p>
             </div>
         </a>
 

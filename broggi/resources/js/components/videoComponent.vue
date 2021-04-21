@@ -1,7 +1,7 @@
 <template>
   <div id="videoDiv">
     <div class="card">
-      <div class="card-header">Videos Broggi</div>
+      <div class="card-header">Video Broggi</div>
 
       <div class="card-body row align-items-center">
         <video muted class="col-12" @timeupdate="changeProgress($event)" @canplay="changeProgress($event)"
@@ -10,7 +10,7 @@
             src="http://localhost:8080/Project2/broggi/public/video/videosBroggi.mp4"
             type="video/mp4"
           />
-          Your browser does not support the video tag.
+          El teu navegador no soporta aquest vídeo.
         </video>
         <div @click="setProgress($event)" class="progress-range">
             <div class="progress-bar"></div>
@@ -21,9 +21,9 @@
                 <i class="fas fa-play"></i> Play
             </button>
 
-            <button class="btn btn-primary m-1" id="section1">Section 1</button>
-            <button class="btn btn-primary m-1" id="section2">Section 2</button>
-            <button class="btn btn-primary m-1" id="section3">Section 3</button>
+            <button class="btn btn-primary m-1" id="section1">Secció 1</button>
+            <button class="btn btn-primary m-1" id="section2">Secció 2</button>
+            <button class="btn btn-primary m-1" id="section3">Secció 3</button>
         </div>
 
       </div>
