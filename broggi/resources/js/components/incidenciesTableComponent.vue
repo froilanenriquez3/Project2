@@ -26,7 +26,8 @@
                     <td>{{ incidencia.telefon_alertant}}</td>
                     <td>{{ incidencia.adreca }}</td>
                     <td>{{ incidencia.tipus_incidencia.tipus}}</td>
-                    <td>{{ incidencia.descripcio.substring(0,20)}}</td>
+                    <td v-show="incidencia.descripcio.length > 20">{{ incidencia.descripcio.substring(0,20) + "..." }}</td>
+                    <td v-show="incidencia.descripcio.length < 20">{{ incidencia.descripcio }}</td>
                     <td> <button class="btn btn-warning">Editar</button> </td>
                     <td> <button class="btn btn-secondary" @click="confirmDelete(incidencia)" >Esborrar</button> </td>
                 </tr>
@@ -133,8 +134,8 @@
                 this.totalRows = this.incidencies.length;
             },
             filter(itemsFiltered){
-            this.itemsToDisplay= itemsFiltered;
-            this.totalRows= this.itemsToDisplay.length;
+                this.itemsToDisplay= itemsFiltered;
+                this.totalRows= this.itemsToDisplay.length;
             },
              showIncidenciaRecurso(id){
                 let me = this;
