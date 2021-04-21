@@ -121,15 +121,15 @@ export default {
     highlightSection() {
 
       if (this.video.currentTime < this.section2time) {
-        document.querySelector("#section1").style.backgroundColor = "red";
+        document.querySelector("#section1").style.backgroundColor = "#e1157b";
         document.querySelector("#section2").style.backgroundColor = "#11ADC4";
         document.querySelector("#section3").style.backgroundColor = "#11ADC4";
       } else if (this.video.currentTime < this.section3time) {
-        document.querySelector("#section2").style.backgroundColor = "red";
+        document.querySelector("#section2").style.backgroundColor = "#e1157b";
         document.querySelector("#section1").style.backgroundColor = "#11ADC4";
         document.querySelector("#section3").style.backgroundColor = "#11ADC4";
       } else {
-        document.querySelector("#section3").style.backgroundColor = "red";
+        document.querySelector("#section3").style.backgroundColor = "#e1157b";
         document.querySelector("#section1").style.backgroundColor = "#11ADC4";
         document.querySelector("#section2").style.backgroundColor = "#11ADC4";
       }

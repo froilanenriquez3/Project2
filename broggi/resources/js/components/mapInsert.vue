@@ -54,6 +54,7 @@ export default {
         },
         addRecursosToMap() {
             this.recursos.forEach(element => {
+                if(element.codi != 'cap'){
                 this.colorRecurs(element);
                 // Div donde irá todo el contenido del popup
                 let div= document.createElement('div');
@@ -86,7 +87,7 @@ export default {
                     .setLngLat([element.lon, element.lat])
                     .setPopup(popup)
                     .addTo(this.map);
-
+                }
             });
         },
 
