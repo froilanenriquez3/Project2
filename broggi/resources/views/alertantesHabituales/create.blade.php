@@ -23,7 +23,7 @@
         <input class="col-10" type="text" id="alertantCognom" name="alertantCognom">
     </div>
     <div class="form-group row">
-        <label class="col-2" for="alertantAdreca">Adreca</label>
+        <label class="col-2" for="alertantAdreca">Adreça</label>
         <input class="col-10" type="number" id="alertantAdreca" name="alertantAdreca">
 
     </div>

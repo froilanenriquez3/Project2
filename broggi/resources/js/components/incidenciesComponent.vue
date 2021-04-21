@@ -5,7 +5,7 @@
         <button class="btn btn-primary" @click="openModalVideo()" v-bind:class="{ hidden: !formacio }">Veure video CPR</button>
     <button class="btn btn-primary" @click="openModalHelp()" v-bind:class="{ hidden: !formacio }">Ajuda amb l'anglès</button>
     <div class="formacionBox">
-    <p>Modo formació</p>
+    <p>Mode formació</p>
             <label class="switch" id="btnModoFormacion">
                 <input @click="toggleFormacio()" type="checkbox">
                 <span class="slider round"></span>
@@ -17,7 +17,7 @@
         <!-- TAG INCIDENCIAS -->
         <div v-show="section == 'Incident'">
         <div class="form-group row">
-        <label class="col-2" for=""><b>Tipus Incidencia</b></label>
+        <label class="col-2" for=""><b>Tipus Incidència</b></label>
         <select class="col-10" name="tipus_incidencia" v-model="incidencia.tipus_incidencies_id">
             <option v-for="tipo in tipusIncidencies" :key="tipo.id" v-bind:value="tipo.id">
             {{ tipo.tipus }}
@@ -57,7 +57,7 @@
     </div>
 
     <div class="form-group row">
-      <label class="col-2" for=""><b>Descripcio</b></label>
+      <label class="col-2" for=""><b>Descripció</b></label>
       <textarea class="col-10" type="" name="" v-model="incidencia.descripcio" maxlength="256">
       </textarea>
     </div>
@@ -142,7 +142,7 @@
       </td>
       <td class="col-4">
            <div v-show="afectat.id == afectatActiu && (infoRecursos[afectat.id] == undefined)">
-                        assigna un recurs del mapa
+                        Assigna un recurs del mapa
                     </div>
             <div  v-show="(infoRecursos[afectat.id] != undefined)" :id="'afectat' + afectat.id" ></div>
       </td>
@@ -233,7 +233,7 @@
 
 
     <button class="btn btn-primary mt-2" @click="afegirIncidencia()" id="btnAddIncidencia">
-      Afegir incidencia
+      Afegir incidència
     </button>
 
 

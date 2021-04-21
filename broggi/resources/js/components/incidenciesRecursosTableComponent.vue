@@ -4,14 +4,14 @@
             <table class="table">
             <thead>
                 <tr>
-                    <th>Incidencia ID</th>
+                    <th>Incidència ID</th>
                     <th>Recurs ID</th>
                     <th>Recurs Codi</th>
                     <th>Afectat ID</th>
                     <th>Afectat Nom</th>
                     <th>Desti</th>
-                    <th>Hora Activacio</th>
-                    <th>Hora Finalitzacio</th>
+                    <th>Hora Activació</th>
+                    <th>Hora Finalització</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,7 +34,7 @@
             aria-controls="my-table">
         </b-pagination>
         </div>
-        <p v-show="incRecs.length == 0">No hi ha incidents</p>
+        <p v-show="incRecs.length == 0">No hi ha incidències</p>
     </div>
 </template>
 

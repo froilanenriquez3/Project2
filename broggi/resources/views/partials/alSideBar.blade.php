@@ -8,15 +8,15 @@
             <ul id="side-menu nav-pills" class="nav flex-column " >
 
                 <li class="sidebar mb-2">
-                    <a  class="nav-link" href="{{ url('/alertants')}}" > Alertantes Habituales </a>
+                    <a  class="nav-link"  data-toggle="pill" href="#" role="tab" aria-controls="v-pills-home" aria-selected="true"> Alertants Habituals </a>
                 </li>
 
                 <li class="sidebar mb-2">
-                    <a  class="nav-link" href="{{ url('/alertants/create')}}" > Nuevo Alertante </a>
+                    <a  class="nav-link"  data-toggle="pill" href="#" role="tab" aria-selected="false"> Nou Alertant </a>
                 </li>
 
                 <li class="sidebar mb-2">
-                    <a  class="nav-link"  href="{{ url('/tipusalertants') }}" > Tipos de alertantes </a>
+                    <a  class="nav-link"  href="{{ url('/tipusalertants') }}" > Tipus d'alertants </a>
                 </li>
 
             </ul>

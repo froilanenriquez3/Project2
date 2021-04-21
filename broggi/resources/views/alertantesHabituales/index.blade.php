@@ -30,8 +30,8 @@
         <th scope="col">ID</th>
         <th scope="col">Nom</th>
         <th scope="col">Cognom</th>
-        <th scope="col">Telefon</th>
-        <th scope="col">Adreca</th>
+        <th scope="col">Telèfon</th>
+        <th scope="col">Adreça</th>
         <th scope="col">Tipus</th>
         <th></th>
         <th></th>

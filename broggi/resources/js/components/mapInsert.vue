@@ -1,7 +1,7 @@
 <template>
     <div class="map-container" >
         <div id="mapa-mapbox" style="width: 400px; height: 300px;"></div>
-        <button @click="addRecursosToMap()" class="btn btn-primary">ver Recursos</button>
+        <button @click="addRecursosToMap()" class="btn btn-primary">veure Recursos</button>
         <!-- Posición del marcador por defecto si la persona no lo arrastra -->
         <div hidden="true" id="latLongInfo">1.8676800;41.8204600
         </div>

@@ -9,12 +9,12 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Incidencia ID</th>
+                    <th>Incidència ID</th>
                     <th>Data</th>
                     <th>Telefon Alertant</th>
                     <th>Adreca</th>
-                    <th>Tipus Incidencia</th>
-                    <th>Descripcio</th>
+                    <th>Tipus Incidència</th>
+                    <th>Descripció</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -53,14 +53,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Esborrar incidencia</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Esborrar incidència</h5>
                 <button type="button" class="close" data-dismiss="modal"
                 aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div id="modalText" class="modal-body">
-                Està segur d'esborrar el incidencia {{ incidencia.id }} ?
+                Està segur d'esborrar l'incidència {{ incidencia.id }} ?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">
