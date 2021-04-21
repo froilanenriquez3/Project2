@@ -37,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/thome', function (){ return view('homePages.teleoperador');});
         Route::resource('/incidencies', IncidenciesController::class);
         Route::resource('/alertants', AlertantsController::class);
+        Route::resource('/tipusalertants', TipusAlertantsController::class);
         Route::resource('/recursos', RecursosController::class);
     });
 
@@ -50,7 +51,6 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:1'])->group(function(){
         Route::get('/ahome',function (){ return view('homePages.admin'); });
         Route::resource('/usuaris', UsuarisController::class);
-        Route::resource('/tipusalertants', TipusAlertantsController::class);
         Route::resource('/tipusrecursos', TipusRecursosController::class);
     });
 
