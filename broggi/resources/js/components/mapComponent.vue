@@ -146,6 +146,7 @@ export default {
         // },
         addRecursosToMap() {
             this.recursos.forEach(element => {
+                if(element.codi != 'cap'){
                 this.colorRecurs(element);
                 // Div donde irá todo el contenido del popup
                 let div= document.createElement('div');
@@ -164,7 +165,7 @@ export default {
 
                 button.addEventListener("click", this.assignarRecurs);
 
-                if(element.codi != "ghost"){
+
                     div.appendChild(p)
                     div.appendChild(button)
 
@@ -188,7 +189,7 @@ export default {
                     this.marker = marker;
                     this.button = button;
                 });
-                }
+            }
             });
         },
     },

@@ -1,7 +1,7 @@
 <template>
     <div class="recursosMovilsContainer">
         <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
-            <strong>WARNING!</strong>
+            <strong>Error: </strong>
             {{errorMessage}}
             <button type="button" @click="resetError()" class="close">
                 <span aria-hidden="true">&times;</span>
@@ -136,7 +136,7 @@ export default {
   components: { FilterSelect, mapInsert },
     data() {
         return {
-            errorMessage:'',
+            errorMessage: '',
             itemsToDisplay: [],
             action: "",
             recursos: [],
@@ -170,8 +170,12 @@ export default {
                 .catch(error => {
                     me.errorMessage= error.response.data.error;
                     console.log(error);
+                    me.errorMessage= error.response.data.error;
                 })
                 .finally(() => (this.loading = false));
+        },
+        resetError(){
+            this.errorMessage= '';
         },
         selectAction(action, recurs) {
             this.action = action;
@@ -257,8 +261,13 @@ export default {
                     me.action=''
                     me.errorMessage= error.response.data.error;
                 })
+                .finally(() =>{
+                    this.selectRecursos();
+                });
+
                 this.resetLatLng();
                 this.cleanResource();
+
             },
             confirmDeleteRecurs(recurs){
                 this.recurs= recurs;
@@ -279,6 +288,9 @@ export default {
                     $('#deleteModal').modal('hide');
                     me.action=''
                 })
+                .finally(() =>{
+                    this.selectRecursos();
+                });
 
             },
              paginator(recursos) {
