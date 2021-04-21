@@ -41,12 +41,12 @@ class IncidenciesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Incidencies  $incidencies
+     * @param  \App\Models\Incidencies  $incidency
      * @return \Illuminate\Http\Response
      */
-    public function show(Incidencies $incidencies)
+    public function show(Incidencies $incidency)
     {
-        //
+        return view('incidencies/' + $incidency);
     }
 
     /**

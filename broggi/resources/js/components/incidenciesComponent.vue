@@ -58,7 +58,7 @@
 
     <div class="form-group row">
       <label class="col-2" for=""><b>Descripcio</b></label>
-      <textarea class="col-10" type="" name="" v-model="incidencia.descripcio">
+      <textarea class="col-10" type="" name="" v-model="incidencia.descripcio" maxlength="256">
       </textarea>
     </div>
 
