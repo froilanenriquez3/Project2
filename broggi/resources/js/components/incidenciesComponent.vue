@@ -257,6 +257,9 @@ export default {
         section: {
             type: String,
             required: true
+        },
+        editincidencia:{
+            required: false
         }
     },
   data() {
@@ -550,6 +553,11 @@ export default {
           this.infoRecursos[afectat.id].prioritat = Number(this.prioritat);
       }
 
+  },
+  initEditIncidencia(){
+      if(this.editincidencia != null ){
+          this.incidencia = this.editincidencia;
+      }
   }
   },
   created() {
@@ -562,6 +570,7 @@ export default {
   mounted() {
     // console.log("Component mounted.");
     // this.nouAfectat();
+    this.initEditIncidencia();
 
   },
   computed:{
