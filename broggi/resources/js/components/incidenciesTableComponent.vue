@@ -17,6 +17,7 @@
                     <th>Descripcio</th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +33,13 @@
                         <button class="btn btn-warning">
                             <a :href="'http://localhost:8080/Project2/broggi/public/incidencies/'+ incidencia.id + '/edit'">
                                 Editar
+                            </a>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">
+                            <a :href="'http://localhost:8080/Project2/broggi/public/incidencies/'+ incidencia.id " class="text-white">
+                            Veure dades
                             </a>
                         </button>
                     </td>
