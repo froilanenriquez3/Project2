@@ -1,7 +1,7 @@
 <template>
     <div id="incTableDiv">
         <!-- Filtro -->
-        <filter-select :multiple="multiple" :name="'Tipus inciencia:'" :listToFilter="incidencies" :filterBy="tipusIncidencies" :filterField="'tipus'" :relatedId="'tipus_incidencies_id'"
+        <filter-select :name="'Tipus inciencia:'" :listToFilter="incidencies" :filterBy="tipusIncidencies" :filterField="'tipus'" :relatedId="'tipus_incidencies_id'"
         @applyFilterResults="filter($event)"></filter-select>
         <!-- Si no hay nada que cumpla con lo buscado, no sale la tabla y solo mostramos mensaje -->
         <div v-if="itemsToDisplay.length == 0"> No s'han trobat elements d'aquestes característiques</div>
@@ -14,6 +14,8 @@
                     <th>Adreca</th>
                     <th>Tipus Incidencia</th>
                     <th>Descripcio</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -24,6 +26,8 @@
                     <td>{{ incidencia.adreca }}</td>
                     <td>{{ incidencia.tipus_incidencia.tipus}}</td>
                     <td>{{ incidencia.descripcio.substring(0,20)}}</td>
+                    <td> <button class="btn btn-warning">Editar</button> </td>
+                    <td> <button class="btn btn-secondary">Esborrar</button> </td>
                 </tr>
             </tbody>
         </table>
@@ -46,6 +50,7 @@
                 perPage: 5,
                 currentPage: 1,
                 totalRows: '',
+                incidencia: null,
                 incidencies: [],
                 incidenciesRecursos: [],
                 incRecs: [],
@@ -66,7 +71,7 @@
                 axios
                     .get("/incidencies")
                     .then((response) => {
-
+                        console.log(response.data);
                     me.incidencies = response.data;
                     me.itemsToDisplay= me.incidencies;
                     console.log(me.incidencies);
@@ -106,7 +111,7 @@
                         me.incidencia.incidencies_has_recursos.forEach(i => {
                             me.incRecs.push(i);
                         });
-                        me.itemsToDisplay= me.incRecs;
+                        // me.itemsToDisplay= me.incRecs;
                         me.totalRows= me.itemsToDisplay.length;
                     })
                     .catch((error) => {
@@ -119,18 +124,30 @@
 
             },
             getTipusIncidencies(){
-        let me = this;
-      axios
-        .get("/tipusincidencies")
-        .then((response) => {
-          console.log(response.data);
-          me.tipusIncidencies = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => (this.loading = false));
-    }
+                let me = this;
+            axios
+                .get("/tipusincidencies")
+                .then((response) => {
+                // console.log(response.data);
+                me.tipusIncidencies = response.data;
+                })
+                .catch((error) => {
+                console.log(error);
+                })
+                .finally(() => (this.loading = false));
+            },
+            deleteIncidencia(){
+                let me = this;
+                axios
+                    .get("/incidencies/" + me.incidencia.id)
+                    .then(response => {
+                        console.log(response.data)
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+                    .finally();
+            }
         },
         mounted() {
             // console.log('Component mounted.');
