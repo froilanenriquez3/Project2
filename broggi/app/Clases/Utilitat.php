@@ -10,6 +10,9 @@ class Utilitat
 {
     if (!empty($exception->errorInfo[1])) {
         switch ($exception->errorInfo[1]) {
+            case 1048:
+                $message = "No se ha podido actualizar, por favor rellene todos los campos. ";
+                break;
             case 1062:
                 $message = "Registro duplicado";
                 break;

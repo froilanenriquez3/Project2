@@ -152,56 +152,56 @@ class ApiIncidenciesController extends Controller
 
         // $incidency = Incidencies::find($request->input('id'));
         // $incidencies->id = $request->input('id');
-        $incidency->hora = $request->input('hora');
-        $incidency->telefon_alertant = $request->input('telefon_alertant');
-        $incidency->data = $request->input('data');
-        $incidency->adreca = $request->input('adreca');
-        $incidency->adreca_complement = $request->input('adreca_complement');
-        $incidency->descripcio = $request->input('descripcio');
-        $incidency->nom_metge = $request->input('nom_metge');
+        $incidency->hora                 = $request->input('hora');
+        $incidency->telefon_alertant     = $request->input('telefon_alertant');
+        $incidency->data                 = $request->input('data');
+        $incidency->adreca               = $request->input('adreca');
+        $incidency->adreca_complement    = $request->input('adreca_complement');
+        $incidency->descripcio           = $request->input('descripcio');
+        $incidency->nom_metge            = $request->input('nom_metge');
         $incidency->tipus_incidencies_id = $request->input('tipus_incidencies_id');
-        $incidency->alertants_id = $request->input('alertants_id');
-        $incidency->municipis_id = $request->input('municipis_id');
-        $incidency->duracion = $request->input('duracion');
+        $incidency->alertants_id         = $request->input('alertants_id');
+        $incidency->municipis_id         = $request->input('municipis_id');
+        $incidency->duracion             = $request->input('duracion');
 
         // Campo de la ternaria
         // $infoRecursos = [];
-
-
         // $incidencia->telefon_alertant = '';
 
         $userId = Auth::user();
         $incidency->usuaris_id  = $userId->id;
-        // $incidencia->usuaris_id  = 1;
+        // $incidency->usuaris_id  = 1;
 
         $infoRecursos = $request->input('incidencies_has_recursos');
 
         try {
-            // $incidency->update();
-            foreach ($infoRecursos as $infoRecurs) {
+            $incidency->save();
+            if (!is_null($infoRecursos)) {
+                foreach ($infoRecursos as $infoRecurs) {
 
-                if ($request->input('saveRecurs') == $infoRecurs['recursos_id']) {
+                    if ($request->input('saveRecurs') == $infoRecurs['recursos_id']) {
 
-                    $incidency->incidencies_has_recursos()
-                    ->where('recursos_id', $infoRecurs['recursos_id'])
-                    ->update(
-                        [
-                            // 'recursos_id' => $infoRecurs['recursos_id'],
-                            'hora_activacio'        => $infoRecurs['hora_activacio'],
-                            'hora_mobilitzacio'     => $infoRecurs['hora_mobilitzacio'],
-                            'hora_assistencia'      => $infoRecurs['hora_assistencia'],
-                            'hora_transport'        => $infoRecurs['hora_transport'],
-                            'hora_arribada_hospital'=> $infoRecurs['hora_arribada_hospital'],
-                            'hora_transferencia'    => $infoRecurs['hora_transferencia'],
-                            'hora_finalitzacio'     => $infoRecurs['hora_finalitzacio'],
-                            'prioritat'             => $infoRecurs['prioritat'],
-                            'desti'                 => $infoRecurs['desti'],
-                            // 'afectat_id'            => $infoRecurs['afectat_id'],
-                        ]
-                    );
+                        $incidency->incidencies_has_recursos()
+                            ->where('recursos_id', $infoRecurs['recursos_id'])
+                            ->update(
+                                [
+                                    // 'recursos_id' => $infoRecurs['recursos_id'],
+                                    'hora_activacio'        => $infoRecurs['hora_activacio'],
+                                    'hora_mobilitzacio'     => $infoRecurs['hora_mobilitzacio'],
+                                    'hora_assistencia'      => $infoRecurs['hora_assistencia'],
+                                    'hora_transport'        => $infoRecurs['hora_transport'],
+                                    'hora_arribada_hospital'=> $infoRecurs['hora_arribada_hospital'],
+                                    'hora_transferencia'    => $infoRecurs['hora_transferencia'],
+                                    'hora_finalitzacio'     => $infoRecurs['hora_finalitzacio'],
+                                    'prioritat'             => $infoRecurs['prioritat'],
+                                    'desti'                 => $infoRecurs['desti'],
+                                    // 'afectat_id'            => $infoRecurs['afectat_id'],
+                                ]
+                            );
+                    }
+
+                    // $incidency->incidencies_has_recursos()->save($ihr);
                 }
-
-                // $incidency->incidencies_has_recursos()->save($ihr);
             }
 
 
@@ -248,6 +248,7 @@ class ApiIncidenciesController extends Controller
             $response = \response()
                 ->json(['message' => 'Incidencia borrado correctamente'], 200);
         } catch (QueryException $ex) {
+            DB::rollBack();
             $message = Utilitat::errorMessage($ex);
             $response = \response()
                 ->json(['error' => $message], 400);

@@ -1,11 +1,11 @@
 <template>
     <div class="recursosMovilsContainer">
-
-        <div v-show="errorMessage != ''" class="alert alert-secondary alert-dismissible fade show" role="alert">
-        {{errorMessage}}
-        <button type="button" @click="resetError()" class="close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <strong>ALERTA!</strong>
+            {{errorMessage}}
+            <button type="button" @click="resetError()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         <!-- Si no se selecciona una opción, se muestra la tabla -->
         <div v-show="action == ''">
@@ -168,6 +168,7 @@ export default {
                     me.totalRows= me.itemsToDisplay.length;
                 })
                 .catch(error => {
+                    me.errorMessage= error.response.data.error;
                     console.log(error);
                     me.errorMessage= error.response.data.error;
                 })
@@ -184,6 +185,9 @@ export default {
                 this.cleanResource;
             }
 
+        },
+        resetError(){
+            this.errorMessage='';
         },
         cleanResource(){
                 this.recurs.id='';
