@@ -248,6 +248,7 @@ class ApiIncidenciesController extends Controller
             $response = \response()
                 ->json(['message' => 'Incidencia borrado correctamente'], 200);
         } catch (QueryException $ex) {
+            DB::rollBack();
             $message = Utilitat::errorMessage($ex);
             $response = \response()
                 ->json(['error' => $message], 400);
