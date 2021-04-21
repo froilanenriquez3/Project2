@@ -1,0 +1,16 @@
+#formSubmit{
+    display: none;
+}
+
+#divForm{
+    width: 80vw;
+    height: 70vh;
+}
+
+#app{
+    width: 100%;
+}
+
+#app div {
+    margin: 1%;
+}

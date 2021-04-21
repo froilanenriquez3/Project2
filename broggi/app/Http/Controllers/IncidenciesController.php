@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Incidencies;
 use Illuminate\Http\Request;
+use App\Http\Resources\IncidenciesResource;
 
 class IncidenciesController extends Controller
 {
@@ -46,7 +47,9 @@ class IncidenciesController extends Controller
      */
     public function show(Incidencies $incidency)
     {
-        return view('incidencies/' + $incidency);
+        $incidencia = new IncidenciesResource(Incidencies::findOrFail($incidency->id));
+        // $incidency = new IncidenciesResource($incidency);
+        return view('incidencies/show',compact('incidencia'));
     }
 
     /**
@@ -57,7 +60,7 @@ class IncidenciesController extends Controller
      */
     public function edit(Incidencies $incidency)
     {
-        return view('incidencies/show', compact('incidency'));
+        return view('incidencies/edit', compact('incidency'));
     }
 
     /**
