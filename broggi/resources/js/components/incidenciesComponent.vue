@@ -524,6 +524,7 @@ export default {
                 .put("/incidencies/"+me.incidencia.id, me.incidencia)
                 .then((response)=>{
                     alert("Formulari enviat correctament");
+                    window.location.href = "/Project2/broggi/public/incidencies";
                     console.log(response);
                     me.incidencia = null;
                 })
@@ -562,7 +563,6 @@ export default {
       else this.multiple = true;
   },
   setPrioritat(afectat){
-      debugger
       if(this.multiple){
           this.infoRecursos[afectat].prioritat = Number(this.prioritat);
       } else {
@@ -573,7 +573,20 @@ export default {
   initEditIncidencia(){
       if(this.editincidencia != null ){
           this.incidencia = this.editincidencia;
+          this.initAlertant();
       }
+  },
+  initAlertant(){
+      let me = this;
+    axios
+        .get("/alertants/"+ me.incidencia.alertants_id)
+        .then(response => {
+            me.alertantIncidencia = response.data;
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        .finally(() => (this.loading = false));
   }
   },
   created() {
