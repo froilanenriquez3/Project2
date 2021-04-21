@@ -23,7 +23,7 @@ class Role
         else {
             // $roles = array_slice(func_get_args(), 2);
             $userRole = Auth::user()->rols_id;
-            $response = redirect('home');
+            $response = redirect('/');
             foreach ($roles as $role) {
                 if ($userRole == $role){
                     $response = $next($request);
