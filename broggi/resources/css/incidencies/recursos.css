@@ -6,3 +6,9 @@
 #recursosAfectats {
     width : 50%;
 }
+
+.mapboxgl-canvas-container {
+
+    height: 100vh;
+
+}

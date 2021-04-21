@@ -24,6 +24,7 @@
             <button class="btn btn-primary m-1" id="section1">Secció 1</button>
             <button class="btn btn-primary m-1" id="section2">Secció 2</button>
             <button class="btn btn-primary m-1" id="section3">Secció 3</button>
+            <i id="muteIcon" @click="toggleMute" class="fas fa-volume-mute ml-2 fa-2x"></i>
         </div>
 
       </div>
@@ -70,6 +71,13 @@ export default {
       document
         .querySelector("#playButton")
         .addEventListener("click", this.playVideo);
+    },
+    toggleMute(){
+        let muteIcon= document.querySelector('#muteIcon');
+        this.video.muted = !this.video.muted;
+
+        muteIcon.classList.contains('fa-volume-up') ? muteIcon.classList.replace('fa-volume-up', 'fa-volume-mute')
+        : muteIcon.classList.replace('fa-volume-mute', 'fa-volume-up')
     },
     skipTen() {
       this.video.currentTime += 10;

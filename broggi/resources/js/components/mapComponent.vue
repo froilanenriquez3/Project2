@@ -1,8 +1,7 @@
 <template>
-    <div class="map-container">
-        <div id="mapa-mapbox" style="width: 400px; height: 300px;"></div>
+    <div class="map-container" style="width: 100%; height: 300px;">
+        <div id="mapa-mapbox" ></div>
         <div id="geocoder" class="geocoder"></div>
-        <button @click="addRecursosToMap()" class="btn btn-primary">ver Recursos</button>
         <div class="color-box bg-primary"></div>
         <span> Recursos disponibles</span>
         <div class="color-box bg-secondary"></div>
@@ -206,6 +205,10 @@ export default {
             zoom: 7 // starting zoom
         });
 
+         this.map.on('load', () =>{
+            this.addRecursosToMap();
+        })
+
 
         let geocoder = new MapboxGeocoder({
             accessToken: this.key,
@@ -216,15 +219,14 @@ export default {
             },
             mapboxgl: mapboxgl
 
+
         });
 
         this.map.addControl(geocoder);
         this.map.addControl(new mapboxgl.NavigationControl());
 
     // No funciona :(
-        this.map.on('load', () =>{
-            this.addRecursosToMap;
-        })
+
     },
 
     // watch: {

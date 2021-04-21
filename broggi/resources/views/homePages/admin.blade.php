@@ -26,7 +26,7 @@
         <a href="{{ asset('/usuaris') }}">
             <div>
                 <i class="icon fas fa-users-cog  d-flex justify-content-center pb-3"></i>
-                <p>Usuarios</p>
+                <p>Usuaris</p>
             </div>
         </a>
         <a href="{{ url('/incidencies') }}">
