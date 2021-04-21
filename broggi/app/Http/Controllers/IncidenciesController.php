@@ -52,12 +52,12 @@ class IncidenciesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Incidencies  $incidencies
+     * @param  \App\Models\Incidencies  $incidency
      * @return \Illuminate\Http\Response
      */
-    public function edit(Incidencies $incidencies)
+    public function edit(Incidencies $incidency)
     {
-        //
+        return view('incidencies/show', compact('incidency'));
     }
 
     /**

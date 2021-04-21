@@ -256,6 +256,9 @@ export default {
         section: {
             type: String,
             required: true
+        },
+        editincidencia:{
+            required: false
         }
     },
   data() {
@@ -515,28 +518,43 @@ export default {
         this.formacio = !this.formacio;
     },
     afegirIncidencia(){
-        this.incidencia.afectats= this.afectats;
-        this.incidencia.descripcio= this.multiplesAfectats;
-
-        console.log("submitting incidencia");
-        console.log(this.incidencia);
         let me = this;
-        axios
-        .post("/incidencies", me.incidencia)
-        .then(function (response) {
-          alert("Incidencia inserted correctly!");
-          console.log(response);
-          me.clearInput();
-          me.getIncidencies();
-          //me.action=""
-        })
-        .catch((error) => {
-          console.log(error.response.status);
-          console.log(error.response.data);
-          me.action = "";
-          // me.errorMessage= error.response.data.error;
-        });
+        if(this.editincidencia != null){
+             axios
+                .put("/incidencies/"+me.incidencia.id, me.incidencia)
+                .then((response)=>{
+                    alert("Formulari enviat correctament");
+                    console.log(response);
+                    me.incidencia = null;
+                })
+                .catch((error)=>{
+                    console.log(error);
+                    console.log(error.response.status);
+                    console.log(error.response.data);
+                })
+        } else {
+            this.incidencia.afectats= this.afectats;
+            this.incidencia.descripcio= this.multiplesAfectats;
 
+            console.log("submitting incidencia");
+            console.log(this.incidencia);
+            // let me = this;
+            axios
+            .post("/incidencies", me.incidencia)
+            .then(function (response) {
+            alert("Incidencia inserted correctly!");
+            console.log(response);
+            me.clearInput();
+            me.getIncidencies();
+            //me.action=""
+            })
+            .catch((error) => {
+            console.log(error.response.status);
+            console.log(error.response.data);
+            me.action = "";
+            // me.errorMessage= error.response.data.error;
+            });
+        }
 
   },
   toggleMultiple(){
@@ -551,6 +569,11 @@ export default {
           this.infoRecursos[afectat.id].prioritat = Number(this.prioritat);
       }
 
+  },
+  initEditIncidencia(){
+      if(this.editincidencia != null ){
+          this.incidencia = this.editincidencia;
+      }
   }
   },
   created() {
@@ -563,6 +586,7 @@ export default {
   mounted() {
     // console.log("Component mounted.");
     // this.nouAfectat();
+    this.initEditIncidencia();
 
   },
   computed:{

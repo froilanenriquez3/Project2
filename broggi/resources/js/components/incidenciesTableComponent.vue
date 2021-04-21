@@ -28,7 +28,13 @@
                     <td>{{ incidencia.tipus_incidencia.tipus}}</td>
                     <td v-show="incidencia.descripcio.length > 20">{{ incidencia.descripcio.substring(0,20) + "..." }}</td>
                     <td v-show="incidencia.descripcio.length < 20">{{ incidencia.descripcio }}</td>
-                    <td> <button class="btn btn-warning">Editar</button> </td>
+                    <td>
+                        <button class="btn btn-warning">
+                            <a :href="'http://localhost:8080/Project2/broggi/public/incidencies/'+ incidencia.id + '/edit'">
+                                Editar
+                            </a>
+                        </button>
+                    </td>
                     <td> <button class="btn btn-secondary" @click="confirmDelete(incidencia)" >Esborrar</button> </td>
                 </tr>
             </tbody>
@@ -199,3 +205,9 @@
         }
     }
 </script>
+<style scoped>
+    a {
+        text-decoration: none;
+        color: black
+    }
+</style>

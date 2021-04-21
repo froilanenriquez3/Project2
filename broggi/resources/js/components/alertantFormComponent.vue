@@ -67,6 +67,9 @@ export default {
         },
         alertant:{
             required: true
+        },
+          editincidencia:{
+            required: false
         }
     },
     data() {
