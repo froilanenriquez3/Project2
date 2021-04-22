@@ -18,6 +18,5 @@
 @endsection
 
 @section('form')
-    <p>{{ $incidenciesrecursos }}</p>
-    <incidencies-recursos :userrecursoid='{{ $recursosId }}' :editincidencia=' {{ $incidenciesrecursos }}'></incidencies-recursos>
+    <incidencies-recursos :userrecursoid='{{ $recursosId }}' :editincidencia=' {{ $incidenciesrecurso }}'></incidencies-recursos>
 @endsection

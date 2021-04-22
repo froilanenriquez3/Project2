@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\IncidenciesHasRecursos;
+use App\Http\Resources\IncidenciesResource;
 
 class IncidenciesHasRecursosController extends Controller
 {
@@ -61,14 +62,16 @@ class IncidenciesHasRecursosController extends Controller
      * Show the form for editing the specified resource.
      *
 
-     * @param  \App\Models\Incidencies  $incidenciesrecursos
+     * @param  \App\Models\Incidencies  $incidenciesrecurso
      * @return \Illuminate\Http\Response
      */
-    public function edit(Incidencies $incidenciesrecursos)
+    public function edit(Incidencies $incidenciesrecurso)
     {
         $recursosId = Auth::user()->recursos_id;
-        // $incidenciesrecursos = Incidencies::with(['incidencies_has_recursos.recursos'])->find($incidenciesrecursos->id);
-        return view('incidenciesHasRecursos/edit', compact('incidenciesrecursos', 'recursosId'));
+        // $incidencia = new IncidenciesResource(Incidencies::find($incidenciesrecursos));
+        // $incidencia = Incidencies::find($incidenciesrecursos->id);
+        $incidenciesrecurso = Incidencies::with(['incidencies_has_recursos.recursos'])->find($incidenciesrecurso->id);
+        return view('incidenciesHasRecursos/edit', compact('incidenciesrecurso', 'recursosId'));
     }
 
     /**
