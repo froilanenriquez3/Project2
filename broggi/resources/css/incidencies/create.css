@@ -84,10 +84,10 @@
 }
 
 
-/* #mapa-mapbox {
-    width: 50%;
-    height: 50%;
-} */
+#mapa-mapbox {
+    /* width: 50%; */
+    /* height: 50%; */
+}
 
 .afectat{
     cursor:pointer;
@@ -142,4 +142,10 @@
 /* .btn{
     float: right!important
 
+} */
+
+/* doesnt work */
+/*
+.mapboxgl-canvas{
+    width: 100%;
 } */
