@@ -87,11 +87,28 @@ class IncidenciesRecursosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Incidencies  $incidencies
+     * @param  \App\Models\Incidencies  $incidenciesrecurso
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Incidencies $incidencies)
+    public function destroy(Incidencies $incidenciesrecurso)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            $incidenciesrecurso->incidencies_has_recursos()->delete();
+
+            DB::commit();
+            $incidenciesrecurso->refresh();
+
+            $response = \response()
+                ->json(['message' => 'Incidencia borrado correctamente'], 200);
+        } catch (QueryException $ex) {
+            DB::rollBack();
+            $message = Utilitat::errorMessage($ex);
+            $response = \response()
+                ->json(['error' => $message], 400);
+        }
+
+        return $response;
     }
 }

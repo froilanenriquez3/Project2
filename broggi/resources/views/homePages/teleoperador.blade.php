@@ -14,7 +14,7 @@
         <a href="{{ url('/incidencies/create') }}">
             <div>
                 <i class="icon fas fa-plus-circle  d-flex justify-content-center pb-3"></i>
-                <p>N Incovaidència</p>
+                <p>Nova Incidència</p>
             </div>
         </a>
         <a href="{{ asset('/alertants') }}">
