@@ -566,37 +566,37 @@ export default {
             });
         }
 
-  },
-  toggleMultiple(){
-      if(this.multiple) this.multiple = false;
-      else this.multiple = true;
-  },
-  setPrioritat(afectat){
-      if(this.multiple){
-          this.infoRecursos[afectat].prioritat = Number(this.prioritat);
-      } else {
-          this.infoRecursos[afectat.id].prioritat = Number(this.prioritat);
-      }
+    },
+    toggleMultiple(){
+        if(this.multiple) this.multiple = false;
+        else this.multiple = true;
+    },
+    setPrioritat(afectat){
+        if(this.multiple){
+            this.infoRecursos[afectat].prioritat = Number(this.prioritat);
+        } else {
+            this.infoRecursos[afectat.id].prioritat = Number(this.prioritat);
+        }
 
-  },
-  initEditIncidencia(){
-      if(this.editincidencia != null ){
-          this.incidencia = this.editincidencia;
-          this.initAlertant();
-      }
-  },
-  initAlertant(){
-      let me = this;
-    axios
-        .get("/alertants/"+ me.incidencia.alertants_id)
-        .then(response => {
-            me.alertantIncidencia = response.data;
-        })
-        .catch(error => {
-            console.log(error);
-        })
-        .finally(() => (this.loading = false));
-  }
+    },
+    initEditIncidencia(){
+        if(this.editincidencia != null ){
+            this.incidencia = this.editincidencia;
+            this.initAlertant();
+        }
+    },
+    initAlertant(){
+        let me = this;
+        axios
+            .get("/alertants/"+ me.incidencia.alertants_id)
+            .then(response => {
+                me.alertantIncidencia = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            .finally(() => (this.loading = false));
+    }
   },
   created() {
     //this.selectIncidencies();

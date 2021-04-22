@@ -3,39 +3,45 @@
        <div id="incidenciesRecursosDiv" v-show="displayForm">
            <div class="form-group row">
                 <p id="incNumDisp" class="col-2"> Incidencia #{{ incidencia.id}} </p>
-                <span class="col-8"></span>
+                <span id="validateDisplay" class="col-8" ></span>
                 <p id="incPrioritatDisp" class="col-2" > Prioritat: {{ infoRecursos.prioritat }} </p>
            </div>
 
            <div class="form-group row">
-               <label class="col-2" for="inActivacio">1: Hora Activació</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_activacio" id="inActivacio" name="inActivacio">
+               <label class="col-2" for="activacio">1: Hora Activació</label>
+               <input class="col-2" type="time" v-model="infoRecursos.hora_activacio" id="activacio" name="activacio">
 
-               <label class="col-2" for="inMobilitzacio">2: Hora Mobilització</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_mobilitzacio" id="inMobilitzacio" name="inMobilitzacio">
+               <label class="col-2" for="mobilitzacio">2: Hora Mobilització</label>
+               <input class="col-2" type="time" v-model="infoRecursos.hora_mobilitzacio" id="mobilitzacio" name="mobilitzacio"
+                @change="validateInput('activacio','mobilitzacio')">
 
-               <label class="col-2" for="inAssistencia">3: Hora Assistència</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_assistencia" id="inAssistencia" name="inAssistencia">
+               <label class="col-2" for="assistencia">3: Hora Assistència</label>
+               <input class="col-2" type="time" v-model="infoRecursos.hora_assistencia" id="assistencia" name="assistencia"
+                @change="validateInput('mobilitzacio', 'assistencia')">
 
-
-           </div>
-
-           <div class="form-group row">
-
-                <label class="col-2" for="inTransport">4: Hora Transport</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_transport" id="inTransport" name="inTransport">
-
-                <label class="col-2" for="inArribadaHospital">5: Hora Arribada Hospital</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_arribada_hospital" id="inArribadaHospital" name="inArribadaHospital">
-
-                <label class="col-2" for="inHoraTransferencia">6: Hora Transferencia</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_transferencia" id="inHoraTransferencia" name="inHoraTransferencia">
 
            </div>
 
            <div class="form-group row">
-                 <label class="col-2" for="inFinalitzacio">7: Hora Finalitzacio</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_finalitzacio" id="inFinalitzacio" name="inFinalitzacio">
+
+                <label class="col-2" for="transport">4: Hora Transport</label>
+               <input class="col-2" type="time" v-model="infoRecursos.hora_transport" id="transport" name="transport"
+                @change="validateInput('assistencia', 'transport')">
+
+                <label class="col-2" for="arribadaHospital">5: Hora Arribada Hospital</label>
+               <input class="col-2" type="time" v-model="infoRecursos.hora_arribada_hospital" id="arribadaHospital" name="arribadaHospital"
+                @change="validateInput('transport', 'arribadaHospital')">
+
+                <label class="col-2" for="horaTransferencia">6: Hora Transferencia</label>
+               <input class="col-2" type="time" v-model="infoRecursos.hora_transferencia" id="horaTransferencia" name="horaTransferencia"
+                @change="validateInput('arribadaHospital','horaTransferencia')">
+
+           </div>
+
+           <div class="form-group row">
+                <label class="col-2" for="finalitzacio">7: Hora Finalitzacio</label>
+               <input class="col-2" type="time" v-model="infoRecursos.hora_finalitzacio" id="finalitzacio" name="finalitzacio"
+                @change="validateInput('horaTransferencia', 'finalitzacio')">
 
                 <label class="col-2" for="inDesti">Desti</label>
                <input class="col-6" type="text" v-model="infoRecursos.desti" id="inDesti" name="inDesti">
@@ -211,6 +217,13 @@
                     }
                     i++;
                 }
+            },
+            validateInput(id1, id2){
+                if(document.getElementById(id1).value > document.getElementById(id2).value){
+                    document.getElementById("validateDisplay").innerHTML = "Entrada inválida: " + id1 + ", " + id2;
+                } else {
+                     document.getElementById("validateDisplay").innerHTML = "";
+                }
             }
         },
         mounted() {
@@ -225,3 +238,8 @@
         }
     }
 </script>
+<style scoped>
+    #validateDisplay{
+        color: red;
+    }
+</style>
