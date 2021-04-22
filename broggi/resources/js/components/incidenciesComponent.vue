@@ -69,7 +69,7 @@
     </div>
 
     <!-- TAG ALERTANTE -->
-    <alertant-form :municipis="municipis" :alertant="alertantIncidencia" :section="section" v-show="section == 'Alertant'"></alertant-form>
+    <alertant-form @dadesAfectat="canviarDades($event)" :municipis="municipis" :alertant="alertantIncidencia" :section="section" v-show="section == 'Alertant'"></alertant-form>
 
     <!-- TAG AFECTADO -->
     <!-- add fa plus icon -->
@@ -380,6 +380,14 @@ export default {
     },
     setAfectatActual(afectat){
         this.afectatActiu= afectat.id;
+    },
+    canviarDades(trobat){
+        debugger;
+        this.alertant.nom = trobat.nom;
+        this.alertant.cognoms = trobat.cognoms;
+        this.alertant.municipis_id= trobat.municipis_id;
+        this.alertant.tipus_alertants_id= trobat.tipus_alertants_id;
+        this.alertant.adreca = trobat.adreca;
     },
     isMultiple(){
         this.multiple= true;
