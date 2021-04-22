@@ -58,6 +58,9 @@
                 required: true,
                 type: Number
 
+            },
+            editincidencia:{
+                required: false
             }
         },
         data(){
@@ -190,12 +193,17 @@
                 }
                 //  console.log(this.incidenciesRecursos);
 
+            },
+            initEditIncidencia(){
+                this.incidencia = this.editincidencia;
+                this.infoRecursos = this.incidencies.incidencies_has_recursos;
             }
         },
         mounted() {
             // console.log('Component mounted.')
             // console.log(this.userrecursoid);
-            this.selectIncidencies();
+            if(this.editincidencia == null) this.selectIncidencies();
+            else this.initEditIncidencia();
             let me = this;
              document.getElementById("formSubmit").onclick = function () {
                 me.submitForm();

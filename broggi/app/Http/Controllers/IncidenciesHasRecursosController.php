@@ -61,12 +61,14 @@ class IncidenciesHasRecursosController extends Controller
      * Show the form for editing the specified resource.
      *
 
-     * @param  \App\Models\IncidenciesHasRecursos  $incidenciesHasRecursos
+     * @param  \App\Models\Incidencies  $incidenciesrecursos
      * @return \Illuminate\Http\Response
      */
-    public function edit(IncidenciesHasRecursos $incidenciesHasRecursos)
+    public function edit(Incidencies $incidenciesrecursos)
     {
-        //
+        $recursosId = Auth::user()->recursos_id;
+        // $incidenciesrecursos = Incidencies::with(['incidencies_has_recursos.recursos'])->find($incidenciesrecursos->id);
+        return view('incidenciesHasRecursos/edit', compact('incidenciesrecursos', 'recursosId'));
     }
 
     /**

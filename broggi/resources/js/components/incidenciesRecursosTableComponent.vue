@@ -24,7 +24,11 @@
                     <td>{{ incidencia.desti}}</td>
                     <td>{{ incidencia.hora_activacio}}</td>
                     <td>{{ incidencia.hora_finalitzacio}}</td>
-                    <td> <button class="btn btn-warning">Editar</button> </td>
+                    <td>
+                        <a :href="'http://localhost:8080/Project2/broggi/public/incidenciesrecursos/'+ incidencia.incidencies_id + '/edit'">
+                            <button class="btn btn-warning">Editar</button>
+                        </a>
+                    </td>
                     <td> <button class="btn btn-secondary" @click="confirmDelete(incidencia)">Esborrar</button> </td>
                 </tr>
             </tbody>
@@ -197,3 +201,9 @@
         }
     }
 </script>
+<style scoped>
+    a {
+        text-decoration: none;
+        color: black
+    }
+</style>
