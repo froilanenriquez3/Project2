@@ -2,9 +2,9 @@
     <div class="container">
        <div id="incidenciesRecursosDiv" v-show="displayForm">
            <div class="form-group row">
-                <p id="incNumDisp" class="col-2"> </p>
+                <p id="incNumDisp" class="col-2"> Incidencia #{{ incidencia.id}} </p>
                 <span class="col-8"></span>
-                <p id="incPrioritatDisp" class="col-2"></p>
+                <p id="incPrioritatDisp" class="col-2" > Prioritat: {{ infoRecursos.prioritat }} </p>
            </div>
 
            <div class="form-group row">
@@ -58,6 +58,9 @@
                 required: true,
                 type: Number
 
+            },
+            editincidencia:{
+                required: false
             }
         },
         data(){
@@ -68,7 +71,9 @@
                 arrayPos: null,
                 incidenciaId: null,
                 afectatId: null,
-                incidencia: null,
+                incidencia: {
+                    id: null
+                },
                 infoRecursos: {
                     incidencies_id: null,
                     hora_activacio: null,
@@ -175,8 +180,8 @@
                             me.infoRecursos = me.incidenciesRecursos[i].incidencies_has_recursos[j];
                             me.arrayPos = j;
                             me.highestPrioritat = me.incidenciesRecursos[i].incidencies_has_recursos[j].prioritat;
-                            document.getElementById("incNumDisp").innerHTML = "Incidencia #" + me.incidencia.id;
-                            document.getElementById("incPrioritatDisp").innerHTML = "Prioritat: " + me.infoRecursos.prioritat;
+                            // document.getElementById("incNumDisp").innerHTML = "Incidencia #" + me.incidencia.id;
+                            // document.getElementById("incPrioritatDisp").innerHTML = "Prioritat: " + me.infoRecursos.prioritat;
                             me.displayForm = true;
                             console.log("FOUND!");
                         }
@@ -190,12 +195,29 @@
                 }
                 //  console.log(this.incidenciesRecursos);
 
+            },
+            initEditIncidencia(){
+                console.log("init edit incidencia");
+                this.incidencia = this.editincidencia;
+                this.incidenciesRecursos = this.incidencia.incidencies_has_recursos;
+
+                let found = false;
+                let i = 0;
+                while(i < this.incidenciesRecursos.length && !found){
+                    if(this.incidenciesRecursos[i].recursos_id == this.userrecursoid){
+                        this.infoRecursos = this.incidenciesRecursos[i];
+                        this.displayForm = true;
+                        found = true
+                    }
+                    i++;
+                }
             }
         },
         mounted() {
             // console.log('Component mounted.')
             // console.log(this.userrecursoid);
-            this.selectIncidencies();
+            if(this.editincidencia == null) this.selectIncidencies();
+            else this.initEditIncidencia();
             let me = this;
              document.getElementById("formSubmit").onclick = function () {
                 me.submitForm();
