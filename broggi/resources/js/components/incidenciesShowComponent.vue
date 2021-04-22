@@ -9,7 +9,7 @@
           <b>Tipus Incidencia ID:</b> {{ incidencia.tipus_incidencies_id }}
         </p>
         <p class="col-4">
-          <b>Tipus Incidencia:</b> {{ incidencia.tipus_incidencia }}
+          <b>Tipus Incidencia:</b> {{ incidencia.tipus_incidencies.tipus }}
         </p>
       </div>
 
