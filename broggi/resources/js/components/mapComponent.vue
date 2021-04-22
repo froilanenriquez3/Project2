@@ -1,6 +1,6 @@
 <template>
-    <div class="map-container" style="width: 100%; height: 300px;">
-        <div id="mapa-mapbox" ></div>
+    <div class="map-container">
+        <div id="mapa-mapbox"></div>
         <div id="geocoder" class="geocoder"></div>
         <div class="color-box bg-primary"></div>
         <span> Recursos disponibles</span>
@@ -200,14 +200,10 @@ export default {
         mapboxgl.accessToken = this.key;
         this.map = new mapboxgl.Map({
             container: "mapa-mapbox", // container ID
-            style: "mapbox://styles/mapbox/streets-v11", // style URL
+            style: "mapbox://styles/mapbox/streets-v11?optimize=true", // style URL
             center: [1.8676800, 41.8204600], // starting position [lng, lat]
-            zoom: 7 // starting zoom
+            zoom: 7,
         });
-
-         this.map.on('load', () =>{
-            this.addRecursosToMap();
-        })
 
 
         let geocoder = new MapboxGeocoder({
@@ -225,7 +221,10 @@ export default {
         this.map.addControl(geocoder);
         this.map.addControl(new mapboxgl.NavigationControl());
 
-    // No funciona :(
+       this.map.on('load', () =>{
+            this.addRecursosToMap();
+            this.map.resize();
+        })
 
     },
 
