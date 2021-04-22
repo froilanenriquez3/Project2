@@ -50,6 +50,7 @@ Vue.component('incidencies-recursos', require('./components/incidenciesRecursosC
 Vue.component('increc-table', require('./components/incidenciesRecursosTableComponent.vue').default);
 Vue.component('incidencies-table', require('./components/incidenciesTableComponent.vue').default);
 Vue.component('map-insert', require('./components/mapInsert.vue').default);
+Vue.component('incidencies-show', require('./components/incidenciesShowComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
