@@ -158,6 +158,7 @@
 </div>
 
 <!-- Se muestra si no es múltiple pero el teleoperador aún no ha escrito en afectados -->
+
     <div v-show="!multiple && numAfectats == 0">
         <p>Encara no s'han registrat afectats. Es necessita un mínim d'un afectat perquè l'incidència sigui vàlida.</p>
     </div>
@@ -630,3 +631,4 @@ export default {
   }
 };
 </script>
+
