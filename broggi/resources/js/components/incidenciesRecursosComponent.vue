@@ -9,14 +9,15 @@
 
            <div class="form-group row">
                <label class="col-2" for="activacio">1: Hora Activació</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_activacio" id="activacio" name="activacio">
+               <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_activacio" id="activacio" name="activacio"
+                @change="validateInput('activacio','mobilitzacio')">
 
                <label class="col-2" for="mobilitzacio">2: Hora Mobilització</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_mobilitzacio" id="mobilitzacio" name="mobilitzacio"
+               <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_mobilitzacio" id="mobilitzacio" name="mobilitzacio"
                 @change="validateInput('activacio','mobilitzacio')">
 
                <label class="col-2" for="assistencia">3: Hora Assistència</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_assistencia" id="assistencia" name="assistencia"
+               <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_assistencia" id="assistencia" name="assistencia"
                 @change="validateInput('mobilitzacio', 'assistencia')">
 
 
@@ -25,22 +26,22 @@
            <div class="form-group row">
 
                 <label class="col-2" for="transport">4: Hora Transport</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_transport" id="transport" name="transport"
+               <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_transport" id="transport" name="transport"
                 @change="validateInput('assistencia', 'transport')">
 
                 <label class="col-2" for="arribadaHospital">5: Hora Arribada Hospital</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_arribada_hospital" id="arribadaHospital" name="arribadaHospital"
+               <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_arribada_hospital" id="arribadaHospital" name="arribadaHospital"
                 @change="validateInput('transport', 'arribadaHospital')">
 
                 <label class="col-2" for="horaTransferencia">6: Hora Transferencia</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_transferencia" id="horaTransferencia" name="horaTransferencia"
+               <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_transferencia" id="horaTransferencia" name="horaTransferencia"
                 @change="validateInput('arribadaHospital','horaTransferencia')">
 
            </div>
 
            <div class="form-group row">
                 <label class="col-2" for="finalitzacio">7: Hora Finalitzacio</label>
-               <input class="col-2" type="time" v-model="infoRecursos.hora_finalitzacio" id="finalitzacio" name="finalitzacio"
+               <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_finalitzacio" id="finalitzacio" name="finalitzacio"
                 @change="validateInput('horaTransferencia', 'finalitzacio')">
 
                 <label class="col-2" for="inDesti">Desti</label>
@@ -221,8 +222,21 @@
             validateInput(id1, id2){
                 if(document.getElementById(id1).value > document.getElementById(id2).value){
                     document.getElementById("validateDisplay").innerHTML = "Entrada inválida: " + id1 + ", " + id2;
+
+                    let inputs = Array.from(document.getElementsByClassName('timeIn'));
+                    inputs.forEach(element => {
+                        if(id2 != element.id && id1 != element.id){
+                            element.disabled = true;
+                        }
+                    });
                 } else {
-                     document.getElementById("validateDisplay").innerHTML = "";
+                    document.getElementById("validateDisplay").innerHTML = "";
+                    let inputs = Array.from(document.getElementsByClassName('timeIn'));
+                    inputs.forEach(element => {
+                        if(id2 != element.id && id1 != element.id){
+                            element.disabled = false;
+                        }
+                    });
                 }
             }
         },
