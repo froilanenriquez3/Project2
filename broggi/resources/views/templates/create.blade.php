@@ -17,14 +17,12 @@
 
 <body>
 
-    <main >
+    <main>
         <header>
             <nav id="navbarHolder">
                 @yield('navbar')
             </nav>
         </header>
-
-
 
         <section id="formSection">
             <div id="divForm" class="container-fluid">
@@ -36,9 +34,8 @@
             <div id="formButtons">
                 @yield('cancelButton')
 
-                <button class="btn btn-primary" id="formSubmit" >Afegir</button>
+                <button class="btn btn-primary" id="formSubmit">Afegir</button>
             </div>
-
         </section>
 
         @yield('footer')

@@ -39,19 +39,16 @@
                     <td v-show="incidencia.descripcio.length > 20">{{ incidencia.descripcio.substring(0,20) + "..." }}</td>
                     <td v-show="incidencia.descripcio.length < 20">{{ incidencia.descripcio }}</td>
                     <td>
-
-                        <a :href="'http://localhost:8080/Project2/broggi/public/incidencies/'+ incidencia.id + '/edit'">
-                            <button class="btn btn-warning">Editar</button>
-                        </a>
-
-                    </td>
-                    <td>
-
                         <a :href="'http://localhost:8080/Project2/broggi/public/incidencies/'+ incidencia.id " class="text-white">
                             <button class="btn btn-primary">Veure dades </button>
                         </a>
-
                     </td>
+                    <td>
+                        <a :href="'http://localhost:8080/Project2/broggi/public/incidencies/'+ incidencia.id + '/edit'">
+                            <button class="btn btn-warning">Editar</button>
+                        </a>
+                    </td>
+
                     <td> <button class="btn btn-secondary" @click="confirmDelete(incidencia)" >Esborrar</button> </td>
                 </tr>
             </tbody>
@@ -147,7 +144,7 @@
 
                     })
                     .catch((error) => {
-                        me.errorMessage= error.response.data.error; 
+                        me.errorMessage= error.response.data.error;
                         console.log(error);
                     })
                     .finally(() => {
