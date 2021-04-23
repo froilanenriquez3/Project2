@@ -1,6 +1,14 @@
 <template>
 <div class="biggerContainer">
-
+    <!-- div para el mensaje de error -->
+        <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <strong>Error: </strong>
+            {{errorMessage}}
+            <button type="button" @click="resetError()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+     	</div>
+    <!-- fin del div para el mensaje de error -->
     <div id="divModoFormacion" v-bind:class="{ formacionActive: formacio }">
         <button class="btn btn-primary" @click="openModalVideo()" v-bind:class="{ hidden: !formacio }">Veure video CPR</button>
     <button class="btn btn-primary" @click="openModalHelp()" v-bind:class="{ hidden: !formacio }">Ajuda amb l'anglès</button>
@@ -260,7 +268,8 @@ export default {
     },
   data() {
     return {
-    formacio: false,
+        errorMessage:'',
+        formacio: false,
       tipusAlertants: [],
       tipusIncidencies: [],
       alertantIncidencia: {},
@@ -336,6 +345,7 @@ export default {
           me.incidencies = response.data;
         })
         .catch((error) => {
+          me.errorMessage= error.response.data.error;
           console.log(error);
         })
         .finally(() => (this.loading = false));
@@ -419,6 +429,7 @@ export default {
           me.municipis = response.data;
         })
         .catch((error) => {
+          me.errorMessage= error.response.data.error;
           console.log(error);
         })
         .finally(() => (this.loading = false));
@@ -432,6 +443,7 @@ export default {
           me.tipusIncidencies = response.data;
         })
         .catch((error) => {
+          me.errorMessage= error.response.data.error;
           console.log(error);
         })
         .finally(() => (this.loading = false));
@@ -445,6 +457,7 @@ export default {
 
         })
         .catch((error) => {
+          me.errorMessage= error.response.data.error;
           console.log(error);
         })
         .finally(() => (this.loading = false));
@@ -458,6 +471,7 @@ export default {
                     me.getFreeRecurs();
                 })
                 .catch(error => {
+                    me.errorMessage= error.response.data.error;
                     console.log(error);
                 })
                 .finally(() => (this.loading = false));
@@ -534,7 +548,7 @@ export default {
           console.log(error.response.status);
           console.log(error.response.data);
           me.action = "";
-          // me.errorMessage= error.response.data.error;
+          me.errorMessage= error.response.data.error;
         });
 
 
@@ -551,7 +565,10 @@ export default {
           this.infoRecursos[afectat.id].prioritat = Number(this.prioritat);
       }
 
-  }
+  },
+    resetError(){
+        this.errorMessage='';
+    }
   },
   created() {
     //this.selectIncidencies();

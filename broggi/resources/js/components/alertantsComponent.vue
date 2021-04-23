@@ -1,5 +1,14 @@
 <template>
   <div class="container">
+    <!-- div para el mensaje de error -->
+    <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
+        <strong>Error: </strong>
+        {{errorMessage}}
+        <button type="button" @click="resetError()" class="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- fin del div para el mensaje de error -->
     <div class="form-group row">
       <label class="col-2" for="nom">Nom</label>
       <input
@@ -75,6 +84,7 @@ export default {
     },
   data() {
     return {
+      errorMessage:'',
       action: "",
       //alertants: [],
       tipus_alertants: [],
@@ -104,7 +114,7 @@ export default {
         .catch((error) => {
           console.log(error.response.status);
           console.log(error.response.data);
-          // me.errorMessage= error.response.data.error;
+          me.errorMessage= error.response.data.error;
         });
       } else{
          axios
@@ -116,7 +126,7 @@ export default {
         .catch((error) => {
           console.log(error.response.status);
           console.log(error.response.data);
-          // me.errorMessage= error.response.data.error;
+          me.errorMessage= error.response.data.error;
         });
       }
 
@@ -130,6 +140,7 @@ export default {
           console.log(me.tipus_alertants);
         })
         .catch((error) => {
+          me.errorMessage= error.response.data.error;
           console.log(error);
         })
         .finally(() => (this.loading = false));
@@ -143,6 +154,7 @@ export default {
           console.log(me.municipis);
         })
         .catch((error) => {
+          me.errorMessage= error.response.data.error;
           console.log(error);
         })
         .finally(() => (this.loading = false));
@@ -152,6 +164,9 @@ export default {
         if(me.editedalertant != null){
             me.alertant = me.editedalertant;
         }
+    },
+    resetError(){
+            this.errorMessage= '';
     }
   },
   created() {
@@ -169,5 +184,6 @@ export default {
 
     // console.log("Component mounted.");
   },
+    
 };
 </script>

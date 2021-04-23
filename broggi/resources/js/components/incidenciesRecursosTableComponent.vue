@@ -1,5 +1,14 @@
 <template>
     <div id="incRecTableDiv">
+        <!-- div para el mensaje de error -->
+        <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <strong>Error: </strong>
+            {{errorMessage}}
+            <button type="button" @click="resetError()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+     	</div>
+        <!-- fin del div para el mensaje de error -->
         <div v-show="incRecs.length > 0">
             <table class="table">
             <thead>
@@ -49,6 +58,7 @@
         },
         data(){
             return {
+                errorMessage:'',
                 itemsToDisplay: [],
                 perPage: 5,
                 currentPage: 1,
@@ -86,7 +96,8 @@
 
                     })
                     .catch((error) => {
-                    console.log(error);
+                        me.errorMessage= error.response.data.error;
+                        console.log(error);
                     })
                     .finally(() => {
                         this.loading = false;
@@ -111,7 +122,8 @@
                         me.totalRows= me.itemsToDisplay.length;
                     })
                     .catch((error) => {
-                    console.log(error);
+                        me.errorMessage= error.response.data.error;
+                        console.log(error);
                     })
                     .finally(() => {
                         this.loading = false;
@@ -119,6 +131,9 @@
                     });
 
             },
+            resetError(){
+                this.errorMessage='';
+            }
         },
         mounted() {
             // console.log('Component mounted.');

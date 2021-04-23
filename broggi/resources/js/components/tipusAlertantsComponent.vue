@@ -1,5 +1,14 @@
 <template>
   <div class="tiposContainer">
+      <!-- div para el mensaje de error -->
+        <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <strong>Error: </strong>
+            {{errorMessage}}
+            <button type="button" @click="resetError()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+     	</div>
+    <!-- fin del div para el mensaje de error -->
     <!-- Si no se selecciona una opción, se muestra la tabla -->
     <div v-show="action == ''">
       <table class="table">
@@ -140,16 +149,17 @@
 export default {
   data() {
     return {
-      action: "",
-       perPage: 5,
+        errorMessage:'',
+        action: "",
+        perPage: 5,
         currentPage: 1,
         totalRows: '',
-      tipus_alertants: [],
-      insert: false,
-      tipo: {
-        id: "",
-        tipus: "",
-      },
+        tipus_alertants: [],
+        insert: false,
+        tipo: {
+            id: "",
+            tipus: "",
+        },
     };
   },
   methods: {
@@ -170,7 +180,8 @@ export default {
           me.totalRows= me.tipus_alertants.length;
         })
         .catch((error) => {
-          console.log(error);
+            me.errorMessage= error.response.data.error;
+            console.log(error);
         })
         .finally(() => (this.loading = false));
     },
@@ -192,8 +203,8 @@ export default {
         .catch((error) => {
           console.log(error.response.status);
           console.log(error.response.data);
-            me.action='';
-          // me.errorMessage= error.response.data.error;
+          me.action='';
+          me.errorMessage= error.response.data.error;
         })
         .finally(() =>{
             this.selectTipus();
@@ -216,8 +227,8 @@ export default {
         .catch((error) => {
           console.log(error.response.status);
           console.log(error.response.data);
-            me.action='';
-          // me.errorMessage= error.response.data.error;
+          me.action='';
+          me.errorMessage= error.response.data.error;
         })
         .finally(() =>{
             this.selectTipus();
@@ -239,7 +250,7 @@ export default {
           //me.infoMessage= response.data.missatge;
         })
         .catch((error) => {
-          //me.errorMessage = error.response.data.error;
+          me.errorMessage = error.response.data.error;
           $("#deleteModal").modal("hide");
             me.action='';
         })
@@ -266,6 +277,9 @@ export default {
           ? recursos.length
           : beginning  + this.perPage;
       return recursos.slice(beginning , end );
+    },
+    resetError(){
+        this.errorMessage='';
     }
   },
   created() {

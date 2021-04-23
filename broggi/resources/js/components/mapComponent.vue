@@ -1,5 +1,14 @@
 <template>
     <div class="map-container">
+        <!-- div para el mensaje de error -->
+        <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <strong>Error: </strong>
+            {{errorMessage}}
+            <button type="button" @click="resetError()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+     	</div>
+        <!-- fin del div para el mensaje de error -->
         <div id="mapa-mapbox" style="width: 400px; height: 300px;"></div>
         <div id="geocoder" class="geocoder"></div>
         <button @click="addRecursosToMap()" class="btn btn-primary">ver Recursos</button>
@@ -26,6 +35,7 @@ export default {
     },
     data() {
         return {
+            errorMessage:'',
             key:
                 "pk.eyJ1IjoibWlzYWxhOTEiLCJhIjoiY2ttZ2d1MmF0MjdzajJucWxqMTN6ZHR4diJ9.LqNFC2cYXEPAzf8f7PLAVg",
             recursos: [],
@@ -53,6 +63,7 @@ export default {
                     me.recursos = response.data;
                 })
                 .catch(error => {
+                    me.errorMessage= error.response.data.error;
                     console.log(error);
                 })
                 .finally(() => (this.loading = false));
@@ -89,7 +100,7 @@ export default {
                 .catch(error => {
                     console.log(error.response.status);
                     console.log(error.response.data);
-                    // me.errorMessage= error.response.data.error;
+                    me.errorMessage= error.response.data.error;
                 });
 
             this.button.innerHTML = "Desactivar";
@@ -115,7 +126,7 @@ export default {
                 .catch(error => {
                     console.log(error.response.status);
                     console.log(error.response.data);
-                    // me.errorMessage= error.response.data.error;
+                    me.errorMessage= error.response.data.error;
                 });
 
             this.button.innerHTML = "Activar";
@@ -192,6 +203,9 @@ export default {
             }
             });
         },
+        resetError(){
+            this.errorMessage='';
+        }
     },
     created() {
         this.selectRecursos();

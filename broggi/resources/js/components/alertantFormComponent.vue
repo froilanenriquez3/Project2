@@ -1,12 +1,14 @@
 <template>
   <div>
-       <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
-            <strong>WARNING!</strong>
+        <!-- div para el mensaje de error -->
+        <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <strong>Error: </strong>
             {{errorMessage}}
             <button type="button" @click="resetError()" class="close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        <!-- fin del div para el mensaje de error -->
         <div id="alertantsDiv">
         <div>
             <h5>Alertant</h5>
@@ -106,10 +108,12 @@ export default {
           console.log(error.response.data);
           me.errorMessage= error.response.data.error;
         });
-  }},
+    },
     resetError(){
         this.errorMessage='';
-    },
+    }
+  },
+    
   created(){
       this.selectTipus();
   },
