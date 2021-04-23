@@ -64,6 +64,14 @@
         <p class="col-4"><b>Telefon Afectat:</b> {{ afectat.telefon }}</p>
       </div>
 
+      <div class="row">
+        <p class="col-4">
+          <b>Recurs Assignat: </b>
+        </p>
+         <p class="col-4"></p>
+          <p class="col-4"></p>
+      </div>
+
     </div>
   </div>
 </template>
