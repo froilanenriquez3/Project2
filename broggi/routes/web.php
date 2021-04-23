@@ -31,22 +31,27 @@ Route::get('/logout', [UsuarisController::class, 'logout']);
 
 //Routes for pages that need to be accessed by login(all of them)
 Route::middleware(['auth'])->group(function () {
-    Route::resource('/incidencies', IncidenciesController::class);
-    Route::resource('/alertants', AlertantsController::class);
-    Route::resource('/recursos', RecursosController::class);
-    Route::resource('/usuaris', UsuarisController::class);
-    Route::resource('/incidenciesrecursos', IncidenciesHasRecursosController::class);
-    Route::resource('/tipusalertants', TipusAlertantsController::class);
-    Route::resource('/tipusrecursos', TipusRecursosController::class);
 
-    Route::get('/thome', function (){ return view('homePages.teleoperador');});
-    Route::get('/rhome', function (){ return view('homePages.recurs');});
-    Route::get('/ahome', function (){
-        $view = view('login');
-        if(Auth::user()->rols_id == 1){
-            $view = view('homePages.admin');
-        }
-        return $view;
+    /* Routes that require the user to be admin or CECOS */
+    Route::middleware(['role:1,2'])->group(function () {
+        Route::get('/thome', function (){ return view('homePages.teleoperador');});
+        Route::resource('/incidencies', IncidenciesController::class);
+        Route::resource('/alertants', AlertantsController::class);
+        Route::resource('/tipusalertants', TipusAlertantsController::class);
+        Route::resource('/recursos', RecursosController::class);
+    });
+
+    /* Routes that require the user to be admin or Recurs */
+    Route::middleware(['role:1,3'])->group(function () {
+        Route::get('/rhome', function (){ return view('homePages.recurs');});
+        Route::resource('/incidenciesrecursos', IncidenciesHasRecursosController::class);
+    });
+
+    /* Admin routes */
+    Route::middleware(['role:1'])->group(function(){
+        Route::get('/ahome',function (){ return view('homePages.admin'); });
+        Route::resource('/usuaris', UsuarisController::class);
+        Route::resource('/tipusrecursos', TipusRecursosController::class);
     });
 
 });

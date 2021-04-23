@@ -13,7 +13,7 @@
         <button class="btn btn-primary" @click="openModalVideo()" v-bind:class="{ hidden: !formacio }">Veure video CPR</button>
     <button class="btn btn-primary" @click="openModalHelp()" v-bind:class="{ hidden: !formacio }">Ajuda amb l'anglès</button>
     <div class="formacionBox">
-    <p>Modo formació</p>
+    <p>Mode formació</p>
             <label class="switch" id="btnModoFormacion">
                 <input @click="toggleFormacio()" type="checkbox">
                 <span class="slider round"></span>
@@ -25,7 +25,7 @@
         <!-- TAG INCIDENCIAS -->
         <div v-show="section == 'Incident'">
         <div class="form-group row">
-        <label class="col-2" for=""><b>Tipus Incidencia</b></label>
+        <label class="col-2" for=""><b>Tipus Incidència</b></label>
         <select class="col-10" name="tipus_incidencia" v-model="incidencia.tipus_incidencies_id">
             <option v-for="tipo in tipusIncidencies" :key="tipo.id" v-bind:value="tipo.id">
             {{ tipo.tipus }}
@@ -65,7 +65,7 @@
     </div>
 
     <div class="form-group row">
-      <label class="col-2" for=""><b>Descripcio</b></label>
+      <label class="col-2" for=""><b>Descripció</b></label>
       <textarea class="col-10" type="" name="" v-model="incidencia.descripcio" maxlength="256">
       </textarea>
     </div>
@@ -77,7 +77,7 @@
     </div>
 
     <!-- TAG ALERTANTE -->
-    <alertant-form :municipis="municipis" :alertant="alertantIncidencia" :section="section" v-show="section == 'Alertant'"></alertant-form>
+    <alertant-form @dadesAfectat="canviarDades($event)" :municipis="municipis" :alertant="alertantIncidencia" :section="section" v-show="section == 'Alertant'"></alertant-form>
 
     <!-- TAG AFECTADO -->
     <!-- add fa plus icon -->
@@ -150,7 +150,7 @@
       </td>
       <td class="col-4">
            <div v-show="afectat.id == afectatActiu && (infoRecursos[afectat.id] == undefined)">
-                        assigna un recurs del mapa
+                        Assigna un recurs del mapa
                     </div>
             <div  v-show="(infoRecursos[afectat.id] != undefined)" :id="'afectat' + afectat.id" ></div>
       </td>
@@ -166,6 +166,7 @@
 </div>
 
 <!-- Se muestra si no es múltiple pero el teleoperador aún no ha escrito en afectados -->
+
     <div v-show="!multiple && numAfectats == 0">
         <p>Encara no s'han registrat afectats. Es necessita un mínim d'un afectat perquè l'incidència sigui vàlida.</p>
     </div>
@@ -241,7 +242,7 @@
 
 
     <button class="btn btn-primary mt-2" @click="afegirIncidencia()" id="btnAddIncidencia">
-      Afegir incidencia
+      Afegir incidència
     </button>
 
 
@@ -264,6 +265,9 @@ export default {
         section: {
             type: String,
             required: true
+        },
+        editincidencia:{
+            required: false
         }
     },
   data() {
@@ -386,6 +390,14 @@ export default {
     },
     setAfectatActual(afectat){
         this.afectatActiu= afectat.id;
+    },
+    canviarDades(trobat){
+        debugger;
+        this.alertant.nom = trobat.nom;
+        this.alertant.cognoms = trobat.cognoms;
+        this.alertant.municipis_id= trobat.municipis_id;
+        this.alertant.tipus_alertants_id= trobat.tipus_alertants_id;
+        this.alertant.adreca = trobat.adreca;
     },
     isMultiple(){
         this.multiple= true;
@@ -529,45 +541,80 @@ export default {
         this.formacio = !this.formacio;
     },
     afegirIncidencia(){
-        this.incidencia.afectats= this.afectats;
-        this.incidencia.descripcio= this.multiplesAfectats;
-
-        console.log("submitting incidencia");
-        console.log(this.incidencia);
         let me = this;
-        axios
-        .post("/incidencies", me.incidencia)
-        .then(function (response) {
-          alert("Incidencia inserted correctly!");
-          console.log(response);
-          me.clearInput();
-          me.getIncidencies();
-          //me.action=""
-        })
-        .catch((error) => {
-          console.log(error.response.status);
-          console.log(error.response.data);
-          me.action = "";
-          me.errorMessage= error.response.data.error;
-        });
+        if(this.editincidencia != null){
+             axios
+                .put("/incidencies/"+me.incidencia.id, me.incidencia)
+                .then((response)=>{
+                    alert("Formulari enviat correctament");
+                    window.location.href = "/Project2/broggi/public/incidencies";
+                    console.log(response);
+                    me.incidencia = null;
+                })
+                .catch((error)=>{
+                    console.log(error);
+                    console.log(error.response.status);
+                    console.log(error.response.data);
+                })
+        } else {
+            this.incidencia.afectats= this.afectats;
+            this.incidencia.descripcio= this.multiplesAfectats;
 
+            console.log("submitting incidencia");
+            console.log(this.incidencia);
+            // let me = this;
+            axios
+            .post("/incidencies", me.incidencia)
+            .then(function (response) {
+            alert("Incidencia inserted correctly!");
+            console.log(response);
+            me.clearInput();
+            me.getIncidencies();
+            //me.action=""
+            })
+            .catch((error) => {
+            console.log(error.response.status);
+            console.log(error.response.data);
+            me.action = "";
+            // me.errorMessage= error.response.data.error;
+              me.errorMessage= error.response.data.error;
+            });
+        }
 
-  },
-  toggleMultiple(){
-      if(this.multiple) this.multiple = false;
-      else this.multiple = true;
-  },
-  setPrioritat(afectat){
-      debugger
-      if(this.multiple){
-          this.infoRecursos[afectat].prioritat = Number(this.prioritat);
-      } else {
-          this.infoRecursos[afectat.id].prioritat = Number(this.prioritat);
-      }
-
+    },
+    toggleMultiple(){
+        if(this.multiple) this.multiple = false;
+        else this.multiple = true;
+    },
+    setPrioritat(afectat){
+        if(this.multiple){
+            this.infoRecursos[afectat].prioritat = Number(this.prioritat);
+        } else {
+            this.infoRecursos[afectat.id].prioritat = Number(this.prioritat);
+        }
   },
     resetError(){
         this.errorMessage='';
+
+    },
+    initEditIncidencia(){
+        if(this.editincidencia != null ){
+            this.incidencia = this.editincidencia;
+            this.initAlertant();
+        }
+    },
+    initAlertant(){
+        let me = this;
+        axios
+            .get("/alertants/"+ me.incidencia.alertants_id)
+            .then(response => {
+                me.alertantIncidencia = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            .finally(() => (this.loading = false));
+>>>>>>> d667adfd2be7421fb69ff08df88983bed59c1df4
     }
   },
   created() {
@@ -580,6 +627,7 @@ export default {
   mounted() {
     // console.log("Component mounted.");
     // this.nouAfectat();
+    this.initEditIncidencia();
 
   },
   computed:{
@@ -602,3 +650,4 @@ export default {
   }
 };
 </script>
+

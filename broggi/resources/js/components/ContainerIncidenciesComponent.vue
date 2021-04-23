@@ -1,13 +1,13 @@
 <template>
   <div class="containerRecursos">
     <aside>
-      <sidebar-component
-        @changeOption="changePage($event)"
-        :page="'incidencies'"></sidebar-component>
+      <sidebar-component @changeOption="changePage($event)" :page="'incidencies'">
+
+      </sidebar-component>
     </aside>
     <div id="divForm">
       <section class="tableSection">
-        <incidencies-component :section="pageToDisplay"></incidencies-component>
+        <incidencies-component :section="pageToDisplay" :editincidencia="editincidencia"></incidencies-component>
       </section>
     </div>
   </div>
@@ -25,6 +25,11 @@ export default {
     IncidenciesComponent,
     videoComponent,
     helpBoxComponent,
+  },
+  props: {
+      editincidencia:{
+            required: false
+        }
   },
   data() {
     return {

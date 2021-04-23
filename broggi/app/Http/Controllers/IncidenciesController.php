@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Incidencies;
 use Illuminate\Http\Request;
+use App\Http\Resources\IncidenciesResource;
 
 class IncidenciesController extends Controller
 {
@@ -46,18 +47,21 @@ class IncidenciesController extends Controller
      */
     public function show(Incidencies $incidency)
     {
-        return view('incidencies/' + $incidency);
+        $incidencia = Incidencies::with(['incidencies_has_recursos', 'incidencies_has_afectats', 'tipus_incidencies'])->find($incidency->id);
+        // $incidencia = new IncidenciesResource(Incidencies::findOrFail($incidency->id));
+        // $incidency = new IncidenciesResource($incidency);
+        return view('incidencies/show',compact('incidencia'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Incidencies  $incidencies
+     * @param  \App\Models\Incidencies  $incidency
      * @return \Illuminate\Http\Response
      */
-    public function edit(Incidencies $incidencies)
+    public function edit(Incidencies $incidency)
     {
-        //
+        return view('incidencies/edit', compact('incidency'));
     }
 
     /**

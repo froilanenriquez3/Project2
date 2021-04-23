@@ -6,3 +6,9 @@
 #recursosAfectats {
     width : 50%;
 }
+
+#mapa-mapbox{
+    position: relative;
+    width: 100%;
+    height: 300px;
+}

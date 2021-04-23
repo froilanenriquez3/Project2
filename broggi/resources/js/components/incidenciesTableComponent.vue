@@ -10,7 +10,7 @@
      	</div>
         <!-- fin del div para el mensaje de error -->
         <!-- Filtro -->
-        <filter-select :name="'Tipus inciencia:'" :listToFilter="incidencies" :filterBy="tipusIncidencies" :filterField="'tipus'"
+        <filter-select :name="'Tipus incidència:'" :listToFilter="incidencies" :filterBy="tipusIncidencies" :filterField="'tipus'"
         :relatedId="'tipus_incidencies_id'" @applyFilterResults="filter($event)">
         </filter-select>
         <!-- Si no hay nada que cumpla con lo buscado, no sale la tabla y solo mostramos mensaje -->
@@ -18,12 +18,13 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Incidencia ID</th>
+                    <th>Incidència ID</th>
                     <th>Data</th>
                     <th>Telefon Alertant</th>
                     <th>Adreca</th>
-                    <th>Tipus Incidencia</th>
-                    <th>Descripcio</th>
+                    <th>Tipus Incidència</th>
+                    <th>Descripció</th>
+                    <th></th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -37,7 +38,20 @@
                     <td>{{ incidencia.tipus_incidencia.tipus}}</td>
                     <td v-show="incidencia.descripcio.length > 20">{{ incidencia.descripcio.substring(0,20) + "..." }}</td>
                     <td v-show="incidencia.descripcio.length < 20">{{ incidencia.descripcio }}</td>
-                    <td> <button class="btn btn-warning">Editar</button> </td>
+                    <td>
+
+                        <a :href="'http://localhost:8080/Project2/broggi/public/incidencies/'+ incidencia.id + '/edit'">
+                            <button class="btn btn-warning">Editar</button>
+                        </a>
+
+                    </td>
+                    <td>
+
+                        <a :href="'http://localhost:8080/Project2/broggi/public/incidencies/'+ incidencia.id " class="text-white">
+                            <button class="btn btn-primary">Veure dades </button>
+                        </a>
+
+                    </td>
                     <td> <button class="btn btn-secondary" @click="confirmDelete(incidencia)" >Esborrar</button> </td>
                 </tr>
             </tbody>
@@ -56,14 +70,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Esborrar incidencia</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Esborrar incidència</h5>
                 <button type="button" class="close" data-dismiss="modal"
                 aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div id="modalText" class="modal-body">
-                Està segur d'esborrar el incidencia {{ incidencia.id }} ?
+                Està segur d'esborrar l'incidència {{ incidencia.id }} ?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">
@@ -217,3 +231,9 @@
         }
     }
 </script>
+<style scoped>
+    a {
+        text-decoration: none;
+        color: black
+    }
+</style>

@@ -23,19 +23,19 @@
                 <ul id="side-menu nav-pills" class="nav flex-column " >
                     <!--Todo -->
                     <li class="sidebar mb-2">
-                        <a  class="nav-link active"  data-toggle="pill" href="#" role="tab" aria-controls="v-pills-home" aria-selected="true"> Todo </a>
+                        <a  class="nav-link active"  data-toggle="pill" href="#" role="tab" aria-controls="v-pills-home" aria-selected="true"> Tot </a>
                     </li>
                     <!--Alertante  -->
                     <li class="sidebar mb-2">
-                        <a  class="nav-link "  data-toggle="pill" href="#" role="tab" aria-controls="v-pills-home" aria-selected="true"> Alertante </a>
+                        <a  class="nav-link "  data-toggle="pill" href="#" role="tab" aria-controls="v-pills-home" aria-selected="true"> Alertant </a>
                     </li>
                     <!--Incidente-->
                     <li class="sidebar mb-2">
-                        <a  class="nav-link"  data-toggle="pill" href="#" role="tab" aria-controls="v-pills-profile" aria-selected="false"> Incidente </a>
+                        <a  class="nav-link"  data-toggle="pill" href="#" role="tab" aria-controls="v-pills-profile" aria-selected="false"> Incidència </a>
                     </li>
                     <!--Afectadx-->
                     <li class="sidebar mb-2">
-                        <a  class="nav-link"  data-toggle="pill" href="#" role="tab" aria-controls="v-pills-messages" aria-selected="false"> Afectadx </a>
+                        <a  class="nav-link"  data-toggle="pill" href="#" role="tab" aria-controls="v-pills-messages" aria-selected="false"> Afectat </a>
                     </li>
                     <!--Recursos-->
                     <li class="sidebar mb-2">

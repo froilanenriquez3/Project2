@@ -18,7 +18,7 @@
                 <li v-for="(question, index) in questions" :key="index">
                   <p>{{ question.questionText }}</p>
                   <button class="btn btn-primary" id="playAudio" @click="playAudio(question.id)"><i class="fas fa-volume-up"></i></button>
-                  <audio :src=" '../audio/' + question.id  + '.m4a' " :id=" 'audio' + question.id " ></audio>
+                  <audio :src=" 'http://localhost:8080/Project2/broggi/public/audio/' + question.id  + '.m4a' " :id=" 'audio' + question.id " ></audio>
                   <button class="btn btn-primary"
                     v-show="!qShowA[index]"
                     id="showButton"

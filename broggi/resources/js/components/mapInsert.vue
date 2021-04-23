@@ -10,7 +10,7 @@
      	</div>
         <!-- fin del div para el mensaje de error -->
         <div id="mapa-mapbox" style="width: 400px; height: 300px;"></div>
-        <button @click="addRecursosToMap()" class="btn btn-primary">ver Recursos</button>
+        <button @click="addRecursosToMap()" class="btn btn-primary">veure Recursos</button>
         <!-- Posición del marcador por defecto si la persona no lo arrastra -->
         <div hidden="true" id="latLongInfo">1.8676800;41.8204600
         </div>
@@ -65,6 +65,7 @@ export default {
         },
         addRecursosToMap() {
             this.recursos.forEach(element => {
+                if(element.codi != 'cap'){
                 this.colorRecurs(element);
                 // Div donde irá todo el contenido del popup
                 let div= document.createElement('div');
@@ -97,7 +98,7 @@ export default {
                     .setLngLat([element.lon, element.lat])
                     .setPopup(popup)
                     .addTo(this.map);
-
+                }
             });
         },
         resetError(){

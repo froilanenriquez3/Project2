@@ -107,7 +107,7 @@ export default {
            axios
         .post("/alertants", me.alertant)
         .then(function (response) {
-          console.log(response);
+        //   console.log(response);
           window.location.href = "/Project2/broggi/public/alertants";
 
         })
@@ -120,7 +120,7 @@ export default {
          axios
         .put("/alertants/" + me.alertant.id, me.alertant)
         .then(function (response) {
-          console.log(response);
+        //   console.log(response);
           window.location.href = "/Project2/broggi/public/alertants";
         })
         .catch((error) => {
@@ -151,7 +151,7 @@ export default {
         .get("/municipis")
         .then((response) => {
           me.municipis = response.data;
-          console.log(me.municipis);
+        //   console.log(me.municipis);
         })
         .catch((error) => {
           me.errorMessage= error.response.data.error;

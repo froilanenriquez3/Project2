@@ -25,7 +25,7 @@
         <table v-else class="table">
             <thead>
                 <tr>
-                    <th scope="col">UserName</th>
+                    <th scope="col">Nom d'usuari</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Cogmons</th>
                     <th scope="col">Email</th>
@@ -77,22 +77,22 @@
         <!-- Si se selecciona la opción añadir, se muestra el formulario -->
         <div v-show="action == 'afegir' || action == 'editar'">
             <div class="form-group row">
-                <label class="col-2" for="username">Nombre de usuario</label>
+                <label class="col-2" for="username">Nom d'usuari</label>
                 <input v-model="usuari.username" class="col-10" type="text" id="userName" name="username" />
             </div>
 
             <div class="form-group row">
-                <label class="col-2" for="contrasenya">Contraseña</label>
+                <label class="col-2" for="contrasenya">Contrasenya</label>
                 <input v-model="usuari.contrasenya" class="col-10" type="password" id="contrasenya" name="contrasenya" />
             </div>
 
             <div class="form-group row">
-                <label class="col-2" for="nom">Nombre</label>
+                <label class="col-2" for="nom">Nom</label>
                 <input v-model="usuari.nom" class="col-10" type="text" id="nom" name="nom" />
             </div>
 
             <div class="form-group row">
-                <label class="col-2" for="contrasenya">Apellidos</label>
+                <label class="col-2" for="contrasenya">Cognoms</label>
                 <input v-model="usuari.cognoms" class="col-10" type="text" id="cognoms" name="cognoms" />
             </div>
 

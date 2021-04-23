@@ -85,8 +85,8 @@
 
 
 #mapa-mapbox {
-    width: 50%;
-    height: 50%;
+    /* width: 50%; */
+    /* height: 50%; */
 }
 
 .afectat{
@@ -142,4 +142,10 @@
 /* .btn{
     float: right!important
 
+} */
+
+/* doesnt work */
+/*
+.mapboxgl-canvas{
+    width: 100%;
 } */

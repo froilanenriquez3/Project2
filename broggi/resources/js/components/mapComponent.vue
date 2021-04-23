@@ -1,5 +1,6 @@
 <template>
     <div class="map-container">
+
         <!-- div para el mensaje de error -->
         <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
             <strong>Error: </strong>
@@ -9,9 +10,9 @@
             </button>
      	</div>
         <!-- fin del div para el mensaje de error -->
-        <div id="mapa-mapbox" style="width: 400px; height: 300px;"></div>
+
+        <div id="mapa-mapbox"></div>
         <div id="geocoder" class="geocoder"></div>
-        <button @click="addRecursosToMap()" class="btn btn-primary">ver Recursos</button>
         <div class="color-box bg-primary"></div>
         <span> Recursos disponibles</span>
         <div class="color-box bg-secondary"></div>
@@ -211,13 +212,14 @@ export default {
         this.selectRecursos();
     },
     mounted() {
-        // console.log("Component mounted.");
+        // console.log("Map Component mounted.");
         mapboxgl.accessToken = this.key;
         this.map = new mapboxgl.Map({
             container: "mapa-mapbox", // container ID
-            style: "mapbox://styles/mapbox/streets-v11", // style URL
+            style: "mapbox://styles/mapbox/streets-v11?optimize=true", // style URL
             center: [1.8676800, 41.8204600], // starting position [lng, lat]
-            zoom: 7 // starting zoom
+            zoom: 7,
+            trackResize: true
         });
 
 
@@ -230,14 +232,15 @@ export default {
             },
             mapboxgl: mapboxgl
 
+
         });
 
         this.map.addControl(geocoder);
         this.map.addControl(new mapboxgl.NavigationControl());
 
-    // No funciona :(
-        this.map.on('load', () =>{
-            this.addRecursosToMap;
+       this.map.on('load', () =>{
+            this.addRecursosToMap();
+            this.map.resize();
         })
     },
 
@@ -253,3 +256,8 @@ export default {
     // }
 };
 </script>
+<style scoped>
+    #mapa-mapbox {
+        width: 100%;
+    }
+</style>

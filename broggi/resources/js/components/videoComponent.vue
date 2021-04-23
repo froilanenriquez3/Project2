@@ -1,7 +1,7 @@
 <template>
   <div id="videoDiv">
     <div class="card">
-      <div class="card-header">Videos Broggi</div>
+      <div class="card-header">Video Broggi</div>
 
       <div class="card-body row align-items-center">
         <video muted class="col-12" @timeupdate="changeProgress($event)" @canplay="changeProgress($event)"
@@ -10,7 +10,7 @@
             src="http://localhost:8080/Project2/broggi/public/video/videosBroggi.mp4"
             type="video/mp4"
           />
-          Your browser does not support the video tag.
+          El teu navegador no soporta aquest vídeo.
         </video>
         <div @click="setProgress($event)" class="progress-range">
             <div class="progress-bar"></div>
@@ -21,9 +21,10 @@
                 <i class="fas fa-play"></i> Play
             </button>
 
-            <button class="btn btn-primary m-1" id="section1">Section 1</button>
-            <button class="btn btn-primary m-1" id="section2">Section 2</button>
-            <button class="btn btn-primary m-1" id="section3">Section 3</button>
+            <button class="btn btn-primary m-1" id="section1">Secció 1</button>
+            <button class="btn btn-primary m-1" id="section2">Secció 2</button>
+            <button class="btn btn-primary m-1" id="section3">Secció 3</button>
+            <i id="muteIcon" @click="toggleMute" class="fas fa-volume-mute ml-2 fa-2x"></i>
         </div>
 
       </div>
@@ -70,6 +71,13 @@ export default {
       document
         .querySelector("#playButton")
         .addEventListener("click", this.playVideo);
+    },
+    toggleMute(){
+        let muteIcon= document.querySelector('#muteIcon');
+        this.video.muted = !this.video.muted;
+
+        muteIcon.classList.contains('fa-volume-up') ? muteIcon.classList.replace('fa-volume-up', 'fa-volume-mute')
+        : muteIcon.classList.replace('fa-volume-mute', 'fa-volume-up')
     },
     skipTen() {
       this.video.currentTime += 10;
@@ -121,15 +129,15 @@ export default {
     highlightSection() {
 
       if (this.video.currentTime < this.section2time) {
-        document.querySelector("#section1").style.backgroundColor = "red";
+        document.querySelector("#section1").style.backgroundColor = "#e1157b";
         document.querySelector("#section2").style.backgroundColor = "#11ADC4";
         document.querySelector("#section3").style.backgroundColor = "#11ADC4";
       } else if (this.video.currentTime < this.section3time) {
-        document.querySelector("#section2").style.backgroundColor = "red";
+        document.querySelector("#section2").style.backgroundColor = "#e1157b";
         document.querySelector("#section1").style.backgroundColor = "#11ADC4";
         document.querySelector("#section3").style.backgroundColor = "#11ADC4";
       } else {
-        document.querySelector("#section3").style.backgroundColor = "red";
+        document.querySelector("#section3").style.backgroundColor = "#e1157b";
         document.querySelector("#section1").style.backgroundColor = "#11ADC4";
         document.querySelector("#section2").style.backgroundColor = "#11ADC4";
       }
