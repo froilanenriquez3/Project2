@@ -186,9 +186,7 @@ export default {
             }
 
         },
-        resetError(){
-            this.errorMessage='';
-        },
+        
         cleanResource(){
                 this.recurs.id='';
                 this.recurs.codi='';
