@@ -614,7 +614,6 @@ export default {
                 console.log(error);
             })
             .finally(() => (this.loading = false));
->>>>>>> d667adfd2be7421fb69ff08df88983bed59c1df4
     }
   },
   created() {
