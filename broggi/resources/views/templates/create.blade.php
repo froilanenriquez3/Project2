@@ -41,8 +41,9 @@
 
         </section>
 
-
+        @yield('footer')
     </main>
+
 
     @include('partials.scripts')
 </body>
