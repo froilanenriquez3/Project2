@@ -27,19 +27,10 @@ main {
 
 }
 
-#filterSection{
-    /* border: solid black 3px; */
-    height: 15%;
-    width: 90%;
-    margin-bottom: 1%;
-    padding: 5px;
-
-}
-
 #divTable{
     position: relative;
     /* border: solid black 3px; */
-    height: 75%;
+    height: 85%;
     width: 90%;
     padding: 5px;
 
