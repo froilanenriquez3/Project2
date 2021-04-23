@@ -126,7 +126,7 @@
   <tbody>
     <tr class="row" v-for="(afectat, index) in afectats" :key="index">
         <td class="col-2">
-            <input type="number" min="1" max="4" :id="'prioritat' + afectat.id" name="prioritat" value="1" v-model="prioritat" @change="setPrioritat(afectat)">
+            <input type="number" min="1" max="4" :id="'prioritat' + afectat.id" name="prioritat" v-model="prioritat" @change="setPrioritat(afectat)">
         </td>
       <td class="afectat col-4" :id="'btnAfectat' + afectat.id"  @click="setAfectatActual(afectat)" v-bind:class="{ afectatActiu: afectat.id == afectatActiu}">
           <div >
@@ -144,7 +144,9 @@
            <div v-show="afectat.id == afectatActiu && (infoRecursos[afectat.id] == undefined)">
                         Assigna un recurs del mapa
                     </div>
-            <div  v-show="(infoRecursos[afectat.id] != undefined)" :id="'afectat' + afectat.id" ></div>
+            <!--
+
+             -->
       </td>
       <td class="col-2">
           <button class="btn btn-primary" @click="setRecursFromMap(recurs)">No cal recurs</button>
@@ -345,6 +347,7 @@ export default {
         .finally(() => (this.loading = false));
     },
     setRecursFromMap(recurs){
+        debugger;
         // Aquí el id del afectado aún es el que tiene en la array! Lo substituiremos al añadir la incidencia.
         this.infoRecurs = {
             recursos_id: recurs.id,
@@ -372,7 +375,7 @@ export default {
         this.incidencia.infoRecursos = this.infoRecursos;
         console.log(this.incidencia);
         // Hacemos que se muestre el recurso seleccionado en el tipo de recurso.
-        document.getElementById('afectat' + this.afectatActiu).innerHTML= recurs.codi;
+        document.getElementById('afectat' + this.afectatActiu).innerHTML= recurs;
         console.log("btnAfectat"+this.afectatActiu);
         document.getElementById("btnAfectat"+this.afectatActiu).setAttribute("disabled", true);
         }
@@ -483,27 +486,6 @@ export default {
     },
     notMultiple(){
         this.multiple= false;
-    },
-    assignRecurs(index, afectatId){
-        // Aquí el id del afectado aún es el que tiene en la array! Lo substituiremos al añadir la incidencia.
-        let recursId = Number(document.getElementById("recursosToAssign" + index).value);
-        this.infoRecurs = {
-            recursos_id: recursId,
-            hora_activacio: null,
-            hora_mobilitzacio: null,
-            hora_assistencia: null,
-            hora_transport: null,
-            hora_arribada_hospital: null,
-            hora_transferencia: null,
-            hora_finalitzacio: null,
-            prioritat: null,
-            desti: null,
-            afectat_id: afectatId
-        };
-        // Los ponemos en el mismo orden que los afectados para ahorrarnos problemas.
-        this.infoRecursos[afectatId]= this.infoRecurs;
-        this.incidencia.infoRecursos = this.infoRecursos;
-
     },
     clearInput() {
       this.incidencia = {

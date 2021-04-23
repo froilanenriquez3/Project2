@@ -74,10 +74,15 @@ export default {
             this.button.style.backgroundColor = "#fdc619";
             this.button.style.color= "black";
 
+            activarRecurs();
+
         },
         activarRecurs() {
             this.recurs.actiu = true;
             this.recursActivat= true;
+
+            this.$emit('assignantRecurs', this.recurs);
+
             console.log(this.marker)
             let me = this;
             axios
@@ -91,7 +96,7 @@ export default {
                     // me.errorMessage= error.response.data.error;
                 });
 
-            this.button.innerHTML = "Desactivar";
+            this.button.innerHTML = "Desassignar";
             this.button.style.backgroundColor = "#fdc619";
             this.marker.color = "#FDC619";
             this.button.removeEventListener("click", this.activarRecurs);
@@ -117,7 +122,7 @@ export default {
                     // me.errorMessage= error.response.data.error;
                 });
 
-            this.button.innerHTML = "Activar";
+            this.button.innerHTML = "Assignar";
             this.button.style.backgroundColor = "#11adc4";
             this.marker._color = "#11adc4";
             this.button.removeEventListener("click", this.desactivarRecurs);
@@ -162,7 +167,7 @@ export default {
                     button.setAttribute("disabled", true);
                 }
 
-                button.addEventListener("click", this.assignarRecurs);
+                button.addEventListener("click", this.activarRecurs);
 
 
                     div.appendChild(p)
@@ -224,7 +229,6 @@ export default {
 
        this.map.on('load', () =>{
             this.addRecursosToMap();
-            this.map.resize();
         })
     },
 

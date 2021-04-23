@@ -1,10 +1,12 @@
 #insideRecursos {
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 #recursosAfectats {
-    width : 50%;
+    margin-top: 2%;
+    width : 90%;
 }
 
 #mapa-mapbox{
