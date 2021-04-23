@@ -6,14 +6,13 @@
 }
 
 #indexSBMain{
-    width: 80vw;
+    width: 70vw;
 }
 
 
-/* #tableNav{
-    position: absolute;
+ #tableNav{
+    position: relative;
     left: 1%;
     bottom: 1%;
 }
- */
 

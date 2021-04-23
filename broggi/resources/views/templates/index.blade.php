@@ -28,10 +28,6 @@
 
         <section id="tableSection">
 
-            <div id="filterSection">
-                <p>Filters</p>
-            </div>
-
             <div id="divTable">
                 <div>
                     @yield('table')
