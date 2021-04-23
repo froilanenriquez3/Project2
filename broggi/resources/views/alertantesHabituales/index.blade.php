@@ -52,11 +52,11 @@
             <form
             action="{{ action([App\Http\Controllers\AlertantsController::class, 'edit'], ['alertant' => $alertant->id]) }}"
             method="GET">
-            <button class="btn btn-primary" id="editAlertant" type="submit">Editar</button>
+            <button class="btn btn-warning" id="editAlertant" type="submit">Editar</button>
             </form>
         </td>
         <td>
-            <button class="btn btn-danger" id="deleteAlertant" type="submit" onclick=" $('#deleteAlertantModal{{$alertant->id}}').modal('show');">Esborrar</button>
+            <button class="btn btn-secondary" id="deleteAlertant" type="submit" onclick=" $('#deleteAlertantModal{{$alertant->id}}').modal('show');">Esborrar</button>
         </td>
         <alertants-delete :alertant='{{$alertant}}'></alertants-delete>
       </tr>
