@@ -552,6 +552,7 @@ export default {
                     me.incidencia = null;
                 })
                 .catch((error)=>{
+                    me.errorMessage= error.response.data.error;
                     console.log(error);
                     console.log(error.response.status);
                     console.log(error.response.data);
@@ -611,10 +612,10 @@ export default {
                 me.alertantIncidencia = response.data;
             })
             .catch(error => {
+                me.errorMessage= error.response.data.error;
                 console.log(error);
             })
             .finally(() => (this.loading = false));
->>>>>>> d667adfd2be7421fb69ff08df88983bed59c1df4
     }
   },
   created() {

@@ -170,7 +170,8 @@
                     me.incidencia = response.data;
                     me.incidenciesRecursos.push(me.incidencia);
                         me.findActiveIncidencia();
-                    // me.infoRecursos = me.incidencia.incidencies_has_recursos;
+                    //me.infoRecursos = me.incidencia.incidencies_has_recursos;
+                    me.infoMessage=response.data.message;
                     // console.log(me.infoRecursos);
                     })
                     .catch((error) => {
