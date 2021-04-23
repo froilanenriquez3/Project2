@@ -1,5 +1,14 @@
 <template>
     <div id="incRecTableDiv">
+        <!-- div para el mensaje de error -->
+        <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <strong>Error: </strong>
+            {{errorMessage}}
+            <button type="button" @click="resetError()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+     	</div>
+        <!-- fin del div para el mensaje de error -->
         <div v-show="incRecs.length > 0">
             <table class="table">
             <thead>
@@ -24,7 +33,11 @@
                     <td>{{ incidencia.desti}}</td>
                     <td>{{ incidencia.hora_activacio}}</td>
                     <td>{{ incidencia.hora_finalitzacio}}</td>
-                    <td> <button class="btn btn-warning">Editar</button> </td>
+                    <td>
+                        <a :href="'http://localhost:8080/Project2/broggi/public/incidenciesrecursos/'+ incidencia.incidencies_id + '/edit'">
+                            <button class="btn btn-warning">Editar</button>
+                        </a>
+                    </td>
                     <td> <button class="btn btn-secondary" @click="confirmDelete(incidencia)">Esborrar</button> </td>
                 </tr>
             </tbody>
@@ -80,6 +93,7 @@
         },
         data(){
             return {
+                errorMessage:'',
                 itemsToDisplay: [],
                 perPage: 5,
                 currentPage: 1,
@@ -120,7 +134,8 @@
 
                     })
                     .catch((error) => {
-                    console.log(error);
+                        me.errorMessage= error.response.data.error;
+                        console.log(error);
                     })
                     .finally(() => {
                         this.loading = false;
@@ -145,13 +160,17 @@
                         me.totalRows= me.itemsToDisplay.length;
                     })
                     .catch((error) => {
-                    console.log(error);
+                        me.errorMessage= error.response.data.error;
+                        console.log(error);
                     })
                     .finally(() => {
                         this.loading = false;
                         // console.log(me.incidencia);
                     });
 
+            },
+            resetError(){
+                this.errorMessage='';
             },
             deleteIncidencia(){
                 let me = this;
@@ -197,3 +216,9 @@
         }
     }
 </script>
+<style scoped>
+    a {
+        text-decoration: none;
+        color: black
+    }
+</style>

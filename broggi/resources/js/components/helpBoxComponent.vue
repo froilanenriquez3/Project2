@@ -1,6 +1,14 @@
 <template>
   <div id="helpBoxDiv">
-
+        <!-- div para el mensaje de error -->
+        <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <strong>Error: </strong>
+            {{errorMessage}}
+            <button type="button" @click="resetError()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <!-- fin del div para el mensaje de error -->
         <div class="card">
           <div class="card-header">English Helpbox</div>
 
@@ -42,6 +50,7 @@
 export default {
   data() {
     return {
+      errorMessage:'',
       questions: [],
       qShowA: [],
       answers: [],
@@ -52,6 +61,7 @@ export default {
     };
   },
   methods: {
+      
     showQuestionAnswers(index) {
         let me = this;
       Vue.set(me.qShowA, index, true);
@@ -70,6 +80,7 @@ export default {
           me.setShowAnswers();
         })
         .catch((error) => {
+          me.errorMessage= error.response.data.error;
           console.log(error);
         })
         .finally(() => (this.loading = false));
@@ -84,6 +95,7 @@ export default {
           me.setShowAnswers();
         })
         .catch((error) => {
+          me.errorMessage= error.response.data.error;
           console.log(error);
         })
         .finally(() => (this.loading = false));
@@ -97,7 +109,11 @@ export default {
     },
     playAudio(id){
         document.querySelector('#audio' + id).play();
+    },
+    resetError(){
+        this.errorMessage= '';
     }
+   
 
   },
 

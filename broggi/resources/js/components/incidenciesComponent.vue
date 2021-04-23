@@ -1,6 +1,14 @@
 <template>
 <div class="biggerContainer">
-
+    <!-- div para el mensaje de error -->
+        <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <strong>Error: </strong>
+            {{errorMessage}}
+            <button type="button" @click="resetError()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+     	</div>
+    <!-- fin del div para el mensaje de error -->
     <div id="divModoFormacion" v-bind:class="{ formacionActive: formacio }">
         <button class="btn btn-primary" @click="openModalVideo()" v-bind:class="{ hidden: !formacio }">Veure video CPR</button>
     <button class="btn btn-primary" @click="openModalHelp()" v-bind:class="{ hidden: !formacio }">Ajuda amb l'anglès</button>
@@ -109,7 +117,7 @@
         <!-- El mapa se enseña en caso de que hayan escrito algo en afectados, tanto si éstos son múltiples
         como si no. -->
         <div v-show="(!multiple && numAfectats > 0) || multiple">
-        <map-component @assignantRecurs="setRecursFromMap($event)" :direccioCompleta="direccio"></map-component>
+        <map-component @desassignantRecurs="removeRecursFromMap($event)" @assignantRecurs="setRecursFromMap($event)" :direccioCompleta="direccio"></map-component>
         </div>
         <!-- No se muestra si no hay afectados aún puestos y no es múltiple -->
         <div id="insideRecursos" v-show="!multiple && numAfectats > 0">
@@ -117,18 +125,15 @@
         <div id="recursosAfectats"><table class="table">
   <thead>
     <tr class="row">
-        <th class="col-2">Prioritat</th>
         <th class="col-4">Afectat</th>
         <th class="col-4">Recurs</th>
+        <th class="col-2">Prioritat</th>
         <th class="col-2"></th>
     </tr>
   </thead>
   <tbody>
-    <tr class="row" v-for="(afectat, index) in afectats" :key="index">
-        <td class="col-2">
-            <input type="number" min="1" max="4" :id="'prioritat' + afectat.id" name="prioritat" v-model="prioritat" @change="setPrioritat(afectat)">
-        </td>
-      <td class="afectat col-4" :id="'btnAfectat' + afectat.id"  @click="setAfectatActual(afectat)" v-bind:class="{ afectatActiu: afectat.id == afectatActiu}">
+    <tr class="afectat row" @click="setAfectatActual(afectat)" v-bind:class="{ afectatActiu: afectat.id == afectatActiu}" v-for="(afectat, index) in afectats" :key="index">
+      <td class="col-4" :id="'btnAfectat' + afectat.id">
           <div >
               <p v-if="afectat.sexes_id == 1">Home
                             <span v-show="afectat.edat != ''">{{', '+ afectat.edat  + " anys "}}</span>
@@ -141,13 +146,17 @@
           </div>
       </td>
       <td class="col-4">
-           <div v-show="afectat.id == afectatActiu && (infoRecursos[afectat.id] == undefined)">
-                        Assigna un recurs del mapa
-                    </div>
-            <!--
+            <div v-show="infoRecursos[afectat.id]" :id="'recursAssignat'+afectat.id"></div>
 
-             -->
       </td>
+            <td class="col-2">
+                <select v-show="infoRecursos[afectat.id]" @change="setPrioritat(afectat)" class="form-select" aria-label="Default select example">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+        </td>
       <td class="col-2">
           <button class="btn btn-primary" @click="setRecursFromMap(recurs)">No cal recurs</button>
       </td>
@@ -266,7 +275,8 @@ export default {
     },
   data() {
     return {
-    formacio: false,
+        errorMessage:'',
+        formacio: false,
       tipusAlertants: [],
       tipusIncidencies: [],
       alertantIncidencia: {},
@@ -342,12 +352,19 @@ export default {
           me.incidencies = response.data;
         })
         .catch((error) => {
+          me.errorMessage= error.response.data.error;
           console.log(error);
         })
         .finally(() => (this.loading = false));
     },
+    removeRecursFromMap(recurs){
+       let foundRecurs= this.infoRecursos.find( function(element) {
+            element.recursos_id == recurs.id
+        })
+
+        console.log('found recurs: ' + foundRecurs);
+    },
     setRecursFromMap(recurs){
-        debugger;
         // Aquí el id del afectado aún es el que tiene en la array! Lo substituiremos al añadir la incidencia.
         this.infoRecurs = {
             recursos_id: recurs.id,
@@ -375,7 +392,7 @@ export default {
         this.incidencia.infoRecursos = this.infoRecursos;
         console.log(this.incidencia);
         // Hacemos que se muestre el recurso seleccionado en el tipo de recurso.
-        document.getElementById('afectat' + this.afectatActiu).innerHTML= recurs;
+        document.getElementById('recursAssignat' + this.afectatActiu).innerHTML= recurs.codi;
         console.log("btnAfectat"+this.afectatActiu);
         document.getElementById("btnAfectat"+this.afectatActiu).setAttribute("disabled", true);
         }
@@ -434,6 +451,7 @@ export default {
           me.municipis = response.data;
         })
         .catch((error) => {
+          me.errorMessage= error.response.data.error;
           console.log(error);
         })
         .finally(() => (this.loading = false));
@@ -447,6 +465,7 @@ export default {
           me.tipusIncidencies = response.data;
         })
         .catch((error) => {
+          me.errorMessage= error.response.data.error;
           console.log(error);
         })
         .finally(() => (this.loading = false));
@@ -460,6 +479,7 @@ export default {
 
         })
         .catch((error) => {
+          me.errorMessage= error.response.data.error;
           console.log(error);
         })
         .finally(() => (this.loading = false));
@@ -473,6 +493,7 @@ export default {
                     me.getFreeRecurs();
                 })
                 .catch(error => {
+                    me.errorMessage= error.response.data.error;
                     console.log(error);
                 })
                 .finally(() => (this.loading = false));
@@ -545,40 +566,44 @@ export default {
             console.log(error.response.data);
             me.action = "";
             // me.errorMessage= error.response.data.error;
+              me.errorMessage= error.response.data.error;
             });
         }
 
+    },
+    toggleMultiple(){
+        if(this.multiple) this.multiple = false;
+        else this.multiple = true;
+    },
+    setPrioritat(afectat){
+        if(this.multiple){
+            this.infoRecursos[afectat].prioritat = Number(this.prioritat);
+        } else {
+            this.infoRecursos[afectat.id].prioritat = Number(this.prioritat);
+        }
   },
-  toggleMultiple(){
-      if(this.multiple) this.multiple = false;
-      else this.multiple = true;
-  },
-  setPrioritat(afectat){
-      if(this.multiple){
-          this.infoRecursos[afectat].prioritat = Number(this.prioritat);
-      } else {
-          this.infoRecursos[afectat.id].prioritat = Number(this.prioritat);
-      }
+    resetError(){
+        this.errorMessage='';
 
-  },
-  initEditIncidencia(){
-      if(this.editincidencia != null ){
-          this.incidencia = this.editincidencia;
-          this.initAlertant();
-      }
-  },
-  initAlertant(){
-      let me = this;
-    axios
-        .get("/alertants/"+ me.incidencia.alertants_id)
-        .then(response => {
-            me.alertantIncidencia = response.data;
-        })
-        .catch(error => {
-            console.log(error);
-        })
-        .finally(() => (this.loading = false));
-  }
+    },
+    initEditIncidencia(){
+        if(this.editincidencia != null ){
+            this.incidencia = this.editincidencia;
+            this.initAlertant();
+        }
+    },
+    initAlertant(){
+        let me = this;
+        axios
+            .get("/alertants/"+ me.incidencia.alertants_id)
+            .then(response => {
+                me.alertantIncidencia = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            .finally(() => (this.loading = false));
+    }
   },
   created() {
     //this.selectIncidencies();
