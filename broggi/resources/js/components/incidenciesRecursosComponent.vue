@@ -11,9 +11,9 @@
         <!-- fin del div para el mensaje de error -->
        <div id="incidenciesRecursosDiv" v-show="displayForm">
            <div class="form-group row">
-                <p id="incNumDisp" class="col-2"> Incidencia #{{ incidencia.id}} </p>
+                <h5 id="incNumDisp" class="col-2"> Incidencia #{{ incidencia.id}} </h5>
                 <span id="validateDisplay" class="col-8" ></span>
-                <p id="incPrioritatDisp" class="col-2" > Prioritat: {{ infoRecursos.prioritat }} </p>
+                <h5 id="incPrioritatDisp" class="col-2" > Prioritat: {{ infoRecursos.prioritat }} </h5>
            </div>
 
            <div class="form-group row">
@@ -28,12 +28,9 @@
                <label class="col-2" for="assistencia">3: Hora Assistència</label>
                <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_assistencia" id="assistencia" name="assistencia"
                 @change="validateInput('mobilitzacio', 'assistencia')">
-
-
            </div>
 
            <div class="form-group row">
-
                 <label class="col-2" for="transport">4: Hora Transport</label>
                <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_transport" id="transport" name="transport"
                 @change="validateInput('assistencia', 'transport')">
@@ -45,7 +42,6 @@
                 <label class="col-2" for="horaTransferencia">6: Hora Transferencia</label>
                <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_transferencia" id="horaTransferencia" name="horaTransferencia"
                 @change="validateInput('arribadaHospital','horaTransferencia')">
-
            </div>
 
            <div class="form-group row">
