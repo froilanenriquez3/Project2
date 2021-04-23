@@ -101,7 +101,7 @@ class IncidenciesRecursosController extends Controller
             $incidenciesrecurso->refresh();
 
             $response = \response()
-                ->json(['message' => 'Incidencia borrado correctamente'], 200);
+                ->json(['message' => 'Incidencia esborrat correctament'], 200);
         } catch (QueryException $ex) {
             DB::rollBack();
             $message = Utilitat::errorMessage($ex);
