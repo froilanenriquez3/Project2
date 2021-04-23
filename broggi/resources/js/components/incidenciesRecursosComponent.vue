@@ -1,5 +1,14 @@
 <template>
     <div class="container">
+        <!-- div para el mensaje de error -->
+        <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <strong>Error: </strong>
+            {{errorMessage}}
+            <button type="button" @click="resetError()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+     	</div>
+        <!-- fin del div para el mensaje de error -->
        <div id="incidenciesRecursosDiv" v-show="displayForm">
            <div class="form-group row">
                 <h5 id="incNumDisp" class="col-2"> Incidencia #{{ incidencia.id}} </h5>
@@ -68,6 +77,7 @@
         },
         data(){
             return {
+                errorMessage:'',
                 displayForm: false,
                 incidencies: [],
                 incidenciesRecursos: [],
@@ -125,7 +135,8 @@
                          window.location.href = "/Project2/broggi/public/incidenciesrecursos";
                     })
                     .catch((error)=>{
-                         console.log(error);
+                        me.errorMessage= error.response.data.error;
+                        console.log(error);
                         console.log(error.response.status);
                         console.log(error.response.data);
                     })
@@ -140,7 +151,8 @@
                     me.getAllShowIncidencies();
                     })
                     .catch((error) => {
-                    console.log(error);
+                        me.errorMessage= error.response.data.error;
+                        console.log(error);
                     })
                     .finally(() => (this.loading = false));
 
@@ -158,7 +170,8 @@
                     // console.log(me.infoRecursos);
                     })
                     .catch((error) => {
-                    console.log(error);
+                        me.errorMessage= error.response.data.error;
+                        console.log(error);
                     })
                     .finally(() => {
                         this.loading = false;
@@ -199,6 +212,9 @@
                 //  console.log(this.incidenciesRecursos);
 
             },
+            resetError(){
+                this.errorMessage='';
+            },
             initEditIncidencia(){
                 console.log("init edit incidencia");
                 this.incidencia = this.editincidencia;
@@ -235,6 +251,7 @@
                     });
                 }
             }
+
         },
         mounted() {
             // console.log('Component mounted.')
