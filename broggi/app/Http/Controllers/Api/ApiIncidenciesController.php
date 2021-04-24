@@ -150,6 +150,8 @@ class ApiIncidenciesController extends Controller
     {
         DB::beginTransaction();
 
+        $afectats = $request->input('incidencies_has_afectats');
+
         // $incidency = Incidencies::find($request->input('id'));
         // $incidencies->id = $request->input('id');
         $incidency->hora                 = $request->input('hora');
@@ -176,6 +178,30 @@ class ApiIncidenciesController extends Controller
 
         try {
             $incidency->save();
+
+            $incidency->incidencies_has_afectats()->detach();
+            $incidency->incidencies_has_afectats()->delete();
+
+            foreach ($afectats as $afectat) {
+                $afectatStore = new Afectats();
+
+                $positionArray = $afectat['id'];
+                $afectatStore->telefon = $afectat['telefon'];
+                $afectatStore->cip = $afectat['cip'];
+                $afectatStore->nom = $afectat['nom'];
+                $afectatStore->cognoms = $afectat['cognoms'];
+                $afectatStore->edat = $afectat['edat'];
+                $afectatStore->sexes_id = $afectat['sexes_id'];
+
+                $afectatStore->save();
+
+                $afectatNewId = $afectatStore->id;
+
+                // $infoRecursos[$positionArray]['afectat_id'] = $afectatNewId;
+
+                $incidency->incidencies_has_afectats()->save($afectatStore);
+            }
+
             if (!is_null($infoRecursos)) {
                 foreach ($infoRecursos as $infoRecurs) {
 

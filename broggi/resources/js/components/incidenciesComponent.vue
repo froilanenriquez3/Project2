@@ -543,11 +543,12 @@ export default {
     afegirIncidencia(){
         let me = this;
         if(this.editincidencia != null){
+            this.incidencia.afectats= this.afectats;
              axios
                 .put("/incidencies/"+me.incidencia.id, me.incidencia)
                 .then((response)=>{
                     alert("Formulari enviat correctament");
-                    window.location.href = "/Project2/broggi/public/incidencies";
+                    // window.location.href = "/Project2/broggi/public/incidencies";
                     console.log(response);
                     me.incidencia = null;
                 })
@@ -600,7 +601,9 @@ export default {
     initEditIncidencia(){
         if(this.editincidencia != null ){
             this.incidencia = this.editincidencia;
+            this.afectats = this.incidencia.incidencies_has_afectats;
             this.initAlertant();
+            this.initAfectats();
         }
     },
     initAlertant(){
@@ -614,6 +617,23 @@ export default {
                 console.log(error);
             })
             .finally(() => (this.loading = false));
+    },
+    initAfectats(){
+
+        for (let i in this.afectats) {
+            //Creamos afectatFormComponent y le pasamos el afectat de la posición numAfectats y la posición que ocupará en la array;
+            let ComponentClass= Vue.extend(afectatFormComponent)
+            let form= new ComponentClass({
+                propsData: { position: i, afectat: this.afectats[i] }
+            });
+
+            form.$mount()
+            this.$refs.afectatsContainer.appendChild(form.$el);
+            this.numAfectats ++;
+        }
+
+
+
     }
   },
   created() {
