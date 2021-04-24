@@ -182,6 +182,8 @@ class ApiIncidenciesController extends Controller
             $incidency->incidencies_has_afectats()->detach();
             $incidency->incidencies_has_afectats()->delete();
 
+            $incidency->incidencies_has_recursos()->delete();
+
             if ($afectats != null && count($afectats) > 0) {
 
                 foreach ($afectats as $afectat) {
@@ -199,40 +201,30 @@ class ApiIncidenciesController extends Controller
 
                     $afectatNewId = $afectatStore->id;
 
-                    // $infoRecursos[$positionArray]['afectat_id'] = $afectatNewId;
+                    $infoRecursos[$positionArray]['afectat_id'] = $afectatNewId;
 
                     $incidency->incidencies_has_afectats()->save($afectatStore);
                 }
             }
 
-            if (!is_null($infoRecursos)) {
-                foreach ($infoRecursos as $infoRecurs) {
+            foreach ($infoRecursos as $infoRecurs) {
+                $ihr = new IncidenciesHasRecursos();
+                // $ihr->incidencies_id= $incidencia->id;
+                $ihr->recursos_id = $infoRecurs['recursos_id'];
+                $ihr->hora_activacio = $infoRecurs['hora_activacio'];
+                $ihr->hora_mobilitzacio = $infoRecurs['hora_mobilitzacio'];
+                $ihr->hora_assistencia = $infoRecurs['hora_assistencia'];
+                $ihr->hora_transport = $infoRecurs['hora_transport'];
+                $ihr->hora_arribada_hospital = $infoRecurs['hora_arribada_hospital'];
+                $ihr->hora_transferencia = $infoRecurs['hora_transferencia'];
+                $ihr->hora_finalitzacio = $infoRecurs['hora_finalitzacio'];
+                $ihr->prioritat = $infoRecurs['prioritat'];
+                $ihr->desti = $infoRecurs['desti'];
+                $ihr->afectat_id = $infoRecurs['afectat_id'];
+                $ihr->prioritat = $infoRecurs['prioritat'];
 
-                    if ($request->input('saveRecurs') == $infoRecurs['recursos_id']) {
-
-                        $incidency->incidencies_has_recursos()
-                            ->where('recursos_id', $infoRecurs['recursos_id'])
-                            ->update(
-                                [
-                                    // 'recursos_id' => $infoRecurs['recursos_id'],
-                                    'hora_activacio'        => $infoRecurs['hora_activacio'],
-                                    'hora_mobilitzacio'     => $infoRecurs['hora_mobilitzacio'],
-                                    'hora_assistencia'      => $infoRecurs['hora_assistencia'],
-                                    'hora_transport'        => $infoRecurs['hora_transport'],
-                                    'hora_arribada_hospital' => $infoRecurs['hora_arribada_hospital'],
-                                    'hora_transferencia'    => $infoRecurs['hora_transferencia'],
-                                    'hora_finalitzacio'     => $infoRecurs['hora_finalitzacio'],
-                                    'prioritat'             => $infoRecurs['prioritat'],
-                                    'desti'                 => $infoRecurs['desti'],
-                                    'afectat_id'            => $infoRecurs['afectat_id'],
-                                ]
-                            );
-                    }
-
-                    // $incidency->incidencies_has_recursos()->save($ihr);
-                }
+                $incidency->incidencies_has_recursos()->save($ihr);
             }
-
 
             DB::commit();
             $incidency->refresh();
