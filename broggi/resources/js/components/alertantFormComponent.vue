@@ -157,6 +157,11 @@ export default {
             this.$emit('dadesAfectat', this.alertantCopia);
         }
     },
+    initAlertant(){
+        if(this.alertant != {}){
+            this.alertantCopia = this.alertant;
+        }
+    }
   }
   ,
 

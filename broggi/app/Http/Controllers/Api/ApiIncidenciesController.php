@@ -150,6 +150,8 @@ class ApiIncidenciesController extends Controller
     {
         DB::beginTransaction();
 
+        $afectats = $request->input('incidencies_has_afectats');
+
         // $incidency = Incidencies::find($request->input('id'));
         // $incidencies->id = $request->input('id');
         $incidency->hora                 = $request->input('hora');
@@ -176,34 +178,53 @@ class ApiIncidenciesController extends Controller
 
         try {
             $incidency->save();
-            if (!is_null($infoRecursos)) {
-                foreach ($infoRecursos as $infoRecurs) {
 
-                    if ($request->input('saveRecurs') == $infoRecurs['recursos_id']) {
+            $incidency->incidencies_has_afectats()->detach();
+            $incidency->incidencies_has_afectats()->delete();
 
-                        $incidency->incidencies_has_recursos()
-                            ->where('recursos_id', $infoRecurs['recursos_id'])
-                            ->update(
-                                [
-                                    // 'recursos_id' => $infoRecurs['recursos_id'],
-                                    'hora_activacio'        => $infoRecurs['hora_activacio'],
-                                    'hora_mobilitzacio'     => $infoRecurs['hora_mobilitzacio'],
-                                    'hora_assistencia'      => $infoRecurs['hora_assistencia'],
-                                    'hora_transport'        => $infoRecurs['hora_transport'],
-                                    'hora_arribada_hospital'=> $infoRecurs['hora_arribada_hospital'],
-                                    'hora_transferencia'    => $infoRecurs['hora_transferencia'],
-                                    'hora_finalitzacio'     => $infoRecurs['hora_finalitzacio'],
-                                    'prioritat'             => $infoRecurs['prioritat'],
-                                    'desti'                 => $infoRecurs['desti'],
-                                    // 'afectat_id'            => $infoRecurs['afectat_id'],
-                                ]
-                            );
-                    }
+            $incidency->incidencies_has_recursos()->delete();
 
-                    // $incidency->incidencies_has_recursos()->save($ihr);
+            if ($afectats != null && count($afectats) > 0) {
+
+                foreach ($afectats as $afectat) {
+                    $afectatStore = new Afectats();
+
+                    $positionArray = $afectat['id'];
+                    $afectatStore->telefon = $afectat['telefon'];
+                    $afectatStore->cip = $afectat['cip'];
+                    $afectatStore->nom = $afectat['nom'];
+                    $afectatStore->cognoms = $afectat['cognoms'];
+                    $afectatStore->edat = $afectat['edat'];
+                    $afectatStore->sexes_id = $afectat['sexes_id'];
+
+                    $afectatStore->save();
+
+                    $afectatNewId = $afectatStore->id;
+
+                    $infoRecursos[$positionArray]['afectat_id'] = $afectatNewId;
+
+                    $incidency->incidencies_has_afectats()->save($afectatStore);
                 }
             }
 
+            foreach ($infoRecursos as $infoRecurs) {
+                $ihr = new IncidenciesHasRecursos();
+                // $ihr->incidencies_id= $incidencia->id;
+                $ihr->recursos_id = $infoRecurs['recursos_id'];
+                $ihr->hora_activacio = $infoRecurs['hora_activacio'];
+                $ihr->hora_mobilitzacio = $infoRecurs['hora_mobilitzacio'];
+                $ihr->hora_assistencia = $infoRecurs['hora_assistencia'];
+                $ihr->hora_transport = $infoRecurs['hora_transport'];
+                $ihr->hora_arribada_hospital = $infoRecurs['hora_arribada_hospital'];
+                $ihr->hora_transferencia = $infoRecurs['hora_transferencia'];
+                $ihr->hora_finalitzacio = $infoRecurs['hora_finalitzacio'];
+                $ihr->prioritat = $infoRecurs['prioritat'];
+                $ihr->desti = $infoRecurs['desti'];
+                $ihr->afectat_id = $infoRecurs['afectat_id'];
+                $ihr->prioritat = $infoRecurs['prioritat'];
+
+                $incidency->incidencies_has_recursos()->save($ihr);
+            }
 
             DB::commit();
             $incidency->refresh();

@@ -12,7 +12,7 @@
         <!-- Filtro -->
         <filter-select :name="'Tipus de Recurs'" :listToFilter="recursos" :filterBy="tipus_recursos" :filterField="'tipus'" :relatedId="'tipus_recursos_id'"
         @applyFilterResults="filter($event)"></filter-select>
-        <button type="button" @click="selectAction('afegir')" class="btn btn-primary">Afegir</button>
+        <!-- <button type="button" @click="selectAction('afegir')" class="btn btn-primary">Afegir</button> -->
         <!-- Si no hay nada que cumpla con lo buscado, no sale la tabla y solo mostramos mensaje -->
         <div v-if="itemsToDisplay.length == 0"> No s'han trobat elements d'aquestes característiques</div>
 
