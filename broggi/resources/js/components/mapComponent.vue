@@ -11,12 +11,12 @@
      	</div>
         <!-- fin del div para el mensaje de error -->
 
-        <div id="mapa-mapbox"></div>
-        <div id="geocoder" class="geocoder"></div>
         <div class="color-box bg-primary"></div>
         <span> Recursos disponibles</span>
         <div class="color-box bg-secondary"></div>
         <span> Recursos no disponibles</span>
+        <div id="mapa-mapbox"></div>
+        <div id="geocoder" class="geocoder"></div>
     </div>
 </template>
 
@@ -29,10 +29,11 @@ export default {
         direccioCompleta: {
             type: String,
             required: true
+        },
+        recursPerCanviar: {
+            required: true
         }
-        // recursosInfo:{
-        //     required:true
-        // }
+
     },
     data() {
         return {
@@ -87,10 +88,15 @@ export default {
             this.button.style.backgroundColor = "#fdc619";
             this.button.style.color= "black";
 
+            activarRecurs();
+
         },
         activarRecurs() {
             this.recurs.actiu = true;
             this.recursActivat= true;
+
+            this.$emit('assignantRecurs', this.recurs);
+
             console.log(this.marker)
             let me = this;
             axios
@@ -104,7 +110,7 @@ export default {
                     me.errorMessage= error.response.data.error;
                 });
 
-            this.button.innerHTML = "Desactivar";
+            this.button.innerHTML = "Desassignar";
             this.button.style.backgroundColor = "#fdc619";
             this.marker.color = "#FDC619";
             this.button.removeEventListener("click", this.activarRecurs);
@@ -117,6 +123,7 @@ export default {
         desactivarRecurs() {
             this.recurs.actiu = false;
             this.recursActivat= false;
+            this.$emit('desassignantRecurs', this.recurs);
             console.log(this.marker)
             let me = this;
             axios
@@ -130,7 +137,7 @@ export default {
                     me.errorMessage= error.response.data.error;
                 });
 
-            this.button.innerHTML = "Activar";
+            this.button.innerHTML = "Assignar";
             this.button.style.backgroundColor = "#11adc4";
             this.marker._color = "#11adc4";
             this.button.removeEventListener("click", this.desactivarRecurs);
@@ -175,7 +182,7 @@ export default {
                     button.setAttribute("disabled", true);
                 }
 
-                button.addEventListener("click", this.assignarRecurs);
+                button.addEventListener("click", this.activarRecurs);
 
 
                     div.appendChild(p)
@@ -242,22 +249,24 @@ export default {
             this.addRecursosToMap();
             this.map.resize();
         })
+
+
+        this.map.on('idle', ()=> this.map.resize());
     },
 
-    // watch: {
-    //     direccioCompleta: {
-    //         deep:true,
-    //         function(val){
-    //         this.map.geocoder.setInput(val);
-    //     }
+    watch: {
+        // direccioCompleta:
+        //     function(val){
+        //     this.map.geocoder.setInput(val);
+        //     }
+        // ,
+        recursPerCanviar: function(newVal){
+                console.log('desde mapa: ')
+                console.log(newVal)
+            }
 
-    //     }
 
-    // }
+    }
 };
 </script>
-<style scoped>
-    #mapa-mapbox {
-        width: 100%;
-    }
-</style>
+
