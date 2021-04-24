@@ -6,7 +6,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarColor02 ">
+    <div class="collapse navbar-collapse" id="navbarColor02">
         <!--inicio izquierdo-->
 
         <!-- fin izquierdo-->

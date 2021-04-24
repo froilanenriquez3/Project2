@@ -34,9 +34,6 @@
             </header>
 
             <section id="tableSection">
-                <div id="filterSection">
-                    <p>Filtres</p>
-                </div>
 
                 <div id="divTable">
                     <div id="app">

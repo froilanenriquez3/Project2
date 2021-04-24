@@ -1,3 +1,15 @@
 #divModoFormacion {
     display: none;
 }
+
+#app{
+    margin-top: 1%;
+}
+
+#divForm{
+    width: 85vw;
+}
+
+.my-row-header{
+    margin-bottom: 3%;
+}
