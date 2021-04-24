@@ -11,12 +11,12 @@
      	</div>
         <!-- fin del div para el mensaje de error -->
 
-        <div id="mapa-mapbox"></div>
-        <div id="geocoder" class="geocoder"></div>
         <div class="color-box bg-primary"></div>
         <span> Recursos disponibles</span>
         <div class="color-box bg-secondary"></div>
         <span> Recursos no disponibles</span>
+        <div id="mapa-mapbox"></div>
+        <div id="geocoder" class="geocoder"></div>
     </div>
 </template>
 
@@ -29,10 +29,11 @@ export default {
         direccioCompleta: {
             type: String,
             required: true
+        },
+        recursPerCanviar: {
+            required: true
         }
-        // recursosInfo:{
-        //     required:true
-        // }
+
     },
     data() {
         return {
@@ -122,6 +123,7 @@ export default {
         desactivarRecurs() {
             this.recurs.actiu = false;
             this.recursActivat= false;
+            this.$emit('desassignantRecurs', this.recurs);
             console.log(this.marker)
             let me = this;
             axios
@@ -245,23 +247,26 @@ export default {
 
        this.map.on('load', () =>{
             this.addRecursosToMap();
+            this.map.resize();
         })
+
+
+        this.map.on('idle', ()=> this.map.resize());
     },
 
-    // watch: {
-    //     direccioCompleta: {
-    //         deep:true,
-    //         function(val){
-    //         this.map.geocoder.setInput(val);
-    //     }
+    watch: {
+        // direccioCompleta:
+        //     function(val){
+        //     this.map.geocoder.setInput(val);
+        //     }
+        // ,
+        recursPerCanviar: function(newVal){
+                console.log('desde mapa: ')
+                console.log(newVal)
+            }
 
-    //     }
 
-    // }
+    }
 };
 </script>
-<style scoped>
-    #mapa-mapbox {
-        width: 100%;
-    }
-</style>
+

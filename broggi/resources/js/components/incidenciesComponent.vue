@@ -116,8 +116,8 @@
     <div v-show="section == 'Recursos'" id="recursosPage">
         <!-- El mapa se enseña en caso de que hayan escrito algo en afectados, tanto si éstos son múltiples
         como si no. -->
-        <div v-show="(!multiple && numAfectats > 0) || multiple">
-        <map-component @desassignantRecurs="removeRecursFromMap($event)" @assignantRecurs="setRecursFromMap($event)" :direccioCompleta="direccio"></map-component>
+        <div v-if="(!multiple && numAfectats > 0) || multiple">
+        <map-component :recursPerCanviar="recursPerCanviar" @desassignantRecurs="removeRecursFromMap($event)" @assignantRecurs="setRecursFromMap($event)" :direccioCompleta="direccio"></map-component>
         </div>
         <!-- No se muestra si no hay afectados aún puestos y no es múltiple -->
         <div id="insideRecursos" v-show="!multiple && numAfectats > 0">
@@ -146,11 +146,11 @@
           </div>
       </td>
       <td class="col-4">
-            <div v-show="infoRecursos[afectat.id]" :id="'recursAssignat'+afectat.id"></div>
+            <div v-if="infoRecursos[afectat.id]" :id="'recursAssignat'+afectat.id">{{infoRecursos[afectat.id].tipus}}</div>
 
       </td>
             <td class="col-2">
-                <select v-show="infoRecursos[afectat.id]" @change="setPrioritat(afectat)" class="form-select" aria-label="Default select example">
+                <select v-if="infoRecursos[afectat.id] && 'tipus' in infoRecursos[afectat.id]" @change="setPrioritat(afectat)" class="form-select" aria-label="Default select example">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -158,7 +158,7 @@
                 </select>
         </td>
       <td class="col-2">
-          <button class="btn btn-primary" @click="setRecursFromMap(recurs)">No cal recurs</button>
+          <button class="btn btn-primary" :class="'noRecurs'+afectat.id" @click="noRecurs(afectat)">No cal recurs</button>
       </td>
 
     </tr>
@@ -293,6 +293,19 @@ export default {
       },
       afectats: [],
       recursos: [],
+      recursPerCanviar: {
+          recursos_id: null,
+            hora_activacio: null,
+            hora_mobilitzacio: null,
+            hora_assistencia: null,
+            hora_transport: null,
+            hora_arribada_hospital: null,
+            hora_transferencia: null,
+            hora_finalitzacio: null,
+            prioritat: null,
+            desti: null,
+            afectat_id: null
+      },
       prioritat: null,
       freeRecursos: [],
       infoRecursos: [],
@@ -357,12 +370,48 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
-    removeRecursFromMap(recurs){
-       let foundRecurs= this.infoRecursos.find( function(element) {
-            element.recursos_id == recurs.id
-        })
+    noRecurs(afectat){
+        let infoRecurs = {
+            recursos_id: 12,
+            hora_activacio: null,
+            hora_mobilitzacio: null,
+            hora_assistencia: null,
+            hora_transport: null,
+            hora_arribada_hospital: null,
+            hora_transferencia: null,
+            hora_finalitzacio: null,
+            prioritat: '',
+            desti: null,
+            afectat_id: this.afectatActiu
+        };
+        // Antes de modificar enviamos el recurso al mapa, ya que se va a tener que desactivar desde allí
+        // por si se quiere volver a asignar a otra persona.
+         this.recursPerCanviar= this.infoRecursos.find( infoRecurso => afectat.id == infoRecurso.afectat_id);
 
-        console.log('found recurs: ' + foundRecurs);
+         Vue.set(this.infoRecursos, afectat.id, infoRecurs)
+
+    },
+    removeRecursFromMap(recurs){
+        // Cuando desasignamos un recurso de un afectado.
+        // Buscamos índice del infoRecurs que tiene el recurso con ese código asignado.
+       let foundRecurs= this.infoRecursos.findIndex( recurso => recurso.tipus == recurs.codi);
+       let infoRecurs = {
+            recursos_id: 12,
+            hora_activacio: null,
+            hora_mobilitzacio: null,
+            hora_assistencia: null,
+            hora_transport: null,
+            hora_arribada_hospital: null,
+            hora_transferencia: null,
+            hora_finalitzacio: null,
+            prioritat: '',
+            desti: null,
+            afectat_id: this.afectatActiu
+        };
+
+    //Vue.set para que sea reactivo y se muestre en pantalla
+        Vue.set(this.infoRecursos, foundRecurs, infoRecurs)
+
     },
     setRecursFromMap(recurs){
         // Aquí el id del afectado aún es el que tiene en la array! Lo substituiremos al añadir la incidencia.
@@ -375,34 +424,37 @@ export default {
             hora_arribada_hospital: null,
             hora_transferencia: null,
             hora_finalitzacio: null,
-            prioritat: Number(this.prioritat),
+            prioritat: null,
             desti: null,
             afectat_id: this.afectatActiu,
             tipus: recurs.codi
         };
-        // Si es múltiple vamos a tratar la información de manera distinta.
+        // OPCIÓN 1: Múltiple
         if(this.multiple){
             // cambiamos el id por uno fantasma.
             this.infoRecurs.afectat_id= 1;
             this.infoRecursos.push(this.infoRecurs);
             this.incidencia.infoRecursos = this.infoRecursos;
-        }else {
+
+
+        } else {
+        // OPCIÓN 2: Afectado con recurso asignado.
             // Los ponemos en el mismo orden que los afectados para ahorrarnos problemas.
-        this.infoRecursos[this.afectatActiu]= this.infoRecurs;
+        Vue.set(this.infoRecursos, this.afectatActiu, this.infoRecurs);
         this.incidencia.infoRecursos = this.infoRecursos;
         console.log(this.incidencia);
-        // Hacemos que se muestre el recurso seleccionado en el tipo de recurso.
-        document.getElementById('recursAssignat' + this.afectatActiu).innerHTML= recurs.codi;
-        console.log("btnAfectat"+this.afectatActiu);
-        document.getElementById("btnAfectat"+this.afectatActiu).setAttribute("disabled", true);
+        let classToSearch= '.noRecurs'+this.afectatActiu.id;
+        let classe= document.querySelector(classToSearch);
+        console.log(classe)
         }
+
+    // Otros casos controlados desde removeRecursFromMap y noRecurs. Prioridad controlada desde setPrioritat.
 
     },
     setAfectatActual(afectat){
         this.afectatActiu= afectat.id;
     },
     canviarDades(trobat){
-        debugger;
         this.alertant.nom = trobat.nom;
         this.alertant.cognoms = trobat.cognoms;
         this.alertant.municipis_id= trobat.municipis_id;

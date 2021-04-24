@@ -73,8 +73,8 @@
 }
 
 .afectatActiu{
-    color: white;
-    background-color: #e1157b9f;
+    color: black;
+    background-color: rgba(0, 0, 0, 0.089);
 }
 
 #formButtons {
@@ -90,8 +90,7 @@
 }
 
 .afectat:hover{
-    color: white;
-    background-color: #e1157b9f;
+    background-color: rgba(0, 0, 0, 0.253);
 }
 
 .geocoder {

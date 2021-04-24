@@ -137,14 +137,6 @@ export default {
           console.log(error.response.data);
           me.errorMessage= error.response.data.error;
         });
-<<<<<<< HEAD
-    },
-    resetError(){
-        this.errorMessage='';
-    }
-  },
-    
-=======
         },
     resetError(){
         this.errorMessage='';
@@ -168,7 +160,6 @@ export default {
   }
   ,
 
->>>>>>> d667adfd2be7421fb69ff08df88983bed59c1df4
   created(){
       this.selectTipus();
       this.getAlertants();
