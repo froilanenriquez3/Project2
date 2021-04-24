@@ -182,24 +182,27 @@ class ApiIncidenciesController extends Controller
             $incidency->incidencies_has_afectats()->detach();
             $incidency->incidencies_has_afectats()->delete();
 
-            foreach ($afectats as $afectat) {
-                $afectatStore = new Afectats();
+            if ($afectats != null && count($afectats) > 0) {
 
-                $positionArray = $afectat['id'];
-                $afectatStore->telefon = $afectat['telefon'];
-                $afectatStore->cip = $afectat['cip'];
-                $afectatStore->nom = $afectat['nom'];
-                $afectatStore->cognoms = $afectat['cognoms'];
-                $afectatStore->edat = $afectat['edat'];
-                $afectatStore->sexes_id = $afectat['sexes_id'];
+                foreach ($afectats as $afectat) {
+                    $afectatStore = new Afectats();
 
-                $afectatStore->save();
+                    $positionArray = $afectat['id'];
+                    $afectatStore->telefon = $afectat['telefon'];
+                    $afectatStore->cip = $afectat['cip'];
+                    $afectatStore->nom = $afectat['nom'];
+                    $afectatStore->cognoms = $afectat['cognoms'];
+                    $afectatStore->edat = $afectat['edat'];
+                    $afectatStore->sexes_id = $afectat['sexes_id'];
 
-                $afectatNewId = $afectatStore->id;
+                    $afectatStore->save();
 
-                // $infoRecursos[$positionArray]['afectat_id'] = $afectatNewId;
+                    $afectatNewId = $afectatStore->id;
 
-                $incidency->incidencies_has_afectats()->save($afectatStore);
+                    // $infoRecursos[$positionArray]['afectat_id'] = $afectatNewId;
+
+                    $incidency->incidencies_has_afectats()->save($afectatStore);
+                }
             }
 
             if (!is_null($infoRecursos)) {
@@ -216,12 +219,12 @@ class ApiIncidenciesController extends Controller
                                     'hora_mobilitzacio'     => $infoRecurs['hora_mobilitzacio'],
                                     'hora_assistencia'      => $infoRecurs['hora_assistencia'],
                                     'hora_transport'        => $infoRecurs['hora_transport'],
-                                    'hora_arribada_hospital'=> $infoRecurs['hora_arribada_hospital'],
+                                    'hora_arribada_hospital' => $infoRecurs['hora_arribada_hospital'],
                                     'hora_transferencia'    => $infoRecurs['hora_transferencia'],
                                     'hora_finalitzacio'     => $infoRecurs['hora_finalitzacio'],
                                     'prioritat'             => $infoRecurs['prioritat'],
                                     'desti'                 => $infoRecurs['desti'],
-                                    // 'afectat_id'            => $infoRecurs['afectat_id'],
+                                    'afectat_id'            => $infoRecurs['afectat_id'],
                                 ]
                             );
                     }

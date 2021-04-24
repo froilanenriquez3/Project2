@@ -545,10 +545,10 @@ export default {
         if(this.editincidencia != null){
             this.incidencia.afectats= this.afectats;
              axios
-                .put("/incidencies/"+me.incidencia.id, me.incidencia)
+                .put("/incidenciesrecursos/"+me.incidencia.id, me.incidencia)
                 .then((response)=>{
                     alert("Formulari enviat correctament");
-                    // window.location.href = "/Project2/broggi/public/incidencies";
+                    window.location.href = "/Project2/broggi/public/incidencies";
                     console.log(response);
                     me.incidencia = null;
                 })
