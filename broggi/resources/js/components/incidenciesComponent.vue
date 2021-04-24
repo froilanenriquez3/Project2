@@ -116,7 +116,7 @@
     <div v-show="section == 'Recursos'" id="recursosPage">
         <!-- El mapa se enseña en caso de que hayan escrito algo en afectados, tanto si éstos son múltiples
         como si no. -->
-        <div v-if="(!multiple && numAfectats > 0) || multiple">
+        <div v-show="(!multiple && numAfectats > 0) || multiple">
         <map-component :recursPerCanviar="recursPerCanviar" @desassignantRecurs="removeRecursFromMap($event)" @assignantRecurs="setRecursFromMap($event)" :direccioCompleta="direccio"></map-component>
         </div>
         <!-- No se muestra si no hay afectados aún puestos y no es múltiple -->
