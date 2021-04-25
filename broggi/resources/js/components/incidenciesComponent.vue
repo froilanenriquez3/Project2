@@ -588,6 +588,7 @@ export default {
         let me = this;
         if(this.editincidencia != null){
             this.incidencia.afectats= this.afectats;
+            this.incidencia.incidencies_has_recursos = this.infoRecursos;
              axios
                 .put("/incidencies/"+me.incidencia.id, me.incidencia)
                 .then((response)=>{
