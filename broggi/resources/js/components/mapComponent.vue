@@ -32,8 +32,7 @@ export default {
         },
         recursPerCanviar: {
             required: true
-        }
-
+        },
     },
     data() {
         return {
@@ -42,6 +41,7 @@ export default {
                 "pk.eyJ1IjoibWlzYWxhOTEiLCJhIjoiY2ttZ2d1MmF0MjdzajJucWxqMTN6ZHR4diJ9.LqNFC2cYXEPAzf8f7PLAVg",
             recursos: [],
             map: {},
+            allMarkers: [],
             color: "",
             recurs: {
                 /* id: 12,
@@ -145,24 +145,27 @@ export default {
 
             // this.checkIfActive();
         },
-        // checkIfActive(){
-        //     let buttons= document.querySelectorAll('.marker-button');
-        //     console.log(buttons)
-        //     if(this.recursActivat){
-        //         buttons.forEach(button => {
-        //         if( button.dataset['data-id'] != this.recursActivat.id ){
-        //             button.setAttribute('disabled', true);
-        //         }
-        //     });
-        //     } else {
-        //         buttons.forEach(button => {
-        //         if( button.dataset['data-id'] != this.recursActivat.id && button.style.backgroundColor != '#e1157a'){
-        //             button.setAttribute('disasbled', false);
-        //         }
-        //     });
-        //     }
+        desactivarRecursSenseEmetre(){
+            this.recurs.actiu = false;
+            this.recursActivat= false;
+            let me = this;
+            axios
+                .put("/recursos/" + me.recurs.id, me.recurs)
+                .then(function(response) {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error.response.status);
+                    console.log(error.response.data);
+                    me.errorMessage= error.response.data.error;
+                });
 
-        // },
+            this.marker.button.innerHTML = "Assignar";
+            this.marker.button.style.backgroundColor = "#11adc4";
+            this.marker._color = "#11adc4";
+            this.marker.button.removeEventListener("click", this.desactivarRecurs);
+            this.marker.button.addEventListener("click", this.activarRecurs);
+        },
         addRecursosToMap() {
             this.recursos.forEach(element => {
                 if(element.codi != 'cap'){
@@ -195,12 +198,11 @@ export default {
 
                 let marker = new mapboxgl.Marker({
                     color: this.color,
-                    draggable: false
+                    draggable: false,
                 })
                     .setLngLat([element.lon, element.lat])
                     .setPopup(popup)
                     .addTo(this.map);
-
 
                 // Marcador
                 marker.getElement().addEventListener("click", () => {
@@ -208,6 +210,13 @@ export default {
                     this.marker = marker;
                     this.button = button;
                 });
+
+                this.allMarkers.push(
+                    {'marker': marker,
+                    'id': element.id,
+                    'button': button
+                    }
+                )
             }
             });
         },
@@ -260,10 +269,19 @@ export default {
         //     this.map.geocoder.setInput(val);
         //     }
         // ,
-        recursPerCanviar: function(newVal){
-                console.log('desde mapa: ')
-                console.log(newVal)
-            }
+        recursPerCanviar: function(val){
+            debugger;
+            // Buscamos el marcador que hemos de cambiar
+            this.marker= this.allMarkers.find( marker => marker.id == val.recursos_id);
+
+            // Buscamos el recurso a desactivar
+            this.recurs= this.recursos.find( recurs => recurs.id == val.recursos_id);
+
+            // No emitimos que se ha desasignado al padre ya que se ha borrado desde allí de una de estas formas:
+            // o se ha apretado 'no cal recurs' cuando ya se había asignado uno anterior.
+            // o se ha asignado un recurso distinto cuando ya había uno asignado a esa persona.
+            this.desactivarRecursSenseEmetre();
+        }
 
 
     }
