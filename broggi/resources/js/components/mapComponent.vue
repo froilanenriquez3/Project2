@@ -42,6 +42,7 @@ export default {
             recursos: [],
             map: {},
             allMarkers: [],
+            geocoder: {},
             color: "",
             recurs: {
                 /* id: 12,
@@ -79,8 +80,6 @@ export default {
         // },
         // Para asignar un recurso a la incidencia
         assignarRecurs(){
-            this.recurs.actiu = true;
-            this.recursActivat= true;
             this.$emit('assignantRecurs', this.recurs);
 
             this.button.innerHTML = "Ja assignat!";
@@ -94,7 +93,6 @@ export default {
         activarRecurs() {
             this.recurs.actiu = true;
             this.recursActivat= true;
-
             this.$emit('assignantRecurs', this.recurs);
 
             console.log(this.marker)
@@ -239,9 +237,10 @@ export default {
         });
 
 
-        let geocoder = new MapboxGeocoder({
+        this.geocoder = new MapboxGeocoder({
             accessToken: this.key,
             placeholder: 'Buscar accident',
+            countries: 'es',
             zoom: 12,
             marker: {
                 color: "#FDC619"
@@ -251,7 +250,7 @@ export default {
 
         });
 
-        this.map.addControl(geocoder);
+        this.map.addControl(this.geocoder);
         this.map.addControl(new mapboxgl.NavigationControl());
 
        this.map.on('load', () =>{
@@ -260,15 +259,14 @@ export default {
         })
 
 
-        this.map.on('idle', ()=> this.map.resize());
+        this.map.on('idle', ()=> {
+            this.map.resize()
+        } );
+
     },
 
     watch: {
-        // direccioCompleta:
-        //     function(val){
-        //     this.map.geocoder.setInput(val);
-        //     }
-        // ,
+
         recursPerCanviar: function(val){
             debugger;
             // Buscamos el marcador que hemos de cambiar
