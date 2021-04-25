@@ -155,7 +155,7 @@ DROP TABLE IF EXISTS `broggi`.`recursos` ;
 
 CREATE TABLE IF NOT EXISTS `broggi`.`recursos` (
   `id` INT NOT NULL auto_increment,
-  `codi` VARCHAR(45) NOT NULL,
+  `codi` VARCHAR(45) UNIQUE NOT NULL,
   `actiu` TINYINT NOT NULL,
   `tipus_recursos_id` INT NOT NULL,
   `lat` DOUBLE ,
@@ -1597,6 +1597,7 @@ VALUES("My friend is having a heart attack", 3);
 INSERT INTO Answer (answerText, question_id)
 VALUES("I have been in a car accident", 3);
 
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('cap', '0', '1', '41.3879', '2');
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('12345', '0', '1', '41.3879', '2.16992');
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('54321', '0', '2', '41.899', '2.1988');
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('66555', '0', '3', '42.000', '1.8');
@@ -1604,10 +1605,10 @@ INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `l
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('77766', '0', '2', '41.5566', '1.951');
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('77899', '0', '2', '41.38899844', '2.158166034');
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78866', '1', '4', '41.3807', '2.1738');
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78866', '1', '1', '41.407665036', '2.171332648');
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78866', '1', '1', '41.407665036', '2.171332648');
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78866', '1', '1', '41.61674', '0.62218');
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78866', '1', '1', '41.236390721', '1.7750302332');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78555', '1', '1', '41.407665036', '2.171332648');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('79999', '1', '1', '41.407665036', '2.171332648');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78844', '1', '1', '41.61674', '0.62218');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('99866', '1', '1', '41.236390721', '1.7750302332');
 
 
 insert into afectats( nom, cognoms, sexes_id) values( "", "",1) ;

@@ -277,6 +277,7 @@ export default {
     return {
         errorMessage:'',
         formacio: false,
+        recursPerCanviar: '',
       tipusAlertants: [],
       tipusIncidencies: [],
       alertantIncidencia: {},
@@ -293,24 +294,11 @@ export default {
       },
       afectats: [],
       recursos: [],
-      recursPerCanviar: {
-          recursos_id: null,
-            hora_activacio: null,
-            hora_mobilitzacio: null,
-            hora_assistencia: null,
-            hora_transport: null,
-            hora_arribada_hospital: null,
-            hora_transferencia: null,
-            hora_finalitzacio: null,
-            prioritat: null,
-            desti: null,
-            afectat_id: null
-      },
       prioritat: null,
       freeRecursos: [],
       infoRecursos: [],
       infoRecurs: {
-        recursos_id: 12,
+        recursos_id: 1,
         hora_activacio: null,
         hora_mobilitzacio: null,
         hora_assistencia: null,
@@ -323,7 +311,7 @@ export default {
         afectat_id: null
       },
       recurs: {
-            id: 12,
+            id: 1,
             codi: "cap",
             actiu: true,
             tipus_recursos_id: 1,
@@ -372,7 +360,7 @@ export default {
     },
     noRecurs(afectat){
         let infoRecurs = {
-            recursos_id: 12,
+            recursos_id: 1,
             hora_activacio: null,
             hora_mobilitzacio: null,
             hora_assistencia: null,
@@ -385,9 +373,9 @@ export default {
             afectat_id: this.afectatActiu
         };
         // Antes de modificar enviamos el recurso al mapa, ya que se va a tener que desactivar desde allí
-        // por si se quiere volver a asignar a otra persona.
-         this.recursPerCanviar= this.infoRecursos.find( infoRecurso => afectat.id == infoRecurso.afectat_id);
-
+        if(this.infoRecursos[afectat.id].hasOwnProperty('tipus')){
+            this.recursPerCanviar= this.infoRecursos[afectat.id];
+        }
          Vue.set(this.infoRecursos, afectat.id, infoRecurs)
 
     },
@@ -396,7 +384,7 @@ export default {
         // Buscamos índice del infoRecurs que tiene el recurso con ese código asignado.
        let foundRecurs= this.infoRecursos.findIndex( recurso => recurso.tipus == recurs.codi);
        let infoRecurs = {
-            recursos_id: 12,
+            recursos_id: 1,
             hora_activacio: null,
             hora_mobilitzacio: null,
             hora_assistencia: null,
@@ -414,6 +402,12 @@ export default {
 
     },
     setRecursFromMap(recurs){
+        if(this.infoRecursos.length > this.afectatActiu){
+        if(this.infoRecursos[this.afectatActiu].hasOwnProperty('tipus')){
+            debugger;
+            this.recursPerCanviar= this.infoRecursos[this.afectatActiu];
+        }
+        }
         // Aquí el id del afectado aún es el que tiene en la array! Lo substituiremos al añadir la incidencia.
         this.infoRecurs = {
             recursos_id: recurs.id,
@@ -435,8 +429,6 @@ export default {
             this.infoRecurs.afectat_id= 1;
             this.infoRecursos.push(this.infoRecurs);
             this.incidencia.infoRecursos = this.infoRecursos;
-
-
         } else {
         // OPCIÓN 2: Afectado con recurso asignado.
             // Los ponemos en el mismo orden que los afectados para ahorrarnos problemas.
@@ -691,9 +683,9 @@ export default {
 
   },
   computed:{
-      direccio: function(){
-          return `${this.incidencia.adreca}, ${this.municipi.nom}`;
-      },
+    //   direccio: function(){
+    //       return `${this.incidencia.adreca}, ${this.municipi.nom}`;
+    //   },
       multiplesAfectats: function(){
           let descripcioAfectats;
           if(this.multiplesAfectatsText == ''){
