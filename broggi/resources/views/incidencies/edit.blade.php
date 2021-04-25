@@ -25,7 +25,7 @@
 
 @section('table')
 
-<container-incidencies :editincidencia="{{ $incidency }}"></container-incidencies>
+<container-incidencies :editincidencia="{{ $incidencia }}"></container-incidencies>
 
 @endsection
 

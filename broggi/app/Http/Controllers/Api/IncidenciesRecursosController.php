@@ -53,19 +53,15 @@ class IncidenciesRecursosController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Incidencies  $incidencies
+     * @param  \App\Models\Incidencies  $incidenciesrecurso
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Incidencies $incidencies)
+    public function update(Request $request, Incidencies $incidenciesrecurso)
     {
-        DB::beginTransaction();
-
+       /*  DB::beginTransaction();
         $array = $request->input('incidencies_has_recursos');
-
         try{
             $ihr = $array[0];
-
-
             $incidencies->incidencies_has_recursos()->save($ihr);
             DB::commit();
             $incidencies->refresh();
@@ -79,7 +75,55 @@ class IncidenciesRecursosController extends Controller
             $response = \response()->json(['error' => $message], 400);
 
         }
+        return $response; */
 
+        DB::beginTransaction();
+
+        $infoRecursos = $request->input('incidencies_has_recursos');
+
+        try {
+
+            if (!is_null($infoRecursos)) {
+                foreach ($infoRecursos as $infoRecurs) {
+
+                    if ($request->input('saveRecurs') == $infoRecurs['recursos_id']) {
+
+                        $incidenciesrecurso->incidencies_has_recursos()
+                            ->where('recursos_id', $infoRecurs['recursos_id'])
+                            ->update(
+                                [
+                                    // 'recursos_id' => $infoRecurs['recursos_id'],
+                                    'hora_activacio'        => $infoRecurs['hora_activacio'],
+                                    'hora_mobilitzacio'     => $infoRecurs['hora_mobilitzacio'],
+                                    'hora_assistencia'      => $infoRecurs['hora_assistencia'],
+                                    'hora_transport'        => $infoRecurs['hora_transport'],
+                                    'hora_arribada_hospital'=> $infoRecurs['hora_arribada_hospital'],
+                                    'hora_transferencia'    => $infoRecurs['hora_transferencia'],
+                                    'hora_finalitzacio'     => $infoRecurs['hora_finalitzacio'],
+                                    'prioritat'             => $infoRecurs['prioritat'],
+                                    'desti'                 => $infoRecurs['desti'],
+                                    'afectat_id'            => $infoRecurs['afectat_id'],
+                                ]
+                            );
+                    }
+
+                    // $incidenciesrecurso->incidencies_has_recursos()->save($ihr);
+                }
+            }
+
+            DB::commit();
+            $incidenciesrecurso->refresh();
+
+            $response = (new IncidenciesResource($incidenciesrecurso))
+                ->response()
+                ->setStatusCode(201);
+
+            // $request->session()->flash('message', "Incidencia afegida correctament");
+        } catch (QueryException $ex) {
+            DB::rollBack();
+            $message = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $message], 400);
+        }
 
         return $response;
     }

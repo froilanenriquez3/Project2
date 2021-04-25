@@ -61,7 +61,8 @@ class IncidenciesController extends Controller
      */
     public function edit(Incidencies $incidency)
     {
-        return view('incidencies/edit', compact('incidency'));
+        $incidencia = Incidencies::with(['incidencies_has_recursos', 'incidencies_has_afectats', 'tipus_incidencies'])->find($incidency->id);
+        return view('incidencies/edit', compact('incidencia'));
     }
 
     /**
