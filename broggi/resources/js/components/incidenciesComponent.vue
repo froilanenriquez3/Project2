@@ -187,8 +187,12 @@
   <tbody>
       <!-- Como en este caso no hay afectados, se cogerá el index para diferenciar los recursos que enviaremos -->
     <tr class="row" v-for="(recurs, index) in recursosToShow" :key="index">
-        <td class="col-2">
-            <input type="number" min="1" max="4" :id="'prioritat' + index" name="prioritat" v-model="recurs.prioritat">
+        <td class="col-2"><select v-model="recurs.prioritat" class="form-select" aria-label="Default select example">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
         </td>
       <td class="col-4">
           {{recurs.tipus}}
@@ -397,14 +401,16 @@ export default {
             afectat_id: this.afectatActiu
         };
 
-    //Vue.set para que sea reactivo y se muestre en pantalla
+    if(this.multiple){
+        this.infoRecursos.splice(foundRecurs,1);
+    }else {
         Vue.set(this.infoRecursos, foundRecurs, infoRecurs)
+    }
 
     },
     setRecursFromMap(recurs){
         if(this.infoRecursos.length > this.afectatActiu){
-        if(this.infoRecursos[this.afectatActiu].hasOwnProperty('tipus')){
-            debugger;
+        if(this.infoRecursos[this.afectatActiu].hasOwnProperty('tipus') && !this.multiple){
             this.recursPerCanviar= this.infoRecursos[this.afectatActiu];
         }
         }
@@ -426,7 +432,7 @@ export default {
         // OPCIÓN 1: Múltiple
         if(this.multiple){
             // cambiamos el id por uno fantasma.
-            this.infoRecurs.afectat_id= 1;
+            this.infoRecurs.afectat_id= 300;
             this.infoRecursos.push(this.infoRecurs);
             this.incidencia.infoRecursos = this.infoRecursos;
         } else {
@@ -479,6 +485,11 @@ export default {
 
         form.$mount()
         this.$refs.afectatsContainer.appendChild(form.$el)
+                // Si ya hay recursos (porque se ha apretado múltples y luego se ha decidido cambiar).
+        if(this.infoRecursos.length > 0){
+            this.infoRecursos[this.afectat.id].afectat_id = this.afectat.id;
+        }
+
        this.numAfectats++;
     },
     openModalVideo(){
@@ -591,9 +602,23 @@ export default {
                     console.log(error.response.data);
                 })
         } else {
-            this.incidencia.afectats= this.afectats;
-            this.incidencia.descripcio= this.multiplesAfectats;
+            // Comprobaciones por si se ha ido cambiando el toggle entre múltiples y no.
+            if(!this.multiple){
+                this.incidencia.afectats= this.afectats;
 
+                // Eliminamos infoRecursos que tengan todo fantasma.
+                // Puede ocurrir si se han llenado muchos recursos en múltiples y luego se cambia a afectados.
+                this.infoRecursos.filter( element => element.afectat_id != 300);
+            } else {
+                this.infoRecursos.forEach(element => {
+                // Nos aseguramos de que todos los afectados sean fantasma.
+                    element.afectat_id= 300
+                });
+
+                 this.incidencia.descripcio= this.multiplesAfectats;
+            }
+
+            this.incidencia.infoRecursos= this.infoRecursos;
             console.log("submitting incidencia");
             console.log(this.incidencia);
             // let me = this;
@@ -619,6 +644,7 @@ export default {
     toggleMultiple(){
         if(this.multiple) this.multiple = false;
         else this.multiple = true;
+
     },
     setPrioritat(afectat){
         if(this.multiple){
@@ -683,9 +709,9 @@ export default {
 
   },
   computed:{
-    //   direccio: function(){
-    //       return `${this.incidencia.adreca}, ${this.municipi.nom}`;
-    //   },
+      direccio: function(){
+          return `${this.incidencia.adreca}, ${this.municipi.nom}`;
+      },
       multiplesAfectats: function(){
           let descripcioAfectats;
           if(this.multiplesAfectatsText == ''){
