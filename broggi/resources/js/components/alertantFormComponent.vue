@@ -25,7 +25,7 @@
 
             <div class="form-group row">
             <label class="col-2" for="telefon"><b>Telefon Alertant</b></label>
-            <input class="col-4" required type="tel" name="telefon" v-model="alertant.telefon"/>
+            <input class="col-4" required type="tel" name="telefon" v-model="alertantCopia.telefon"/>
             <button @click="searchAlertant()" class="btn btn-primary ml-4">Buscar a base de dades</button>
             <p v-show="!isFound">No hi ha cap alertant a la base de dades amb aquest telèfon.</p>
             </div>
@@ -98,6 +98,7 @@ export default {
       tipus_alertants: [],
       isFound: true,
       alertantCopia: {
+          telefon: '',
           nom: '',
           cognoms: '',
           adreca: '',
@@ -162,13 +163,13 @@ export default {
             this.isFound = false;
         } else {
             this.isFound = true;
-            this.alertantCopia.nom= trobat.nom;
-            this.alertantCopia.cognoms= trobat.cognoms;
-            this.alertantCopia.adreca= trobat.adreca;
-            this.alertantCopia.municipis_id= trobat.municipis_id;
-            this.alertantCopia.tipus_alertants_id= trobat.tipus_alertants_id;
+            this.alertant.nom= trobat.nom;
+            this.alertant.cognoms= trobat.cognoms;
+            this.alertant.adreca= trobat.adreca;
+            this.alertant.municipis_id= trobat.municipis_id;
+            this.alertant.tipus_alertants_id= trobat.tipus_alertants_id;
 
-            this.$emit('dadesAfectat', this.alertantCopia);
+            this.$emit('dadesAfectat', this.alertant);
         }
     },
     initAlertant(){
@@ -192,8 +193,10 @@ export default {
   },
 //   Cada vez que la copia de alertant cambie la emitimos a incidencias, para tener los cambios allí.
   watch: {
-      alertantCopia: function(){
-          this.$emit('dadesAfectat', this.alertantCopia);
+      alertantCopia: function(val){
+          console.log('In the watcher')
+          immediate: true,
+          this.$emit('dadesAfectat', val);
     }
   }
 
