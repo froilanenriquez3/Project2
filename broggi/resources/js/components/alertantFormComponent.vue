@@ -15,7 +15,7 @@
 
             <div class="form-group row">
             <label class="col-2" for="telefon"><b>Telefon Alertant</b></label>
-            <input class="col-4" required type="tel" name="telefon" v-model="alertant.telefon"/>
+            <input class="col-4" required type="tel" name="telefon" v-model="alertantCopia.telefon"/>
             <button @click="searchAlertant()" class="btn btn-primary ml-4">Buscar a base de dades</button>
             <p v-show="!isFound">No hi ha cap alertant a la base de dades amb aquest telèfon.</p>
             </div>
@@ -87,6 +87,7 @@ export default {
       tipus_alertants: [],
       isFound: true,
       alertantCopia: {
+          telefon: '',
           nom: '',
           cognoms: '',
           adreca: '',
@@ -158,7 +159,8 @@ export default {
         }
     },
     initAlertant(){
-        if(this.alertant != {}){
+        if(Object.keys(this.alertant).length !== 0 ){
+            console.log('filling in alertant');
             this.alertantCopia = this.alertant;
         }
     }
@@ -171,12 +173,20 @@ export default {
   },
   mounted() {
     // console.log("Component mounted.");
+    this.initAlertant();
   },
 //   Cada vez que la copia de alertant cambie la emitimos a incidencias, para tener los cambios allí.
   watch: {
-      alertantCopia: function(){
-          this.$emit('dadesAfectat', this.alertantCopia);
-    }
+    alertantCopia: function(){
+        console.log("emitting changes");
+      this.$emit('dadesAfectat', this.alertantCopia);
+    },
+    /* alertant: function(val){
+           if(Object.keys(this.alertant).length !== 0 ){
+               console.log("Init edit alertant");
+            this.alertantCopia = val;
+           }
+      }, */
   }
 
   }
