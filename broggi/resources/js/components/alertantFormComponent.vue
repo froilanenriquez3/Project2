@@ -149,13 +149,13 @@ export default {
             this.isFound = false;
         } else {
             this.isFound = true;
-            this.alertantCopia.nom= trobat.nom;
-            this.alertantCopia.cognoms= trobat.cognoms;
-            this.alertantCopia.adreca= trobat.adreca;
-            this.alertantCopia.municipis_id= trobat.municipis_id;
-            this.alertantCopia.tipus_alertants_id= trobat.tipus_alertants_id;
+            this.alertant.nom= trobat.nom;
+            this.alertant.cognoms= trobat.cognoms;
+            this.alertant.adreca= trobat.adreca;
+            this.alertant.municipis_id= trobat.municipis_id;
+            this.alertant.tipus_alertants_id= trobat.tipus_alertants_id;
 
-            this.$emit('dadesAfectat', this.alertantCopia);
+            this.$emit('dadesAfectat', this.alertant);
         }
     },
     initAlertant(){
@@ -177,16 +177,17 @@ export default {
   },
 //   Cada vez que la copia de alertant cambie la emitimos a incidencias, para tener los cambios allí.
   watch: {
-    alertantCopia: function(){
-        console.log("emitting changes");
-      this.$emit('dadesAfectat', this.alertantCopia);
-    },
     /* alertant: function(val){
            if(Object.keys(this.alertant).length !== 0 ){
                console.log("Init edit alertant");
             this.alertantCopia = val;
            }
       }, */
+      alertantCopia: function(val){
+          console.log('In the watcher')
+          immediate: true,
+          this.$emit('dadesAfectat', val);
+    }
   }
 
   }

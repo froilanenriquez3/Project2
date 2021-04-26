@@ -151,7 +151,7 @@
 
       </td>
             <td class="col-2">
-                <select v-if="infoRecursos[afectat.id] && 'tipus' in infoRecursos[afectat.id]" @change="setPrioritat(afectat)" class="form-select" aria-label="Default select example">
+                <select v-if="infoRecursos[afectat.id] && 'tipus' in infoRecursos[afectat.id]" v-model="infoRecursos[afectat.id].prioritat" class="form-select" aria-label="Default select example">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -336,7 +336,7 @@ export default {
       incidencia: {
         data: null,
         hora: null,
-        telefon_alertant: /* 123456789 */null,
+        telefon_alertant: null,
         adreca: null,
         adreca_complement: null,
         descripcio: null,
@@ -381,8 +381,10 @@ export default {
             afectat_id: this.afectatActiu
         };
         // Antes de modificar enviamos el recurso al mapa, ya que se va a tener que desactivar desde allí
+        if(this.infoRecursos[afectat.id]){
         if(this.infoRecursos[afectat.id].hasOwnProperty('tipus')){
             this.recursPerCanviar= this.infoRecursos[afectat.id];
+        }
         }
          Vue.set(this.infoRecursos, afectat.id, infoRecurs)
 
@@ -413,7 +415,8 @@ export default {
 
     },
     setRecursFromMap(recurs){
-        if(this.infoRecursos.length > this.afectatActiu){
+        debugger;
+        if(this.infoRecursos[this.afectatActiu]){
         if(this.infoRecursos[this.afectatActiu].hasOwnProperty('tipus') && !this.multiple){
             this.recursPerCanviar= this.infoRecursos[this.afectatActiu];
         }
@@ -445,9 +448,6 @@ export default {
         Vue.set(this.infoRecursos, this.afectatActiu, this.infoRecurs);
         this.incidencia.infoRecursos = this.infoRecursos;
         console.log(this.incidencia);
-        let classToSearch= '.noRecurs'+this.afectatActiu.id;
-        let classe= document.querySelector(classToSearch);
-        console.log(classe)
         }
 
     // Otros casos controlados desde removeRecursFromMap y noRecurs. Prioridad controlada desde setPrioritat.
@@ -457,12 +457,12 @@ export default {
         this.afectatActiu= afectat.id;
     },
     canviarDades(trobat){
-        console.log("change alertant values");
-        this.alertant.nom = trobat.nom;
-        this.alertant.cognoms = trobat.cognoms;
-        this.alertant.municipis_id= trobat.municipis_id;
-        this.alertant.tipus_alertants_id= trobat.tipus_alertants_id;
-        this.alertant.adreca = trobat.adreca;
+        this.alertantIncidencia.telefon = trobat.telefon;
+        this.alertantIncidencia.nom = trobat.nom;
+        this.alertantIncidencia.cognoms = trobat.cognoms;
+        this.alertantIncidencia.municipis_id= trobat.municipis_id;
+        this.alertantIncidencia.tipus_alertants_id= trobat.tipus_alertants_id;
+        this.alertantIncidencia.adreca = trobat.adreca;
         this.incidencia.telefon_alertant = trobat.telefon;
     },
     isMultiple(){
@@ -609,13 +609,32 @@ export default {
                     console.log(error.response.data);
                 })
         } else {
+            // Si no se ha asignado ningún recurso a una persona y tampoco se ha apretado 'no cal recurs',
+            // le ponemos el fantasma igual por defecto
+            this.afectats.forEach(element => {
+                if(!this.infoRecursos[element.id]){
+                    this.infoRecursos[element.id] = {
+                    recursos_id: 1,
+                    hora_activacio: null,
+                    hora_mobilitzacio: null,
+                    hora_assistencia: null,
+                    hora_transport: null,
+                    hora_arribada_hospital: null,
+                    hora_transferencia: null,
+                    hora_finalitzacio: null,
+                    prioritat: null,
+                    desti: null,
+                    afectat_id: element.id,
+                    }
+                }
+            });
             // Comprobaciones por si se ha ido cambiando el toggle entre múltiples y no.
             if(!this.multiple){
                 this.incidencia.afectats= this.afectats;
 
                 // Eliminamos infoRecursos que tengan todo fantasma.
                 // Puede ocurrir si se han llenado muchos recursos en múltiples y luego se cambia a afectados.
-                this.infoRecursos.filter( element => element.afectat_id != 300);
+                this.infoRecursos= this.infoRecursos.filter( element => element.afectat_id != 300);
             } else {
                 this.infoRecursos.forEach(element => {
                 // Nos aseguramos de que todos los afectados sean fantasma.
