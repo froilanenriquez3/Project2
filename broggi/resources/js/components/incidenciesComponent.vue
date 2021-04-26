@@ -78,7 +78,7 @@
     </div>
 
     <!-- TAG ALERTANTE -->
-    <alertant-form @dadesAfectat="canviarDades($event)" :municipis="municipis" :alertant="alertantIncidencia" :section="section" v-show="section == 'Alertant'"></alertant-form>
+    <alertant-form @dadesAlertant="canviarDades($event)" :municipis="municipis" :alertant="alertantIncidencia" :section="section" v-show="section == 'Alertant'"></alertant-form>
 
     <!-- TAG AFECTADO -->
     <!-- add fa plus icon -->

@@ -15,14 +15,15 @@
 
             <div class="form-group row">
             <label class="col-2" for="telefon"><b>Telefon Alertant</b></label>
-            <input class="col-4" required type="tel" name="telefon" v-model="alertantCopia.telefon"/>
+            <input class="col-4" required type="tel" name="telefon" id="telefon" v-model="alertantCopia.telefon" @input="updateAlertant()"/>
             <button @click="searchAlertant()" class="btn btn-primary ml-4">Buscar a base de dades</button>
             <p v-show="!isFound">No hi ha cap alertant a la base de dades amb aquest telèfon.</p>
             </div>
 
             <div class="form-group row">
                 <label class="col-2" for="tipus_alertant"><b>Tipus</b></label>
-                <select class="form-select col-4" v-model="alertantCopia.tipus_alertants_id" aria-label="Default select example">
+                <select class="form-select col-4" v-model="alertantCopia.tipus_alertants_id" aria-label="Default select example" @input="updateAlertant()">
+                    <option value=""></option>
                     <option v-for="tipus in tipus_alertants" :key="tipus.id"
                     v-bind:value="tipus.id" >{{tipus.tipus}}</option>
                 </select>
@@ -30,22 +31,23 @@
 
             <div class="form-group row">
             <label class="col-2" for="nom">Nom</label>
-            <input class="col-10" type="text" name="nom" v-model="alertantCopia.nom"/>
+            <input class="col-10" type="text" name="nom" v-model="alertantCopia.nom" @input="updateAlertant()"/>
             </div>
 
             <div class="form-group row">
             <label class="col-2" for="cognoms">Cognoms</label>
-            <input class="col-10" type="text" name="cognoms" v-model="alertantCopia.cognoms"/>
+            <input class="col-10" type="text" name="cognoms" v-model="alertantCopia.cognoms" @input="updateAlertant()"/>
             </div>
 
             <div class="form-group row">
             <label class="col-2" for="adreça">Adreça</label>
-            <input class="col-10" type="text" name="adreça" v-model="alertantCopia.adreca"/>
+            <input class="col-10" type="text" name="adreça" v-model="alertantCopia.adreca" @input="updateAlertant()"/>
             </div>
 
             <div class="form-group row">
             <label class="col-2" for="municipi_alertant">Municipi</label>
-            <select class="form-select col-4" v-model="alertantCopia.municipis_id" aria-label="Default select example">
+            <select class="form-select col-4" v-model="alertantCopia.municipis_id" aria-label="Default select example" @input="updateAlertant()">
+                <option value=""></option>
                     <option v-for="municipi in municipis" :key="municipi.id"
                     v-bind:value="municipi.id" >{{municipi.nom}}</option>
                 </select>
@@ -163,6 +165,10 @@ export default {
             console.log('filling in alertant');
             this.alertantCopia = this.alertant;
         }
+    },
+    updateAlertant(){
+        console.log("Emitting alertant");
+        this.$emit('dadesAlertant', this.alertantCopia);
     }
   }
   ,
@@ -177,16 +183,10 @@ export default {
   },
 //   Cada vez que la copia de alertant cambie la emitimos a incidencias, para tener los cambios allí.
   watch: {
-    /* alertant: function(val){
-           if(Object.keys(this.alertant).length !== 0 ){
-               console.log("Init edit alertant");
-            this.alertantCopia = val;
-           }
-      }, */
       alertantCopia: function(val){
-          console.log('In the watcher')
+          console.log('In the watcher');
           immediate: true,
-          this.$emit('dadesAfectat', val);
+          this.$emit('dadesAlertant', val);
     }
   }
 
