@@ -74,27 +74,10 @@ export default {
         colorRecurs(recurs) {
             this.color = recurs.actiu ? "#e1157a" : "#11adc4";
         },
-        // setInputValue(){
-        //     let input= document.getElementsByClassName("mapboxgl-ctrl-geocoder--input")[0];
-        //     input.value= direccioCompleta
-        // },
-        // Para asignar un recurso a la incidencia
-        assignarRecurs(){
-            this.$emit('assignantRecurs', this.recurs);
-
-            this.button.innerHTML = "Ja assignat!";
-            this.button.setAttribute('disabled', true);
-            this.button.style.backgroundColor = "#fdc619";
-            this.button.style.color= "black";
-
-            activarRecurs();
-
-        },
         activarRecurs() {
             this.recurs.actiu = true;
             this.recursActivat= true;
-            this.$emit('assignantRecurs', this.recurs);
-
+             this.$emit('assignantRecurs', this.recurs);
             console.log(this.marker)
             let me = this;
             axios
@@ -268,7 +251,6 @@ export default {
     watch: {
 
         recursPerCanviar: function(val){
-            debugger;
             // Buscamos el marcador que hemos de cambiar
             this.marker= this.allMarkers.find( marker => marker.id == val.recursos_id);
 
