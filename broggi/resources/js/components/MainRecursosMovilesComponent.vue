@@ -1,5 +1,15 @@
 <template>
     <div class="recursosMovilsContainer">
+        <!-- div para el mensaje de feedback -->
+        <div v-show="infoMessage !=''" class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>Info: </strong>
+            {{infoMessage}}
+            <button type="button" @click="resetMessage()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <!-- fin del div para el mensaje de feedback -->
+        <!-- div para el mensaje de error -->
         <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
             <strong>Error: </strong>
             {{errorMessage}}
@@ -7,6 +17,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        <!-- fin del div para el mensaje de error -->
         <!-- Si no se selecciona una opción, se muestra la tabla -->
         <div v-show="action == ''">
         <!-- Filtro -->
@@ -137,6 +148,7 @@ export default {
   components: { FilterSelect, mapInsert },
     data() {
         return {
+            infoMessage:'',
             errorMessage: '',
             itemsToDisplay: [],
             action: "",
@@ -167,6 +179,7 @@ export default {
                     me.recursos = response.data;
                     me.itemsToDisplay= me.recursos;
                     me.totalRows= me.itemsToDisplay.length;
+                    
                 })
                 .catch(error => {
                     me.errorMessage= error.response.data.error;
@@ -177,6 +190,9 @@ export default {
         },
         resetError(){
             this.errorMessage= '';
+        },
+        resetMessage(){
+            this.infoMessage='';
         },
         selectAction(action, recurs) {
             this.action = action;
@@ -208,6 +224,7 @@ export default {
                 .then(response => {
                     me.tipus_recursos = response.data;
                     console.log(me.tipus_recursos);
+                    
                 })
                 .catch(error => {
                     me.errorMessage= error.response.data.error;
@@ -224,6 +241,7 @@ export default {
                     console.log(response);
                     me.selectRecursos();
                     me.action=""
+                    me.infoMessage = response.data.message;
                 })
                 .catch(error => {
                     console.log(error.response.status);
@@ -253,6 +271,7 @@ export default {
                     console.log(response);
                     me.selectRecursos();
                     me.action=''
+                    me.infoMessage = response.data.message;
                 })
                 .catch(error => {
                     console.log(error.response.status);
@@ -281,6 +300,7 @@ export default {
                     $('#deleteModal').modal('hide');
                     me.action=''
                     //me.infoMessage= response.data.missatge;
+                    me.infoMessage = response.data.message;
                 })
                 .catch(error => {
                     me.errorMessage = error.response.data.error;

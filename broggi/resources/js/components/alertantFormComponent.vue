@@ -1,5 +1,15 @@
 <template>
   <div>
+
+        <!-- div para el mensaje de feedback -->
+        <div v-show="infoMessage !=''" class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>Info: </strong>
+            {{infoMessage}}
+            <button type="button" @click="resetMessage()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <!-- fin del div para el mensaje de feedback -->
         <!-- div para el mensaje de error -->
         <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
             <strong>Error: </strong>
@@ -15,14 +25,15 @@
 
             <div class="form-group row">
             <label class="col-2" for="telefon"><b>Telefon Alertant</b></label>
-            <input class="col-4" required type="tel" name="telefon" v-model="alertantCopia.telefon"/>
+            <input class="col-4" required type="tel" name="telefon" id="telefon" v-model="alertantCopia.telefon" @input="updateAlertant()" maxlength="9" />
             <button @click="searchAlertant()" class="btn btn-primary ml-4">Buscar a base de dades</button>
             <p v-show="!isFound">No hi ha cap alertant a la base de dades amb aquest telèfon.</p>
             </div>
 
             <div class="form-group row">
                 <label class="col-2" for="tipus_alertant"><b>Tipus</b></label>
-                <select class="form-select col-4" v-model="alertantCopia.tipus_alertants_id" aria-label="Default select example">
+                <select class="form-select col-4" v-model="alertantCopia.tipus_alertants_id" aria-label="Default select example" @input="updateAlertant()">
+                    <option value=""></option>
                     <option v-for="tipus in tipus_alertants" :key="tipus.id"
                     v-bind:value="tipus.id" >{{tipus.tipus}}</option>
                 </select>
@@ -30,22 +41,23 @@
 
             <div class="form-group row">
             <label class="col-2" for="nom">Nom</label>
-            <input class="col-10" type="text" name="nom" v-model="alertantCopia.nom"/>
+            <input class="col-10" type="text" name="nom" v-model="alertantCopia.nom" @input="updateAlertant()"/>
             </div>
 
             <div class="form-group row">
             <label class="col-2" for="cognoms">Cognoms</label>
-            <input class="col-10" type="text" name="cognoms" v-model="alertantCopia.cognoms"/>
+            <input class="col-10" type="text" name="cognoms" v-model="alertantCopia.cognoms" @input="updateAlertant()"/>
             </div>
 
             <div class="form-group row">
             <label class="col-2" for="adreça">Adreça</label>
-            <input class="col-10" type="text" name="adreça" v-model="alertantCopia.adreca"/>
+            <input class="col-10" type="text" name="adreça" v-model="alertantCopia.adreca" @input="updateAlertant()"/>
             </div>
 
             <div class="form-group row">
             <label class="col-2" for="municipi_alertant">Municipi</label>
-            <select class="form-select col-4" v-model="alertantCopia.municipis_id" aria-label="Default select example">
+            <select class="form-select col-4" v-model="alertantCopia.municipis_id" aria-label="Default select example" @input="updateAlertant()">
+                <option value=""></option>
                     <option v-for="municipi in municipis" :key="municipi.id"
                     v-bind:value="municipi.id" >{{municipi.nom}}</option>
                 </select>
@@ -81,12 +93,14 @@ export default {
     },
     data() {
     return {
+      infoMessage:'',
       errorMessage:'',
       action: "",
       alertants: [],
       tipus_alertants: [],
       isFound: true,
       alertantCopia: {
+          id: '',
           telefon: '',
           nom: '',
           cognoms: '',
@@ -104,6 +118,7 @@ export default {
         .then((response) => {
           me.tipus_alertants = response.data;
           me.totalRows= me.tipus_alertants.length;
+
         })
         .catch((error) => {
             me.errorMessage= error.response.data.error;
@@ -117,6 +132,7 @@ export default {
         .get("/alertants")
         .then((response) => {
           me.alertants = response.data;
+
         })
         .catch((error) => {
             me.errorMessage= error.response.data.error;
@@ -132,6 +148,9 @@ export default {
           console.log(response);
         // Pasamos id para guardarlo en alertants_id en incidencias.
           me.alertant.id = response.data.id;
+          me.alertantCopia.id = response.data.id;
+          me.updateAlertant();
+          me.infoMessage = response.data.message;
         })
         .catch((error) => {
           console.log(error.response.status);
@@ -143,26 +162,35 @@ export default {
         this.errorMessage='';
     },
     searchAlertant(){
-        let trobat= this.alertants.find( alertant => alertant.telefon == this.alertant.telefon);
+        let trobat= this.alertants.find( alertant => alertant.telefon == this.alertantCopia.telefon);
         console.log(trobat)
         if(trobat == undefined){
             this.isFound = false;
         } else {
             this.isFound = true;
-            this.alertant.nom= trobat.nom;
-            this.alertant.cognoms= trobat.cognoms;
-            this.alertant.adreca= trobat.adreca;
-            this.alertant.municipis_id= trobat.municipis_id;
-            this.alertant.tipus_alertants_id= trobat.tipus_alertants_id;
+            this.alertantCopia.nom= trobat.nom;
+            this.alertantCopia.cognoms= trobat.cognoms;
+            this.alertantCopia.adreca= trobat.adreca;
+            this.alertantCopia.municipis_id= trobat.municipis_id;
+            this.alertantCopia.tipus_alertants_id= trobat.tipus_alertants_id;
 
-            this.$emit('dadesAfectat', this.alertant);
+            this.$emit('dadesAfectat', this.alertantCopia);
         }
     },
     initAlertant(){
-        if(this.alertant != {}){
+        if(Object.keys(this.alertant).length !== 0 ){
+            console.log('filling in alertant');
             this.alertantCopia = this.alertant;
         }
+    },
+    updateAlertant(){
+        console.log("Emitting alertant");
+        this.$emit('dadesAlertant', this.alertantCopia);
+    },
+    resetMessage(){
+        this.infoMessage='';
     }
+
   }
   ,
 
@@ -172,13 +200,14 @@ export default {
   },
   mounted() {
     // console.log("Component mounted.");
+    this.initAlertant();
   },
 //   Cada vez que la copia de alertant cambie la emitimos a incidencias, para tener los cambios allí.
   watch: {
       alertantCopia: function(val){
-          console.log('In the watcher')
+          console.log('In the watcher');
           immediate: true,
-          this.$emit('dadesAfectat', val);
+          this.$emit('dadesAlertant', val);
     }
   }
 

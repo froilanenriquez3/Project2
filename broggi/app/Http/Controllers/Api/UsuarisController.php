@@ -48,7 +48,8 @@ class UsuarisController extends Controller
         $usuaris->save();
         $response= (new UsuarisResource($usuaris))
                     ->response()
-                    ->setStatusCode(201);
+                    //->setStatusCode(201);
+                    ->json(['message' => 'Usuari creat correctament'], 201);
         } catch (QueryException $ex){
             $message = Utilitat::errorMessage($ex);
             $response = \response()
@@ -92,7 +93,8 @@ class UsuarisController extends Controller
         $usuari->save();
         $response= (new UsuarisResource($usuari))
                     ->response()
-                    ->setStatusCode(201);
+                    //->setStatusCode(201);
+                    ->json(['message' => 'Usuari guardat correctament'], 201);
         } catch (QueryException $ex){
             $message = Utilitat::errorMessage($ex);
             $response = \response()
@@ -113,7 +115,7 @@ class UsuarisController extends Controller
         try{
             $usuari->delete();
             $response= \response()
-                        ->json(['message'=>'Registro borrado correctamente'], 200);
+                        ->json(['message'=>'Usuari esborrat correctament'], 200);
         } catch (QueryException $ex){
             $message = Utilitat::errorMessage($ex);
             $response= \response()

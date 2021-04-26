@@ -1,5 +1,14 @@
 <template>
     <div id="incTableDiv">
+        <!-- div para el mensaje de feedback -->
+        <div v-show="infoMessage !=''" class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>Info: </strong>
+            {{infoMessage}}
+            <button type="button" @click="resetMessage()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <!-- fin del div para el mensaje de feedback -->
         <!-- div para el mensaje de error -->
         <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
             <strong>Error: </strong>
@@ -100,6 +109,7 @@
          components: { FilterSelect },
         data(){
             return {
+                infoMessage:'',
                 errorMessage:'',
                 itemsToDisplay: [],
                 perPage: 5,
@@ -129,18 +139,20 @@
                     .get("/incidencies")
                     .then((response) => {
                         console.log(response.data);
-                    me.incidencies = response.data;
-                    me.itemsToDisplay= me.incidencies;
-                    console.log(me.incidencies);
-                    /* response.data.forEach(incidencia => {
-                        incidencia.incidencies_has_recursos.forEach( i =>{
-                             me.incRecs.push(i);
-                        });
-                    }); */
+                        me.incidencies = response.data;
+                        me.itemsToDisplay= me.incidencies;
+                        console.log(me.incidencies);
+                        /* response.data.forEach(incidencia => {
+                            incidencia.incidencies_has_recursos.forEach( i =>{
+                                me.incRecs.push(i);
+                            });
+                        }); */
 
-                    me.incidencies.forEach( incidencia =>{
-                        me.showIncidenciaRecurso(incidencia.id);
-                    });
+                        me.incidencies.forEach( incidencia =>{
+                            me.showIncidenciaRecurso(incidencia.id);
+                        });
+                        
+                
 
                     })
                     .catch((error) => {
@@ -171,6 +183,7 @@
                         });
                         // me.itemsToDisplay= me.incRecs;
                         me.totalRows= me.itemsToDisplay.length;
+                        
                     })
                     .catch((error) => {
                         me.errorMessage= error.response.data.error;
@@ -187,8 +200,9 @@
             axios
                 .get("/tipusincidencies")
                 .then((response) => {
-                // console.log(response.data);
-                me.tipusIncidencies = response.data;
+                    // console.log(response.data);
+                    me.tipusIncidencies = response.data;
+                    
                 })
                 .catch((error) => {
                     me.errorMessage= error.response.data.error;
@@ -203,6 +217,7 @@
                     .then(response => {
                         console.log(response.data)
                         me.selectIncidencies();
+                        me.infoMessage = response.data.message;
                     })
                     .catch(error => {
                         me.errorMessage= error.response.data.error;
@@ -218,7 +233,10 @@
             },
             resetError(){
                 this.errorMessage='';
-            }
+            },
+            resetMessage(){
+                this.infoMessage='';
+            },
 
         },
         mounted() {

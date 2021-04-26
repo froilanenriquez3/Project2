@@ -116,7 +116,8 @@ class IncidenciesRecursosController extends Controller
 
             $response = (new IncidenciesResource($incidenciesrecurso))
                 ->response()
-                ->setStatusCode(201);
+                //->setStatusCode(201);
+                ->json(['message' => 'Incidencia actualitzada correctament'], 201);
 
             // $request->session()->flash('message', "Incidencia afegida correctament");
         } catch (QueryException $ex) {
@@ -145,7 +146,7 @@ class IncidenciesRecursosController extends Controller
             $incidenciesrecurso->refresh();
 
             $response = \response()
-                ->json(['message' => 'Incidencia borrado correctamente'], 200);
+                ->json(['message' => 'Incidencia esborrada correctament'], 200);
         } catch (QueryException $ex) {
             DB::rollBack();
             $message = Utilitat::errorMessage($ex);

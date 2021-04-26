@@ -1,5 +1,14 @@
 <template>
 <div class="biggerContainer">
+    <!-- div para el mensaje de feedback -->
+    <div v-show="infoMessage !=''" class="alert alert-primary alert-dismissible fade show" role="alert">
+        <strong>Info: </strong>
+        {{infoMessage}}
+        <button type="button" @click="resetMessage()" class="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- fin del div para el mensaje de feedback -->
     <!-- div para el mensaje de error -->
         <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
             <strong>Error: </strong>
@@ -27,6 +36,7 @@
         <div class="form-group row">
         <label class="col-2" for=""><b>Tipus Incidència</b></label>
         <select class="col-10" name="tipus_incidencia" v-model="incidencia.tipus_incidencies_id">
+            <option value=""></option>
             <option v-for="tipo in tipusIncidencies" :key="tipo.id" v-bind:value="tipo.id">
             {{ tipo.tipus }}
             </option>
@@ -77,7 +87,7 @@
     </div>
 
     <!-- TAG ALERTANTE -->
-    <alertant-form @dadesAfectat="canviarDades($event)" :municipis="municipis" :alertant="alertantIncidencia" :section="section" v-show="section == 'Alertant'"></alertant-form>
+    <alertant-form @dadesAlertant="canviarDades($event)" :municipis="municipis" :alertant="alertantIncidencia" :section="section" v-show="section == 'Alertant'"></alertant-form>
 
     <!-- TAG AFECTADO -->
     <!-- add fa plus icon -->
@@ -279,23 +289,24 @@ export default {
     },
   data() {
     return {
+        infoMessage:'',
         errorMessage:'',
         formacio: false,
         recursPerCanviar: '',
-      tipusAlertants: [],
-      tipusIncidencies: [],
-      alertantIncidencia: {},
-      numAfectats: 0,
-      afectat: {
-          id: '1',
-          telefon: '',
-          cip: '',
-          nom:'',
-          cognoms: '',
-          edat:'',
-          te_cip:'',
-          sexes_id:'1'
-      },
+        tipusAlertants: [],
+        tipusIncidencies: [],
+        alertantIncidencia: {},
+        numAfectats: 0,
+        afectat: {
+            id: '1',
+            telefon: '',
+            cip: '',
+            nom:'',
+            cognoms: '',
+            edat:'',
+            te_cip:'',
+            sexes_id:'1'
+        },
       afectats: [],
       recursos: [],
       prioritat: null,
@@ -355,6 +366,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           me.incidencies = response.data;
+
         })
         .catch((error) => {
           me.errorMessage= error.response.data.error;
@@ -459,6 +471,10 @@ export default {
         this.alertantIncidencia.municipis_id= trobat.municipis_id;
         this.alertantIncidencia.tipus_alertants_id= trobat.tipus_alertants_id;
         this.alertantIncidencia.adreca = trobat.adreca;
+        this.incidencia.telefon_alertant = trobat.telefon;
+        this.incidencia.alertants_id = trobat.id;
+        console.log("Trobat id" + trobat.id);
+        console.log(this.incidencia.alertants_id);
     },
     isMultiple(){
         this.multiple= true;
@@ -522,6 +538,7 @@ export default {
         .get("/municipis")
         .then((response) => {
           me.municipis = response.data;
+          me.infoMessage = response.data.message;
         })
         .catch((error) => {
           me.errorMessage= error.response.data.error;
@@ -534,8 +551,9 @@ export default {
       axios
         .get("/tipusincidencies")
         .then((response) => {
-          console.log(response.data);
+        //   console.log(response.data);
           me.tipusIncidencies = response.data;
+
         })
         .catch((error) => {
           me.errorMessage= error.response.data.error;
@@ -549,6 +567,7 @@ export default {
         .get("/afectats")
         .then((response) => {
           console.log(response.data);
+
 
         })
         .catch((error) => {
@@ -564,6 +583,7 @@ export default {
                 .then(response => {
                     me.recursos = response.data;
                     me.getFreeRecurs();
+
                 })
                 .catch(error => {
                     me.errorMessage= error.response.data.error;
@@ -614,8 +634,10 @@ export default {
                     window.location.href = "/Project2/broggi/public/incidencies";
                     console.log(response);
                     me.incidencia = null;
+                    me.infoMessage = response.data.message;
                 })
                 .catch((error)=>{
+                    me.errorMessage= error.response.data.error;
                     console.log(error);
                     console.log(error.response.status);
                     console.log(error.response.data);
@@ -663,11 +685,14 @@ export default {
             axios
             .post("/incidencies", me.incidencia)
             .then(function (response) {
-            alert("Incidencia inserted correctly!");
-            console.log(response);
-            me.clearInput();
-            me.getIncidencies();
-            //me.action=""
+                alert("Incidencia inserted correctly!");
+                window.location.href = "/Project2/broggi/public/incidencies";
+
+                console.log(response);
+                me.clearInput();
+                me.getIncidencies();
+                //me.action=""
+                me.infoMessage = response.data.message;
             })
             .catch((error) => {
             console.log(error.response.status);
@@ -709,8 +734,10 @@ export default {
             .get("/alertants/"+ me.incidencia.alertants_id)
             .then(response => {
                 me.alertantIncidencia = response.data;
+                me.alertant = response.data;
             })
             .catch(error => {
+                me.errorMessage= error.response.data.error;
                 console.log(error);
             })
             .finally(() => (this.loading = false));
@@ -731,6 +758,9 @@ export default {
 
 
 
+    },
+    resetMessage(){
+        this.infoMessage='';
     }
   },
   created() {
@@ -739,11 +769,12 @@ export default {
     this.getTipusIncidencies();
     // this.getAfectats();
     this.getRecurs();
+
   },
   mounted() {
     // console.log("Component mounted.");
     // this.nouAfectat();
-    this.initEditIncidencia();
+       this.initEditIncidencia();
 
   },
   computed:{
@@ -764,6 +795,7 @@ export default {
           return this.infoRecursos;
       }
   }
+
 };
 </script>
 

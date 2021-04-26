@@ -88,6 +88,13 @@ export default {
       incidencia: {},
     };
   },
+  methods: {
+      initAfectatsRecursos(){
+          this.incidencia.incidencies_has_afectats.forEach(element => {
+            //   element.recurso = somethingidklol;
+          });
+      }
+  },
   created() {
     this.incidencia = this.showincidencia;
   },
