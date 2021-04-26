@@ -36,6 +36,7 @@
         <div class="form-group row">
         <label class="col-2" for=""><b>Tipus Incidència</b></label>
         <select class="col-10" name="tipus_incidencia" v-model="incidencia.tipus_incidencies_id">
+            <option value=""></option>
             <option v-for="tipo in tipusIncidencies" :key="tipo.id" v-bind:value="tipo.id">
             {{ tipo.tipus }}
             </option>
@@ -86,7 +87,7 @@
     </div>
 
     <!-- TAG ALERTANTE -->
-    <alertant-form @dadesAfectat="canviarDades($event)" :municipis="municipis" :alertant="alertantIncidencia" :section="section" v-show="section == 'Alertant'"></alertant-form>
+    <alertant-form @dadesAlertant="canviarDades($event)" :municipis="municipis" :alertant="alertantIncidencia" :section="section" v-show="section == 'Alertant'"></alertant-form>
 
     <!-- TAG AFECTADO -->
     <!-- add fa plus icon -->
@@ -365,7 +366,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           me.incidencies = response.data;
-          
+
         })
         .catch((error) => {
           me.errorMessage= error.response.data.error;
@@ -470,6 +471,10 @@ export default {
         this.alertantIncidencia.municipis_id= trobat.municipis_id;
         this.alertantIncidencia.tipus_alertants_id= trobat.tipus_alertants_id;
         this.alertantIncidencia.adreca = trobat.adreca;
+        this.incidencia.telefon_alertant = trobat.telefon;
+        this.incidencia.alertants_id = trobat.id;
+        console.log("Trobat id" + trobat.id);
+        console.log(this.incidencia.alertants_id);
     },
     isMultiple(){
         this.multiple= true;
@@ -546,9 +551,9 @@ export default {
       axios
         .get("/tipusincidencies")
         .then((response) => {
-          console.log(response.data);
+        //   console.log(response.data);
           me.tipusIncidencies = response.data;
-          
+
         })
         .catch((error) => {
           me.errorMessage= error.response.data.error;
@@ -562,7 +567,7 @@ export default {
         .get("/afectats")
         .then((response) => {
           console.log(response.data);
-          
+
 
         })
         .catch((error) => {
@@ -578,7 +583,7 @@ export default {
                 .then(response => {
                     me.recursos = response.data;
                     me.getFreeRecurs();
-                    
+
                 })
                 .catch(error => {
                     me.errorMessage= error.response.data.error;
@@ -681,6 +686,8 @@ export default {
             .post("/incidencies", me.incidencia)
             .then(function (response) {
                 alert("Incidencia inserted correctly!");
+                window.location.href = "/Project2/broggi/public/incidencies";
+
                 console.log(response);
                 me.clearInput();
                 me.getIncidencies();
@@ -727,7 +734,7 @@ export default {
             .get("/alertants/"+ me.incidencia.alertants_id)
             .then(response => {
                 me.alertantIncidencia = response.data;
-                
+                me.alertant = response.data;
             })
             .catch(error => {
                 me.errorMessage= error.response.data.error;
@@ -762,11 +769,12 @@ export default {
     this.getTipusIncidencies();
     // this.getAfectats();
     this.getRecurs();
+
   },
   mounted() {
     // console.log("Component mounted.");
     // this.nouAfectat();
-    this.initEditIncidencia();
+       this.initEditIncidencia();
 
   },
   computed:{
@@ -787,6 +795,7 @@ export default {
           return this.infoRecursos;
       }
   }
+
 };
 </script>
 
