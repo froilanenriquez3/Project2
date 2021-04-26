@@ -15,7 +15,7 @@
 
             <div class="form-group row">
             <label class="col-2" for="telefon"><b>Telefon Alertant</b></label>
-            <input class="col-4" required type="tel" name="telefon" id="telefon" v-model="alertantCopia.telefon" @input="updateAlertant()"/>
+            <input class="col-4" required type="tel" name="telefon" id="telefon" v-model="alertantCopia.telefon" @input="updateAlertant()" maxlength="9" />
             <button @click="searchAlertant()" class="btn btn-primary ml-4">Buscar a base de dades</button>
             <p v-show="!isFound">No hi ha cap alertant a la base de dades amb aquest telèfon.</p>
             </div>
@@ -89,6 +89,7 @@ export default {
       tipus_alertants: [],
       isFound: true,
       alertantCopia: {
+          id: '',
           telefon: '',
           nom: '',
           cognoms: '',
@@ -134,6 +135,8 @@ export default {
           console.log(response);
         // Pasamos id para guardarlo en alertants_id en incidencias.
           me.alertant.id = response.data.id;
+          me.alertantCopia.id = response.data.id;
+          me.updateAlertant();
         })
         .catch((error) => {
           console.log(error.response.status);

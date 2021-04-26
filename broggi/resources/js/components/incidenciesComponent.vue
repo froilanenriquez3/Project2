@@ -464,6 +464,9 @@ export default {
         this.alertantIncidencia.tipus_alertants_id= trobat.tipus_alertants_id;
         this.alertantIncidencia.adreca = trobat.adreca;
         this.incidencia.telefon_alertant = trobat.telefon;
+        this.incidencia.alertants_id = trobat.id;
+        console.log("Trobat id" + trobat.id);
+        console.log(this.incidencia.alertants_id);
     },
     isMultiple(){
         this.multiple= true;
