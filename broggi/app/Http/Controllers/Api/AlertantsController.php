@@ -44,7 +44,9 @@ class AlertantsController extends Controller
         $alertants->save();
         $response= (new AlertantsResource($alertants))
                     ->response()
-                    ->setStatusCode(201);
+                   // ->setStatusCode(201)
+                    ->json(['message' => 'Alertant creat correctament'], 201);
+        
         } catch (QueryException $ex){
             $message = Utilitat::errorMessage($ex);
             $response = \response()
@@ -87,7 +89,8 @@ class AlertantsController extends Controller
         $alertant->save();
         $response= (new alertantsResource($alertant))
                     ->response()
-                    ->setStatusCode(201);
+                    //->setStatusCode(201);
+                    ->json(['message' => 'Alertant actualitzat correctament'], 201);
         } catch (QueryException $ex){
             $message = Utilitat::errorMessage($ex);
             $response = \response()
@@ -108,7 +111,7 @@ class AlertantsController extends Controller
         try{
             $alertant->delete();
             $response= \response()
-                        ->json(['message'=>'Registro borrado correctamente'], 200);
+                        ->json(['message'=>'Alertant esborrat correctament'], 200);
         } catch (QueryException $ex){
             $message = Utilitat::errorMessage($ex);
             $response= \response()

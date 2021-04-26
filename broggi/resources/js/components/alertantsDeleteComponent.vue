@@ -1,6 +1,15 @@
 <template>
 
   <div class="modal fade" :id="id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- div para el mensaje de feedback -->
+    <div v-show="infoMessage !=''" class="alert alert-primary alert-dismissible fade show" role="alert">
+        <strong>Info: </strong>
+        {{infoMessage}}
+        <button type="button" @click="resetMessage()" class="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- fin del div para el mensaje de feedback -->
     <!-- div para el mensaje de error -->
     <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
         <strong>Error: </strong>
@@ -40,6 +49,7 @@ export default {
     },
     data(){
         return{
+        infoMessage:'',    
         errorMessage:'',
         id: "",
         alertantDelete: {
@@ -63,6 +73,7 @@ export default {
                     // window.location.href = "/Project2/broggi/public/alertants";
                     $(me.id).modal('hide');
                     //me.infoMessage= response.data.missatge;
+                     me.infoMessage = response.data.message;
                 })
                 .catch(error => {
                     me.errorMessage = error.response.data.error;
@@ -72,6 +83,9 @@ export default {
             },
             resetError(){
             this.errorMessage= '';
+            },
+            resetMessage(){
+                this.infoMessage='';
             }
 
     },

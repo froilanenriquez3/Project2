@@ -1,13 +1,14 @@
 <template>
     <div class="container">
-        <!-- div para el feedback -->
+       <!-- div para el mensaje de feedback -->
         <div v-show="infoMessage !=''" class="alert alert-primary alert-dismissible fade show" role="alert">
-            <strong>Info:!</strong> 
+            <strong>Info: </strong>
+            {{infoMessage}}
             <button type="button" @click="resetMessage()" class="close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <!-- fin del div para el feedback -->
+        <!-- fin del div para el mensaje de feedback -->
         <!-- div para el mensaje de error -->
         <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
             <strong>Error: </strong>
@@ -159,7 +160,7 @@
                             recursos_id: null
                         }
                         window.location.href = "/Project2/broggi/public/incidenciesrecursos";
-                        me.infoMessage=response.data.message;
+                        me.infoMessage = response.data.message;
                     })
                     .catch((error)=>{
                         me.errorMessage= error.response.data.error;
@@ -176,7 +177,7 @@
                         // console.log(response.data);
                         me.incidencies = response.data;
                         me.getAllShowIncidencies();
-                        me.infoMessage = response.data.message;
+                        
                     })
                     .catch((error) => {
                         me.errorMessage= error.response.data.error;
@@ -195,7 +196,6 @@
                         me.incidenciesRecursos.push(me.incidencia);
                             me.findActiveIncidencia();
                         //me.infoRecursos = me.incidencia.incidencies_has_recursos;
-                        me.infoMessage = response.data.message;
                         // console.log(me.infoRecursos);
                     })
                     .catch((error) => {
@@ -279,8 +279,10 @@
                         }
                     });
                 }
+            },
+            resetMessage(){
+                this.infoMessage='';
             }
-
         },
         mounted() {
             // console.log('Component mounted.')

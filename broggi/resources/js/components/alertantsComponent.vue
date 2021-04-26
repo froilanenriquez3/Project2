@@ -1,5 +1,14 @@
 <template>
   <div class="container">
+    <!-- div para el mensaje de feedback -->
+    <div v-show="infoMessage !=''" class="alert alert-primary alert-dismissible fade show" role="alert">
+        <strong>Info: </strong>
+        {{infoMessage}}
+        <button type="button" @click="resetMessage()" class="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- fin del div para el mensaje de feedback -->
     <!-- div para el mensaje de error -->
     <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
         <strong>Error: </strong>
@@ -84,20 +93,21 @@ export default {
     },
   data() {
     return {
-      errorMessage:'',
-      action: "",
-      //alertants: [],
-      tipus_alertants: [],
-      municipis: [],
-      alertant: {
-        id: "",
-        telefon: "",
-        nom: "",
-        cognoms: "",
-        adreca: "",
-        municipis_id: "",
-        tipus_alertants_id: "",
-      },
+        infoMessage:'',
+        errorMessage:'',
+        action: "",
+        //alertants: [],
+        tipus_alertants: [],
+        municipis: [],
+        alertant: {
+            id: "",
+            telefon: "",
+            nom: "",
+            cognoms: "",
+            adreca: "",
+            municipis_id: "",
+            tipus_alertants_id: "",
+        },
     };
   },
   methods: {
@@ -108,20 +118,22 @@ export default {
         .post("/alertants", me.alertant)
         .then(function (response) {
         //   console.log(response);
-          window.location.href = "/Project2/broggi/public/alertants";
+            window.location.href = "/Project2/broggi/public/alertants";
+            me.infoMessage = response.data.message;
 
         })
         .catch((error) => {
-          console.log(error.response.status);
-          console.log(error.response.data);
-          me.errorMessage= error.response.data.error;
+            console.log(error.response.status);
+            console.log(error.response.data);
+            me.errorMessage= error.response.data.error;
         });
       } else{
          axios
         .put("/alertants/" + me.alertant.id, me.alertant)
         .then(function (response) {
-        //   console.log(response);
-          window.location.href = "/Project2/broggi/public/alertants";
+            //   console.log(response);
+            window.location.href = "/Project2/broggi/public/alertants";
+            me.infoMessage = response.data.message;
         })
         .catch((error) => {
           console.log(error.response.status);
@@ -136,8 +148,9 @@ export default {
       axios
         .get("/tipusalertants")
         .then((response) => {
-          me.tipus_alertants = response.data;
-          console.log(me.tipus_alertants);
+            me.tipus_alertants = response.data;
+            console.log(me.tipus_alertants);
+            
         })
         .catch((error) => {
           me.errorMessage= error.response.data.error;
@@ -150,7 +163,8 @@ export default {
       axios
         .get("/municipis")
         .then((response) => {
-          me.municipis = response.data;
+            me.municipis = response.data;
+            
         //   console.log(me.municipis);
         })
         .catch((error) => {
@@ -167,6 +181,9 @@ export default {
     },
     resetError(){
             this.errorMessage= '';
+    }, 
+    resetMessage(){
+        this.infoMessage='';
     }
   },
   created() {

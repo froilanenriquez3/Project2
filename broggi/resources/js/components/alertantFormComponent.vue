@@ -1,5 +1,15 @@
 <template>
   <div>
+
+        <!-- div para el mensaje de feedback -->
+        <div v-show="infoMessage !=''" class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>Info: </strong>
+            {{infoMessage}}
+            <button type="button" @click="resetMessage()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <!-- fin del div para el mensaje de feedback -->
         <!-- div para el mensaje de error -->
         <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
             <strong>Error: </strong>
@@ -81,6 +91,7 @@ export default {
     },
     data() {
     return {
+      infoMessage:'', 
       errorMessage:'',
       action: "",
       alertants: [],
@@ -103,6 +114,7 @@ export default {
         .then((response) => {
           me.tipus_alertants = response.data;
           me.totalRows= me.tipus_alertants.length;
+          
         })
         .catch((error) => {
             me.errorMessage= error.response.data.error;
@@ -116,6 +128,7 @@ export default {
         .get("/alertants")
         .then((response) => {
           me.alertants = response.data;
+          
         })
         .catch((error) => {
             me.errorMessage= error.response.data.error;
@@ -131,6 +144,7 @@ export default {
           console.log(response);
         // Pasamos id para guardarlo en alertants_id en incidencias.
           me.alertant.id = response.data.id;
+          me.infoMessage = response.data.message;
         })
         .catch((error) => {
           console.log(error.response.status);
@@ -161,7 +175,11 @@ export default {
         if(this.alertant != {}){
             this.alertantCopia = this.alertant;
         }
+    },
+    resetMessage(){
+        this.infoMessage='';
     }
+
   }
   ,
 

@@ -1,5 +1,14 @@
 <template>
     <div class="recursosMovilsContainer">
+        <!-- div para el mensaje de feedback -->
+        <div v-show="infoMessage !=''" class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>Info: </strong>
+            {{infoMessage}}
+            <button type="button" @click="resetMessage()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <!-- fin del div para el mensaje de feedback -->
         <!-- div para el mensaje de error -->
         <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
             <strong>Error: </strong>
@@ -149,6 +158,7 @@ import FilterSelect from './filterSelect.vue';
 export default {
     data() {
         return {
+            infoMessage:'',
             errorMessage:'',
             itemsToDisplay: [],
             FilterSelect,
@@ -181,6 +191,7 @@ export default {
                     me.usuaris = response.data;
                     me.itemsToDisplay= me.usuaris;
                     me.totalRows= me.itemsToDisplay.length;
+                    
                 })
                 .catch(error => {
                     me.errorMessage= error.response.data.error;
@@ -217,6 +228,7 @@ export default {
                 .then(response => {
                     me.rols = response.data;
                     console.log(me.rols);
+                    
                 })
                 .catch(error => {
                     me.errorMessage= error.response.data.error;
@@ -246,6 +258,7 @@ export default {
                     console.log(response);
                     me.selectUsuaris();
                     me.action=""
+                    me.infoMessage = response.data.message;
                 })
                 .catch(error => {
                     console.log(error.response.status);
@@ -274,6 +287,7 @@ export default {
                     console.log(response);
                     me.selectUsuaris();
                     me.action=''
+                    me.infoMessage = response.data.message;
                 })
                 .catch(error => {
                     console.log(error.response.status);
@@ -298,6 +312,7 @@ export default {
                     $('#deleteModal').modal('hide');
                     me.action=''
                     //me.infoMessage= response.data.missatge;
+                    me.infoMessage = response.data.message;
                 })
                 .catch(error => {
                     me.errorMessage = error.response.data.error;
@@ -308,6 +323,9 @@ export default {
             },
             resetError(){
                 this.errorMessage='';
+            },
+            resetMessage(){
+                this.infoMessage='';
             }
     },
     created() {
