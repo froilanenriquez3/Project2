@@ -1,5 +1,14 @@
 <template>
 <div class="biggerContainer">
+    <!-- div para el mensaje de feedback -->
+    <div v-show="infoMessage !=''" class="alert alert-primary alert-dismissible fade show" role="alert">
+        <strong>Info: </strong>
+        {{infoMessage}}
+        <button type="button" @click="resetMessage()" class="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- fin del div para el mensaje de feedback -->
     <!-- div para el mensaje de error -->
         <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
             <strong>Error: </strong>
@@ -280,26 +289,24 @@ export default {
     },
   data() {
     return {
+        infoMessage:'',
         errorMessage:'',
         formacio: false,
         recursPerCanviar: '',
-      tipusAlertants: [],
-      tipusIncidencies: [],
-      alertant: {
-
-      },
-      alertantIncidencia: {},
-      numAfectats: 0,
-      afectat: {
-          id: '1',
-          telefon: '',
-          cip: '',
-          nom:'',
-          cognoms: '',
-          edat:'',
-          te_cip:'',
-          sexes_id:'1'
-      },
+        tipusAlertants: [],
+        tipusIncidencies: [],
+        alertantIncidencia: {},
+        numAfectats: 0,
+        afectat: {
+            id: '1',
+            telefon: '',
+            cip: '',
+            nom:'',
+            cognoms: '',
+            edat:'',
+            te_cip:'',
+            sexes_id:'1'
+        },
       afectats: [],
       recursos: [],
       prioritat: null,
@@ -359,6 +366,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           me.incidencies = response.data;
+
         })
         .catch((error) => {
           me.errorMessage= error.response.data.error;
@@ -486,6 +494,7 @@ export default {
 
       this.afectats.push(this.afectat);
 
+
     //Creamos afectatFormComponent y le pasamos el afectat de la posición numAfectats y la posición que ocupará en la array;
         let ComponentClass= Vue.extend(afectatFormComponent)
         let form= new ComponentClass({
@@ -494,10 +503,26 @@ export default {
 
         form.$mount()
         this.$refs.afectatsContainer.appendChild(form.$el)
-                // Si ya hay recursos (porque se ha apretado múltples y luego se ha decidido cambiar).
-        if(this.infoRecursos.length > 0){
-            this.infoRecursos[this.afectat.id].afectat_id = this.afectat.id;
+
+        // Si ya hay recursos (porque se ha apretado múltples y luego se ha decidido cambiar).
+        if(this.infoRecursos[this.afectat.id] && this.infoRecursos[this.afectat.id].afectat_id == 300){
+            this.infoRecursos[this.afectat.id].afectat_id = this.numAfectats;
         }
+
+        // Teniendo el id falso, vamos a crear un infoRecursos para ese afectado.
+        this.infoRecursos[this.numAfectats] = {
+                    recursos_id: null,
+                    hora_activacio: null,
+                    hora_mobilitzacio: null,
+                    hora_assistencia: null,
+                    hora_transport: null,
+                    hora_arribada_hospital: null,
+                    hora_transferencia: null,
+                    hora_finalitzacio: null,
+                    prioritat: null,
+                    desti: null,
+                    afectat_id: this.numAfectats,
+                    }
 
        this.numAfectats++;
     },
@@ -513,6 +538,7 @@ export default {
         .get("/municipis")
         .then((response) => {
           me.municipis = response.data;
+          me.infoMessage = response.data.message;
         })
         .catch((error) => {
           me.errorMessage= error.response.data.error;
@@ -527,6 +553,7 @@ export default {
         .then((response) => {
         //   console.log(response.data);
           me.tipusIncidencies = response.data;
+
         })
         .catch((error) => {
           me.errorMessage= error.response.data.error;
@@ -540,6 +567,7 @@ export default {
         .get("/afectats")
         .then((response) => {
           console.log(response.data);
+
 
         })
         .catch((error) => {
@@ -555,6 +583,7 @@ export default {
                 .then(response => {
                     me.recursos = response.data;
                     me.getFreeRecurs();
+
                 })
                 .catch(error => {
                     me.errorMessage= error.response.data.error;
@@ -605,8 +634,10 @@ export default {
                     window.location.href = "/Project2/broggi/public/incidencies";
                     console.log(response);
                     me.incidencia = null;
+                    me.infoMessage = response.data.message;
                 })
                 .catch((error)=>{
+                    me.errorMessage= error.response.data.error;
                     console.log(error);
                     console.log(error.response.status);
                     console.log(error.response.data);
@@ -661,6 +692,7 @@ export default {
                 me.clearInput();
                 me.getIncidencies();
                 //me.action=""
+                me.infoMessage = response.data.message;
             })
             .catch((error) => {
             console.log(error.response.status);
@@ -705,6 +737,7 @@ export default {
                 me.alertant = response.data;
             })
             .catch(error => {
+                me.errorMessage= error.response.data.error;
                 console.log(error);
             })
             .finally(() => (this.loading = false));
@@ -725,6 +758,9 @@ export default {
 
 
 
+    },
+    resetMessage(){
+        this.infoMessage='';
     }
   },
   created() {

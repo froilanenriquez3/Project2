@@ -1,5 +1,14 @@
 <template>
     <div id="incRecTableDiv">
+        <!-- div para el mensaje de feedback -->
+        <div v-show="infoMessage !=''" class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>Info: </strong>
+            {{infoMessage}}
+            <button type="button" @click="resetMessage()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <!-- fin del div para el mensaje de feedback -->
         <!-- div para el mensaje de error -->
         <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
             <strong>Error: </strong>
@@ -120,18 +129,18 @@
                 axios
                     .get("/incidencies")
                     .then((response) => {
-                    me.incidencies = response.data;
+                        me.incidencies = response.data;
 
-                    /* response.data.forEach(incidencia => {
-                        incidencia.incidencies_has_recursos.forEach( i =>{
-                             me.incRecs.push(i);
+                        /* response.data.forEach(incidencia => {
+                            incidencia.incidencies_has_recursos.forEach( i =>{
+                                me.incRecs.push(i);
+                            });
+                        }); */
+
+                        me.incidencies.forEach( incidencia =>{
+                            me.showIncidenciaRecurso(incidencia.id);
                         });
-                    }); */
-
-                    me.incidencies.forEach( incidencia =>{
-                        me.showIncidenciaRecurso(incidencia.id);
-                    });
-
+                        
                     })
                     .catch((error) => {
                         me.errorMessage= error.response.data.error;
@@ -158,6 +167,7 @@
                         });
                         me.itemsToDisplay= me.incRecs;
                         me.totalRows= me.itemsToDisplay.length;
+                        
                     })
                     .catch((error) => {
                         me.errorMessage= error.response.data.error;
@@ -184,7 +194,8 @@
                             id: null
                         };
 
-                         me.selectIncidencies();
+                        me.selectIncidencies();
+                        me.infoMessage = response.data.message;
 
                     })
                     .catch(error => {
@@ -208,7 +219,10 @@
 
                 console.log(this.editIncidencia);
                 $("#deleteModal").modal("show");
-            }
+            },
+            resetMessage(){
+                this.infoMessage='';
+            },
         },
         mounted() {
             // console.log('Component mounted.');

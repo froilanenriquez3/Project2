@@ -1,5 +1,14 @@
 <template>
   <div id="helpBoxDiv">
+        <!-- div para el mensaje de feedback -->
+        <div v-show="infoMessage !=''" class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>Info: </strong>
+            {{infoMessage}}
+            <button type="button" @click="resetMessage()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <!-- fin del div para el mensaje de feedback -->
         <!-- div para el mensaje de error -->
         <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
             <strong>Error: </strong>
@@ -50,14 +59,15 @@
 export default {
   data() {
     return {
-      errorMessage:'',
-      questions: [],
-      qShowA: [],
-      answers: [],
-      //   question: {
-      //     text: "",
-      //     answers: [],
-      //   }
+        infoMessage:'',
+        errorMessage:'',
+        questions: [],
+        qShowA: [],
+        answers: [],
+        //   question: {
+        //     text: "",
+        //     answers: [],
+        //   }
     };
   },
   methods: {
@@ -75,13 +85,14 @@ export default {
       axios
         .get("/questions")
         .then((response) => {
-          //console.log(response.data);
-          me.questions = response.data;
-          me.setShowAnswers();
+            //console.log(response.data);
+            me.questions = response.data;
+            me.setShowAnswers();
+            
         })
         .catch((error) => {
-          me.errorMessage= error.response.data.error;
-          console.log(error);
+            me.errorMessage= error.response.data.error;
+            console.log(error);
         })
         .finally(() => (this.loading = false));
     },
@@ -93,6 +104,7 @@ export default {
           console.log(response.data);
           me.answers = response.data;
           me.setShowAnswers();
+          
         })
         .catch((error) => {
           me.errorMessage= error.response.data.error;
@@ -112,6 +124,9 @@ export default {
     },
     resetError(){
         this.errorMessage= '';
+    },
+    resetMessage(){
+        this.infoMessage='';
     }
    
 
