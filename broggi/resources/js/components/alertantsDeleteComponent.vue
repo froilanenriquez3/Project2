@@ -1,5 +1,5 @@
 <template>
-   
+
   <div class="modal fade" :id="id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <!-- div para el mensaje de error -->
     <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
@@ -40,7 +40,7 @@ export default {
     },
     data(){
         return{
-        errorMessage:'',    
+        errorMessage:'',
         id: "",
         alertantDelete: {
         id: "",
@@ -80,6 +80,6 @@ export default {
         this.id = "deleteAlertantModal" + this.alertant.id;
         // console.log("Component mounted.");
     },
-    
+
 };
 </script>

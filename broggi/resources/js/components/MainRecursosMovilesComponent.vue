@@ -12,7 +12,7 @@
         <!-- Filtro -->
         <filter-select :name="'Tipus de Recurs'" :listToFilter="recursos" :filterBy="tipus_recursos" :filterField="'tipus'" :relatedId="'tipus_recursos_id'"
         @applyFilterResults="filter($event)"></filter-select>
-        <button type="button" @click="selectAction('afegir')" class="btn btn-primary">Afegir</button>
+        <!-- <button type="button" @click="selectAction('afegir')" class="btn btn-primary">Afegir</button> -->
         <!-- Si no hay nada que cumpla con lo buscado, no sale la tabla y solo mostramos mensaje -->
         <div v-if="itemsToDisplay.length == 0"> No s'han trobat elements d'aquestes característiques</div>
 
@@ -102,12 +102,13 @@
 
             <map-insert :recurs="this.recurs" :action="action"></map-insert>
 
-
             <button v-if="action == 'afegir' " type="button" @click="afegirRecurs()" class="btn btn-primary">Afegir</button>
             <button v-else type="button" @click="editarRecurs()" class="btn btn-warning">Editar</button>
+
+            <button type="button" @click="cerrarPagina()" class="btn ml-3 border border-dark">Enrere</button>
         </div>
 
-        <!-- Modal Delelte -->
+        <!-- Modal Delete -->
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -186,7 +187,7 @@ export default {
             }
 
         },
-        
+
         cleanResource(){
                 this.recurs.id='';
                 this.recurs.codi='';
@@ -299,6 +300,9 @@ export default {
           ? recursos.length
           : beginning  + this.perPage;
       return recursos.slice(beginning , end );
+    }, cerrarPagina(){
+        this.selectRecursos();
+        this.action=""
     }
     },
     created() {

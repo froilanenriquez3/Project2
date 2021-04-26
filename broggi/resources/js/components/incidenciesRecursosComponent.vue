@@ -18,47 +18,64 @@
      	</div>
         <!-- fin del div para el mensaje de error -->
        <div id="incidenciesRecursosDiv" v-show="displayForm">
-           <div class="form-group row">
+           <div class="form-group row my-row-header">
                 <h5 id="incNumDisp" class="col-2"> Incidencia #{{ incidencia.id}} </h5>
                 <span id="validateDisplay" class="col-8" ></span>
                 <h5 id="incPrioritatDisp" class="col-2" > Prioritat: {{ infoRecursos.prioritat }} </h5>
            </div>
 
-           <div class="form-group row">
-               <label class="col-2" for="activacio">1: Hora Activació</label>
+           <div class="container">
+
+           <div class="form-group row mb-5">
+               <label class="col-3" for="activacio">1: Hora Activació</label>
                <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_activacio" id="activacio" name="activacio"
                 @change="validateInput('activacio','mobilitzacio')">
+                <span class="col-1"></span>
 
-               <label class="col-2" for="mobilitzacio">2: Hora Mobilització</label>
+               <label class="col-3" for="mobilitzacio">2: Hora Mobilització</label>
                <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_mobilitzacio" id="mobilitzacio" name="mobilitzacio"
                 @change="validateInput('activacio','mobilitzacio')">
 
-               <label class="col-2" for="assistencia">3: Hora Assistència</label>
-               <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_assistencia" id="assistencia" name="assistencia"
-                @change="validateInput('mobilitzacio', 'assistencia')">
            </div>
 
-           <div class="form-group row">
-                <label class="col-2" for="transport">4: Hora Transport</label>
+           <div class="form-group row mb-5">
+
+                <label class="col-3" for="assistencia">3: Hora Assistència</label>
+               <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_assistencia" id="assistencia" name="assistencia"
+                @change="validateInput('mobilitzacio', 'assistencia')">
+                <span class="col-1"></span>
+
+                <label class="col-3" for="transport">4: Hora Transport</label>
                <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_transport" id="transport" name="transport"
                 @change="validateInput('assistencia', 'transport')">
 
-                <label class="col-2" for="arribadaHospital">5: Hora Arribada Hospital</label>
+           </div>
+
+           <div class="form-group row mb-5">
+                 <label class="col-3" for="arribadaHospital">5: Hora Arribada Hospital</label>
                <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_arribada_hospital" id="arribadaHospital" name="arribadaHospital"
                 @change="validateInput('transport', 'arribadaHospital')">
+                <span class="col-1"></span>
 
-                <label class="col-2" for="horaTransferencia">6: Hora Transferencia</label>
+                <label class="col-3" for="horaTransferencia">6: Hora Transferencia</label>
                <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_transferencia" id="horaTransferencia" name="horaTransferencia"
                 @change="validateInput('arribadaHospital','horaTransferencia')">
            </div>
 
-           <div class="form-group row">
-                <label class="col-2" for="finalitzacio">7: Hora Finalitzacio</label>
+           <div class="form-group row mb-5">
+                <label class="col-3" for="finalitzacio">7: Hora Finalitzacio</label>
                <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_finalitzacio" id="finalitzacio" name="finalitzacio"
                 @change="validateInput('horaTransferencia', 'finalitzacio')">
+                <span class="col-1"></span>
 
+
+           </div>
+
+           <div class="form-group row">
                 <label class="col-2" for="inDesti">Desti</label>
                <input class="col-6" type="text" v-model="infoRecursos.desti" id="inDesti" name="inDesti">
+           </div>
+
            </div>
 
            <!-- <button class="btn btn-primary" id="submitForm" @click="submitForm()">Siguiente</button> -->
@@ -122,7 +139,7 @@
                 console.log("Save recurs:" + me.incidencia.saveRecurs);
 
                 axios
-                    .put("/incidencies/"+me.incidencia.id, me.incidencia)
+                    .put("/incidenciesrecursos/"+me.incidencia.id, me.incidencia)
                     .then((response)=>{
                         alert("Formulari enviat correctament");
                         console.log(response);

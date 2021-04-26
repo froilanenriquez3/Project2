@@ -11,12 +11,12 @@
      	</div>
         <!-- fin del div para el mensaje de error -->
 
-        <div id="mapa-mapbox"></div>
-        <div id="geocoder" class="geocoder"></div>
         <div class="color-box bg-primary"></div>
         <span> Recursos disponibles</span>
         <div class="color-box bg-secondary"></div>
         <span> Recursos no disponibles</span>
+        <div id="mapa-mapbox"></div>
+        <div id="geocoder" class="geocoder"></div>
     </div>
 </template>
 
@@ -29,10 +29,10 @@ export default {
         direccioCompleta: {
             type: String,
             required: true
-        }
-        // recursosInfo:{
-        //     required:true
-        // }
+        },
+        recursPerCanviar: {
+            required: true
+        },
     },
     data() {
         return {
@@ -41,6 +41,8 @@ export default {
                 "pk.eyJ1IjoibWlzYWxhOTEiLCJhIjoiY2ttZ2d1MmF0MjdzajJucWxqMTN6ZHR4diJ9.LqNFC2cYXEPAzf8f7PLAVg",
             recursos: [],
             map: {},
+            allMarkers: [],
+            geocoder: {},
             color: "",
             recurs: {
                 /* id: 12,
@@ -78,8 +80,6 @@ export default {
         // },
         // Para asignar un recurso a la incidencia
         assignarRecurs(){
-            this.recurs.actiu = true;
-            this.recursActivat= true;
             this.$emit('assignantRecurs', this.recurs);
 
             this.button.innerHTML = "Ja assignat!";
@@ -87,10 +87,14 @@ export default {
             this.button.style.backgroundColor = "#fdc619";
             this.button.style.color= "black";
 
+            activarRecurs();
+
         },
         activarRecurs() {
             this.recurs.actiu = true;
             this.recursActivat= true;
+            this.$emit('assignantRecurs', this.recurs);
+
             console.log(this.marker)
             let me = this;
             axios
@@ -104,7 +108,7 @@ export default {
                     me.errorMessage= error.response.data.error;
                 });
 
-            this.button.innerHTML = "Desactivar";
+            this.button.innerHTML = "Desassignar";
             this.button.style.backgroundColor = "#fdc619";
             this.marker.color = "#FDC619";
             this.button.removeEventListener("click", this.activarRecurs);
@@ -117,6 +121,7 @@ export default {
         desactivarRecurs() {
             this.recurs.actiu = false;
             this.recursActivat= false;
+            this.$emit('desassignantRecurs', this.recurs);
             console.log(this.marker)
             let me = this;
             axios
@@ -130,7 +135,7 @@ export default {
                     me.errorMessage= error.response.data.error;
                 });
 
-            this.button.innerHTML = "Activar";
+            this.button.innerHTML = "Assignar";
             this.button.style.backgroundColor = "#11adc4";
             this.marker._color = "#11adc4";
             this.button.removeEventListener("click", this.desactivarRecurs);
@@ -138,24 +143,27 @@ export default {
 
             // this.checkIfActive();
         },
-        // checkIfActive(){
-        //     let buttons= document.querySelectorAll('.marker-button');
-        //     console.log(buttons)
-        //     if(this.recursActivat){
-        //         buttons.forEach(button => {
-        //         if( button.dataset['data-id'] != this.recursActivat.id ){
-        //             button.setAttribute('disabled', true);
-        //         }
-        //     });
-        //     } else {
-        //         buttons.forEach(button => {
-        //         if( button.dataset['data-id'] != this.recursActivat.id && button.style.backgroundColor != '#e1157a'){
-        //             button.setAttribute('disasbled', false);
-        //         }
-        //     });
-        //     }
+        desactivarRecursSenseEmetre(){
+            this.recurs.actiu = false;
+            this.recursActivat= false;
+            let me = this;
+            axios
+                .put("/recursos/" + me.recurs.id, me.recurs)
+                .then(function(response) {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error.response.status);
+                    console.log(error.response.data);
+                    me.errorMessage= error.response.data.error;
+                });
 
-        // },
+            this.marker.button.innerHTML = "Assignar";
+            this.marker.button.style.backgroundColor = "#11adc4";
+            this.marker._color = "#11adc4";
+            this.marker.button.removeEventListener("click", this.desactivarRecurs);
+            this.marker.button.addEventListener("click", this.activarRecurs);
+        },
         addRecursosToMap() {
             this.recursos.forEach(element => {
                 if(element.codi != 'cap'){
@@ -175,7 +183,7 @@ export default {
                     button.setAttribute("disabled", true);
                 }
 
-                button.addEventListener("click", this.assignarRecurs);
+                button.addEventListener("click", this.activarRecurs);
 
 
                     div.appendChild(p)
@@ -188,12 +196,11 @@ export default {
 
                 let marker = new mapboxgl.Marker({
                     color: this.color,
-                    draggable: false
+                    draggable: false,
                 })
                     .setLngLat([element.lon, element.lat])
                     .setPopup(popup)
                     .addTo(this.map);
-
 
                 // Marcador
                 marker.getElement().addEventListener("click", () => {
@@ -201,6 +208,13 @@ export default {
                     this.marker = marker;
                     this.button = button;
                 });
+
+                this.allMarkers.push(
+                    {'marker': marker,
+                    'id': element.id,
+                    'button': button
+                    }
+                )
             }
             });
         },
@@ -223,9 +237,10 @@ export default {
         });
 
 
-        let geocoder = new MapboxGeocoder({
+        this.geocoder = new MapboxGeocoder({
             accessToken: this.key,
             placeholder: 'Buscar accident',
+            countries: 'es',
             zoom: 12,
             marker: {
                 color: "#FDC619"
@@ -235,29 +250,39 @@ export default {
 
         });
 
-        this.map.addControl(geocoder);
+        this.map.addControl(this.geocoder);
         this.map.addControl(new mapboxgl.NavigationControl());
 
        this.map.on('load', () =>{
             this.addRecursosToMap();
             this.map.resize();
         })
+
+
+        this.map.on('idle', ()=> {
+            this.map.resize()
+        } );
+
     },
 
-    // watch: {
-    //     direccioCompleta: {
-    //         deep:true,
-    //         function(val){
-    //         this.map.geocoder.setInput(val);
-    //     }
+    watch: {
 
-    //     }
+        recursPerCanviar: function(val){
+            debugger;
+            // Buscamos el marcador que hemos de cambiar
+            this.marker= this.allMarkers.find( marker => marker.id == val.recursos_id);
 
-    // }
+            // Buscamos el recurso a desactivar
+            this.recurs= this.recursos.find( recurs => recurs.id == val.recursos_id);
+
+            // No emitimos que se ha desasignado al padre ya que se ha borrado desde allí de una de estas formas:
+            // o se ha apretado 'no cal recurs' cuando ya se había asignado uno anterior.
+            // o se ha asignado un recurso distinto cuando ya había uno asignado a esa persona.
+            this.desactivarRecursSenseEmetre();
+        }
+
+
+    }
 };
 </script>
-<style scoped>
-    #mapa-mapbox {
-        width: 100%;
-    }
-</style>
+
