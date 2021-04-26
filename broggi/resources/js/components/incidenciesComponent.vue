@@ -478,6 +478,7 @@ export default {
 
       this.afectats.push(this.afectat);
 
+
     //Creamos afectatFormComponent y le pasamos el afectat de la posición numAfectats y la posición que ocupará en la array;
         let ComponentClass= Vue.extend(afectatFormComponent)
         let form= new ComponentClass({
@@ -486,10 +487,26 @@ export default {
 
         form.$mount()
         this.$refs.afectatsContainer.appendChild(form.$el)
-                // Si ya hay recursos (porque se ha apretado múltples y luego se ha decidido cambiar).
-        if(this.infoRecursos.length > 0){
-            this.infoRecursos[this.afectat.id].afectat_id = this.afectat.id;
+
+        // Si ya hay recursos (porque se ha apretado múltples y luego se ha decidido cambiar).
+        if(this.infoRecursos[this.afectat.id] && this.infoRecursos[this.afectat.id].afectat_id == 300){
+            this.infoRecursos[this.afectat.id].afectat_id = this.numAfectats;
         }
+
+        // Teniendo el id falso, vamos a crear un infoRecursos para ese afectado.
+        this.infoRecursos[this.numAfectats] = {
+                    recursos_id: null,
+                    hora_activacio: null,
+                    hora_mobilitzacio: null,
+                    hora_assistencia: null,
+                    hora_transport: null,
+                    hora_arribada_hospital: null,
+                    hora_transferencia: null,
+                    hora_finalitzacio: null,
+                    prioritat: null,
+                    desti: null,
+                    afectat_id: this.numAfectats,
+                    }
 
        this.numAfectats++;
     },
