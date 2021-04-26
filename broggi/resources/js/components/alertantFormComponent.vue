@@ -143,19 +143,19 @@ export default {
         this.errorMessage='';
     },
     searchAlertant(){
-        let trobat= this.alertants.find( alertant => alertant.telefon == this.alertant.telefon);
+        let trobat= this.alertants.find( alertant => alertant.telefon == this.alertantCopia.telefon);
         console.log(trobat)
         if(trobat == undefined){
             this.isFound = false;
         } else {
             this.isFound = true;
-            this.alertant.nom= trobat.nom;
-            this.alertant.cognoms= trobat.cognoms;
-            this.alertant.adreca= trobat.adreca;
-            this.alertant.municipis_id= trobat.municipis_id;
-            this.alertant.tipus_alertants_id= trobat.tipus_alertants_id;
+            this.alertantCopia.nom= trobat.nom;
+            this.alertantCopia.cognoms= trobat.cognoms;
+            this.alertantCopia.adreca= trobat.adreca;
+            this.alertantCopia.municipis_id= trobat.municipis_id;
+            this.alertantCopia.tipus_alertants_id= trobat.tipus_alertants_id;
 
-            this.$emit('dadesAfectat', this.alertant);
+            this.$emit('dadesAfectat', this.alertantCopia);
         }
     },
     initAlertant(){
