@@ -1,7 +1,7 @@
 <template>
   <div id="helpBoxDiv">
         <!-- div para el mensaje de feedback -->
-        <div v-show="infoMessage !=''" class="alert alert-primary alert-dismissible fade show" role="alert">
+        <div v-show="infoMessage != ''" class="alert alert-primary alert-dismissible fade show" role="alert">
             <strong>Info: </strong>
             {{infoMessage}}
             <button type="button" @click="resetMessage()" class="close">
@@ -18,39 +18,49 @@
             </button>
         </div>
         <!-- fin del div para el mensaje de error -->
-        <div class="card">
-          <div class="card-header">English Helpbox</div>
-
-          <div class="card-body">
+        <!-- <div class="card"> -->
+          <!-- <div class="card-header">
+              English Helpbox
+            </div>-->
+          <!-- <div class="card-body"> -->
             <div id="questionsDiv">
-              <ul>
+              <ul id="questionList">
                 <li v-for="(question, index) in questions" :key="index">
-                  <p>{{ question.questionText }}</p>
-                  <button class="btn btn-primary" id="playAudio" @click="playAudio(question.id)"><i class="fas fa-volume-up"></i></button>
+
+                  <button class="btn btn-primary" id="playAudio" @click="playAudio(question.id)">
+                      <i class="fas fa-volume-up"></i>
+                      </button>
                   <audio :src=" 'http://localhost:8080/Project2/broggi/public/audio/' + question.id  + '.m4a' " :id=" 'audio' + question.id " ></audio>
                   <button class="btn btn-primary"
                     v-show="!qShowA[index]"
                     id="showButton"
                     @click="showQuestionAnswers(index)">
-                    See answers
+                    <i class="fas fa-list"></i>
+                    <!-- See example answers -->
                   </button>
                   <button class="btn btn-primary"
                     v-show="qShowA[index]"
                     id="hideButton"
                     @click="hideQuestionAnswers(index)">
-                    Hide answers
+                    <i class="fas fa-minus-circle"></i>
+                    <!-- Hide answers -->
                   </button>
 
+                   <b class="question">{{ question.questionText }}</b>
+
                   <div id="answersDiv" v-show="qShowA[index]">
-                    <ul v-for="answer in question.answers" :key="answer.id">
-                      <li>{{ answer.answerText }}</li>
-                    </ul>
+                      <ul id="answersList">
+                            <li v-for="answer in question.answers" :key="answer.id">
+                                <p>{{ answer.answerText }}</p>
+                            </li>
+                      </ul>
+
                   </div>
                 </li>
               </ul>
             </div>
-          </div>
-        </div>
+          <!-- </div> -->
+        <!-- </div> -->
 
   </div>
 </template>
@@ -71,7 +81,7 @@ export default {
     };
   },
   methods: {
-      
+
     showQuestionAnswers(index) {
         let me = this;
       Vue.set(me.qShowA, index, true);
@@ -88,7 +98,7 @@ export default {
             //console.log(response.data);
             me.questions = response.data;
             me.setShowAnswers();
-            
+
         })
         .catch((error) => {
             me.errorMessage= error.response.data.error;
@@ -104,7 +114,7 @@ export default {
           console.log(response.data);
           me.answers = response.data;
           me.setShowAnswers();
-          
+
         })
         .catch((error) => {
           me.errorMessage= error.response.data.error;
@@ -128,7 +138,7 @@ export default {
     resetMessage(){
         this.infoMessage='';
     }
-   
+
 
   },
 
@@ -139,3 +149,19 @@ export default {
     },
 };
 </script>
+<style scoped>
+    #questionList > li{
+        list-style: none;
+        margin-bottom: 5%;
+    }
+
+    .question{
+        margin-left: 5%;
+    }
+
+    #answersList {
+        margin-left: 20%;
+    }
+
+
+</style>
