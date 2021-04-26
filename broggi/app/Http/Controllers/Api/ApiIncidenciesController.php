@@ -69,6 +69,7 @@ class ApiIncidenciesController extends Controller
         try {
             $incidencia->save();
 
+
             foreach ($afectats as $afectat) {
                 $afectatStore = new Afectats();
 
@@ -113,7 +114,8 @@ class ApiIncidenciesController extends Controller
 
             $response = (new IncidenciesResource($incidencia))
                 ->response()
-                ->setStatusCode(201);
+                //->setStatusCode(201);
+                ->json(['message' => 'Incidencia creada correctament'], 201);
         } catch (QueryException $ex) {
             DB::rollBack();
             $message = Utilitat::errorMessage($ex);
@@ -231,7 +233,8 @@ class ApiIncidenciesController extends Controller
 
             $response = (new IncidenciesResource($incidency))
                 ->response()
-                ->setStatusCode(201);
+                //->setStatusCode(201);
+                ->json(['message' => 'Incidencia actualitzada correctament'], 201);
 
             $request->session()->flash('message', "Incidencia afegida correctament");
         } catch (QueryException $ex) {
@@ -267,7 +270,7 @@ class ApiIncidenciesController extends Controller
             $incidency->refresh();
 
             $response = \response()
-                ->json(['message' => 'Incidencia borrado correctamente'], 200);
+                ->json(['message' => 'Incidencia esborrada correctament'], 200);
         } catch (QueryException $ex) {
             DB::rollBack();
             $message = Utilitat::errorMessage($ex);

@@ -1,5 +1,14 @@
 <template>
     <div class="tiposContainer">
+        <!-- div para el mensaje de feedback -->
+        <div v-show="infoMessage !=''" class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>Info: </strong>
+            {{infoMessage}}
+            <button type="button" @click="resetMessage()" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <!-- fin del div para el mensaje de feedback -->
         <!-- div para el mensaje de error -->
         <div v-show="errorMessage !=''" class="alert alert-secondary alert-dismissible fade show" role="alert">
             <strong>Error: </strong>
@@ -125,6 +134,7 @@
 export default {
   data() {
     return {
+        infoMessage:'',
         errorMessage:'',
         action: "",
         perPage: 5,
@@ -152,8 +162,8 @@ export default {
       axios
         .get("/tipusrecursos")
         .then((response) => {
-          me.tipus_recursos = response.data;
-        me.totalRows= me.tipus_recursos.length;
+            me.tipus_recursos = response.data;
+            me.totalRows= me.tipus_recursos.length;
         })
         .catch((error) => {
             me.errorMessage= error.response.data.error;
@@ -167,14 +177,15 @@ export default {
       axios
         .post("/tipusrecursos", me.tipo)
         .then(function (response) {
-          console.log(response);
-          me.selectTipus();
-          me.tipo =  {
-                id: "",
-                tipus: "",
-            };
-           me.action='';
+            console.log(response);
+            me.selectTipus();
+            me.tipo =  {
+                    id: "",
+                    tipus: "",
+                };
+            me.action='';
             document.getElementById("addButton").style.display = "block";
+            me.infoMessage = response.data.message;
         })
         .catch((error) => {
           console.log(error.response.status);
@@ -192,13 +203,14 @@ export default {
       axios
         .put("/tipusrecursos/" + me.tipo.id, me.tipo)
         .then(function (response) {
-          console.log(response);
-          me.selectTipus();
-           me.action='';
-            me.tipo =  {
-                id: "",
-                tipus: "",
-            };
+            console.log(response);
+            me.selectTipus();
+            me.action='';
+                me.tipo =  {
+                    id: "",
+                    tipus: "",
+                };
+             me.infoMessage = response.data.message;
         })
         .catch((error) => {
           console.log(error.response.status);
@@ -224,6 +236,7 @@ export default {
           $("#deleteModalTipus").modal("hide");
             me.action='';
           //me.infoMessage= response.data.missatge;
+           me.infoMessage = response.data.message;
         })
         .catch((error) => {
           me.errorMessage = error.response.data.error;
@@ -255,6 +268,9 @@ export default {
     },
     resetError(){
         this.errorMessage='';
+    },
+    resetMessage(){
+        this.infoMessage = '';
     }
   },
   created() {

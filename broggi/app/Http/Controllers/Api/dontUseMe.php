@@ -71,7 +71,7 @@ class IncidenciesController extends Controller
         try{
             $incidencies->delete();
             $response= \response()
-                        ->json(['message'=>'Registro borrado correctamente'], 200);
+                        ->json(['message'=>'Registre esborrat correctament'], 200);
         } catch (QueryException $ex){
             $message = Utilitat::errorMessage($ex);
             $response= \response()

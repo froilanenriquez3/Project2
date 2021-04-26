@@ -16,6 +16,9 @@ class Utilitat
             case 1062:
                 $message = "Registre duplicat";
                 break;
+            case 1264:
+                $message = "Input fora de rang";
+                break;
             case 1451;
                 $message = "Registre amb elements relacionats.";
                 break;
