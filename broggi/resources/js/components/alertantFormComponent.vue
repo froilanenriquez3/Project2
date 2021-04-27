@@ -30,7 +30,8 @@
             <p v-show="!isFound">No hi ha cap alertant a la base de dades amb aquest telèfon.</p>
             </div>
 
-            <div class="form-group row">
+            <div v-show="showInputs">
+            <div class="form-group row" >
                 <label class="col-2" for="tipus_alertant"><b>Tipus</b></label>
                 <select class="form-select col-10" v-model="alertantCopia.tipus_alertants_id" aria-label="Default select example" @input="updateAlertant()">
                     <option value=""></option>
@@ -59,6 +60,7 @@
                     <option v-for="municipi in municipis" :key="municipi.id"
                     v-bind:value="municipi.id" >{{municipi.nom}}</option>
                 </select>
+            </div>
             </div>
 
         </div>
@@ -105,7 +107,8 @@ export default {
           adreca: '',
           municipis_id: '',
           tipus_alertants_id: ''
-      }
+      },
+      showInputs: false
     };
   },
   methods: {
@@ -148,7 +151,7 @@ export default {
           me.alertant.id = response.data.id;
           me.alertantCopia.id = response.data.id;
           me.updateAlertant();
-          me.infoMessage = response.data.message;
+          me.infoMessage = 'Alertant creat correctament';
         })
         .catch((error) => {
           console.log(error.response.status);
@@ -174,12 +177,16 @@ export default {
 
             this.$emit('dadesAfectat', this.alertantCopia);
         }
+        this.showInputs = true;
     },
     initAlertant(){
         if(this.editincidencia != null){
             console.log("init alertant");
             this.alertantCopia = this.alertant;
+            this.showInputs = true;
+            console.log(this.alertant);
             console.log(this.alertantCopia);
+
         }
     },
     updateAlertant(){

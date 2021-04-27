@@ -466,6 +466,7 @@ export default {
         this.afectatActiu= afectat.id;
     },
     canviarDades(trobat){
+        debugger
         this.alertantIncidencia.telefon = trobat.telefon;
         this.alertantIncidencia.nom = trobat.nom;
         this.alertantIncidencia.cognoms = trobat.cognoms;
@@ -646,7 +647,7 @@ export default {
              axios
                 .put("/incidencies/"+me.incidencia.id, me.incidencia)
                 .then((response)=>{
-                    alert("Formulari enviat correctament");
+                    // alert("Formulari enviat correctament");
                     window.location.href = "/Project2/broggi/public/incidencies";
                     console.log(response);
                     me.incidencia = null;
@@ -701,14 +702,15 @@ export default {
             axios
             .post("/incidencies", me.incidencia)
             .then(function (response) {
-                alert("Incidencia inserted correctly!");
+                // alert("Incidencia inserted correctly!");
+                me.infoMessage = 'Incidencia creada correctament';
                 window.location.href = "/Project2/broggi/public/incidencies";
 
                 console.log(response);
                 me.clearInput();
                 me.getIncidencies();
                 //me.action=""
-                me.infoMessage = response.data.message;
+
             })
             .catch((error) => {
             console.log(error.response.status);
@@ -738,7 +740,26 @@ export default {
     },
     initEditIncidencia(){
         if(this.editincidencia != null ){
-            this.incidencia = this.editincidencia;
+            this.incidencia.adreca                   = this.editincidencia.adreca;
+            this.incidencia.adreca_complement        = this.editincidencia.adreca_complement;
+            this.incidencia.alertants                = this.editincidencia.alertants;
+            this.incidencia.alertants_id             = this.editincidencia.alertants_id;
+            this.incidencia.data                     = this.editincidencia.data;
+            this.incidencia.descripcio               = this.editincidencia.descripcio;
+            this.incidencia.duracion                 = this.editincidencia.duracion;
+            this.incidencia.hora                     = this.editincidencia.hora;
+            this.incidencia.id                       = this.editincidencia.id;
+            this.incidencia.incidencies_has_recursos = this.editincidencia.incidencies_has_recursos;
+            this.incidencia.incidencies_has_afectats = this.editincidencia.incidencies_has_afectats;
+            this.incidencia.municipis_id             = this.editincidencia.municipis_id;
+            this.incidencia.nom_metge                = this.editincidencia.nom_metgel
+            this.incidencia.telefon_alertant         = this.editincidencia.telefon_alertant;
+            this.incidencia.tipus_incidencies        = this.editincidencia.tipus_incidencies;
+            this.incidencia.tipus_incidencies_id     = this.editincidencia.tipus_incidencies_id;
+            this.incidencia.usuaris_id               = this.editincidencia.usuaris_id;
+
+
+            // this.incidencia = this.editincidencia;
             this.afectats = this.incidencia.incidencies_has_afectats;
             this.initAlertant();
             this.initAfectats();
@@ -750,7 +771,7 @@ export default {
             .get("/alertants/"+ me.incidencia.alertants_id)
             .then(response => {
                 me.alertantIncidencia = response.data;
-                me.alertant = response.data;
+                // me.alertant = response.data;
             })
             .catch(error => {
                 me.errorMessage= error.response.data.error;

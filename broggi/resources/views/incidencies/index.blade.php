@@ -2,6 +2,7 @@
 
 @section('links')
 {{-- <link rel="stylesheet" href="{{ asset('../resources/css/incidenciesRecursos/incidenciesRecursos.css?' . rand()) }}"> --}}
+<link rel="stylesheet" href="{{ asset('../resources/css/incidencies/index.css?' . rand()) }}">
 @endsection
 
 @section('navbar')
@@ -23,5 +24,5 @@
 @endsection
 
 @section('addButton')
-    {{-- <a href="{{ url('/alertants/create') }}"> <button class="btn btn-primary" id="addButton">Afegir</button></a> --}}
+    <a href="{{ url('/incidencies/create') }}"> <button class="btn btn-primary" id="addButton">Afegir</button></a>
 @endsection
