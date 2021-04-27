@@ -39,8 +39,8 @@ class TipusRecursController extends Controller
             $tipus->save();
             $response= (new TipusRecursosResource($tipus))
                         ->response()
-                        //->setStatusCode(201);
-                        ->json(['message' => 'Tipus de Recurs creat correctament'], 201);
+                        ->setStatusCode(201);
+                        // ->json(['message' => 'Tipus de Recurs creat correctament'], 201);
             } catch (QueryException $ex){
                 $message = Utilitat::errorMessage($ex);
                 $response = \response()
@@ -77,8 +77,8 @@ class TipusRecursController extends Controller
             $tipusrecurso->save();
             $response= (new tipusRecursosResource($tipusrecurso))
                         ->response()
-                       // ->setStatusCode(201);
-                        ->json(['message' => 'Tipus de Recurs guardat correctament'], 201);
+                       ->setStatusCode(201);
+                        // ->json(['message' => 'Tipus de Recurs guardat correctament'], 201);
             } catch (QueryException $ex){
                 $message = Utilitat::errorMessage($ex);
                 $response = \response()
