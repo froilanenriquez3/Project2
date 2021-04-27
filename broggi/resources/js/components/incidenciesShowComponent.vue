@@ -7,72 +7,74 @@
     </div>
 
     <div>
-        <div class="row">
-            <p class="col-4">
-                <b>Tipus Incidencia ID:</b> {{ incidencia.tipus_incidencies_id }}
-            </p>
-            <p class="col-4">
-                <b>Tipus Incidencia:</b> {{ incidencia.tipus_incidencies.tipus }}
-            </p>
-        </div>
+      <div class="row">
+        <p class="col-4">
+          <b>Tipus Incidencia ID:</b> {{ incidencia.tipus_incidencies_id }}
+        </p>
+        <p class="col-4">
+          <b>Tipus Incidencia:</b> {{ incidencia.tipus_incidencies.tipus }}
+        </p>
+      </div>
 
+      <div class="row">
+        <p class="col-4"><b>Descripcio:</b> {{ incidencia.descripcio }}</p>
+      </div>
 
-        <div class="row">
-            <p class="col-4"><b>Descripcio:</b> {{ incidencia.descripcio }}</p>
-        </div>
+      <div class="row">
+        <p class="col-4"><b>Adreca:</b> {{ incidencia.adreca }}</p>
+        <p class="col-4">
+          <b>Complement:</b> {{ incidencia.adreca_complement }}
+        </p>
+        <p class="col-4"><b>Municipi:</b> {{ incidencia.municipis_id }}</p>
+      </div>
 
-        <div class="row">
-            <p class="col-4"><b>Adreca:</b> {{ incidencia.adreca }}</p>
-            <p class="col-4"><b>Complement:</b> {{ incidencia.adreca_complement }}</p>
-            <p class="col-4"><b>Municipi:</b> {{ incidencia.municipis_id }}</p>
-        </div>
-
-        <div class="row">
-            <p class="col-4"><b>Hora:</b> {{ incidencia.hora }}</p>
-            <p class="col-4"><b>Data:</b> {{ incidencia.data }}</p>
-        </div>
-
+      <div class="row">
+        <p class="col-4"><b>Hora:</b> {{ incidencia.hora }}</p>
+        <p class="col-4"><b>Data:</b> {{ incidencia.data }}</p>
+      </div>
     </div>
 
     <div class="row">
       <h5 class="col-10">Alertant</h5>
     </div>
     <div>
-        <div class="row">
-            <p class="col-4"><b>Alertant ID:</b> {{ incidencia.alertants_id }}</p>
-            <p class="col-4"><b>Nom Metge:</b> {{ incidencia.nom_metge }}</p>
-            <p class="col-4">
-                <b>Telefon Alertant:</b> {{ incidencia.telefon_alertant }}
-            </p>
-        </div>
+      <div class="row">
+        <p class="col-4"><b>Alertant ID:</b> {{ incidencia.alertants_id }}</p>
+        <p class="col-4"><b>Nom Metge:</b> {{ incidencia.nom_metge }}</p>
+        <p class="col-4">
+          <b>Telefon Alertant:</b> {{ incidencia.telefon_alertant }}
+        </p>
+      </div>
     </div>
 
     <div class="row">
       <h5 class="col-10">Afectats</h5>
     </div>
 
-    <div v-for="afectat in incidencia.incidencies_has_afectats" :key="afectat.id">
-      <div class="row">
-        <p class="col-4"><b>Afectat ID:</b> {{ afectat.id }}</p>
-        <p class="col-4"><b>Nom: </b> {{ afectat.nom }}</p>
-        <p class="col-4"><b>Cognom: </b> {{ afectat.cognoms }}</p>
-      </div>
+    <div v-if="incidencia.incidencies_has_afectats.length > 0">
+      <div
+        v-for="afectat in incidencia.incidencies_has_afectats"
+        :key="afectat.id" class="card">
+        <div class="row">
+          <p class="col-4"><b>Afectat ID:</b> {{ afectat.id }}</p>
+          <p class="col-4"><b>Nom: </b> {{ afectat.nom }}</p>
+          <p class="col-4"><b>Cognom: </b> {{ afectat.cognoms }}</p>
+        </div>
 
-      <div class="row">
-        <p class="col-4"><b>Edat:</b> {{ afectat.edat }}</p>
-        <p class="col-4"><b>Sexes :</b> {{ afectat.sexes_id }}</p>
-        <p class="col-4"><b>Telefon Afectat:</b> {{ afectat.telefon }}</p>
-      </div>
+        <div class="row">
+          <p class="col-4"><b>Edat:</b> {{ afectat.edat }}</p>
+          <p class="col-4"><b>Sexes :</b> {{ afectat.sexes_id }}</p>
+          <p class="col-4"><b>Telefon Afectat:</b> {{ afectat.telefon }}</p>
+        </div>
 
-      <div class="row">
-        <p class="col-4">
-          <b>Recurs Assignat: </b>
-        </p>
-         <p class="col-4"></p>
-          <p class="col-4"></p>
+        <div class="row">
+          <p class="col-4"><b>Recurs Assignat: </b>{{ afectat.recursos_id }}</p>
+          <p class="col-4"><b>Codi: </b>{{ afectat.recursos_codi }}</p>
+          <p class="col-4"><b>Prioritat: </b>{{ afectat.prioritat }}</p>
+        </div>
       </div>
-
     </div>
+    <div v-else></div>
   </div>
 </template>
 
@@ -86,22 +88,82 @@ export default {
   data() {
     return {
       incidencia: {},
+      recursos: []
     };
   },
   methods: {
-      initAfectatsRecursos(){
-          this.incidencia.incidencies_has_afectats.forEach(element => {
-            //   element.recurso = somethingidklol;
+    initAfectatsRecursos() {
+      this.incidencia.incidencies_has_afectats.forEach((element, index) => {
+        let found = false;
+        let i = 0;
+        while (i < this.incidencia.incidencies_has_recursos.length && !found) {
+          if (this.incidencia.incidencies_has_recursos[i].afectat_id == element.id) {
+            let newElement = element;
+
+            newElement.recursos_id = this.incidencia.incidencies_has_recursos[i].recursos_id;
+            newElement.prioritat = this.incidencia.incidencies_has_recursos[i].prioritat;
+
+            Vue.set(
+              this.incidencia.incidencies_has_afectats,
+              index,
+              newElement
+            );
+
+            this.findRecurso(element);
+
+            found = true;
+          }
+          i++;
+        }
+      });
+
+    },
+    selectRecursos() {
+      let me = this;
+      axios
+        .get("/recursos")
+        .then((response) => {
+            console.log(response.data);
+          response.data.forEach((element) => {
+            if (element.id != 1) {
+              me.recursos.push(element);
+            }
           });
-      }
+          // me.recursos = response.data;
+          me.itemsToDisplay = me.recursos;
+          me.totalRows = me.itemsToDisplay.length;
+
+           me.initAfectatsRecursos();
+        })
+        .catch((error) => {
+        //   me.errorMessage = error.response.data.error;
+          console.log(error);
+        //   me.errorMessage = error.response.data.error;
+        })
+        .finally(() => (this.loading = false));
+    },
+    findRecurso(afectat){
+
+        let i = 0;
+        let found = false;
+        while(i < this.recursos.length && !found){
+
+            if(this.recursos[i].id == afectat.recursos_id){
+                found = true;
+                afectat.recursos_codi = this.recursos[i].codi;
+
+            } else {
+                i++;
+            }
+        }
+    }
   },
   created() {
     this.incidencia = this.showincidencia;
   },
   mounted() {
-    console.log("Component mounted.");
+    this.selectRecursos();
 
-    console.log(this.incidencia);
-  },
+  }
 };
 </script>

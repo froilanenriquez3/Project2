@@ -177,7 +177,7 @@
                         // console.log(response.data);
                         me.incidencies = response.data;
                         me.getAllShowIncidencies();
-                        
+
                     })
                     .catch((error) => {
                         me.errorMessage= error.response.data.error;

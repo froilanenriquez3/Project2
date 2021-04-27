@@ -140,7 +140,7 @@
                         me.incidencies.forEach( incidencia =>{
                             me.showIncidenciaRecurso(incidencia.id);
                         });
-                        
+
                     })
                     .catch((error) => {
                         me.errorMessage= error.response.data.error;
@@ -167,7 +167,7 @@
                         });
                         me.itemsToDisplay= me.incRecs;
                         me.totalRows= me.itemsToDisplay.length;
-                        
+
                     })
                     .catch((error) => {
                         me.errorMessage= error.response.data.error;
@@ -185,7 +185,7 @@
             deleteIncidencia(){
                 let me = this;
                 axios
-                    .delete("/incidenciesrecursos/" + me.editIncidencia.id)
+                    .delete("/incidenciesrecursos/" + me.editIncidencia.id + "/" + me.userrecursoid)
                     .then(response => {
                         console.log(response.data);
                         me.incRecs = [];
