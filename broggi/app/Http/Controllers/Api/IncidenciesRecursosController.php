@@ -143,11 +143,9 @@ class IncidenciesRecursosController extends Controller
         $ihr = IncidenciesHasRecursos::where('incidencies_id', '=', $incidenciesrecurso->id)
             ->where('recursos_id', '=', $recurs_id)->first();
 
-
         try {
 
             $ihr->delete();
-            // $incidenciesrecurso->incidencies_has_recursos()->delete();
 
             DB::commit();
             $incidenciesrecurso->refresh();

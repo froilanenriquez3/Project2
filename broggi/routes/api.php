@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\MunicipisController;
 use App\Http\Controllers\Api\TipusRecursController;
 use App\Http\Controllers\Api\TipusAlertantsController;
 use App\Http\Controllers\Api\TipusIncidenciesController;
+use App\Models\Incidencies;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +46,4 @@ Route::apiResource('answers', AnswerController::class);
 Route::apiResource('tipusincidencies', TipusIncidenciesController::class);
 Route::apiResource('afectats', AfectatsController::class);
 Route::apiResource('incidenciesrecursos', IncidenciesRecursosController::class);
+Route::delete('incidenciesrecursos/{incidenciesrecurso}/{recurs_id}',[IncidenciesRecursosController::class, 'destroy'] );

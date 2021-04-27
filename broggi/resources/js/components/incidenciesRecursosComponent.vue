@@ -140,7 +140,7 @@
                 console.log("Save recurs:" + me.incidencia.saveRecurs);
 
                 axios
-                    .put("/incidenciesrecursos/"+me.incidencia.id, me.incidencia, me.userrecursoid)
+                    .put("/incidenciesrecursos/"+me.incidencia.id, me.incidencia)
                     .then((response)=>{
                         alert("Formulari enviat correctament");
                         console.log(response);
