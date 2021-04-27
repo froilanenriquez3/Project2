@@ -43,8 +43,8 @@ class RecursosController extends Controller
             $recursos->save();
             $response= (new RecursosResource($recursos))
                         ->response()
-                        //->setStatusCode(201);
-                        ->json(['message' => 'Recurs creat correctament'], 201);
+                        ->setStatusCode(201);
+                        // ->json(['message' => 'Recurs creat correctament'], 201);
             } catch (QueryException $ex){
                 $message = Utilitat::errorMessage($ex);
                 $response = \response()
@@ -87,8 +87,8 @@ class RecursosController extends Controller
             $recurso->save();
             $response= (new RecursosResource($recurso))
                         ->response()
-                        //->setStatusCode(201);
-                        ->json(['message' => 'Recurs actualitzat correctament'], 201);
+                        ->setStatusCode(201);
+                        // ->json(['message' => 'Recurs actualitzat correctament'], 201);
             } catch (QueryException $ex){
                 $message = Utilitat::errorMessage($ex);
                 $response = \response()
