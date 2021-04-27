@@ -49,8 +49,7 @@
                                 value="actiu"
                                 id="actiu"
                                 :checked="recurs.actiu"
-                                disabled
-                            />
+                                disabled/>
                             <label class="form-check-label" for="actiu"></label>
                         </div>
                     </td>
@@ -61,8 +60,7 @@
                         <button
                             type="submit"
                             class="btn btn-warning btn-sm d-flex"
-                             @click="selectAction('editar', recurs)"
-                        >
+                             @click="selectAction('editar', recurs)">
                            Editar
                         </button>
                     </td>
@@ -71,8 +69,7 @@
                             id="deleteB"
                             type="submit"
                             class="btn btn-secondary btn-sm d-flex"
-                             @click="confirmDeleteRecurs(recurs)"
-                        >
+                             @click="confirmDeleteRecurs(recurs)">
                             Esborrar
                         </button>
                     </td>
@@ -176,10 +173,15 @@ export default {
             axios
                 .get("/recursos")
                 .then(response => {
-                    me.recursos = response.data;
+                    response.data.forEach(element => {
+                        if (element.id != 1){
+                            me.recursos.push(element);
+                        }
+                    });
+                    // me.recursos = response.data;
                     me.itemsToDisplay= me.recursos;
                     me.totalRows= me.itemsToDisplay.length;
-                    
+
                 })
                 .catch(error => {
                     me.errorMessage= error.response.data.error;
@@ -224,7 +226,7 @@ export default {
                 .then(response => {
                     me.tipus_recursos = response.data;
                     console.log(me.tipus_recursos);
-                    
+
                 })
                 .catch(error => {
                     me.errorMessage= error.response.data.error;
