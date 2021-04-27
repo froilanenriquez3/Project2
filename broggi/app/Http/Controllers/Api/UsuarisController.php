@@ -49,7 +49,7 @@ class UsuarisController extends Controller
         $response= (new UsuarisResource($usuaris))
                     ->response()
                     ->setStatusCode(201);
-                    // ->json(['message' => 'Usuari creat correctament'], 201);
+                    //->json(['message' => 'Usuari creat correctament'], 201);
         } catch (QueryException $ex){
             $message = Utilitat::errorMessage($ex);
             $response = \response()
@@ -94,7 +94,7 @@ class UsuarisController extends Controller
         $response= (new UsuarisResource($usuari))
                     ->response()
                     ->setStatusCode(201);
-                    // ->json(['message' => 'Usuari guardat correctament'], 201);
+                    //->json(['message' => 'Usuari guardat correctament'], 201);
         } catch (QueryException $ex){
             $message = Utilitat::errorMessage($ex);
             $response = \response()

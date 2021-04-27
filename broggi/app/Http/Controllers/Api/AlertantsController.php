@@ -44,9 +44,9 @@ class AlertantsController extends Controller
         $alertants->save();
         $response= (new AlertantsResource($alertants))
                     ->response()
-                   ->setStatusCode(201);
-                    // ->json(['message' => 'Alertant creat correctament'], 201);
-
+                    ->setStatusCode(201);
+                    //->json(['message' => 'Alertant creat correctament'], 201);
+        
         } catch (QueryException $ex){
             $message = Utilitat::errorMessage($ex);
             $response = \response()
@@ -90,7 +90,7 @@ class AlertantsController extends Controller
         $response= (new alertantsResource($alertant))
                     ->response()
                     ->setStatusCode(201);
-                    // ->json(['message' => 'Alertant actualitzat correctament'], 201);
+                    //->json(['message' => 'Alertant actualitzat correctament'], 201);
         } catch (QueryException $ex){
             $message = Utilitat::errorMessage($ex);
             $response = \response()
