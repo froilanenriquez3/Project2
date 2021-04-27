@@ -360,6 +360,7 @@ CREATE TABLE IF NOT EXISTS `broggi`.`Question` (
   `questionText` VARCHAR(150) NOT NULL,
   `incidencies_id` INT NOT NULL,
   PRIMARY KEY (`id`),
+   `translation` VARCHAR(150) NULL,
   INDEX `fk_Question_incidencies1_idx` (`incidencies_id` ASC) ,
   CONSTRAINT `fk_Question_incidencies1`
     FOREIGN KEY (`incidencies_id`)
@@ -1571,13 +1572,13 @@ VALUES("Recurs2", "$2y$12$H1E5Jy3gzLqe9DaG9k7jHeAhMMUbeBgNXLGRAzJWPnkDmPz5Go0iG"
 INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id, recursos_id)
 VALUES("Recurs3", "$2y$12$H1E5Jy3gzLqe9DaG9k7jHeAhMMUbeBgNXLGRAzJWPnkDmPz5Go0iG", "admin@mail.com", "Recurs", "mobil", 3, 3);
 
-INSERT INTO Question (questionText, incidencies_id)
-VALUES("What is your emergency?", -1);
-INSERT INTO Answer (answerText, question_id)
+INSERT INTO Question (questionText, incidencies_id, translation)
+VALUES("What is your emergency?", -1, "¿Quina és l'emergència?");
+INSERT INTO Answer (answerText, question_id, translation)
 VALUES("My house is on fire", 1);
-INSERT INTO Answer (answerText, question_id)
+INSERT INTO Answer (answerText, question_id, translation)
 VALUES("My friend is having a heart attack", 1);
-INSERT INTO Answer (answerText, question_id)
+INSERT INTO Answer (answerText, question_id, translation)
 VALUES("I have been in a car accident", 1);
 
 INSERT INTO Question (questionText, incidencies_id)
@@ -1644,15 +1645,14 @@ INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `l
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('77766', '0', '2', '41.5566', '1.951');
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('77899', '0', '2', '41.38899844', '2.158166034');
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78866', '1', '4', '41.3807', '2.1738');
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78555', '1', '1', '41.407665036', '2.171332648');
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('79999', '1', '1', '41.407665036', '2.171332648');
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78844', '1', '1', '41.61674', '0.62218');
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('99866', '1', '1', '41.236390721', '1.7750302332');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78555', '0', '1', '41.407665036', '2.171332648');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('79999', '0', '1', '41.407665036', '2.171332648');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78844', '0', '1', '41.61674', '0.62218');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('99866', '0', '1', '41.236390721', '1.7750302332');
 
 
 insert into afectats(id, nom, cognoms, sexes_id) values( 300, "", "",1) ;
--- insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Violet", 'Incredible', 12, true, 1) ;
--- insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Dash", 'Incredible', 12, true, 1) ;
+
 
 
 COMMIT;
