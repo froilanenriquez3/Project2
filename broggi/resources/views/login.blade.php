@@ -10,7 +10,8 @@
     @include('partials.headerLinks')
 
     <link rel="stylesheet" href=" {{ asset('../resources/css/login.css?'.rand()) }}">
-
+    <link rel="icon" href="{{ asset('logoWeb.ico') }}" sizes="32x32" type="ico">
+ 
     <title>Broggi</title>
 </head>
 <body>

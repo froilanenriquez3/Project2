@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('../resources/css/sidebar.css?' . rand()) }}">
 
     @yield('links')
-
+    <link rel="icon" href="{{ asset('logoWeb.ico') }}" sizes="32x32" type="ico">
     <title>@yield('title')</title>
 </head>
 

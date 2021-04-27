@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('../resources/css/side.css?'.rand())}}">
     <link rel="stylesheet" href="{{ asset('../resources/css/createTemplateSB.css?' . rand()) }}">
     <title>@yield('title')</title>
+    <link rel="icon" href="{{ asset('logoWeb.ico') }}" sizes="32x32" type="ico">
 </head>
 
 <body>

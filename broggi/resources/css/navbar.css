@@ -4,7 +4,7 @@ a.navbarLinks{
 }
 a.navbarLinks:hover,
 a.navbarLinks:active,
-/* a.navbarLinks:active:before, */
+a.navbarLinks:active::before, 
 a.navbarLinks:focus{
     font-style: bold!important;
     background-color: #11ADC4!important;
@@ -12,6 +12,8 @@ a.navbarLinks:focus{
     color: white !important;
 
 }
+
+
 
 .logo:hover{
     background-color: white;
