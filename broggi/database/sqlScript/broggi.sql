@@ -360,6 +360,7 @@ CREATE TABLE IF NOT EXISTS `broggi`.`Question` (
   `questionText` VARCHAR(150) NOT NULL,
   `incidencies_id` INT NOT NULL,
   PRIMARY KEY (`id`),
+   `translation` VARCHAR(150) NULL,
   INDEX `fk_Question_incidencies1_idx` (`incidencies_id` ASC) ,
   CONSTRAINT `fk_Question_incidencies1`
     FOREIGN KEY (`incidencies_id`)
@@ -378,6 +379,7 @@ CREATE TABLE IF NOT EXISTS `broggi`.`Answer` (
   `id` INT NOT NULL auto_increment,
   `answerText` VARCHAR(150) NOT NULL,
   `Question_id` INT NOT NULL,
+  `translation` VARCHAR(150) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Answer_Question1_idx` (`Question_id` ASC),
   CONSTRAINT `fk_Answer_Question1`
@@ -1570,32 +1572,70 @@ VALUES("Recurs2", "$2y$12$H1E5Jy3gzLqe9DaG9k7jHeAhMMUbeBgNXLGRAzJWPnkDmPz5Go0iG"
 INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id, recursos_id)
 VALUES("Recurs3", "$2y$12$H1E5Jy3gzLqe9DaG9k7jHeAhMMUbeBgNXLGRAzJWPnkDmPz5Go0iG", "admin@mail.com", "Recurs", "mobil", 3, 3);
 
+INSERT INTO Question (questionText, incidencies_id, translation)
+VALUES("What is your emergency?", -1, "¿Quina és l'emergència?");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("My house is on fire", 1);
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("My friend is having a heart attack", 1);
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("I have been in a car accident", 1);
+
 INSERT INTO Question (questionText, incidencies_id)
 VALUES("What's the location of your emergency?", -1);
 INSERT INTO Answer (answerText, question_id)
-VALUES("At my house", 1);
+VALUES("At my house", 2);
 INSERT INTO Answer (answerText, question_id)
-VALUES("At my place of work", 1);
+VALUES("At my place of work", 2);
 INSERT INTO Answer (answerText, question_id)
-VALUES("At my school", 1);
+VALUES("At my school", 2);
 
 INSERT INTO Question (questionText, incidencies_id)
 VALUES("When did this happen?", -1);
 INSERT INTO Answer (answerText, question_id)
-VALUES("Five minutes ago", 2);
+VALUES("Five minutes ago", 3);
 INSERT INTO Answer (answerText, question_id)
-VALUES("One hour ago", 2);
+VALUES("One hour ago", 3);
 INSERT INTO Answer (answerText, question_id)
-VALUES("I don't know", 2);
+VALUES("I don't know", 3);
 
 INSERT INTO Question (questionText, incidencies_id)
-VALUES("What is your emergency?", -1);
+VALUES("What is your/his/her name?", -1);
 INSERT INTO Answer (answerText, question_id)
-VALUES("My house is on fire", 3);
+VALUES("My name is Lucas", 4);
 INSERT INTO Answer (answerText, question_id)
-VALUES("My friend is having a heart attack", 3);
+VALUES("My name is Maria", 4);
 INSERT INTO Answer (answerText, question_id)
-VALUES("I have been in a car accident", 3);
+VALUES("His name is Marc", 4);
+INSERT INTO Answer (answerText, question_id)
+VALUES("Her name is Julia", 4);
+
+INSERT INTO Question (questionText, incidencies_id)
+VALUES("How old are you? ||  How old is he/she?", -1);
+INSERT INTO Answer (answerText, question_id)
+VALUES("I am twenty years old", 5);
+INSERT INTO Answer (answerText, question_id)
+VALUES("She is forty three", 5);
+INSERT INTO Answer (answerText, question_id)
+VALUES("He is thirty six years old", 5);
+
+INSERT INTO Question (questionText, incidencies_id)
+VALUES("Do you need medical assistance? ", -1);
+INSERT INTO Answer (answerText, question_id)
+VALUES("Yes, I need medical assistance", 6);
+INSERT INTO Answer (answerText, question_id)
+VALUES("No, I don't need medical assistance", 6);
+
+INSERT INTO Question (questionText, incidencies_id)
+VALUES("How many people were hurt? ", -1);
+INSERT INTO Answer (answerText, question_id)
+VALUES("I am the only one", 7);
+INSERT INTO Answer (answerText, question_id)
+VALUES("Two, me and my friend", 7);
+INSERT INTO Answer (answerText, question_id)
+VALUES("There are at least dozen", 7);
+INSERT INTO Answer (answerText, question_id)
+VALUES("Just the other driver and his passengers", 7);
 
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('cap', '0', '1', '41.3879', '2');
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('12345', '0', '1', '41.3879', '2.16992');
@@ -1605,15 +1645,14 @@ INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `l
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('77766', '0', '2', '41.5566', '1.951');
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('77899', '0', '2', '41.38899844', '2.158166034');
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78866', '1', '4', '41.3807', '2.1738');
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78555', '1', '1', '41.407665036', '2.171332648');
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('79999', '1', '1', '41.407665036', '2.171332648');
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78844', '1', '1', '41.61674', '0.62218');
-INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('99866', '1', '1', '41.236390721', '1.7750302332');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78555', '0', '1', '41.407665036', '2.171332648');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('79999', '0', '1', '41.407665036', '2.171332648');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('78844', '0', '1', '41.61674', '0.62218');
+INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('99866', '0', '1', '41.236390721', '1.7750302332');
 
 
 insert into afectats(id, nom, cognoms, sexes_id) values( 300, "", "",1) ;
--- insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Violet", 'Incredible', 12, true, 1) ;
--- insert into afectats(telefon, cip, nom, cognoms, edat, te_cip, sexes_id) values('123456789', 'fyuahjsdfk', "Dash", 'Incredible', 12, true, 1) ;
+
 
 
 COMMIT;
