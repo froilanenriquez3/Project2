@@ -423,7 +423,6 @@ export default {
 
     },
     setRecursFromMap(recurs){
-        debugger;
         if(this.infoRecursos[this.afectatActiu]){
         if(this.infoRecursos[this.afectatActiu].hasOwnProperty('tipus') && !this.multiple){
             this.recursPerCanviar= this.infoRecursos[this.afectatActiu];
@@ -478,6 +477,10 @@ export default {
     },
     isMultiple(){
         this.multiple= true;
+        this.afectats.forEach(afectat => {
+            this.infoRecursos[afectat.id].afectat_id= afectat.id;
+        });
+
     },
     nouAfectat(){
         this.multiple= false;
