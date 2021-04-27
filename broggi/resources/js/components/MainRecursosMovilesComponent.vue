@@ -32,8 +32,9 @@
             <thead>
                 <tr>
                     <th scope="col">Codi</th>
-                    <th scope="col">Actiu</th>
                     <th scope="col">Tipus</th>
+                    <th scope="col">Actiu</th>
+                    
                     <th></th>
                     <th></th>
                 </tr>
@@ -92,28 +93,29 @@
         <div v-show="action == 'afegir' || action == 'editar'">
             <div class="form-group row">
                 <label class="col-2" for="codi">Codi</label>
-                <input v-model="recurs.codi" class="col-10" type="text" id="codi" name="codi" />
+                <input v-model="recurs.codi" class="col-5" type="text" id="codi" name="codi" />
             </div>
-             <div class="form-group row">
-            <label class="form-check-label col-2" for="actiu">Actiu</label>
-            <div class="custom-control custom-checkbox col-10">
-                <input class="form-check-input" type="checkbox"  v-model="recurs.actiu" value="actiu" name="actiu" id="actiu">
-            </div>
-        </div>
+            
             <div class="form-group row">
-            <label class="col-2" for="tipus_rescurs_id">Tipus</label>
-            <select class="form-select" v-model="recurs.tipus_recursos_id" aria-label="Default select example">
-                <option v-for="recurso in tipus_recursos" :key="recurso.id"
-                v-bind:value="recurso.id" >{{recurso.tipus}}</option>
-            </select>
+                <label class="col-2" for="tipus_rescurs_id">Tipus</label>
+                <select class="form-select col-5" v-model="recurs.tipus_recursos_id" aria-label="Default select example">
+                    <option v-for="recurso in tipus_recursos" :key="recurso.id"
+                    v-bind:value="recurso.id" >{{recurso.tipus}}</option>
+                </select>
+            </div>
+            <div class="form-group row">
+                <label class="form-check-label col-2" for="actiu">Actiu</label>
+                <div class="custom-control custom-checkbox col-10">
+                    <input class="form-check-input" type="checkbox"  v-model="recurs.actiu" value="actiu" name="actiu" id="actiu">
+                </div>
             </div>
 
             <map-insert :recurs="this.recurs" :action="action"></map-insert>
 
-            <button v-if="action == 'afegir' " type="button" @click="afegirRecurs()" class="btn btn-primary">Afegir</button>
-            <button v-else type="button" @click="editarRecurs()" class="btn btn-warning">Editar</button>
+            <button v-if="action == 'afegir' " type="button" @click="afegirRecurs()"  class="btn btn-primary">Afegir</button>
+            <button v-else type="button" @click="editarRecurs()" class="btn btn_editar_recurs btn-warning" style="margin-top:20">Editar</button>
 
-            <button type="button" @click="cerrarPagina()" class="btn ml-3 border border-dark">Enrere</button>
+            <button type="button" @click="cerrarPagina()" class="btn btn_editar_recurs ml-3 border border-dark">Enrere</button>
         </div>
 
         <!-- Modal Delete -->
@@ -336,3 +338,11 @@ export default {
     }
 };
 </script>
+<style>
+    .btn_editar_recurs{
+        margin-top : 2em;
+        float: right;
+        margin-left: 2em;
+
+    }
+</style>
