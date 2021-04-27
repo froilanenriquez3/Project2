@@ -146,6 +146,7 @@ export default {
         // Si hay recurso (editar), cogemos el valor del recurso para que el marcador se muestre allí,y también cambiamos el centro del mapa.
           this.marker.setLngLat([newVal.lon, newVal.lat])
           this.map.setCenter([newVal.lon, newVal.lat])
+           document.getElementById('latLongInfo').innerHTML= newVal.lon + ';' + newVal.lat;
         }
 
 }

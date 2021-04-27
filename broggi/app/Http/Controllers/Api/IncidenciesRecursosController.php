@@ -117,8 +117,8 @@ class IncidenciesRecursosController extends Controller
 
             $response = (new IncidenciesResource($incidenciesrecurso))
                 ->response()
-                //->setStatusCode(201);
-                ->json(['message' => 'Incidencia actualitzada correctament'], 201);
+                ->setStatusCode(201);
+                // ->json(['message' => 'Incidencia actualitzada correctament'], 201);
 
             // $request->session()->flash('message', "Incidencia afegida correctament");
         } catch (QueryException $ex) {
