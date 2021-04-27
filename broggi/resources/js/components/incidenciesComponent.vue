@@ -538,7 +538,7 @@ export default {
         .get("/municipis")
         .then((response) => {
           me.municipis = response.data;
-          me.infoMessage = response.data.message;
+          
         })
         .catch((error) => {
           me.errorMessage= error.response.data.error;
