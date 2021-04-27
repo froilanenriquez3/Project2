@@ -647,7 +647,7 @@ export default {
              axios
                 .put("/incidencies/"+me.incidencia.id, me.incidencia)
                 .then((response)=>{
-                    alert("Formulari enviat correctament");
+                    // alert("Formulari enviat correctament");
                     window.location.href = "/Project2/broggi/public/incidencies";
                     console.log(response);
                     me.incidencia = null;
@@ -702,14 +702,15 @@ export default {
             axios
             .post("/incidencies", me.incidencia)
             .then(function (response) {
-                alert("Incidencia inserted correctly!");
+                // alert("Incidencia inserted correctly!");
+                me.infoMessage = 'Incidencia creada correctament';
                 window.location.href = "/Project2/broggi/public/incidencies";
 
                 console.log(response);
                 me.clearInput();
                 me.getIncidencies();
                 //me.action=""
-                me.infoMessage = response.data.message;
+
             })
             .catch((error) => {
             console.log(error.response.status);

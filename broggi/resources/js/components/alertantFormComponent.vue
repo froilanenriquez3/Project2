@@ -151,7 +151,7 @@ export default {
           me.alertant.id = response.data.id;
           me.alertantCopia.id = response.data.id;
           me.updateAlertant();
-          me.infoMessage = response.data.message;
+          me.infoMessage = 'Alertant creat correctament';
         })
         .catch((error) => {
           console.log(error.response.status);
