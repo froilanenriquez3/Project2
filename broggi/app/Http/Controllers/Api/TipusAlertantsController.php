@@ -39,8 +39,8 @@ class TipusAlertantsController extends Controller
             $tipo->save();
             $response= (new TipusAlertantsResource($tipo))
                         ->response()
-                        //->setStatusCode(201);
-                        ->json(['message' => 'Tipus d´Alertants creat correctament'], 201);
+                        ->setStatusCode(201);
+                        //->json(['message' => 'Tipus d´Alertants creat correctament'], 201);
             } catch (QueryException $ex){
                 $message = Utilitat::errorMessage($ex);
                 $response = \response()
@@ -77,8 +77,8 @@ class TipusAlertantsController extends Controller
             $tipusalertant->save();
             $response= (new TipusAlertantsResource($tipusalertant))
                         ->response()
-                        //->setStatusCode(201);
-                        ->json(['message' => 'Tipus d´Alertants guardat correctament'], 201);
+                        ->setStatusCode(201);
+                        //->json(['message' => 'Tipus d´Alertants guardat correctament'], 201);
             } catch (QueryException $ex){
                 $message = Utilitat::errorMessage($ex);
                 $response = \response()
