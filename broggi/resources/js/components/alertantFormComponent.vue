@@ -32,7 +32,7 @@
 
             <div class="form-group row">
                 <label class="col-2" for="tipus_alertant"><b>Tipus</b></label>
-                <select class="form-select col-4" v-model="alertantCopia.tipus_alertants_id" aria-label="Default select example" @input="updateAlertant()">
+                <select class="form-select col-10" v-model="alertantCopia.tipus_alertants_id" aria-label="Default select example" @input="updateAlertant()">
                     <option value=""></option>
                     <option v-for="tipus in tipus_alertants" :key="tipus.id"
                     v-bind:value="tipus.id" >{{tipus.tipus}}</option>
@@ -40,13 +40,11 @@
             </div>
 
             <div class="form-group row">
-            <label class="col-2" for="nom">Nom</label>
-            <input class="col-10" type="text" name="nom" v-model="alertantCopia.nom" @input="updateAlertant()"/>
-            </div>
+                <label class="col-2" for="nom">Nom</label>
+                <input class="col-4" type="text" name="nom" v-model="alertantCopia.nom" @input="updateAlertant()"/>
 
-            <div class="form-group row">
-            <label class="col-2" for="cognoms">Cognoms</label>
-            <input class="col-10" type="text" name="cognoms" v-model="alertantCopia.cognoms" @input="updateAlertant()"/>
+                <label class="col-2" for="cognoms">Cognoms</label>
+                <input class="col-4" type="text" name="cognoms" v-model="alertantCopia.cognoms" @input="updateAlertant()"/>
             </div>
 
             <div class="form-group row">
@@ -56,7 +54,7 @@
 
             <div class="form-group row">
             <label class="col-2" for="municipi_alertant">Municipi</label>
-            <select class="form-select col-4" v-model="alertantCopia.municipis_id" aria-label="Default select example" @input="updateAlertant()">
+            <select class="form-select col-10" v-model="alertantCopia.municipis_id" aria-label="Default select example" @input="updateAlertant()">
                 <option value=""></option>
                     <option v-for="municipi in municipis" :key="municipi.id"
                     v-bind:value="municipi.id" >{{municipi.nom}}</option>
@@ -178,9 +176,10 @@ export default {
         }
     },
     initAlertant(){
-        if(Object.keys(this.alertant).length !== 0 ){
-            console.log('filling in alertant');
+        if(this.editincidencia != null){
+            console.log("init alertant");
             this.alertantCopia = this.alertant;
+            console.log(this.alertantCopia);
         }
     },
     updateAlertant(){
@@ -205,7 +204,6 @@ export default {
 //   Cada vez que la copia de alertant cambie la emitimos a incidencias, para tener los cambios allí.
   watch: {
       alertantCopia: function(val){
-          console.log('In the watcher');
           immediate: true,
           this.$emit('dadesAlertant', val);
     }
@@ -213,3 +211,8 @@ export default {
 
   }
 </script>
+<style scoped>
+    .form-group{
+        margin-bottom: 3%;
+    }
+</style>

@@ -47,10 +47,11 @@ class IncidenciesController extends Controller
      */
     public function show(Incidencies $incidency)
     {
-        $incidencia = Incidencies::with(['incidencies_has_recursos', 'incidencies_has_afectats', 'tipus_incidencies'])->find($incidency->id);
+        $incidencia = Incidencies::with(['incidencies_has_recursos', 'incidencies_has_afectats', 'tipus_incidencies'])
+            ->find($incidency->id);
         // $incidencia = new IncidenciesResource(Incidencies::findOrFail($incidency->id));
         // $incidency = new IncidenciesResource($incidency);
-        return view('incidencies/show',compact('incidencia'));
+        return view('incidencies/show', compact('incidencia'));
     }
 
     /**
@@ -61,7 +62,15 @@ class IncidenciesController extends Controller
      */
     public function edit(Incidencies $incidency)
     {
-        $incidencia = Incidencies::with(['incidencies_has_recursos', 'incidencies_has_afectats', 'tipus_incidencies'])->find($incidency->id);
+        $incidencia = Incidencies::with(
+            [
+                'incidencies_has_recursos',
+                'incidencies_has_afectats',
+                'tipus_incidencies',
+                'alertants'
+            ]
+        )
+            ->find($incidency->id);
         return view('incidencies/edit', compact('incidencia'));
     }
 
