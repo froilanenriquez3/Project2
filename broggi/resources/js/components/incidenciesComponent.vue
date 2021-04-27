@@ -480,9 +480,24 @@ export default {
     },
     isMultiple(){
         this.multiple= true;
+        this.afectats.forEach(afectat => {
+            this.infoRecursos[afectat.id].afectat_id= afectat.id;
+        });
+
     },
     nouAfectat(){
         this.multiple= false;
+
+        // Si ya se ha apretado múltiples y luego se ha decidido cambiar y ya había recurso asignado, lo tenemos que desasignar.
+        // Si no puede suceder que solo haya 1 asignado pero hubiera ya 3 recursos asignados y en el mapa y en la bd aún consten
+        // como asignados.
+        this.infoRecursos.forEach( infoRecurs => {
+            debugger;
+            if(infoRecurs.afectat_id == 300 && infoRecurs.hasOwnProperty('tipus')){
+                 this.recursPerCanviar= infoRecurs;
+            }
+        });
+
       this.afectat= {
           id: '',
           telefon: '',
@@ -511,7 +526,7 @@ export default {
             this.infoRecursos[this.afectat.id].afectat_id = this.numAfectats;
         }
 
-        // Teniendo el id falso, vamos a crear un infoRecursos para ese afectado.
+        // Teniendo el id falso (posición de afectado en array), vamos a crear un infoRecursos para ese afectado.
         this.infoRecursos[this.numAfectats] = {
                     recursos_id: null,
                     hora_activacio: null,
