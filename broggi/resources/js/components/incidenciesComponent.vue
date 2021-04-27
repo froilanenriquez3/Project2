@@ -87,7 +87,9 @@
     </div>
 
     <!-- TAG ALERTANTE -->
-    <alertant-form @dadesAlertant="canviarDades($event)" :municipis="municipis" :alertant="alertantIncidencia" :section="section" v-show="section == 'Alertant'"></alertant-form>
+    <alertant-form @dadesAlertant="canviarDades($event)" :municipis="municipis"
+    :alertant="alertantIncidencia" :section="section" v-show="section == 'Alertant'"
+    :editincidencia="editincidencia"></alertant-form>
 
     <!-- TAG AFECTADO -->
     <!-- add fa plus icon -->
@@ -473,7 +475,7 @@ export default {
         this.alertantIncidencia.adreca = trobat.adreca;
         this.incidencia.telefon_alertant = trobat.telefon;
         this.incidencia.alertants_id = trobat.id;
-        console.log("Trobat id" + trobat.id);
+        console.log("Trobat id: " + trobat.id);
         console.log(this.incidencia.alertants_id);
     },
     isMultiple(){
@@ -538,7 +540,7 @@ export default {
         .get("/municipis")
         .then((response) => {
           me.municipis = response.data;
-          
+
         })
         .catch((error) => {
           me.errorMessage= error.response.data.error;

@@ -6,7 +6,7 @@
 
         <div class="form-group row">
           <label class="col-2" for="">Telefon Afectat</label>
-          <input class="col-10" v-model="afectat.telefon" type="tel" name="telefon" maxlength="9" />
+          <input class="col-4" v-model="afectat.telefon" type="tel" name="telefon" maxlength="9" />
         </div>
 
         <div class="form-group row">
