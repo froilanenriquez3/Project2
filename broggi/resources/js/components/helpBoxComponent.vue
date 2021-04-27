@@ -47,11 +47,13 @@
                   </button>
 
                    <b class="question">{{ question.questionText }}</b>
+                   <p class="translation"> {{ question.translation }} </p>
 
                   <div id="answersDiv" v-show="qShowA[index]">
                       <ul id="answersList">
                             <li v-for="answer in question.answers" :key="answer.id">
                                 <p>{{ answer.answerText }}</p>
+                                <p class="answer-translation">{{ answer.translation }}</p>
                             </li>
                       </ul>
 
@@ -95,7 +97,7 @@ export default {
       axios
         .get("/questions")
         .then((response) => {
-            //console.log(response.data);
+            console.log(response.data);
             me.questions = response.data;
             me.setShowAnswers();
 
@@ -159,8 +161,17 @@ export default {
         margin-left: 5%;
     }
 
-    #answersList {
+    .translation {
+        margin-left: 30%;
+        color: gray;
+    }
+
+    #answersList{
         margin-left: 20%;
+    }
+
+    .answer-translation {
+        color: gray;
     }
 
 

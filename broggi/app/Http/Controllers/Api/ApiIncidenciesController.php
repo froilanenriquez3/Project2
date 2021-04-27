@@ -115,7 +115,7 @@ class ApiIncidenciesController extends Controller
             $response = (new IncidenciesResource($incidencia))
                 ->response()
                 ->setStatusCode(201);
-                // ->json(['message' => 'Incidencia creada correctament'], 201);
+                //->json(['message' => 'Incidencia creada correctament'], 201);
         } catch (QueryException $ex) {
             DB::rollBack();
             $message = Utilitat::errorMessage($ex);
@@ -234,7 +234,7 @@ class ApiIncidenciesController extends Controller
             $response = (new IncidenciesResource($incidency))
                 ->response()
                 ->setStatusCode(201);
-                // ->json(['message' => 'Incidencia actualitzada correctament'], 201);
+                //->json(['message' => 'Incidencia actualitzada correctament'], 201);
 
             $request->session()->flash('message', "Incidencia afegida correctament");
         } catch (QueryException $ex) {

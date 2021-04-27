@@ -1573,69 +1573,69 @@ INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id, recurs
 VALUES("Recurs3", "$2y$12$H1E5Jy3gzLqe9DaG9k7jHeAhMMUbeBgNXLGRAzJWPnkDmPz5Go0iG", "admin@mail.com", "Recurs", "mobil", 3, 3);
 
 INSERT INTO Question (questionText, incidencies_id, translation)
-VALUES("What is your emergency?", -1, "¿Quina és l'emergència?");
+VALUES("What is your emergency?", -1, "Quina és l'emergència?");
 INSERT INTO Answer (answerText, question_id, translation)
-VALUES("My house is on fire", 1);
+VALUES("My house is on fire", 1, "La meva casa està en flames");
 INSERT INTO Answer (answerText, question_id, translation)
-VALUES("My friend is having a heart attack", 1);
+VALUES("My friend is having a heart attack", 1, "El meu amic està tenint un atac de cor");
 INSERT INTO Answer (answerText, question_id, translation)
-VALUES("I have been in a car accident", 1);
+VALUES("I have been in a car accident", 1, "He estat en un accident de cotxe");
 
-INSERT INTO Question (questionText, incidencies_id)
-VALUES("What's the location of your emergency?", -1);
-INSERT INTO Answer (answerText, question_id)
-VALUES("At my house", 2);
-INSERT INTO Answer (answerText, question_id)
-VALUES("At my place of work", 2);
-INSERT INTO Answer (answerText, question_id)
-VALUES("At my school", 2);
+INSERT INTO Question (questionText, incidencies_id, translation)
+VALUES("What's the location of your emergency?", -1, "Quina és la ubicació de la teva emergència?");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("At my house", 2, "A casa meva");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("At my place of work", 2, "Al meu lloc de treball");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("At my school", 2, "A la meva escola");
 
-INSERT INTO Question (questionText, incidencies_id)
-VALUES("When did this happen?", -1);
-INSERT INTO Answer (answerText, question_id)
-VALUES("Five minutes ago", 3);
-INSERT INTO Answer (answerText, question_id)
-VALUES("One hour ago", 3);
-INSERT INTO Answer (answerText, question_id)
-VALUES("I don't know", 3);
+INSERT INTO Question (questionText, incidencies_id, translation)
+VALUES("When did this happen?", -1, "Quan ha passat això?");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("Five minutes ago", 3, "Fa cinc minuts");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("One hour ago", 3, "Fa una hora");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("I don't know", 3, "No sé");
 
-INSERT INTO Question (questionText, incidencies_id)
-VALUES("What is your/his/her name?", -1);
-INSERT INTO Answer (answerText, question_id)
-VALUES("My name is Lucas", 4);
-INSERT INTO Answer (answerText, question_id)
-VALUES("My name is Maria", 4);
-INSERT INTO Answer (answerText, question_id)
-VALUES("His name is Marc", 4);
-INSERT INTO Answer (answerText, question_id)
-VALUES("Her name is Julia", 4);
+INSERT INTO Question (questionText, incidencies_id, translation)
+VALUES("What is your/his/her name?", -1, "Quin es el teu/seu/seu name?");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("My name is Lucas", 4, "Em dic Lucas");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("My name is Maria", 4, "Em dic Maria");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("His name is Marc", 4, "El seu nom és Marc");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("Her name is Julia", 4, "El seu nom és Julia");
 
-INSERT INTO Question (questionText, incidencies_id)
-VALUES("How old are you? ||  How old is he/she?", -1);
-INSERT INTO Answer (answerText, question_id)
-VALUES("I am twenty years old", 5);
-INSERT INTO Answer (answerText, question_id)
-VALUES("She is forty three", 5);
-INSERT INTO Answer (answerText, question_id)
-VALUES("He is thirty six years old", 5);
+INSERT INTO Question (questionText, incidencies_id, translation)
+VALUES("How old are you? ||  How old is he/she?", -1, "Quants anys tens? || Quin/Quina edat té ell/ella?");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("I am twenty years old", 5, "Tinc vint anys.");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("She is forty three", 5, "Ella té quaranta-tres anys.");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("He is thirty six years old", 5, "Ell té trenta-sis anys.");
 
-INSERT INTO Question (questionText, incidencies_id)
-VALUES("Do you need medical assistance? ", -1);
-INSERT INTO Answer (answerText, question_id)
-VALUES("Yes, I need medical assistance", 6);
-INSERT INTO Answer (answerText, question_id)
-VALUES("No, I don't need medical assistance", 6);
+INSERT INTO Question (questionText, incidencies_id, translation)
+VALUES("Do you need medical assistance? ", -1, "Necessites assistència mèdica?");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("Yes, I need medical assistance", 6, "Sí, necessito assistència mèdica");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("No, I don't need medical assistance", 6, "No, no necessito assistència mèdica.");
 
-INSERT INTO Question (questionText, incidencies_id)
-VALUES("How many people were hurt? ", -1);
-INSERT INTO Answer (answerText, question_id)
-VALUES("I am the only one", 7);
-INSERT INTO Answer (answerText, question_id)
-VALUES("Two, me and my friend", 7);
-INSERT INTO Answer (answerText, question_id)
-VALUES("There are at least dozen", 7);
-INSERT INTO Answer (answerText, question_id)
-VALUES("Just the other driver and his passengers", 7);
+INSERT INTO Question (questionText, incidencies_id, translation)
+VALUES("How many people were hurt? ", -1, "Quantes persones han ferit?");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("I am the only one", 7, "Sóc l'únic");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("Two, me and my friend", 7, "Dos, jo i el meu/meva amic/amiga");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("There are at least dozen", 7, "Hi ha almenys dotzenes");
+INSERT INTO Answer (answerText, question_id, translation)
+VALUES("Just the other driver and his passengers", 7, "Només l'altre conductor i els seus passatgers");
 
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('cap', '0', '1', '41.3879', '2');
 INSERT INTO `broggi`.`recursos` (`codi`, `actiu`, `tipus_recursos_id`, `lat`, `lon`) VALUES ('12345', '0', '1', '41.3879', '2.16992');

@@ -8,6 +8,7 @@ use App\Models\Incidencies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\IncidenciesHasRecursos;
 use Illuminate\Database\QueryException;
 use App\Http\Resources\RecursosResource;
 use App\Http\Resources\IncidenciesResource;
@@ -117,7 +118,7 @@ class IncidenciesRecursosController extends Controller
             $response = (new IncidenciesResource($incidenciesrecurso))
                 ->response()
                 ->setStatusCode(201);
-                // ->json(['message' => 'Incidencia actualitzada correctament'], 201);
+                //->json(['message' => 'Incidencia actualitzada correctament'], 201);
 
             // $request->session()->flash('message', "Incidencia afegida correctament");
         } catch (QueryException $ex) {
@@ -135,12 +136,16 @@ class IncidenciesRecursosController extends Controller
      * @param  \App\Models\Incidencies  $incidenciesrecurso
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Incidencies $incidenciesrecurso)
+    public function destroy(Incidencies $incidenciesrecurso, $recurs_id)
     {
         DB::beginTransaction();
 
+        $ihr = IncidenciesHasRecursos::where('incidencies_id', '=', $incidenciesrecurso->id)
+            ->where('recursos_id', '=', $recurs_id)->first();
+
         try {
-            $incidenciesrecurso->incidencies_has_recursos()->delete();
+
+            $ihr->delete();
 
             DB::commit();
             $incidenciesrecurso->refresh();
