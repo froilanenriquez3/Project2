@@ -249,8 +249,8 @@ export default {
     },
 
     watch: {
-
-        recursPerCanviar: function(val){
+        recursPerCanviar:
+        function(val){
             // Buscamos el marcador que hemos de cambiar
             this.marker= this.allMarkers.find( marker => marker.id == val.recursos_id);
 
