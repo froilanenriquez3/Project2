@@ -1,7 +1,7 @@
 <template>
 <div class="biggerContainer">
     <!-- div para el mensaje de feedback -->
-    <div v-show="infoMessage !=''" class="alert alert-primary alert-dismissible fade show" role="alert">
+    <div v-show="infoMessage !='' && infoMessage != undefined " class="alert alert-primary alert-dismissible fade show" role="alert">
         <strong>Info: </strong>
         {{infoMessage}}
         <button type="button" @click="resetMessage()" class="close">
