@@ -10,10 +10,11 @@
     width: 100%;
 }
 
-#app div {
+/* #app div {
     margin: 1%;
-}
+} */
 
 .div-headers {
+    margin-top: 2%;
     margin-bottom: 2%;
 }

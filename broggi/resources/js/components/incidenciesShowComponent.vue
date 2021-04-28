@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <header class="row div-headers" id="showHeader">
+    <div class="row div-headers" id="showHeader">
       <h5 class="col-10">Incidencia ID #{{ incidencia.id }}</h5>
 
       <p class="col-2"><b>Usuaris ID:</b> {{ incidencia.usuaris.username }}</p>
-    </header>
+    </div>
 
     <div>
       <div class="row">
@@ -56,9 +56,7 @@
     <div v-if="incidencia.incidencies_has_afectats.length > 0">
       <div
         v-for="afectat in incidencia.incidencies_has_afectats"
-        :key="afectat.id"
-        class="card"
-      >
+        :key="afectat.id" class="card p-3">
         <div class="row">
           <p class="col-4"><b>Afectat ID:</b> {{ afectat.id }}</p>
           <p class="col-4"><b>Nom: </b> {{ afectat.nom }}</p>
