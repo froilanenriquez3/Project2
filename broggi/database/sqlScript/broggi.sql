@@ -1579,10 +1579,10 @@ VALUES("My house is on fire", 1, "La meva casa està en flames");
 INSERT INTO Answer (answerText, question_id, translation)
 VALUES("My friend is having a heart attack", 1, "El meu amic està tenint un atac de cor");
 INSERT INTO Answer (answerText, question_id, translation)
-VALUES("I have been in a car accident", 1, "He estat en un accident de cotxe");
+VALUES("I have been in a car accident", 1, "He tingut un accident de cotxe");
 
 INSERT INTO Question (questionText, incidencies_id, translation)
-VALUES("What's the location of your emergency?", -1, "Quina és la ubicació de la teva emergència?");
+VALUES("What's the location of your emergency?", -1, "Quina és la ubicació de l'emergència?");
 INSERT INTO Answer (answerText, question_id, translation)
 VALUES("At my house", 2, "A casa meva");
 INSERT INTO Answer (answerText, question_id, translation)
@@ -1600,7 +1600,7 @@ INSERT INTO Answer (answerText, question_id, translation)
 VALUES("I don't know", 3, "No sé");
 
 INSERT INTO Question (questionText, incidencies_id, translation)
-VALUES("What is your/his/her name?", -1, "Quin es el teu/seu/seu name?");
+VALUES("What is your/his/her name?", -1, "Quin es el teu/seu nom?");
 INSERT INTO Answer (answerText, question_id, translation)
 VALUES("My name is Lucas", 4, "Em dic Lucas");
 INSERT INTO Answer (answerText, question_id, translation)
@@ -1633,7 +1633,7 @@ VALUES("I am the only one", 7, "Sóc l'únic");
 INSERT INTO Answer (answerText, question_id, translation)
 VALUES("Two, me and my friend", 7, "Dos, jo i el meu/meva amic/amiga");
 INSERT INTO Answer (answerText, question_id, translation)
-VALUES("There are at least dozen", 7, "Hi ha almenys dotzenes");
+VALUES("There are at least five", 7, "N'hi ha cinc com a mínim.");
 INSERT INTO Answer (answerText, question_id, translation)
 VALUES("Just the other driver and his passengers", 7, "Només l'altre conductor i els seus passatgers");
 
