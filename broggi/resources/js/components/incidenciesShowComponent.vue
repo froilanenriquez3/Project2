@@ -65,13 +65,18 @@
 
         <div class="row">
           <p class="col-4"><b>Edat:</b> {{ afectat.edat }}</p>
-          <p class="col-4"><b>Sexes :</b> {{ afectat.sexes_id }}</p>
+          <p class="col-4">
+            <b>Sexes :</b>
+            <span v-if="afectat.sexes_id == 1"> Home </span>
+            <span v-else> Dona </span>
+            <!-- {{ afectat.sexes_id }} -->
+          </p>
           <p class="col-4"><b>Telefon Afectat:</b> {{ afectat.telefon }}</p>
         </div>
 
         <div class="row">
           <p class="col-4"><b>Recurs Assignat: </b>{{ afectat.recursos_id }}</p>
-          <p class="col-4"><b>Codi: </b>{{ afectat.recursos_codi }}</p>
+          <p class="col-4"><b>Recurs Codi: </b>{{ afectat.recursos_codi }}</p>
           <p class="col-4"><b>Prioritat: </b>{{ afectat.prioritat }}</p>
         </div>
       </div>
