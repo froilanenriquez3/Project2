@@ -45,7 +45,7 @@
         <p class="col-4"><b>Nom Metge:</b> {{ incidencia.nom_metge }}</p>
       </div>
       <div class="row">
-        <p class="col-4"><b>Tipus Alertant ID:</b> {{ incidencia.alertants.tipus_alertants_id }}</p>
+        <p class="col-4"><b>Tipus Alertant:</b> {{ incidencia.alertants.tipus['tipus'] }}</p>
       </div>
     </div>
 
@@ -91,6 +91,7 @@ export default {
     return {
       incidencia: {},
       recursos: [],
+      tipus_alertants: []
     };
   },
   methods: {
@@ -99,17 +100,11 @@ export default {
         let found = false;
         let i = 0;
         while (i < this.incidencia.incidencies_has_recursos.length && !found) {
-          if (
-            this.incidencia.incidencies_has_recursos[i].afectat_id == element.id
-          ) {
+          if (this.incidencia.incidencies_has_recursos[i].afectat_id == element.id) {
             let newElement = element;
 
-            newElement.recursos_id = this.incidencia.incidencies_has_recursos[
-              i
-            ].recursos_id;
-            newElement.prioritat = this.incidencia.incidencies_has_recursos[
-              i
-            ].prioritat;
+            newElement.recursos_id = this.incidencia.incidencies_has_recursos[i].recursos_id;
+            newElement.prioritat = this.incidencia.incidencies_has_recursos[i].prioritat;
 
             Vue.set(
               this.incidencia.incidencies_has_afectats,
@@ -130,7 +125,7 @@ export default {
       axios
         .get("/recursos")
         .then((response) => {
-          console.log(response.data);
+
           response.data.forEach((element) => {
             if (element.id != 1) {
               me.recursos.push(element);
@@ -161,12 +156,30 @@ export default {
         }
       }
     },
+    selectTipus() {
+      let me = this;
+      axios
+        .get("/tipusalertants")
+        .then((response) => {
+          me.tipus_alertants = response.data;
+
+          me.incidencia.alertants.tipus = me.tipus_alertants.find(tipus => tipus.id == me.incidencia.alertants.tipus_alertants_id);;
+        })
+        .catch((error) => {
+            me.errorMessage= error.response.data.error;
+            console.log(error);
+        })
+        .finally(() => (this.loading = false));
+    },
   },
   created() {
     this.incidencia = this.showincidencia;
+    this.incidencia.alertants.tipus = { tipus: ""};
+
   },
   mounted() {
     this.selectRecursos();
+    this.selectTipus();
   },
 };
 </script>
