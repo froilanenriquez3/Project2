@@ -475,8 +475,6 @@ export default {
         this.alertantIncidencia.adreca = trobat.adreca;
         if(trobat.id != undefined) this.incidencia.telefon_alertant = trobat.telefon;
         this.incidencia.alertants_id = trobat.id;
-        console.log("Trobat id: " + trobat.id);
-        console.log(this.incidencia.alertants_id);
     },
     isMultiple(){
         this.multiple= true;
@@ -766,6 +764,7 @@ export default {
             }
 
             this.initAfectats();
+            this.initInfoRecursos();
         }
     },
     initAlertant(){
@@ -798,8 +797,9 @@ export default {
             this.numAfectats ++;
         }
 
-
-
+    },
+    initInfoRecursos(){
+        this.infoRecursos = this.incidencia.incidencies_has_recursos;
     },
     resetMessage(){
         this.infoMessage='';

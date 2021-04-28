@@ -61,7 +61,7 @@
 
             //Nuclear option
             if(this.editincidencia != null){
-                this.incidencies = ['Incident'];
+                this.incidencies = ['Incident', 'Alertant'];
             }
 
             this.addSection();
