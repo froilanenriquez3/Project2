@@ -181,12 +181,9 @@ export default {
     },
     initAlertant(){
         if(this.editincidencia != null){
-            console.log("init alertant");
+
             this.alertantCopia = this.alertant;
             this.showInputs = true;
-            console.log(this.alertant);
-            console.log(this.alertantCopia);
-
         }
     },
     updateAlertant(){

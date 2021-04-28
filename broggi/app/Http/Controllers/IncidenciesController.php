@@ -47,7 +47,15 @@ class IncidenciesController extends Controller
      */
     public function show(Incidencies $incidency)
     {
-        $incidencia = Incidencies::with(['incidencies_has_recursos', 'incidencies_has_afectats', 'tipus_incidencies'])
+        $incidencia = Incidencies::with(
+            [
+                'incidencies_has_recursos',
+                'incidencies_has_afectats',
+                'tipus_incidencies',
+                'usuaris',
+                'municipis',
+                'alertants'
+            ])
             ->find($incidency->id);
         // $incidencia = new IncidenciesResource(Incidencies::findOrFail($incidency->id));
         // $incidency = new IncidenciesResource($incidency);
