@@ -466,14 +466,14 @@ export default {
         this.afectatActiu= afectat.id;
     },
     canviarDades(trobat){
-        debugger
+
         this.alertantIncidencia.telefon = trobat.telefon;
         this.alertantIncidencia.nom = trobat.nom;
         this.alertantIncidencia.cognoms = trobat.cognoms;
         this.alertantIncidencia.municipis_id= trobat.municipis_id;
         this.alertantIncidencia.tipus_alertants_id= trobat.tipus_alertants_id;
         this.alertantIncidencia.adreca = trobat.adreca;
-        this.incidencia.telefon_alertant = trobat.telefon;
+        if(trobat.id != undefined) this.incidencia.telefon_alertant = trobat.telefon;
         this.incidencia.alertants_id = trobat.id;
         console.log("Trobat id: " + trobat.id);
         console.log(this.incidencia.alertants_id);
@@ -761,7 +761,10 @@ export default {
 
             // this.incidencia = this.editincidencia;
             this.afectats = this.incidencia.incidencies_has_afectats;
-            this.initAlertant();
+            if(this.incidencia.alertants_id != null || this.incidencia.alertants_id != undefined){
+                this.initAlertant();
+            }
+
             this.initAfectats();
         }
     },
@@ -771,6 +774,8 @@ export default {
             .get("/alertants/"+ me.incidencia.alertants_id)
             .then(response => {
                 me.alertantIncidencia = response.data;
+                me.incidencia.telefon_alertant = me.alertantIncidencia.telefon;
+                me.incidencia.alertants_id = me.alertantIncidencia.id;
                 // me.alertant = response.data;
             })
             .catch(error => {

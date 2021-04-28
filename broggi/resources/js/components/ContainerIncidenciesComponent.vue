@@ -1,7 +1,7 @@
 <template>
   <div class="containerRecursos">
     <aside>
-      <sidebar-component @changeOption="changePage($event)" :page="'incidencies'">
+      <sidebar-component @changeOption="changePage($event)" :page="'incidencies'" :editincidencia="editincidencia">
 
       </sidebar-component>
     </aside>

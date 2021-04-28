@@ -31,7 +31,7 @@
     <div class="row div-headers">
       <h5 class="col-10">Alertant</h5>
     </div>
-    <div>
+    <div v-if="incidencia.alertants_id != null">
       <div class="row">
         <p class="col-4"><b>Alertant ID:</b> {{ incidencia.alertants_id }}</p>
         <p class="col-4"><b>Nom:</b>{{ incidencia.alertants.nom }}</p>
@@ -47,6 +47,14 @@
       <div class="row">
         <p class="col-4"><b>Tipus Alertant:</b> {{ incidencia.alertants.tipus['tipus'] }}</p>
       </div>
+    </div>
+
+    <div v-else>
+        <div class="row">
+            <p class="col-4">
+                <b>Telefon Alertant:</b> {{ incidencia.telefon_alertant }}
+            </p>
+         </div>
     </div>
 
     <div class="row div-headers">
@@ -138,7 +146,6 @@ export default {
           });
           // me.recursos = response.data;
           me.itemsToDisplay = me.recursos;
-          me.totalRows = me.itemsToDisplay.length;
 
           me.initAfectatsRecursos();
         })
@@ -171,7 +178,7 @@ export default {
           me.incidencia.alertants.tipus = me.tipus_alertants.find(tipus => tipus.id == me.incidencia.alertants.tipus_alertants_id);;
         })
         .catch((error) => {
-            me.errorMessage= error.response.data.error;
+            // me.errorMessage= error.response.data.error;
             console.log(error);
         })
         .finally(() => (this.loading = false));
@@ -179,7 +186,7 @@ export default {
   },
   created() {
     this.incidencia = this.showincidencia;
-    this.incidencia.alertants.tipus = { tipus: ""};
+    if(this.incidencia.alertants != null) this.incidencia.alertants.tipus = { tipus: ""};
 
   },
   mounted() {

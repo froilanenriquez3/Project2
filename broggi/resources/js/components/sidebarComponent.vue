@@ -22,6 +22,9 @@
         page: {
             type: String,
             required: true
+        },
+        editincidencia: {
+            required: false
         }
     },
         data() {
@@ -55,6 +58,12 @@
     },
         mounted() {
             // console.log('Component mounted.');
+
+            //Nuclear option
+            if(this.editincidencia != null){
+                this.incidencies = ['Incident'];
+            }
+
             this.addSection();
         }
     }
