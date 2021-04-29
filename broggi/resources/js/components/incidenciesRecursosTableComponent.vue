@@ -102,6 +102,7 @@
         },
         data(){
             return {
+                infoMessage: '',
                 errorMessage:'',
                 itemsToDisplay: [],
                 perPage: 5,
