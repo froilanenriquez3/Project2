@@ -324,7 +324,7 @@ CREATE TABLE IF NOT EXISTS `broggi`.`incidencies_has_recursos` (
   `hora_arribada_hospital` TIME NULL,
   `hora_transferencia` TIME NULL,
   `hora_finalitzacio` TIME NULL,
-  `prioritat` INT NULL,
+  `prioritat` INT NOT NULL,
   `desti` VARCHAR(100) NULL,
   `afectat_id` INT NOT NULL,
   PRIMARY KEY (`incidencies_id`, `recursos_id`),
