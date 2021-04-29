@@ -145,12 +145,12 @@
       <td class="col-4" :id="'btnAfectat' + afectat.id">
           <div >
               <p v-if="afectat.sexes_id == 1">Home
-                            <span v-show="afectat.edat != ''">{{', '+ afectat.edat  + " anys "}}</span>
-                              <span v-show="afectat.nom != ''">{{ '('+afectat.nom+')' }}</span>
+                            <span v-show="afectat.edat != '' && afectat.edat != null">{{', '+ afectat.edat  + " anys "}}</span>
+                              <span v-show="afectat.nom != '' && afectat.nom != null">{{ '('+afectat.nom+')' }}</span>
 
                         <p v-else-if="afectat.sexes_id == 2">Dona
-                           <span v-show="afectat.edat != ''">{{', '+ afectat.edat  + " anys "}}</span>
-                              <span v-show="afectat.nom != ''">{{'(' +afectat.nom+ ')' }}</span>
+                           <span v-show="afectat.edat != '' && afectat.edat != null">{{', '+ afectat.edat  + " anys "}}</span>
+                              <span v-show="afectat.nom != '' && afectat.nom != null">{{'(' +afectat.nom+ ')' }}</span>
                         </p>
           </div>
       </td>
@@ -324,7 +324,7 @@ export default {
         hora_arribada_hospital: null,
         hora_transferencia: null,
         hora_finalitzacio: null,
-        prioritat: 0,
+        prioritat: null,
         desti: null,
         afectat_id: null
       },
@@ -634,27 +634,13 @@ export default {
         if(this.editincidencia != null){
             this.incidencia.afectats= this.afectats;
             this.incidencia.incidencies_has_recursos = this.infoRecursos;
-
-            if(document.getElementById('eSaveAlertant').checked){
-                console.log('saving alertant');
-                axios
-                    .put("/alertants/" + me.alertantIncidencia.id, me.alertantIncidencia)
-                    .then(response => {
-                        console.log(response);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    })
-            }
-
-            axios
+             axios
                 .put("/incidencies/"+me.incidencia.id, me.incidencia)
                 .then((response)=>{
                     // alert("Formulari enviat correctament");
-                    // console.log(me.incidencia.id);
-                    window.location.href = "/Project2/broggi/public/incidencies/" + me.incidencia.id ;
-                    // console.log(response);
-                    // me.incidencia = null;
+                    window.location.href = "/Project2/broggi/public/incidencies";
+                    console.log(response);
+                    me.incidencia = null;
                     me.infoMessage = response.data.message;
                 })
                 .catch((error)=>{
@@ -683,6 +669,13 @@ export default {
                     }
                 }
             });
+
+            this.infoRecursos.forEach(infoRecurs => {
+                if(infoRecurs.recursos_id == 1){
+                    infoRecurs.prioritat= 0;
+                }
+            });
+
             // Comprobaciones por si se ha ido cambiando el toggle entre múltiples y no.
             if(!this.multiple){
                 this.incidencia.afectats= this.afectats;
@@ -709,8 +702,6 @@ export default {
                 // alert("Incidencia inserted correctly!");
                 me.infoMessage = 'Incidencia creada correctament';
                 window.location.href = "/Project2/broggi/public/incidencies";
-                //  console.log(me.incidencia.id);
-                //  window.location.href = "/Project2/broggi/public/incidencies/" + me.incidencia.id ;
 
                 console.log(response);
                 me.clearInput();
