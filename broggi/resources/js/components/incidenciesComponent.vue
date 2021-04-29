@@ -157,6 +157,7 @@
       <td class="col-4">
             <div v-if="infoRecursos[afectat.id]" :id="'recursAssignat'+afectat.id">{{infoRecursos[afectat.id].tipus}}</div>
 
+            <div v-if="infoRecursos[afectat.id] && infoRecursos[afectat.id].recursos_id== 1">No necessita recurs</div>
       </td>
             <td class="col-2">
                 <select v-if="infoRecursos[afectat.id] && 'tipus' in infoRecursos[afectat.id]" v-model="infoRecursos[afectat.id].prioritat" class="form-select" aria-label="Default select example">
