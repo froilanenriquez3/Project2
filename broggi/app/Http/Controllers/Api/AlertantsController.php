@@ -46,7 +46,7 @@ class AlertantsController extends Controller
                     ->response()
                     ->setStatusCode(201);
                     //->json(['message' => 'Alertant creat correctament'], 201);
-        
+
         } catch (QueryException $ex){
             $message = Utilitat::errorMessage($ex);
             $response = \response()
@@ -65,6 +65,7 @@ class AlertantsController extends Controller
     public function show(Alertants $alertant)
     {
         $alertant = Alertants::with(['municipis','tipus_alertants'])->find($alertant->id);
+
         return new AlertantsResource($alertant);
     }
 

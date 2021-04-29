@@ -149,8 +149,8 @@ export default {
         .get("/tipusalertants")
         .then((response) => {
             me.tipus_alertants = response.data;
-            console.log(me.tipus_alertants);
-            
+            // console.log(me.tipus_alertants);
+
         })
         .catch((error) => {
           me.errorMessage= error.response.data.error;
@@ -164,7 +164,7 @@ export default {
         .get("/municipis")
         .then((response) => {
             me.municipis = response.data;
-            
+
         //   console.log(me.municipis);
         })
         .catch((error) => {
@@ -181,7 +181,7 @@ export default {
     },
     resetError(){
             this.errorMessage= '';
-    }, 
+    },
     resetMessage(){
         this.infoMessage='';
     }
@@ -196,11 +196,11 @@ export default {
      document.getElementById("formSubmit").onclick = function () {
       me.createAlertant();
     };
-    console.log(this.insert);
-    console.log(this.editedalertant);
+    // console.log(this.insert);
+    // console.log(this.editedalertant);
 
     // console.log("Component mounted.");
   },
-    
+
 };
 </script>

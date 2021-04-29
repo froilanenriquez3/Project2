@@ -805,6 +805,7 @@ export default {
     },
     initAlertant(){
         let me = this;
+        if(this.incidencia.alertants_id != null){
         axios
             .get("/alertants/"+ me.incidencia.alertants_id)
             .then(response => {
@@ -818,6 +819,8 @@ export default {
                 console.log(error);
             })
             .finally(() => (this.loading = false));
+
+        }
     },
     initAfectats(){
 

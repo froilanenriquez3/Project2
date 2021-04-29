@@ -113,7 +113,7 @@ export default {
       axios
         .get("/answers")
         .then((response) => {
-          console.log(response.data);
+        //   console.log(response.data);
           me.answers = response.data;
           me.setShowAnswers();
 
