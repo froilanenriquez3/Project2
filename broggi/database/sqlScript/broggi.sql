@@ -324,7 +324,7 @@ CREATE TABLE IF NOT EXISTS `broggi`.`incidencies_has_recursos` (
   `hora_arribada_hospital` TIME NULL,
   `hora_transferencia` TIME NULL,
   `hora_finalitzacio` TIME NULL,
-  `prioritat` INT NULL,
+  `prioritat` INT NOT NULL,
   `desti` VARCHAR(100) NULL,
   `afectat_id` INT NOT NULL,
   PRIMARY KEY (`incidencies_id`, `recursos_id`),
@@ -1566,11 +1566,11 @@ VALUES("Admin", "$2y$12$H1mP/taqaFI7rFpYWtrRNe3rofNVNz2v47cmxKSedKH28i7BpFbJS", 
 INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id)
 VALUES("Cecos", "$2y$12$hrnHGBQFTxofRxmtPOPlAu72hmhqaEdJWT97OdnJ4C4IEaYMmacse", "admin@mail.com", "Tele", "operador", 2);
 INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id, recursos_id)
-VALUES("Recurs", "$2y$12$H1E5Jy3gzLqe9DaG9k7jHeAhMMUbeBgNXLGRAzJWPnkDmPz5Go0iG", "admin@mail.com", "Recurs", "mobil", 3, 1);
+VALUES("Recurs", "$2y$12$H1E5Jy3gzLqe9DaG9k7jHeAhMMUbeBgNXLGRAzJWPnkDmPz5Go0iG", "admin@mail.com", "Recurs", "mobil", 3, 2);
 INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id, recursos_id)
-VALUES("Recurs2", "$2y$12$H1E5Jy3gzLqe9DaG9k7jHeAhMMUbeBgNXLGRAzJWPnkDmPz5Go0iG", "admin@mail.com", "Recurs", "mobil", 3, 2);
+VALUES("Recurs2", "$2y$12$H1E5Jy3gzLqe9DaG9k7jHeAhMMUbeBgNXLGRAzJWPnkDmPz5Go0iG", "admin@mail.com", "Recurs", "mobil", 3, 3);
 INSERT INTO usuaris (username, contrasenya, email, nom, cognoms, rols_id, recursos_id)
-VALUES("Recurs3", "$2y$12$H1E5Jy3gzLqe9DaG9k7jHeAhMMUbeBgNXLGRAzJWPnkDmPz5Go0iG", "admin@mail.com", "Recurs", "mobil", 3, 3);
+VALUES("Recurs3", "$2y$12$H1E5Jy3gzLqe9DaG9k7jHeAhMMUbeBgNXLGRAzJWPnkDmPz5Go0iG", "admin@mail.com", "Recurs", "mobil", 3, 4);
 
 INSERT INTO Question (questionText, incidencies_id, translation)
 VALUES("What is your emergency?", -1, "Quina és l'emergència?");
