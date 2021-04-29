@@ -634,12 +634,25 @@ export default {
         if(this.editincidencia != null){
             this.incidencia.afectats= this.afectats;
             this.incidencia.incidencies_has_recursos = this.infoRecursos;
-             axios
+
+            if(document.getElementById('eSaveAlertant').checked){
+                console.log('saving alertant');
+                axios
+                    .put("/alertants/" + me.alertantIncidencia.id, me.alertantIncidencia)
+                    .then(response => {
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            }
+
+            axios
                 .put("/incidencies/"+me.incidencia.id, me.incidencia)
                 .then((response)=>{
                     // alert("Formulari enviat correctament");
-                    window.location.href = "/Project2/broggi/public/incidencies";
-                    console.log(response);
+                    // window.location.href = "/Project2/broggi/public/incidencies";
+                    // console.log(response);
                     me.incidencia = null;
                     me.infoMessage = response.data.message;
                 })

@@ -31,41 +31,46 @@
             </div>
 
             <div v-show="showInputs">
-            <div class="form-group row" >
-                <label class="col-2" for="tipus_alertant"><b>Tipus</b></label>
-                <select class="form-select col-10" v-model="alertantCopia.tipus_alertants_id" aria-label="Default select example" @input="updateAlertant()">
+                <div class="form-group row" >
+                    <label class="col-2" for="tipus_alertant"><b>Tipus</b></label>
+                    <select class="form-select col-10" v-model="alertantCopia.tipus_alertants_id" aria-label="Default select example" @input="updateAlertant()">
+                        <option value=""></option>
+                        <option v-for="tipus in tipus_alertants" :key="tipus.id"
+                        v-bind:value="tipus.id" >{{tipus.tipus}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2" for="nom">Nom</label>
+                    <input class="col-4" type="text" name="nom" v-model="alertantCopia.nom" @input="updateAlertant()"/>
+
+                    <label class="col-2" for="cognoms">Cognoms</label>
+                    <input class="col-4" type="text" name="cognoms" v-model="alertantCopia.cognoms" @input="updateAlertant()"/>
+                </div>
+
+                <div class="form-group row">
+                <label class="col-2" for="adreça">Adreça</label>
+                <input class="col-10" type="text" name="adreça" v-model="alertantCopia.adreca" @input="updateAlertant()"/>
+                </div>
+
+                <div class="form-group row">
+                <label class="col-2" for="municipi_alertant">Municipi</label>
+                <select class="form-select col-10" v-model="alertantCopia.municipis_id" aria-label="Default select example" @input="updateAlertant()">
                     <option value=""></option>
-                    <option v-for="tipus in tipus_alertants" :key="tipus.id"
-                    v-bind:value="tipus.id" >{{tipus.tipus}}</option>
-                </select>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-2" for="nom">Nom</label>
-                <input class="col-4" type="text" name="nom" v-model="alertantCopia.nom" @input="updateAlertant()"/>
-
-                <label class="col-2" for="cognoms">Cognoms</label>
-                <input class="col-4" type="text" name="cognoms" v-model="alertantCopia.cognoms" @input="updateAlertant()"/>
-            </div>
-
-            <div class="form-group row">
-            <label class="col-2" for="adreça">Adreça</label>
-            <input class="col-10" type="text" name="adreça" v-model="alertantCopia.adreca" @input="updateAlertant()"/>
-            </div>
-
-            <div class="form-group row">
-            <label class="col-2" for="municipi_alertant">Municipi</label>
-            <select class="form-select col-10" v-model="alertantCopia.municipis_id" aria-label="Default select example" @input="updateAlertant()">
-                <option value=""></option>
-                    <option v-for="municipi in municipis" :key="municipi.id"
-                    v-bind:value="municipi.id" >{{municipi.nom}}</option>
-                </select>
-            </div>
+                        <option v-for="municipi in municipis" :key="municipi.id"
+                        v-bind:value="municipi.id" >{{municipi.nom}}</option>
+                    </select>
+                </div>
             </div>
 
         </div>
 
         <button v-show="!isFound" @click="guardarAlertant()" class="btn btn-primary">Guardar com alertant Habitual</button>
+
+        <div v-show="editincidencia != null" class="row">
+            <label for="eSaveAlertant" class="form-check-label col-2">Guardar Alertant</label>
+            <input type="checkbox" id="eSaveAlertant" name="eSaveAlertant" class="form-check-input col-4" />
+        </div>
 
         </div>
   </div>
