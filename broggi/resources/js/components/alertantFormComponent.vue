@@ -146,7 +146,7 @@ export default {
            axios
         .post("/alertants", me.alertant)
         .then(function (response) {
-          console.log(response);
+        //   console.log(response);
         // Pasamos id para guardarlo en alertants_id en incidencias.
           me.alertant.id = response.data.id;
           me.alertantCopia.id = response.data.id;
@@ -164,7 +164,7 @@ export default {
     },
     searchAlertant(){
         let trobat= this.alertants.find( alertant => alertant.telefon == this.alertantCopia.telefon);
-        console.log(trobat)
+        // console.log(trobat)
         if(trobat == undefined){
             this.isFound = false;
         } else {
@@ -181,15 +181,14 @@ export default {
     },
     //Function runs before all the info of alertant is retrieved...
     initAlertant(){
-        if(this.editincidencia != null){
-
+         if((this.editincidencia != null)  && (this.editincidencia.alertants_id != null)){
 
             let me = this;
             axios
             .get("/alertants/"+ me.editincidencia.alertants_id)
             .then(response => {
                 me.alertantCopia = response.data;
-                if(me.alertantCopia != null) this.showInputs = true;
+                me.showInputs = true;
 
                 // me.alertant = response.data;
             })
@@ -199,11 +198,11 @@ export default {
             })
             .finally(() => (this.loading = false));
 
-
-        }
+         }
+         this.alertantCopia.telefon = this.editincidencia.telefon_alertant;
     },
     updateAlertant(){
-        console.log("Emitting alertant");
+        // console.log("Emitting alertant");
         this.$emit('dadesAlertant', this.alertantCopia);
     },
     resetMessage(){

@@ -60,9 +60,9 @@
             // console.log('Component mounted.');
 
             //Nuclear option
-            if(this.editincidencia != null){
+            /* if(this.editincidencia != null){
                 this.incidencies = ['Incident', 'Alertant'];
-            }
+            } */
 
             this.addSection();
         }
