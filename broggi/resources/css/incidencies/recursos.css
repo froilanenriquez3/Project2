@@ -13,3 +13,22 @@
     width: 100%;
     height: 300px;
 }
+
+.textResources{
+    padding-top: 2em;
+}
+
+#recursosAfectatsMultiples{
+    margin-top: 2%;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    text-align: center;
+}
+
+#recursosContainer{
+    display: flex;
+    margin: auto;
+    text-align: center;
+}

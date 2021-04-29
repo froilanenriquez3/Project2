@@ -139,6 +139,10 @@ export default {
             this.addRecursosToMap;
         })
 
+        this.map.on('idle', ()=> {
+            this.map.resize()
+        } );
+
 
     },
     watch: {

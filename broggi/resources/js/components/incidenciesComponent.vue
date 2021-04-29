@@ -94,9 +94,6 @@
     <!-- TAG AFECTADO -->
     <!-- add fa plus icon -->
     <div v-show="section == 'Afectats' ">
-
-       <!--  <button @click="notMultiple()" class="btn btn-secondary">Menys de 3 afectats</button>
-        <button @click="isMultiple()" class="btn btn-secondary">Múltiples afectats (+3)</button> -->
        <span>Menys de 3 afectats</span>
         <label class="switch" id="btnNumAfectats">
                 <input type="checkbox" @click="toggleMultiple()">
@@ -129,7 +126,7 @@
         <!-- El mapa se enseña en caso de que hayan escrito algo en afectados, tanto si éstos son múltiples
         como si no. -->
         <div v-show="(!multiple && numAfectats > 0) || multiple">
-        <map-component :recursPerCanviar="recursPerCanviar" @desassignantRecurs="removeRecursFromMap($event)" @assignantRecurs="setRecursFromMap($event)" :direccioCompleta="direccio"></map-component>
+        <map-component :desactivarTot="desactivarTot" :recursPerCanviar="recursPerCanviar" @desassignantRecurs="removeRecursFromMap($event)" @assignantRecurs="setRecursFromMap($event)" :direccioCompleta="direccio"></map-component>
         </div>
         <!-- No se muestra si no hay afectados aún puestos y no es múltiple -->
         <div id="insideRecursos" v-show="!multiple && numAfectats > 0">
@@ -188,31 +185,33 @@
 
 <!-- Se muestra si hay múltiples afectados -->
     <div v-show="multiple">
-        Assigna tants recursos com creguis necessaris utilitzant el mapa i seràn enviats a l'accident.
+        <p class="textResources">Assigna tants recursos com creguis necessaris utilitzant el mapa i seràn enviats a l'accident.</p>
+         <div class="recursosContainer">
          <div id="recursosAfectatsMultiples"><table class="table">
   <thead>
     <tr class="row">
-        <th class="col-2">Prioritat</th>
-        <th class="col-4">Recurs</th>
+        <th class="col-5">Prioritat</th>
+        <th class="col-5">Recurs</th>
     </tr>
   </thead>
   <tbody>
       <!-- Como en este caso no hay afectados, se cogerá el index para diferenciar los recursos que enviaremos -->
     <tr class="row" v-for="(recurs, index) in recursosToShow" :key="index">
-        <td class="col-2"><select v-model="recurs.prioritat" class="form-select" aria-label="Default select example">
+        <td class="col-5"><select v-model="recurs.prioritat" class="form-select" aria-label="Default select example">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                 </select>
         </td>
-      <td class="col-4">
+      <td class="col-5">
           {{recurs.tipus}}
       </td>
     </tr>
   </tbody>
 </table>
 
+        </div>
         </div>
     </div>
 
@@ -295,6 +294,7 @@ export default {
         errorMessage:'',
         formacio: false,
         recursPerCanviar: '',
+        desactivarTot: '',
         tipusAlertants: [],
         tipusIncidencies: [],
         alertantIncidencia: {},
@@ -466,7 +466,6 @@ export default {
         this.afectatActiu= afectat.id;
     },
     canviarDades(trobat){
-        debugger
         this.alertantIncidencia.telefon = trobat.telefon;
         this.alertantIncidencia.nom = trobat.nom;
         this.alertantIncidencia.cognoms = trobat.cognoms;
@@ -478,25 +477,17 @@ export default {
         console.log("Trobat id: " + trobat.id);
         console.log(this.incidencia.alertants_id);
     },
-    isMultiple(){
-        this.multiple= true;
-        this.afectats.forEach(afectat => {
-            this.infoRecursos[afectat.id].afectat_id= afectat.id;
-        });
-
-    },
     nouAfectat(){
         this.multiple= false;
 
         // Si ya se ha apretado múltiples y luego se ha decidido cambiar y ya había recurso asignado, lo tenemos que desasignar.
         // Si no puede suceder que solo haya 1 asignado pero hubiera ya 3 recursos asignados y en el mapa y en la bd aún consten
         // como asignados.
-        this.infoRecursos.forEach( infoRecurs => {
-            debugger;
-            if(infoRecurs.afectat_id == 300 && infoRecurs.hasOwnProperty('tipus')){
-                 this.recursPerCanviar= infoRecurs;
-            }
-        });
+        // this.infoRecursos.forEach( infoRecurs => {
+        //     if(infoRecurs.afectat_id == 300 && infoRecurs.hasOwnProperty('tipus')){
+        //          this.recursPerCanviar= infoRecurs;
+        //     }
+        // });
 
       this.afectat= {
           id: '',
@@ -723,8 +714,52 @@ export default {
 
     },
     toggleMultiple(){
-        if(this.multiple) this.multiple = false;
-        else this.multiple = true;
+        if(this.multiple){
+            this.multiple = false;
+            if(this.infoRecursos.length > 0){
+                this.infoRecursos.forEach(infoRecurs => {
+                    if(infoRecurs.hasOwnProperty('tipus')){
+                        this.desactivarTot= 'desactivarAfectats'
+                    }
+            });
+            }
+
+            this.infoRecursos= [];
+
+            this.afectats.forEach(afectat => {
+               let infoRecurs= {
+                    recursos_id: null,
+                    hora_activacio: null,
+                    hora_mobilitzacio: null,
+                    hora_assistencia: null,
+                    hora_transport: null,
+                    hora_arribada_hospital: null,
+                    hora_transferencia: null,
+                    hora_finalitzacio: null,
+                    prioritat: null,
+                    desti: null,
+                    afectat_id: afectat.id,
+                    }
+
+                this.infoRecursos.push(infoRecurs)
+            });
+
+        } else{
+            this.multiple = true;
+            // Desasignamos todos los recursos que había asignados a afectados y después eliminamos infoRecursos.
+            // Si no hicieramos eso, saldrían ya tantos infoRecursos como afectados había antes vacíos y queda raro.
+            if(this.infoRecursos.length > 0){
+
+                this.infoRecursos.forEach(infoRecurs => {
+                    if(infoRecurs.hasOwnProperty('tipus')){
+                        this.desactivarTot= 'desactivarMultiples';
+                    }
+            });
+            }
+
+            this.infoRecursos= [];
+        }
+
 
     },
     setPrioritat(afectat){
@@ -774,7 +809,7 @@ export default {
                 // me.alertant = response.data;
             })
             .catch(error => {
-                me.errorMessage= error.response.data.error;
+                me.alertant= this.alertantIncidencia;
                 console.log(error);
             })
             .finally(() => (this.loading = false));
