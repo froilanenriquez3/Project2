@@ -203,8 +203,9 @@ export default {
             })
             .finally(() => (this.loading = false));
 
+             this.alertantCopia.telefon = this.editincidencia.telefon_alertant;
          }
-         this.alertantCopia.telefon = this.editincidencia.telefon_alertant;
+
     },
     updateAlertant(){
         // console.log("Emitting alertant");
