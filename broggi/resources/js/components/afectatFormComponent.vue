@@ -10,15 +10,15 @@
         </div>
 
         <div class="form-group row">
-          <label class="col-2" for=""><b>Nom</b></label>
+          <label class="col-2" for="">Nom</label>
           <input class="col-4" v-model="afectat.nom" type="text" name="nom" />
 
-          <label class="col-2" for=""><b>Cognoms</b></label>
+          <label class="col-2" for="">Cognoms</label>
           <input class="col-4" v-model="afectat.cognoms" type="text" name="cognoms" />
         </div>
 
         <div class="form-group row">
-          <label class="col-2" for=""><b>Edat</b></label>
+          <label class="col-2" for="">Edat</label>
           <input class="col-4" v-model="afectat.edat" type="number" name="edat" min="0" />
 
         </div>
@@ -33,6 +33,7 @@
          </div>
 
         <div class="form-group row">
+            <label for="" class="col-2"><b>Sexe</b></label>
              <div class="custom-control custom-radio custom-control-inline col-2">
                 <input type="radio" :id="idRadioDona" value="2" v-model="afectat.sexes_id" :name="nameRadio" class="custom-control-input ">
                 <label class="custom-control-label" :for="idRadioDona">Dona</label>
@@ -43,11 +44,6 @@
                 <label class="custom-control-label" :for="idRadioHome">Home</label>
             </div>
         </div>
-
-
-
-
-
 
         <br />
       </div>
