@@ -82,7 +82,7 @@
           <p class="col-4"><b>Telefon Afectat:</b> {{ afectat.telefon }}</p>
         </div>
 
-        <div class="row">
+        <div class="row" v-if="afectat.recursos_id != 1 || afectat.recursos_id != null">
           <p class="col-4"><b>Recurs Assignat: </b>{{ afectat.recursos_id }}</p>
           <p class="col-4"><b>Recurs Codi: </b>{{ afectat.recursos_codi }}</p>
           <p class="col-4"><b>Prioritat: </b>{{ afectat.prioritat }}</p>

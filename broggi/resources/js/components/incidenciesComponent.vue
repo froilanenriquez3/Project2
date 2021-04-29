@@ -683,6 +683,8 @@ export default {
                     }
                 }
             });
+
+
             // Comprobaciones por si se ha ido cambiando el toggle entre múltiples y no.
             if(!this.multiple){
                 this.incidencia.afectats= this.afectats;
