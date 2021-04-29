@@ -33,6 +33,9 @@ export default {
         recursPerCanviar: {
             required: true
         },
+        desactivarTot: {
+            required: true
+        },
     },
     data() {
         return {
@@ -44,6 +47,7 @@ export default {
             allMarkers: [],
             geocoder: {},
             color: "",
+            changed: [],
             recurs: {
                 /* id: 12,
                 codi: "ghost",
@@ -74,6 +78,14 @@ export default {
         colorRecurs(recurs) {
             this.color = recurs.actiu ? "#e1157a" : "#11adc4";
         },
+        desactivarTotsRecursos(){
+            this.changed.forEach(recurs => {
+                this.marker= this.allMarkers.find( marker => marker.id == recurs.id);
+                this.recurs= recurs;
+                this.desactivarRecursSenseEmetre();
+
+            });
+        },
         activarRecurs() {
             this.recurs.actiu = true;
             this.recursActivat= true;
@@ -96,6 +108,7 @@ export default {
             this.marker.color = "#FDC619";
             this.button.removeEventListener("click", this.activarRecurs);
             this.button.addEventListener("click", this.desactivarRecurs);
+            this.changed.push(this.recurs)
 
 
             // this.checkIfActive();
@@ -241,7 +254,6 @@ export default {
             this.map.resize();
         })
 
-
         this.map.on('idle', ()=> {
             this.map.resize()
         } );
@@ -261,6 +273,11 @@ export default {
             // o se ha apretado 'no cal recurs' cuando ya se había asignado uno anterior.
             // o se ha asignado un recurso distinto cuando ya había uno asignado a esa persona.
             this.desactivarRecursSenseEmetre();
+        },
+
+        desactivarTot:
+        function(){
+            this.desactivarTotsRecursos();
         }
 
 

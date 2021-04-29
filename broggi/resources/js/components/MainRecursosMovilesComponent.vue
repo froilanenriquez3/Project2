@@ -34,7 +34,7 @@
                     <th scope="col">Codi</th>
                     <th scope="col">Tipus</th>
                     <th scope="col">Actiu</th>
-                    
+
                     <th></th>
                     <th></th>
                 </tr>
@@ -95,7 +95,7 @@
                 <label class="col-2" for="codi">Codi</label>
                 <input v-model="recurs.codi" class="col-5" type="text" id="codi" name="codi" />
             </div>
-            
+
             <div class="form-group row">
                 <label class="col-2" for="tipus_rescurs_id">Tipus</label>
                 <select class="form-select col-5" v-model="recurs.tipus_recursos_id" aria-label="Default select example">
@@ -175,12 +175,14 @@ export default {
             axios
                 .get("/recursos")
                 .then(response => {
-                    response.data.forEach(element => {
-                        if (element.id != 1){
-                            me.recursos.push(element);
-                        }
-                    });
+                    me.recursos= response.data;
+                    // response.data.forEach(element => {
+                    //     if (element.id != 1){
+                    //         me.recursos.push(element);
+                    //     }
+                    // });
                     // me.recursos = response.data;
+                    me.recursos.splice(0,1);
                     me.itemsToDisplay= me.recursos;
                     me.totalRows= me.itemsToDisplay.length;
 
@@ -245,7 +247,7 @@ export default {
                     console.log(response);
                     me.selectRecursos();
                     me.action=""
-                    me.infoMessage = response.data.message;
+                    // me.infoMessage = response.data.message;
                 })
                 .catch(error => {
                     console.log(error.response.status);
@@ -275,7 +277,7 @@ export default {
                     console.log(response);
                     me.selectRecursos();
                     me.action=''
-                    me.infoMessage = response.data.message;
+                    // me.infoMessage = response.data.message;
                 })
                 .catch(error => {
                     console.log(error.response.status);
@@ -301,6 +303,7 @@ export default {
                 .delete('recursos/' + me.recurs.id)
                 .then(response => {
                     me.selectRecursos();
+                    me.itemsToDisplay= me.selectRecursos()
                     $('#deleteModal').modal('hide');
                     me.action=''
                     //me.infoMessage= response.data.missatge;
