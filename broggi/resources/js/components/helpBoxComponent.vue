@@ -97,7 +97,7 @@ export default {
       axios
         .get("/questions")
         .then((response) => {
-            console.log(response.data);
+
             me.questions = response.data;
             me.setShowAnswers();
 

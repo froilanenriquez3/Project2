@@ -179,13 +179,26 @@ export default {
         }
         this.showInputs = true;
     },
+    //Function runs before all the info of alertant is retrieved...
     initAlertant(){
         if(this.editincidencia != null){
-            console.log("init alertant");
-            this.alertantCopia = this.alertant;
-            this.showInputs = true;
-            console.log(this.alertant);
-            console.log(this.alertantCopia);
+
+
+            let me = this;
+            axios
+            .get("/alertants/"+ me.editincidencia.alertants_id)
+            .then(response => {
+                me.alertantCopia = response.data;
+                if(me.alertantCopia != null) this.showInputs = true;
+
+                // me.alertant = response.data;
+            })
+            .catch(error => {
+                me.errorMessage= error.response.data.error;
+                console.log(error);
+            })
+            .finally(() => (this.loading = false));
+
 
         }
     },

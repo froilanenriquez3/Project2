@@ -181,7 +181,7 @@ class ApiIncidenciesController extends Controller
         try {
             $incidency->save();
 
-            $incidency->incidencies_has_afectats()->detach();
+            /* $incidency->incidencies_has_afectats()->detach();
             $incidency->incidencies_has_afectats()->delete();
 
             $incidency->incidencies_has_recursos()->delete();
@@ -226,7 +226,7 @@ class ApiIncidenciesController extends Controller
                 $ihr->prioritat = $infoRecurs['prioritat'];
 
                 $incidency->incidencies_has_recursos()->save($ihr);
-            }
+            } */
 
             DB::commit();
             $incidency->refresh();
