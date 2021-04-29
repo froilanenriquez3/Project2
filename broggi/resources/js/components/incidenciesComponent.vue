@@ -145,12 +145,12 @@
       <td class="col-4" :id="'btnAfectat' + afectat.id">
           <div >
               <p v-if="afectat.sexes_id == 1">Home
-                            <span v-show="afectat.edat != ''">{{', '+ afectat.edat  + " anys "}}</span>
-                              <span v-show="afectat.nom != ''">{{ '('+afectat.nom+')' }}</span>
+                            <span v-show="afectat.edat != '' && afectat.edat != null">{{', '+ afectat.edat  + " anys "}}</span>
+                              <span v-show="afectat.nom != '' && afectat.nom != null">{{ '('+afectat.nom+')' }}</span>
 
                         <p v-else-if="afectat.sexes_id == 2">Dona
-                           <span v-show="afectat.edat != ''">{{', '+ afectat.edat  + " anys "}}</span>
-                              <span v-show="afectat.nom != ''">{{'(' +afectat.nom+ ')' }}</span>
+                           <span v-show="afectat.edat != '' && afectat.edat != null">{{', '+ afectat.edat  + " anys "}}</span>
+                              <span v-show="afectat.nom != '' && afectat.nom != null">{{'(' +afectat.nom+ ')' }}</span>
                         </p>
           </div>
       </td>
@@ -663,27 +663,19 @@ export default {
                     hora_arribada_hospital: null,
                     hora_transferencia: null,
                     hora_finalitzacio: null,
-                    prioritat: null,
+                    prioritat: 0,
                     desti: null,
                     afectat_id: element.id,
                     }
                 }
             });
-            // Comprobaciones por si se ha ido cambiando el toggle entre múltiples y no.
-            if(!this.multiple){
-                this.incidencia.afectats= this.afectats;
 
-                // Eliminamos infoRecursos que tengan todo fantasma.
-                // Puede ocurrir si se han llenado muchos recursos en múltiples y luego se cambia a afectados.
-                this.infoRecursos= this.infoRecursos.filter( element => element.afectat_id != 300);
-            } else {
-                this.infoRecursos.forEach(element => {
-                // Nos aseguramos de que todos los afectados sean fantasma.
-                    element.afectat_id= 300
-                });
+            this.infoRecursos.forEach(infoRecurs => {
+                if(infoRecurs.recursos_id == 1){
+                    infoRecurs.prioritat= 0;
+                }
+            });
 
-                 this.incidencia.descripcio= this.multiplesAfectats;
-            }
 
             this.incidencia.infoRecursos= this.infoRecursos;
             console.log("submitting incidencia");
