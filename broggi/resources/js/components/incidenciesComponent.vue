@@ -324,7 +324,7 @@ export default {
         hora_arribada_hospital: null,
         hora_transferencia: null,
         hora_finalitzacio: null,
-        prioritat: 0,
+        prioritat: null,
         desti: null,
         afectat_id: null
       },
@@ -634,27 +634,13 @@ export default {
         if(this.editincidencia != null){
             this.incidencia.afectats= this.afectats;
             this.incidencia.incidencies_has_recursos = this.infoRecursos;
-
-            if(document.getElementById('eSaveAlertant').checked){
-                console.log('saving alertant');
-                axios
-                    .put("/alertants/" + me.alertantIncidencia.id, me.alertantIncidencia)
-                    .then(response => {
-                        console.log(response);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    })
-            }
-
-            axios
+             axios
                 .put("/incidencies/"+me.incidencia.id, me.incidencia)
                 .then((response)=>{
                     // alert("Formulari enviat correctament");
-                    // console.log(me.incidencia.id);
-                    window.location.href = "/Project2/broggi/public/incidencies/" + me.incidencia.id ;
-                    // console.log(response);
-                    // me.incidencia = null;
+                    window.location.href = "/Project2/broggi/public/incidencies";
+                    console.log(response);
+                    me.incidencia = null;
                     me.infoMessage = response.data.message;
                 })
                 .catch((error)=>{
@@ -677,7 +663,7 @@ export default {
                     hora_arribada_hospital: null,
                     hora_transferencia: null,
                     hora_finalitzacio: null,
-                    prioritat: 0,
+                    prioritat: null,
                     desti: null,
                     afectat_id: element.id,
                     }
@@ -690,6 +676,21 @@ export default {
                 }
             });
 
+            // Comprobaciones por si se ha ido cambiando el toggle entre múltiples y no.
+            if(!this.multiple){
+                this.incidencia.afectats= this.afectats;
+
+                // Eliminamos infoRecursos que tengan todo fantasma.
+                // Puede ocurrir si se han llenado muchos recursos en múltiples y luego se cambia a afectados.
+                this.infoRecursos= this.infoRecursos.filter( element => element.afectat_id != 300);
+            } else {
+                this.infoRecursos.forEach(element => {
+                // Nos aseguramos de que todos los afectados sean fantasma.
+                    element.afectat_id= 300
+                });
+
+                 this.incidencia.descripcio= this.multiplesAfectats;
+            }
 
             this.incidencia.infoRecursos= this.infoRecursos;
             console.log("submitting incidencia");
@@ -701,8 +702,6 @@ export default {
                 // alert("Incidencia inserted correctly!");
                 me.infoMessage = 'Incidencia creada correctament';
                 window.location.href = "/Project2/broggi/public/incidencies";
-                //  console.log(me.incidencia.id);
-                //  window.location.href = "/Project2/broggi/public/incidencies/" + me.incidencia.id ;
 
                 console.log(response);
                 me.clearInput();
