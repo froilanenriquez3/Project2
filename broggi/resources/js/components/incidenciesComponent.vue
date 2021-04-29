@@ -638,7 +638,7 @@ export default {
                 .put("/incidencies/"+me.incidencia.id, me.incidencia)
                 .then((response)=>{
                     // alert("Formulari enviat correctament");
-                    window.location.href = "/Project2/broggi/public/incidencies";
+                    window.location.href = "/Project2/broggi/public/incidencies/" + me.incidencia.id;
                     console.log(response);
                     me.incidencia = null;
                     me.infoMessage = response.data.message;
