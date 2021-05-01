@@ -19,15 +19,29 @@
      	</div>
         <!-- fin del div para el mensaje de error -->
        <div id="incidenciesRecursosDiv" v-show="displayForm">
-           <div class="form-group row my-row-header">
-                <h5 id="incNumDisp" class="col-2"> Incidencia #{{ incidencia.id}} </h5>
-                <span id="validateDisplay" class="col-8" ></span>
-                <h5 id="incPrioritatDisp" class="col-2" > Prioritat: {{ infoRecursos.prioritat }} </h5>
+           <div class="d-flex d-flex justify-content-between align-items-center mb-5">
+                <div id="infoIncidencia">
+                <h5 id="incNumDisp" class="mb-4"> Incidencia #{{ incidencia.id}} </h5>
+               <p><strong>Descripció:</strong> {{incidencia.descripcio}}</p>
+               <p><strong>Adreça:</strong> {{incidencia.adreca}}</p>
+                </div>
+
+                <div id="infoAfectat">
+                   <h5 class="mb-4">Informació Afectat</h5>
+                   <p v-show="afectat.edat != ''"><strong>Edat:</strong> {{afectat.edat}}</p>
+                   <p v-show="afectat.edat == ''"><strong>Edat:</strong> No especificada</p>
+                   <p v-if="afectat.sexes_id == '1'"><strong>Sexe:</strong> Home</p>
+                   <p v-else><strong>Sexe:</strong> Dona</p>
+               </div>
+                <div class="d-flex align-items-center">
+                <h5 id="incPrioritatDisp"> Prioritat</h5><p :class="infoRecursos.prioritat > 2 ? 'pink' : 'blue'">{{ infoRecursos.prioritat }}</p>
+                </div>
            </div>
+
 
            <div class="container">
 
-           <div class="form-group row mb-5">
+           <div class="form-group row mb-4">
                <label class="col-3" for="activacio">1: Hora Activació</label>
                <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_activacio" id="activacio" name="activacio"
                 @change="validateInput('activacio','mobilitzacio')">
@@ -39,7 +53,7 @@
 
            </div>
 
-           <div class="form-group row mb-5">
+           <div class="form-group row mb-4">
 
                 <label class="col-3" for="assistencia">3: Hora Assistència</label>
                <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_assistencia" id="assistencia" name="assistencia"
@@ -52,7 +66,7 @@
 
            </div>
 
-           <div class="form-group row mb-5">
+           <div class="form-group row mb-4">
                  <label class="col-3" for="arribadaHospital">5: Hora Arribada Hospital</label>
                <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_arribada_hospital" id="arribadaHospital" name="arribadaHospital"
                 @change="validateInput('transport', 'arribadaHospital')">
@@ -63,7 +77,7 @@
                 @change="validateInput('arribadaHospital','horaTransferencia')">
            </div>
 
-           <div class="form-group row mb-5">
+           <div class="form-group row mb-4">
                 <label class="col-3" for="finalitzacio">7: Hora Finalitzacio</label>
                <input class="col-2 timeIn" type="time" v-model="infoRecursos.hora_finalitzacio" id="finalitzacio" name="finalitzacio"
                 @change="validateInput('horaTransferencia', 'finalitzacio')">
@@ -111,6 +125,16 @@
                 arrayPos: null,
                 incidenciaId: null,
                 afectatId: null,
+                afectat: {
+                    id: '',
+                    telefon: '',
+                    cip: '',
+                    nom:'',
+                    cognoms: '',
+                    edat:'',
+                    te_cip:'',
+                    sexes_id:'1'
+                },
                 incidencia: {
                     id: null
                 },
@@ -234,6 +258,27 @@
                 }
 
             },
+            getAfectat(){
+                let me = this;
+                axios
+                    .get("/afectats/" + me.incidencies_has_recursos.afectat_id)
+                    .then((response) => {
+                        // console.log(response.data);
+                        me.afectat = response.data;
+
+                        //me.infoRecursos = me.incidencia.incidencies_has_recursos;
+                        // console.log(me.infoRecursos);
+                    })
+                    .catch((error) => {
+                        me.errorMessage= error.response.data.error;
+                        console.log(error);
+                    })
+                    .finally(() => {
+                        this.loading = false;
+                        // console.log(me.incidencia);
+                    });
+
+            },
             getAllShowIncidencies(){
                 for(let i in this.incidencies){
                     this.showIncidenciaRecurso(this.incidencies[i].id);
@@ -248,6 +293,7 @@
                 console.log("init edit incidencia");
                 this.incidencia = this.editincidencia;
                 this.incidenciesRecursos = this.incidencia.incidencies_has_recursos;
+                this.getAfectat();
 
                 let found = false;
                 let i = 0;

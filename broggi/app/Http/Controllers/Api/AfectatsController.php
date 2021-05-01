@@ -57,12 +57,14 @@ class AfectatsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Afectats  $afectats
+     * @param  \App\Models\Afectats  $afectat
      * @return \Illuminate\Http\Response
      */
-    public function show(Afectats $afectats)
+    public function show(Afectats $afectat)
     {
-        //
+        $afectat = Afectats::with(['municipis'])->find($afectat->id);
+
+        return new AfectatsResource($afectat);
     }
 
     /**

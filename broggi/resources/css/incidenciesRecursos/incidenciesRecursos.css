@@ -14,4 +14,28 @@
     margin-bottom: 3%;
 }
 
+h5{
+    font-size: 20px;
+}
 
+.blue{
+    padding: 10px;
+    margin-left: 6px;
+    border: solid rgb(0, 172, 194) 3px;
+    color: rgb(0, 172, 194);
+    border-radius: 50px;
+    font-size: 25px;
+}
+
+.pink{
+    padding: 10px;
+    margin-left: 6px;
+    border: solid #e1157a 3px;
+    color: #e1157a;
+    border-radius: 10px;
+    font-size: 25px;
+}
+
+#incPrioritatDisp{
+    margin-right: 4px;
+}
