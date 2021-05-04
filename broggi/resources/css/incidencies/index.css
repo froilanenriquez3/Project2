@@ -1,5 +1,7 @@
 #addButton {
-    position: absolute;
-    bottom: 7%;
-    right: 7%;
+    /* position: absolute; */
+
+    margin-left: 800% !important;
+    margin-top: 5%;
+    position: relative;
 }

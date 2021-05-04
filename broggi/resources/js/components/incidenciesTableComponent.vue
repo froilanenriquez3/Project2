@@ -112,7 +112,7 @@
                 infoMessage:'',
                 errorMessage:'',
                 itemsToDisplay: [],
-                perPage: 5,
+                perPage: 4,
                 currentPage: 1,
                 totalRows: '',
                 incidencia: {
@@ -151,8 +151,8 @@
                         me.incidencies.forEach( incidencia =>{
                             me.showIncidenciaRecurso(incidencia.id);
                         });
-                        
-                
+
+
 
                     })
                     .catch((error) => {
@@ -183,7 +183,7 @@
                         });
                         // me.itemsToDisplay= me.incRecs;
                         me.totalRows= me.itemsToDisplay.length;
-                        
+
                     })
                     .catch((error) => {
                         me.errorMessage= error.response.data.error;
@@ -202,7 +202,7 @@
                 .then((response) => {
                     // console.log(response.data);
                     me.tipusIncidencies = response.data;
-                    
+
                 })
                 .catch((error) => {
                     me.errorMessage= error.response.data.error;
