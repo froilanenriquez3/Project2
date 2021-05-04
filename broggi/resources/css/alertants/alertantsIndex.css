@@ -1,18 +1,22 @@
-#app{
+#app {
     background-color: white;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-#indexSBMain{
+#indexSBMain {
     width: 70vw;
 }
 
-
- #tableNav{
+#tableNav {
     position: relative;
     left: 1%;
     bottom: 1%;
 }
 
+#addButton {
+    position: absolute;
+    right: 5%;
+    bottom: 5%;
+}
