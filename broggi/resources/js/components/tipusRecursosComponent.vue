@@ -185,7 +185,9 @@ export default {
                 };
             me.action='';
             document.getElementById("addButton").style.display = "block";
-            me.infoMessage = response.data.message;
+            me.infoMessage = 'Tipus afegit correctament.';
+             this.selectTipus();
+
         })
         .catch((error) => {
           console.log(error.response.status);
@@ -210,7 +212,8 @@ export default {
                     id: "",
                     tipus: "",
                 };
-             me.infoMessage = response.data.message;
+             me.infoMessage = 'Tipus modificat correctament.';
+              this.selectTipus();
         })
         .catch((error) => {
           console.log(error.response.status);
@@ -236,7 +239,8 @@ export default {
           $("#deleteModalTipus").modal("hide");
             me.action='';
           //me.infoMessage= response.data.missatge;
-           me.infoMessage = response.data.message;
+           me.infoMessage = 'Tipus eliminat correctament.';
+        this.selectTipus();
         })
         .catch((error) => {
           me.errorMessage = error.response.data.error;

@@ -53,8 +53,8 @@
         <thead>
           <tr>
             <th scope="col">Codi</th>
-            <th scope="col">Tipus</th>
             <th scope="col">Actiu</th>
+            <th scope="col">Tipus</th>
 
             <th></th>
             <th></th>
