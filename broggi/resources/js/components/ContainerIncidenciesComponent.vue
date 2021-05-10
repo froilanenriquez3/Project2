@@ -1,7 +1,7 @@
 <template>
   <div class="containerRecursos">
     <aside>
-      <sidebar-component @changeOption="changePage($event)" :page="'incidencies'" :editincidencia="editincidencia">
+      <sidebar-component @changeOption="changePage($event)" :page="'Incidència'" :editincidencia="editincidencia">
 
       </sidebar-component>
     </aside>
@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       // Al verse por primera vez mostrará incident.
-      pageToDisplay: "Incident",
+      pageToDisplay: "Incidència",
     };
   },
   mounted() {
