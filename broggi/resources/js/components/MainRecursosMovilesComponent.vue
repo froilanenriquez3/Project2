@@ -56,8 +56,8 @@
             <th scope="col">Actiu</th>
             <th scope="col">Tipus</th>
 
-            <th></th>
-            <th></th>
+            <th v-show="usertype != 2"></th>
+            <th v-show="usertype != 2"></th>
           </tr>
         </thead>
         <tbody>
@@ -79,7 +79,7 @@
 
             <td>{{ recurs.recurs }}</td>
 
-            <td>
+            <td v-show="usertype != 2">
               <button
                 type="submit"
                 class="btn btn-warning btn-sm d-flex"
@@ -88,7 +88,7 @@
                 Editar
               </button>
             </td>
-            <td>
+            <td v-show="usertype != 2">
               <button
                 id="deleteB"
                 type="submit"
@@ -237,6 +237,12 @@ import FilterSelect from "./filterSelect.vue";
 import mapInsert from "./mapInsert.vue";
 export default {
   components: { FilterSelect, mapInsert },
+  props: {
+        usertype: {
+            required: false,
+            type: Number
+        }
+    },
   data() {
     return {
       infoMessage: "",
