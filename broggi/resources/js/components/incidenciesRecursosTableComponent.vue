@@ -97,7 +97,6 @@
             userrecursoid: {
                 required: true,
                 type: Number
-
             }
         },
         data(){

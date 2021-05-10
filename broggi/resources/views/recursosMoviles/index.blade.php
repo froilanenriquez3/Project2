@@ -21,7 +21,7 @@
 
 @section('table')
     <div id="app">
-    <container-recursos></container-recursos>
+    <container-recursos :usertype='{{ Auth::user()->rols_id }}' ></container-recursos>
 </div>
 @endsection
 

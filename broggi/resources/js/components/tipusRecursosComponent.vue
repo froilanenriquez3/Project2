@@ -25,15 +25,15 @@
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Tipus</th>
-            <th></th>
-            <th></th>
+            <th v-show="usertype != 2"></th>
+            <th v-show="usertype != 2"></th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="tipo in paginator(tipus_recursos)" :key="tipo.id">
             <th scope="row">{{ tipo.id }}</th>
             <td>{{ tipo.tipus }}</td>
-            <td>
+            <td v-show="usertype != 2">
               <button
                 type="submit"
                 class="btn btn-warning btn-sm d-flex"
@@ -42,7 +42,7 @@
                 Editar
               </button>
             </td>
-            <td>
+            <td v-show="usertype != 2">
               <button
                 id="deleteB"
                 type="submit"
@@ -132,6 +132,12 @@
 
 <script>
 export default {
+    props: {
+        usertype: {
+            required: false,
+            type: Number
+        }
+    },
   data() {
     return {
         infoMessage:'',
