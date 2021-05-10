@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       recursos: ["Recursos", "Tipus de Recursos"],
-      incidencies: ["Incidència", "Alertant", "Afectats", "Recursos"],
+      Incidència: ["Incidència", "Alertant", "Afectats", "Recursos"],
       selectedList: [],
       selectedSection: "",
     };
@@ -72,8 +72,8 @@ export default {
           // Por defecto se mostrará primero la primera opción
           this.selectedSection = this.selectedList[0];
           break;
-        case "incidencies":
-          this.selectedList = this.incidencies;
+        case "Incidència":
+          this.selectedList = this.Incidència;
           this.selectedSection = this.selectedList[0];
         default:
           break;
@@ -89,7 +89,7 @@ export default {
 
     //Nuclear option
     if (this.editincidencia != null) {
-      this.incidencies = ["Incident", "Alertant"];
+      this.Incidència = ["Incidència", "Alertant"];
     }
 
     this.addSection();

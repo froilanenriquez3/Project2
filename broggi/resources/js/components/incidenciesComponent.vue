@@ -32,7 +32,7 @@
     <div class="container" >
 
         <!-- TAG INCIDENCIAS -->
-        <div v-show="section == 'Incident'">
+        <div v-show="section == 'Incidència'">
         <div class="form-group row">
         <label class="col-2" for=""><b>Tipus Incidència</b></label>
         <select class="col-10" name="tipus_incidencia" v-model="incidencia.tipus_incidencies_id">
