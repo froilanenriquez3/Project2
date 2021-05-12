@@ -58,6 +58,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::prefix('api')->group(function(){
     Route::apiResource('incidencies', ApiIncidenciesController::class);
+    Route::post('incidencies/update/{incidency}', [ApiIncidenciesController::class, 'update']);
+    Route::post('incidencies/delete/{incidency}', [ApiIncidenciesController::class, 'destroy']);
 });
 
 Route::get('/clearcache', function() {
