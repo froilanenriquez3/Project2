@@ -49,7 +49,7 @@ export default {
     },
     data(){
         return{
-        infoMessage:'',    
+        infoMessage:'',
         errorMessage:'',
         id: "",
         alertantDelete: {
@@ -66,7 +66,8 @@ export default {
          deleteAlertant(){
             let me= this;
             axios
-                .delete('alertants/' + me.alertant.id)
+                 // .delete('alertants/' + me.alertant.id)
+                .post('alertants/delete/' + me.alertant.id)
                 .then(response => {
                     console.log('Succesfully deleted');
                     window.location.reload();

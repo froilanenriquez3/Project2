@@ -225,7 +225,8 @@ export default {
       console.log("Save recurs:" + me.incidencia.saveRecurs);
 
       axios
-        .put("/incidenciesrecursos/" + me.incidencia.id, me.incidencia)
+        // .put("/incidenciesrecursos/" + me.incidencia.id, me.incidencia)
+        .post("/incidenciesrecursos/update/" + me.incidencia.id, me.incidencia)
         .then((response) => {
           alert("Formulari enviat correctament");
           console.log(response);

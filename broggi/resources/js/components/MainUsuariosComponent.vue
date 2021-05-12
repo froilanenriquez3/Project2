@@ -388,7 +388,8 @@ export default {
     editarUsuari() {
       let me = this;
       axios
-        .put("/usuaris/" + me.usuari.id, me.usuari)
+         // .put("/usuaris/" + me.usuari.id, me.usuari)
+        .post("/usuaris/update/" + me.usuari.id, me.usuari)
         .then(function (response) {
           console.log(response);
           me.selectUsuaris();
@@ -412,7 +413,8 @@ export default {
     deleteUsuari() {
       let me = this;
       axios
-        .delete("usuaris/" + me.usuari.id)
+         // .delete("usuaris/" + me.usuari.id)
+        .post("usuaris/delete/" + me.usuari.id)
         .then((response) => {
           me.selectUsuaris();
           $("#deleteModal").modal("hide");

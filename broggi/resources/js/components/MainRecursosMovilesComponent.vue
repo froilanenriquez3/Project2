@@ -367,7 +367,8 @@ export default {
       this.retrieveLatLng();
       let me = this;
       axios
-        .put("/recursos/" + me.recurs.id, me.recurs)
+        // .put("/recursos/" + me.recurs.id, me.recurs)
+        .post("/recursos/update/" + me.recurs.id, me.recurs)
         .then(function (response) {
           console.log(response);
           me.selectRecursos();
@@ -394,7 +395,8 @@ export default {
     deleteRecurs() {
       let me = this;
       axios
-        .delete("recursos/" + me.recurs.id)
+         // .delete("recursos/" + me.recurs.id)
+        .post("recursos/delete/" + me.recurs.id)
         .then((response) => {
           me.selectRecursos();
           me.itemsToDisplay = me.selectRecursos();

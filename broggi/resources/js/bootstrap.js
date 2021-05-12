@@ -22,8 +22,8 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.baseURL = '/Project2/broggi/public/api';
-// window.axios.defaults.baseURL = '/daw2a01/Project2/broggi/public/api';
+// window.axios.defaults.baseURL = '/Project2/broggi/public/api';
+window.axios.defaults.baseURL = '/daw2a01/Project2/broggi/public/api';
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

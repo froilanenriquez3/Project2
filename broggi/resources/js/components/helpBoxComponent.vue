@@ -30,7 +30,7 @@
                   <button class="btn btn-primary" id="playAudio" @click="playAudio(question.id)">
                       <i class="fas fa-volume-up"></i>
                       </button>
-                  <audio :src=" 'http://localhost:8080/Project2/broggi/public/audio/' + question.id  + '.m4a' " :id=" 'audio' + question.id " ></audio>
+                  <audio :src=" 'http://daw.abp-politecnics.com/daw2a01/Project2/broggi/public/audio/' + question.id  + '.m4a' " :id=" 'audio' + question.id " ></audio>
                   <button class="btn btn-primary"
                     v-show="!qShowA[index]"
                     id="showButton"

@@ -185,7 +185,8 @@
             deleteIncidencia(){
                 let me = this;
                 axios
-                    .delete("/incidenciesrecursos/" + me.editIncidencia.id + "/" + me.userrecursoid)
+                    // .delete("/incidenciesrecursos/" + me.editIncidencia.id + "/" + me.userrecursoid)
+                    .post("/incidenciesrecursos/delete/" + me.editIncidencia.id + "/" + me.userrecursoid)
                     .then(response => {
                         console.log(response.data);
                         me.incRecs = [];

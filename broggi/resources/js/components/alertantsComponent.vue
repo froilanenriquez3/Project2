@@ -129,7 +129,8 @@ export default {
         });
       } else{
          axios
-        .put("/alertants/" + me.alertant.id, me.alertant)
+         // .put("/alertants/" + me.alertant.id, me.alertant)
+        .post("/alertants/update/" + me.alertant.id, me.alertant)
         .then(function (response) {
             //   console.log(response);
             window.location.href = "/Project2/broggi/public/alertants";

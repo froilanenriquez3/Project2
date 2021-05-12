@@ -635,10 +635,11 @@ export default {
             this.incidencia.afectats= this.afectats;
             this.incidencia.incidencies_has_recursos = this.infoRecursos;
              axios
-                .put("/incidencies/"+me.incidencia.id, me.incidencia)
+                // .put("/incidencies/"+me.incidencia.id, me.incidencia)
+                .post("/incidencies/update/"+me.incidencia.id, me.incidencia)
                 .then((response)=>{
                     // alert("Formulari enviat correctament");
-                    window.location.href = "/Project2/broggi/public/incidencies/" + me.incidencia.id;
+                    window.location.href = "/daw2a01/Project2/broggi/public/incidencies/" + me.incidencia.id;
                     console.log(response);
                     me.incidencia = null;
                     me.infoMessage = response.data.message;
@@ -701,7 +702,7 @@ export default {
             .then(function (response) {
                 // alert("Incidencia inserted correctly!");
                 me.infoMessage = 'Incidencia creada correctament';
-                window.location.href = "/Project2/broggi/public/incidencies";
+                window.location.href = "/daw2a01/Project2/broggi/public/incidencies";
 
                 console.log(response);
                 me.clearInput();

@@ -209,7 +209,8 @@ export default {
          console.log("updating");
       let me = this;
       axios
-        .put("/tipusrecursos/" + me.tipo.id, me.tipo)
+         // .put("/tipusrecursos/" + me.tipo.id, me.tipo)
+        .post("/tipusrecursos/update/" + me.tipo.id, me.tipo)
         .then(function (response) {
             console.log(response);
             me.selectTipus();
@@ -239,7 +240,8 @@ export default {
         console.log("deleting");
       let me = this;
       axios
-        .delete("/tipusrecursos/" + me.tipo.id)
+        // .delete("/tipusrecursos/" + me.tipo.id)
+        .post("/tipusrecursos/delete/" + me.tipo.id)
         .then((response) => {
           me.selectTipus();
           $("#deleteModalTipus").modal("hide");

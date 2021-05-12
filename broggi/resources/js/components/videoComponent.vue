@@ -7,7 +7,7 @@
         <video muted class="col-12" @timeupdate="changeProgress($event)" @canplay="changeProgress($event)"
         id="myVideo" width="320" height="240">
           <source
-            src="http://localhost:8080/Project2/broggi/public/video/videoBroggi.mp4"
+            src="http://daw.abp-politecnics.com/daw2a01/Project2/broggi/public/video/videoBroggi.mp4"
             type="video/mp4"
           />
           El teu navegador no soporta aquest vídeo.

@@ -225,7 +225,8 @@ export default {
          console.log("updating");
       let me = this;
       axios
-        .put("/tipusalertants/" + me.tipo.id, me.tipo)
+        // .put("/tipusalertants/" + me.tipo.id, me.tipo)
+        .post("/tipusalertants/update/" + me.tipo.id, me.tipo)
         .then(function (response) {
             console.log(response);
             me.selectTipus();
@@ -254,7 +255,8 @@ export default {
         console.log("deleting");
       let me = this;
       axios
-        .delete("/tipusalertants/" + me.tipo.id)
+        // .delete("/tipusalertants/" + me.tipo.id)
+        .post("/tipusalertants/delete/" + me.tipo.id)
         .then((response) => {
           me.selectTipus();
           $("#deleteModal").modal("hide");
